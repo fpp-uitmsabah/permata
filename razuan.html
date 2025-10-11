@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Dr. Mohd Razuan Abd Hishamuddin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #22c55e, #3b82f6);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #16a34a, #2563eb);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        // Data for the specific faculty member
+        const profileData = {
+            "name": "Dr. Mohd Razuan Abd Hishamuddin",
+            "imageUrl": "https://i.imgur.com/pYidT6V.jpeg",
+            "title": "Academic Researcher",
+            "institution": "Universiti Teknologi MARA (UiTM)",
+            "campus": "Sabah Branch, Kota Kinabalu Campus",
+            "faculty": "Faculty of Business and Management",
+            "summary": "Dr. Mohd Razuan Abd Hishamuddin is an emerging academic researcher specializing in the critical intersection of green finance, banking stability, and financial inclusion. His work, which focuses on Malaysia and the broader ASEAN region, employs sophisticated econometric methodologies to provide policy-relevant insights into sustainable economics and its impact on financial systems.",
+            "education": [
+                { "degree": "Doctor of Philosophy (PhD)", "institution": "UiTM Sabah Branch" },
+                { "degree": "Master of Science (Business Management)", "institution": "Universiti Teknologi MARA, 2020" },
+                { "degree": "Bachelor of Business Administration (Hons) Finance", "institution": "UiTM Sabah Campus, 2017" }
+            ],
+            "research_focus": [
+                {
+                    "area": "Green Finance and Banking Stability",
+                    "description": "Examines how green financing initiatives serve as a mediating factor to maintain banking stability in the face of climate change challenges across ASEAN and the Tiger Cub Economies.",
+                    "icon": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                },
+                {
+                    "area": "Financial Inclusion and Economic Growth",
+                    "description": "Investigates the mediating role of income inequality in the relationship between financial inclusion and economic growth across developing, frontier, and developed Asian nations.",
+                    "icon": "M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7z"
+                }
+            ],
+            "methodology": [
+                "Panel Autoregressive Distributed Lag (ARDL) models", "Baron and Kenny's Step Approach for mediation analysis", "Panel data analysis"
+            ],
+            "key_publications": [
+                { "title": "A Beacon of Climate Change and Green Financing Toward Bank Stability Among Tiger Cub Economics", "year": 2024, "journal": "ASEAN Journal on Science and Technology for Development" },
+                { "title": "Transformative Impacts of Green Finance on Co2 Emissions and Bank Stability", "year": 2024, "journal": "European Proceedings of Social and Behavioural Sciences" },
+                { "title": "The impact of climate change and green financing on bank stability in Malaysia", "year": 2023, "journal": "Journal of Emerging Economies & Islamic Research" },
+                { "title": "Financial Inclusion and Economic Growth: Evidence in Asia", "year": 2019, "journal": "Malaysian Journal of Business and Economics" }
+            ],
+            "impact": [
+                "Green financing initiatives help maintain banking sector financial stability over time.",
+                "Commercial banks can remain stable in the long run with green financing injection.",
+                "Green finance serves as an alternative financing tool to mitigate climate change impacts on banking operations."
+            ]
+        };
+
+        // Show Profile
+        function showProfile() {
+            
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-indigo-50">
+                    <div class="profile-header text-white relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                        
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Back to Directory
+                            </a>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${profileData.imageUrl}" alt="${profileData.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-green-900" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z M14.59 8.59L12 11.17 9.41 8.59 8 10l4 4 4-4-1.41-1.41z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
+                                    <p class="text-2xl text-green-100 mb-2 font-medium">${profileData.title}</p>
+                                    <p class="text-xl text-blue-100 mb-4">${profileData.institution}</p>
+                                    <div class="flex flex-wrap gap-3 mb-6">
+                                        <span class="bg-green-400 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            🌿 Green Finance
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🏦 Banking Stability
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            📈 ASEAN Economics
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-blue-500 to-indigo-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                        Executive Profile
+                                    </h2>
+                                    <div class="p-6 bg-gradient-to-r from-green-50 via-blue-50 to-indigo-50 rounded-xl border-l-4 border-green-500">
+                                        <p class="text-gray-700 text-lg leading-relaxed">${profileData.summary}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Core Research Focus
+                                    </h2>
+                                     <div class="space-y-6">
+                                        ${profileData.research_focus.map((item, index) => {
+                                             const colors = ['border-blue-500 bg-blue-50', 'border-green-500 bg-green-50'];
+                                            return `
+                                            <div class="p-6 rounded-xl border-l-4 ${colors[index]}">
+                                                <div class="flex items-start">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center">
+                                                            <svg class="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path d="${item.icon}"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <h3 class="text-lg font-bold text-gray-900">${item.area}</h3>
+                                                        <p class="mt-1 text-gray-600">${item.description}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            `
+                                        }).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                        Key Publications
+                                    </h2>
+                                    <div class="space-y-4">
+                                        ${profileData.key_publications.map((pub, index) => {
+                                             const colors = ['border-purple-500 bg-purple-50', 'border-indigo-500 bg-indigo-50', 'border-blue-500 bg-blue-50', 'border-green-500 bg-green-50'];
+                                            return `
+                                                <div class="p-4 rounded-xl border-l-4 ${colors[index % colors.length]}">
+                                                    <p class="font-semibold text-gray-800 flex-1">"${pub.title}" (${pub.year})</p>
+                                                    <p class="text-sm text-gray-600 mt-1">${pub.journal}</p>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-8">
+                               <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Academic Background
+                                    </h3>
+                                    <div class="space-y-3">
+                                        ${profileData.education.map(edu => `
+                                            <div class="p-3 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                                <p class="text-sm font-bold text-gray-900">${edu.degree}</p>
+                                                <p class="text-xs text-gray-600">${edu.institution}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Research Methodologies
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${profileData.methodology.map(focus => `
+                                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-semibold">${focus}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 rounded-2xl p-6">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-green-900 mb-2">Research Impact</h3>
+                                         <ul class="text-left text-blue-700 text-sm leading-relaxed list-disc list-inside">
+                                            ${profileData.impact.map(item => `<li>${item}</li>`).join('')}
+                                         </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+</body>
+</html>

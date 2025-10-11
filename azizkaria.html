@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Associate Professor Dr. Noorziah Mohd Salleh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #7c3aed, #be185d);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        // Data for the specific faculty member
+        const profileData = {
+            "name": "Associate Professor Dr. Noorziah Mohd Salleh",
+            "imageUrl": "https://i.imgur.com/YzT5qni.png",
+            "title": "Associate Professor (Profesor Madya)",
+            "institution": "Universiti Teknologi MARA (UiTM) Cawangan Sabah",
+            "faculty": "Faculty of Business and Management",
+            "email": "noorziah@uitm.edu.my",
+            "phone": "088 - 325151",
+            "ORCID_ID": ". ",
+            "Thompson_ID": "C-3764-2014",
+            "education": [
+                { "degree": "PhD in Management", "institution": "RMIT University", "year": 2010, "type": "degree" },
+                { "degree": "MBA in Business Administration", "institution": "St. Francis College, Fort Wayne, USA", "type": "degree" },
+                { "degree": "Bachelor of Arts (Honours) in Anthropology/Sociology", "institution": "Universiti Sains Malaysia (USM)", "type": "degree" },
+                { "degree": "Blockchain Technology", "institution": "The Linux Foundation", "year": 2019, "type": "certification" },
+                { "degree": "Writing Skill Course", "institution": "Curtin University", "year": 2015, "type": "certification" }
+            ],
+            "research_focus": [
+                "Human Capital Development", "Graduate Work-Readiness", "Economic Growth", "Human Resource Management", "Entrepreneurship Education", "Skills Mismatch", "Gig Economy", "Youth Unemployment", "Education Policy", "Socio-Economic Studies", "Community Empowerment", "Tourism and Socio-Economics of Sabah"
+            ],
+            "notable_achievements": [
+                "Founder of Entrepreneurship Day at UiTM Sabah", "Leadership roles in PERDASAMA and PERTUBUHAN KEBAJIKAN ISLAM", "Chair of various academic and international conference committees", "Editorial roles in major academic publications"
+            ],
+            "scholarly_impact": {
+                "total_citations": 277, "citations_since_2020": 223, "h_index": 7, "i10_index": 5
+            },
+            "key_publications": [
+                { "title": "Graduate work-readiness challenges in the Asia-Pacific region", "citations": 118 },
+                { "title": "Analyzing the functions of short-term expatriate assignments", "citations": 25 },
+                { "title": "Challenges and motivations of gig economy workers", "citations": 20 }
+            ],
+            "academic_roles": [
+                "Liaison Officer (LO UiTM Global) for Office of International Affairs", "Industrial Training Coordinator (2016-2019)", "Chairman of Academic and Teaching Quality (2015-2016)"
+            ],
+            "community_leadership": [
+                "Head of Education and Women Bureau, Malay Chamber of Commerce Malaysia (PERDASAMA), 2016-2022", "Head of Women, Putatan Branch, PERTUBUHAN KEBAJIKAN ISLAM, 2024-Present", "Branch Advisor, PERSATUAN MASYARAKAT BRUNEI SABAH (PMBS)"
+            ],
+            "initiatives": [
+                "Founder of Entrepreneurship Day at UiTM Sabah since 2015", "Advisor for Marketing Association of UiTM Sabah (MAOUS)", "Mentorship in digital skills bootcamp for students"
+            ],
+            "summary": "Associate Professor Dr. Noorziah Mohd Salleh is a practitioner-scholar known for her impactful research on human capital development, graduate readiness, and socio-economic empowerment, combined with significant academic leadership and community engagement in Sabah and Malaysia."
+        };
+
+        // Show Profile
+        function showProfile() {
+            
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-red-50">
+                    <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 text-white relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                        
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Back to Directory
+                            </a>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${profileData.imageUrl}" alt="${profileData.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-purple-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-purple-900" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
+                                    <p class="text-2xl text-purple-100 mb-2 font-medium">${profileData.title}</p>
+                                    <p class="text-xl text-pink-100 mb-4">${profileData.institution}</p>
+                                    <div class="flex flex-wrap gap-3 mb-6">
+                                        <span class="bg-purple-400 text-purple-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            👥 Human Capital Expert
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🎓 PhD in Management
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            💡 Community Leader
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                        Professional Summary
+                                    </h2>
+                                    <div class="p-6 bg-gradient-to-r from-purple-50 via-pink-50 to-red-50 rounded-xl border-l-4 border-purple-500">
+                                        <p class="text-gray-700 text-lg leading-relaxed">${profileData.summary}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                        Scholarly Impact
+                                    </h2>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                        <div class="p-4 bg-blue-50 rounded-xl border-2 border-blue-100">
+                                            <div class="text-3xl font-bold text-blue-600">${profileData.scholarly_impact.total_citations}</div>
+                                            <div class="text-sm text-blue-700 font-medium">Total Citations</div>
+                                        </div>
+                                        <div class="p-4 bg-green-50 rounded-xl border-2 border-green-100">
+                                            <div class="text-3xl font-bold text-green-600">${profileData.scholarly_impact.h_index}</div>
+                                            <div class="text-sm text-green-700 font-medium">H-Index</div>
+                                        </div>
+                                        <div class="p-4 bg-purple-50 rounded-xl border-2 border-purple-100">
+                                            <div class="text-3xl font-bold text-purple-600">${profileData.scholarly_impact.i10_index}</div>
+                                            <div class="text-sm text-purple-700 font-medium">i10-Index</div>
+                                        </div>
+                                         <div class="p-4 bg-pink-50 rounded-xl border-2 border-pink-100">
+                                            <div class="text-3xl font-bold text-pink-600">${profileData.scholarly_impact.citations_since_2020}</div>
+                                            <div class="text-sm text-pink-700 font-medium">Citations Since 2020</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Key Publications
+                                    </h2>
+                                    <div class="space-y-4">
+                                        ${profileData.key_publications.map((pub, index) => {
+                                             const colors = ['border-yellow-500 bg-yellow-50', 'border-blue-500 bg-blue-50', 'border-green-500 bg-green-50'];
+                                             const textColors = ['text-yellow-800', 'text-blue-800', 'text-green-800'];
+                                            return `
+                                                <div class="p-4 rounded-xl border-l-4 ${colors[index % colors.length]}">
+                                                    <div class="flex items-center justify-between">
+                                                        <p class="font-semibold text-gray-800 flex-1">"${pub.title}"</p>
+                                                        <span class="ml-4 px-3 py-1 ${textColors[index % textColors.length]} bg-white rounded-full font-bold text-sm shadow-sm">${pub.citations} Citations</span>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-red-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                        Community Leadership & Initiatives
+                                    </h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h3 class="font-bold text-lg mb-3 text-gray-700">Leadership Roles</h3>
+                                            <div class="space-y-3">
+                                                ${profileData.community_leadership.map(role => `
+                                                    <div class="p-3 bg-pink-50 rounded-lg border-l-4 border-pink-400">
+                                                        <p class="font-medium text-pink-900">${role}</p>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                         <div>
+                                            <h3 class="font-bold text-lg mb-3 text-gray-700">Key Initiatives</h3>
+                                            <div class="space-y-3">
+                                                 ${profileData.initiatives.map(item => `
+                                                    <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                                        <p class="font-medium text-red-900">${item}</p>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Contact & Info
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <div class="p-3 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                            <p class="text-sm font-medium text-gray-500">Email</p>
+                                            <p class="text-sm font-bold text-gray-900">${profileData.email}</p>
+                                        </div>
+                                        <div class="p-3 bg-pink-50 rounded-lg border-l-4 border-pink-400">
+                                            <p class="text-sm font-medium text-gray-500">Phone</p>
+                                            <p class="text-sm font-bold text-gray-900">${profileData.phone}</p>
+                                        </div>
+                                         <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                            <p class="text-sm font-medium text-gray-500">Thompson ID</p>
+                                            <p class="text-sm font-bold text-gray-900">${profileData.Thompson_ID}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                                        </svg>
+                                        Academic & Admin Roles
+                                    </h3>
+                                    <div class="space-y-2">
+                                        ${profileData.academic_roles.map(role => `
+                                            <div class="flex items-center p-2 bg-indigo-50 rounded-lg">
+                                                <div class="w-2 h-2 bg-indigo-500 rounded-full mr-3 flex-shrink-0"></div>
+                                                <span class="text-sm text-gray-700">${role}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Research Focus
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${profileData.research_focus.map(focus => `
+                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">${focus}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+</body>
+</html>

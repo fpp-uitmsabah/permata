@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Associate Professor Dr. Imelda Albert Gisip</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* Enhanced animations and transitions */
+        .faculty-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        // Data for the specific faculty member
+        const marketingExpertProfileData = {
+            name: "Associate Professor Dr. Imelda Albert Gisip",
+            position: "PROFESOR MADYA",
+            field: "PEMASARAN",
+            phone: "088 - 325151",
+            imageUrl: "https://i.imgur.com/znk7EGc.png",
+            detailedProfile: {
+                summary: "A distinguished marketing scholar and Associate Professor specializing in brand management, SME development, and entrepreneurship research. With over 17 years of service at UiTM Sabah, she has established herself as a leading expert in applying Resource-Based View theory to brand management and SME performance in the Malaysian context.",
+                current_role: {
+                    title: "Associate Professor (Profesor Madya)",
+                    institution: "Universiti Teknologi MARA (UiTM), Sabah Campus",
+                    faculty: "Faculty of Business & Management",
+                    since: "March 1, 2007"
+                },
+                education: [
+                    {
+                        degree: "PhD in Marketing",
+                        institution: "Universiti Malaysia Sabah (UMS)",
+                        period: "Completed"
+                    },
+                    {
+                        degree: "Master of Business Administration (MBA)",
+                        institution: "Universiti Teknologi MARA, Cawangan Sabah",
+                        period: "Completed"
+                    },
+                    {
+                        degree: "Bachelor of Business Administration (Hons) in Marketing",
+                        institution: "Universiti Teknologi MARA, Cawangan Sabah",
+                        honors: "Second Class Upper",
+                        period: "Completed"
+                    },
+                    {
+                        degree: "Diploma in Banking",
+                        institution: "Universiti Teknologi MARA, Cawangan Sabah",
+                        period: "Completed"
+                    }
+                ],
+                areas_of_expertise: [
+                    "Marketing",
+                    "Branding",
+                    "Entrepreneurship",
+                    "SME Development",
+                    "Brand Management",
+                    "Digital Commerce",
+                    "Consumer Behavior"
+                ],
+                research_focus: {
+                    core_pillar: "SME Development, Branding, and Entrepreneurship in Sabah",
+                    theoretical_foundation: "Resource-Based View (RBV) in Brand Management",
+                    institutional_affiliation: "UiTM Research Nexus (ReNeU), Social, Creativity & Innovation (SCI) cluster"
+                },
+                key_publications: [
+                    {
+                        title: "Antecedents and Outcomes of Brand Management from the Perspective of Resource Based View (RBV) Theory",
+                        year: 2013,
+                        co_author: "Amran Harun",
+                        significance: "foundational"
+                    },
+                    {
+                        title: "Market orientation and brand performance in Small and Medium Enterprises (SMEs) in Malaysia context",
+                        year: 2019,
+                        significance: "key"
+                    },
+                    {
+                        title: "Study on brand equity components for Sabah SMEs' food brands in 2023",
+                        year: 2023,
+                        significance: "recent"
+                    }
+                ],
+                research_themes: [
+                    "SME performance",
+                    "Brand management",
+                    "Entrepreneurship",
+                    "Government support",
+                    "Digital commerce",
+                    "Online consumer behavior",
+                    "Social media influence",
+                    "Employee well-being",
+                    "Cultural products and tourism"
+                ]
+            }
+        };
+
+        // Show Marketing Expert profile
+        function showMarketingExpertProfile() {
+            const profileData = marketingExpertProfileData.detailedProfile;
+            
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-red-50">
+                    <div class="bg-gradient-to-r from-orange-500 via-pink-500 to-red-500 text-white relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                        
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Back to Directory
+                            </a>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${marketingExpertProfileData.imageUrl}" alt="${marketingExpertProfileData.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-orange-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-orange-900" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${marketingExpertProfileData.name}</h1>
+                                    <p class="text-2xl text-orange-100 mb-2 font-medium">${profileData.current_role.title}</p>
+                                    <p class="text-xl text-pink-100 mb-4">${profileData.current_role.institution}</p>
+                                    <div class="flex flex-wrap gap-3 mb-6">
+                                        <span class="bg-orange-400 text-orange-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            📈 Marketing Expert since ${new Date(profileData.current_role.since).getFullYear()}
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🎓 PhD in Marketing
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🏢 SME & Brand Management
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 via-pink-500 to-red-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                        Professional Summary
+                                    </h2>
+                                    <div class="p-6 bg-gradient-to-r from-orange-50 via-pink-50 to-red-50 rounded-xl border-l-4 border-orange-500">
+                                        <p class="text-gray-700 text-lg leading-relaxed">${profileData.summary}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Academic Journey
+                                    </h2>
+                                    <div class="space-y-6">
+                                        ${profileData.education.map((edu, index) => {
+                                            const colors = [
+                                                'from-blue-50 to-indigo-50 border-blue-500 text-blue-600',
+                                                'from-green-50 to-emerald-50 border-green-500 text-green-600',
+                                                'from-purple-50 to-pink-50 border-purple-500 text-purple-600',
+                                                'from-yellow-50 to-orange-50 border-yellow-500 text-yellow-600'
+                                            ];
+                                            const colorSet = colors[index % colors.length].split(' ');
+                                            const icons = ['🎓', '📚', '🎯', '📜'];
+                                            return `
+                                                <div class="p-6 bg-gradient-to-r ${colorSet[0]} ${colorSet[1]} rounded-xl border-l-4 ${colorSet[2]}">
+                                                    <h3 class="text-lg font-bold text-gray-900 mb-2">${icons[index]} ${edu.degree}</h3>
+                                                    <p class="text-sm text-gray-600 mb-1">${edu.institution}</p>
+                                                    ${edu.honors ? `<span class="inline-block mt-1 px-2 py-1 bg-yellow-200 text-yellow-800 text-xs font-bold rounded">${edu.honors}</span>` : ''}
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Research Focus
+                                    </h2>
+                                    <div class="space-y-6">
+                                        <div class="p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500">
+                                            <h3 class="text-lg font-bold text-green-900 mb-3">🎯 Core Research Pillar</h3>
+                                            <p class="text-green-800 text-lg font-medium mb-4">${profileData.research_focus.core_pillar}</p>
+                                            <div class="space-y-3">
+                                                <div class="p-3 bg-white bg-opacity-60 rounded-lg">
+                                                    <p class="text-sm font-medium text-gray-700"><strong>Theoretical Foundation:</strong> ${profileData.research_focus.theoretical_foundation}</p>
+                                                </div>
+                                                <div class="p-3 bg-white bg-opacity-60 rounded-lg">
+                                                    <p class="text-sm font-medium text-gray-700"><strong>Institutional Affiliation:</strong> ${profileData.research_focus.institutional_affiliation}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Key Publications
+                                    </h2>
+                                    <div class="space-y-6">
+                                        ${profileData.key_publications.map((pub, index) => {
+                                            const colors = [
+                                                'from-yellow-50 to-orange-50 border-yellow-500',
+                                                'from-blue-50 to-indigo-50 border-blue-500',
+                                                'from-green-50 to-emerald-50 border-green-500'
+                                            ];
+                                            const badges = {
+                                                'foundational': 'bg-yellow-400 text-yellow-900',
+                                                'key': 'bg-blue-400 text-blue-900',
+                                                'recent': 'bg-green-400 text-green-900'
+                                            };
+                                            return `
+                                                <div class="p-6 bg-gradient-to-r ${colors[index]} rounded-xl border-l-4">
+                                                    <div class="flex items-start justify-between mb-3">
+                                                        <h4 class="font-bold text-gray-900 text-lg leading-tight flex-1 mr-4">"${pub.title}"</h4>
+                                                        ${pub.significance ? `<span class="px-3 py-1 ${badges[pub.significance]} rounded-full text-sm font-bold flex-shrink-0">${pub.significance.toUpperCase()}</span>` : ''}
+                                                    </div>
+                                                    <div class="flex items-center justify-between text-sm">
+                                                        <span class="text-gray-600">${pub.year}</span>
+                                                        ${pub.co_author ? `<span class="text-gray-600">Co-author: ${pub.co_author}</span>` : ''}
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Contact Information
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                            <p class="text-sm font-medium text-gray-500">Phone</p>
+                                            <p class="text-sm font-bold text-gray-900">${marketingExpertProfileData.phone}</p>
+                                        </div>
+                                        <div class="p-3 bg-pink-50 rounded-lg border-l-4 border-pink-500">
+                                            <p class="text-sm font-medium text-gray-500">Faculty</p>
+                                            <p class="text-sm font-bold text-gray-900">${profileData.current_role.faculty}</p>
+                                        </div>
+                                        <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                            <p class="text-sm font-medium text-gray-500">Since</p>
+                                            <p class="text-sm font-bold text-gray-900">${new Date(profileData.current_role.since).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Areas of Expertise
+                                    </h3>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        ${profileData.areas_of_expertise.map((area, index) => {
+                                            const colors = [
+                                                'bg-blue-50 border-blue-500 text-blue-700',
+                                                'bg-green-50 border-green-500 text-green-700',
+                                                'bg-purple-50 border-purple-500 text-purple-700',
+                                                'bg-orange-50 border-orange-500 text-orange-700',
+                                                'bg-pink-50 border-pink-500 text-pink-700',
+                                                'bg-indigo-50 border-indigo-500 text-indigo-700',
+                                                'bg-emerald-50 border-emerald-500 text-emerald-700'
+                                            ];
+                                            return `
+                                                <div class="flex items-center p-3 ${colors[index % colors.length]} rounded-lg border-l-4">
+                                                    <div class="w-2 h-2 bg-current rounded-full mr-3"></div>
+                                                    <span class="text-sm font-medium">${area}</span>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                        Quick Stats
+                                    </h3>
+                                    <div class="grid grid-cols-1 gap-4">
+                                        <div class="p-4 bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl text-center border-2 border-orange-200">
+                                            <div class="text-2xl font-bold text-orange-600 mb-1">17+</div>
+                                            <div class="text-xs text-orange-700 font-medium">Years at UiTM Sabah</div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl text-center border-2 border-green-200">
+                                            <div class="text-2xl font-bold text-green-600 mb-1">7</div>
+                                            <div class="text-xs text-green-700 font-medium">Areas of Expertise</div>
+                                        </div>
+                                        <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl text-center border-2 border-purple-200">
+                                            <div class="text-2xl font-bold text-purple-600 mb-1">9</div>
+                                            <div class="text-xs text-purple-700 font-medium">Research Themes</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-br from-orange-50 to-pink-50 border-2 border-orange-200 rounded-2xl p-6">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-orange-900 mb-2">Marketing Excellence</h3>
+                                        <p class="text-orange-700 text-sm leading-relaxed">
+                                            Leading expert in SME brand management and Resource-Based View theory applications in Malaysian marketing context.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', showMarketingExpertProfile);
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Dr. Rainah Ginsad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        const profileData = {
+            name: "Dr. Rainah Ginsad",
+            title: "Senior Lecturer in Economics",
+            institution: "Universiti Teknologi MARA (UiTM) Sabah Branch",
+            faculty: "Faculty of Business and Management",
+            imageUrl: "https://i.imgur.com/wY54IiY.png",
+            summary: "Dr. Rainah Ginsad is a sharp-minded economist who dissects the critical links between government policy and market realities. Her focus is on how a nation's fiscal decisions—from taxation to public spending—directly impact housing prices and economic growth in both emerging and advanced economies.",
+            extended_summary: "With pioneering doctoral research that broke down the effects of government expenditure on housing markets, Dr. Ginsad provides policymakers with crucial, data-driven insights needed to tackle housing affordability and advance sustainable development goals. A Senior Lecturer at Universiti Teknologi MARA and an Associate Fellow at the prestigious Accounting Research Institute, Dr. Ginsad is more than an academic—she is a vital voice whose meticulous analysis bridges the gap between economic theory and real-world policy.",
+            education: [
+                {
+                    degree: "Doctor of Business Administration (DBA)",
+                    institution: "Universiti Teknologi MARA",
+                    year: 2021,
+                    thesis: "The Role of Government Expenditure (Productive and Non-Productive) Towards Housing Prices in Emerging and Advanced Economies"
+                }
+            ],
+            research_interests: [
+                "Government Expenditure Analysis", "Housing Economics", "Tax Policy & Economic Growth", "Macroeconomic Development", "Fiscal Policy", "Energy Economics", "Financial Development", "Comparative Economic Analysis"
+            ],
+            methodological_expertise: ["Structural Equation Modeling (SEM)", "Partial Least Squares (PLS)", "'TPB Plus' Framework Adaptation"],
+            achievements: [
+                { title: "Graduate On Time (GOT)", description: "Successfully completed DBA program on schedule in 2021" },
+                { title: "Best Supervisor Award", description: "Recognized with the Jewel in the Crown Award in 2018 for mentorship excellence" },
+                { title: "Extensive Publication Record", description: "Over 100 publications with a seminal work cited 460+ times" },
+                { title: "Dedicated Mentor", description: "Supervised over 30 postgraduate students, including 16 PhD graduates" },
+                { title: "Associate Fellow, ARI", description: "Appointed to a Higher Institution Centre of Excellence (HICoE)" },
+                { title: "Consultation Grant Recipient", description: "Successfully obtained a competitive grant in December 2024" }
+            ],
+            research_pillars: [
+                {
+                    title: "Fostering Entrepreneurship from the Ground Up",
+                    description: "Systematically dissects the multifaceted nature of entrepreneurship, examining its psychological antecedents, its application in critical economic sectors like agropreneurship, and its potential to address societal challenges through social enterprise."
+                },
+                {
+                    title: "Driving Sustainable Regional Development",
+                    description: "Aligns research with strategic development blueprints like the Sabah Maju Jaya plan, focusing on food security, the Blue Economy, and community resilience."
+                },
+                {
+                    title: "Empowering Organizations and SMEs",
+                    description: "Provides critical insights into the internal dynamics of firms, focusing on leadership styles, psychological empowerment, and empirically identifying key barriers to SME growth in Malaysia."
+                },
+                {
+                    title: "Navigating the Digital Frontier",
+                    description: "Engages with contemporary business phenomena driven by rapid digitalization, applying expertise in consumer behavior and technology adoption to e-wallets, social media influence, and e-commerce."
+                }
+            ],
+            publications: [
+                {
+                    title: "Impact of direct and indirect taxes on economic development: A comparison between developed and developing countries",
+                    authors: "Hakim, T. A., Karia, A. A., David, J., Ginsad, R., et al.",
+                    journal: "Cogent Economics & Finance, 2022"
+                },
+                {
+                    title: "The Role of Government Expenditure... Towards Housing Prices in Emerging and Advanced Economies",
+                    authors: "Ginsad, R.",
+                    journal: "Doctoral Dissertation, Universiti Teknologi MARA, 2021"
+                }
+            ],
+            contact: {
+                faculty: "Faculty of Business and Management",
+                institution: "Universiti Teknologi MARA (UiTM), Sabah Branch",
+                address: "88997 Kota Kinabalu, Sabah, Malaysia"
+            }
+        };
+
+        function showProfile() {
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+                    <div class="profile-header text-white relative overflow-hidden">
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                Back to Directory
+                            </a>
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${profileData.imageUrl}" alt="${profileData.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-blue-900" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6c0 1.887 1.12 3.535 2.768 4.332l-1.49 3.724A1 1 0 006.38 18h7.24a1 1 0 00.898-1.444l-1.49-3.724C14.88 11.535 16 9.887 16 8a6 6 0 00-6-6zm0 10a4 4 0 110-8 4 4 0 010 8z"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
+                                    <p class="text-2xl text-blue-100 mb-2 font-medium">${profileData.title}</p>
+                                    <p class="text-xl text-indigo-100 mb-4">${profileData.institution}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Professional Biography</h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">${profileData.summary}</p>
+                                    <p class="text-gray-700 leading-relaxed">${profileData.extended_summary}</p>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Key Research Pillars</h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        ${profileData.research_pillars.map(pillar => `
+                                            <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                                                <h4 class="font-bold text-blue-900 text-lg mb-2">${pillar.title}</h4>
+                                                <p class="text-sm text-blue-800">${pillar.description}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Key Achievements & Highlights</h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        ${profileData.achievements.map(ach => `
+                                            <div class="p-4 bg-indigo-50 rounded-xl border-2 border-indigo-100 text-center flex flex-col justify-center">
+                                                <h4 class="font-bold text-indigo-800 text-md leading-tight">${ach.title}</h4>
+                                                <p class="text-xs text-indigo-600 mt-1">${ach.description}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Academic Qualifications</h3>
+                                    <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                                        <p class="font-bold text-gray-900">${profileData.education[0].degree}</p>
+                                        <p class="text-sm text-gray-700">${profileData.education[0].institution} (${profileData.education[0].year})</p>
+                                        <p class="text-xs text-gray-600 mt-2 italic"><strong>Thesis:</strong> "${profileData.education[0].thesis}"</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Methodological Expertise</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${profileData.methodological_expertise.map(skill => `<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold">${skill}</span>`).join('')}
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Research Interests</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${profileData.research_interests.map(interest => `<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">${interest}</span>`).join('')}
+                                    </div>
+                                </div>
+                                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Contact</h3>
+                                    <p class="text-sm text-gray-600">${profileData.contact.faculty}</p>
+                                    <p class="text-sm text-gray-600">${profileData.contact.institution}</p>
+                                    <p class="text-sm text-gray-600">${profileData.contact.address}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+</body>
+</html>

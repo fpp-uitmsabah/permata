@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Dr. Sharifah Nurafizah Syed Annuar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #0d9488 0%, #15803d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0d9488, #15803d);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0f766e, #166534);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        const profileData = {
+            name: "Dr. Sharifah Nurafizah Syed Annuar",
+            imageUrl: "https://i.imgur.com/mZx1OJe.png",
+            title: "Senior Lecturer",
+            department: "Faculty of Business and Management",
+            institution: "Universiti Teknologi MARA (UiTM), Sabah Branch",
+            summary: "A distinguished academic leader at the intersection of marketing scholarship, industry engagement, and regional development in Sabah. As a Senior Lecturer at UiTM Sabah, she embodies the modern 'boundary spanner,' focusing on generating tangible societal and economic impact. Her profile is characterized by a robust academic foundation, a highly relevant research portfolio in digital marketing and social enterprise, and a demonstrated capacity for strategic leadership that bridges academia, government, and the private sector.",
+            academicLineage: "Dr. Sharifah's academic training shows a progressive specialization from a broad, practical foundation in marketing to a highly focused, research-intensive expertise. Her journey, spanning institutions in Malaysia and the UK, has shaped her identity as a 'practitioner-scholar' whose work is deeply grounded in real-world application, leveraging rigorous research to address tangible market and societal issues.",
+            education: [
+                {
+                    degree: "PhD in Marketing",
+                    institution: "Universiti Malaysia Sabah (UMS)",
+                    icon: "🎓",
+                    description: "Cemented her status as a research expert with a deep-rooted commitment to the regional context of Sabah and Borneo."
+                },
+                {
+                    degree: "Master's in Marketing Communications",
+                    institution: "Middlesex University, UK",
+                    icon: "🌍",
+                    description: "Honed her expertise in strategic communications and gained a crucial international perspective on different market dynamics."
+                },
+                {
+                    degree: "Bachelor's in Marketing",
+                    institution: "Universiti Teknologi MARA (UiTM)",
+                    icon: "📚",
+                    description: "Provided a comprehensive grounding in core marketing principles within the Malaysian business context."
+                }
+            ],
+            researchFocus: [
+                "Digital Marketing", "E-Wallet Adoption", "Consumer Behavior", "Social & Health Marketing", "Organ Donation Promotion", "Entrepreneurship", "Social Enterprise", "Tourism & Regional Economics"
+            ],
+            scholarlyImpact: {
+                googleScholarCitations: 460,
+                awards: [
+                    "Nominee, Impactful Leadership Awards, Tallberg Foundation Sweden (2019)",
+                    "UiTM's Top Authors (Q1 & Q2 Journals)",
+                    "Industry Linkages Award"
+                ]
+            },
+            keyPublications: [
+                 {
+                    title: "The effect of perceived usefulness, perceived ease of use, reward, and perceived risk toward e-wallet usage intention",
+                    citations: 140
+                },
+                {
+                    title: "Factors Influencing Online Purchase Intention of Millennials and Gen Z Consumers",
+                    citations: 48
+                },
+                {
+                    title: "Functional food consumption among older consumers in Malaysia: A Health Belief Model perspective",
+                    citations: 31
+                }
+            ],
+            leadershipRoles: [
+                {
+                    title: "Head of Technical Committee, Human Capital Development (STI)",
+                    organization: "Sabah State Level",
+                    icon: "🔬"
+                },
+                 {
+                    title: "Programme Advisor",
+                    organization: "Social Enterprise World Forum (SEWF) & SCENIC",
+                    icon: "🌐"
+                },
+                {
+                    title: "Associate Consultant",
+                    organization: "UiTM Technoventure Sdn. Bhd. (UTV)",
+                    icon: "💼"
+                },
+                {
+                    title: "Senior Associate and Consultant",
+                    organization: "Sociable and Co., Brunei Darussalam",
+                    icon: "🌏"
+                },
+                {
+                    title: "Editorial Member",
+                    organization: "Jurnal Borneo Akademika",
+                    icon: "✒️"
+                }
+            ],
+            researchThemes: [
+                {
+                    theme: "Technology Adoption & Digital Marketing",
+                    description: "Highly cited work focusing on consumer and business adoption of digital technologies, particularly e-wallets, e-commerce trends among youth, and emerging platforms like TikTok and the metaverse.",
+                    icon: "💻"
+                },
+                {
+                    theme: "Social & Health Marketing",
+                    description: "Applies marketing principles for societal benefit, with significant research on promoting organ donation registration, fostering pro-environmental behaviors via social media influencers, and encouraging healthy food consumption.",
+                    icon: "❤️"
+                },
+                {
+                    theme: "Tourism & Regional Economics (Sabah Focus)",
+                    description: "Tailored research to leverage Sabah's unique cultural and natural assets, including promoting indigenous foods to tourists and developing sustainable and responsible tourism strategies for Southeast Asia.",
+                    icon: "🏞️"
+                },
+                {
+                    theme: "Entrepreneurship & MSMEs",
+                    description: "Focuses on the critical MSME sector by investigating cashless system adoption and leading the development of a Social Enterprise Blueprint for Sabah to blend commercial activity with social impact.",
+                    icon: "🚀"
+                }
+            ],
+            intellectualFrameworks: {
+                summary: "Dr. Sharifah's research is characterized by her skillful application of established theoretical models to new empirical problems. This pragmatic approach ensures her findings are grounded in solid theory and comparable with broader scientific literature, making her an effective translational researcher.",
+                models: [
+                    { name: "Technology Acceptance Model (TAM)", description: "A cornerstone of her digital technology research, often extended with variables like Perceived Risk and Trust to dissect the drivers of e-wallet adoption in the Malaysian context." },
+                    { name: "Information Adoption Model (IAM)", description: "Central to her social marketing work, used to understand how individuals process and act upon information from social media in campaigns promoting organ donation." },
+                    { name: "Health Belief Model (HBM)", description: "A key framework in her health marketing research to predict behaviors, such as the drivers of functional food consumption among older adults." }
+                ],
+                methodology: "Her work is predominantly quantitative, utilizing survey-based designs and advanced statistical techniques like Partial Least Squares Structural Equation Modeling (PLS-SEM) with software such as SmartPLS to test complex theoretical models."
+            }
+        };
+
+        function showProfile() {
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-cyan-50">
+                    <div class="profile-header text-white">
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Back to Directory
+                            </a>
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${profileData.imageUrl}" alt="${profileData.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-teal-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-teal-900" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 2a6 6 0 00-6 6c0 1.887.672 3.633 1.791 4.993l-1.482 4.444a1 1 0 001.396 1.396l4.444-1.482A5.968 5.968 0 0010 18a6 6 0 100-12zm-3 6a1 1 0 112 0 1 1 0 01-2 0zm2-3a1 1 0 100 2 1 1 0 000-2zm4 3a1 1 0 11-2 0 1 1 0 012 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
+                                    <p class="text-2xl text-green-100 mb-2 font-medium">${profileData.title}</p>
+                                    <p class="text-xl text-teal-100 mb-4">${profileData.institution}</p>
+                                    <div class="flex flex-wrap gap-3 mb-6">
+                                        <span class="bg-teal-400 text-teal-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            📈 Strategic Integrator
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🎓 PhD in Marketing
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            💡 Industry & Community Leader
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                        Executive Summary
+                                    </h2>
+                                    <div class="p-6 bg-gradient-to-r from-teal-50 to-green-50 rounded-xl border-l-4 border-teal-500">
+                                        <p class="text-gray-700 text-lg leading-relaxed">${profileData.summary}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                        Academic Lineage & Foundational Expertise
+                                    </h2>
+                                     <div class="p-6 bg-blue-50 rounded-xl border-l-4 border-blue-400 mb-6">
+                                        <p class="text-gray-700 italic leading-relaxed">${profileData.academicLineage}</p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        ${profileData.education.map(edu => `
+                                            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-300">
+                                                <p class="text-lg font-bold text-gray-900">${edu.icon} ${edu.degree}</p>
+                                                <p class="text-md text-gray-700 font-medium">${edu.institution}</p>
+                                                <p class="text-sm text-gray-600 mt-1">${edu.description}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                        Intellectual Frameworks & Methodology
+                                    </h2>
+                                     <div class="p-6 bg-purple-50 rounded-xl border-l-4 border-purple-400 mb-6">
+                                        <p class="text-gray-700 leading-relaxed">${profileData.intellectualFrameworks.summary}</p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        ${profileData.intellectualFrameworks.models.map(model => `
+                                            <div class="p-3 bg-gray-50 rounded-lg">
+                                                <h4 class="font-bold text-gray-800">${model.name}</h4>
+                                                <p class="text-sm text-gray-600">${model.description}</p>
+                                            </div>
+                                        `).join('')}
+                                        <div class="p-3 bg-gray-100 rounded-lg">
+                                            <h4 class="font-bold text-gray-800">Methodology</h4>
+                                            <p class="text-sm text-gray-600">${profileData.intellectualFrameworks.methodology}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                         <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                        Thematic Research Contributions
+                                    </h2>
+                                    <div class="space-y-4">
+                                        ${profileData.researchThemes.map(theme => `
+                                            <div class="flex items-start p-4 bg-green-50 rounded-lg">
+                                                <span class="text-2xl mr-4 mt-1">${theme.icon}</span>
+                                                <div>
+                                                    <h4 class="font-bold text-green-900">${theme.theme}</h4>
+                                                    <p class="text-sm text-gray-700 mt-1">${theme.description}</p>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                                        Awards & Recognition
+                                    </h3>
+                                    <div class="space-y-3">
+                                        ${profileData.scholarlyImpact.awards.map(award => `
+                                            <div class="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                                <p class="text-sm font-bold text-gray-800">${award}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                         <svg class="w-5 h-5 mr-2 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        Leadership & Professional Roles
+                                    </h3>
+                                    <div class="space-y-2">
+                                        ${profileData.leadershipRoles.map(role => `
+                                            <div class="flex items-start p-2 bg-pink-50 rounded-lg">
+                                                <span class="mr-3 mt-1">${role.icon}</span>
+                                                <div>
+                                                    <p class="text-sm font-medium text-gray-800">${role.title}</p>
+                                                    <p class="text-xs text-gray-600">${role.organization}</p>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                        Areas of Expertise
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${profileData.researchFocus.map(focus => `
+                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">${focus}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+</body>
+</html>

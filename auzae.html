@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Dr. Pg. Mohd Auza'e Pg. Arshad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        // Data for the specific faculty member
+        const profileData = {
+            "name": "Dr. Pg. Mohd Auza'e Pg. Arshad",
+            "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg",
+            "title": "Senior Lecturer (Pensyarah Kanan) & Coordinator, Corporate Communications Unit",
+            "department": "Management",
+            "institution": "Universiti Teknologi MARA (UiTM) Cawangan Sabah",
+            "phone": "088 - 513801",
+            "summary": "Dr. Pg. Mohd Auza'e Pg. Arshad is a distinguished academic and university administrator whose work lies at the intersection of management, technology, and consumer behavior. His research pioneers a novel theoretical model integrating Goal-Setting Theory with gamification to predict and enhance user engagement, with a sustained focus on the mobile fitness application ecosystem.",
+            "education": {
+                "phd": "PhD from Azman Hashim International Business School, Universiti Teknologi Malaysia (UTM), 2020",
+                "sponsorship": "MyBrain15 sponsorship from the Malaysian Ministry of Education"
+            },
+            "research_focus": [
+                "Gamification", "Goal-Setting Theory", "User Engagement", "Mobile Marketing", "Hi-Tech Consumer Behavior"
+            ],
+            "methodology": "Specializes in quantitative research designs, survey-based data collection, and advanced statistical analysis using Partial Least Square-Structural Equation Modeling (PLS-SEM).",
+            "theoretical_contribution": {
+                "title": "The GST-Gamification Synergy",
+                "description": "Dr. Arshad's central contribution is the integration of Locke's Goal-Setting Theory (GST) as an 'internal force' of motivation with gamification as an 'external force' of environmental design. This hybrid model addresses a key weakness in gamification literature by providing a robust theoretical foundation to explain why gamified systems succeed or fail, thus offering a more holistic view of sustained user engagement."
+            },
+            "contextual_application": {
+                "title": "The Mobile Fitness App Ecosystem",
+                "description": "His research is strategically situated within the m-Health sector, addressing the critical issue of high user abandonment rates in fitness apps. The work provides actionable recommendations for developers and marketers to create more compelling applications, with the dual aim of enhancing user engagement and promoting healthier lifestyles."
+            },
+            "key_publications": [
+                { "title": "Goal Setting Theory on Mobile Fitness Application Engagement: The Mediating Role of Goal Mechanisms", "year": 2025 },
+                { "title": "Goal-setting theory and gamification in mobile fitness app engagement: a pilot study", "year": 2022 },
+                { "title": "Goal-setting theory (Gst) and gamification relationship in increasing mobile fitness apps engagement: a conceptual discussion", "year": 2019 }
+            ],
+            "citation_metrics": {
+                "citations": 22,
+                "h_index": 4,
+                "note": "21 of 22 citations have occurred since 2020, indicating a clear and accelerating upward trend in scholarly impact."
+            }
+        };
+
+        // Show Profile
+        function showProfile() {
+            
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+                    <div class="profile-header text-white relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                        
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Back to Directory
+                            </a>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${profileData.imageUrl}" alt="${profileData.name}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-blue-900" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 2a6 6 0 00-6 6c0 1.887.643 3.633 1.706 4.962L4.5 17.562a1 1 0 001.414 1.414l4.038-4.038A5.965 5.965 0 0010 14a6 6 0 000-12zm0 10a4 4 0 110-8 4 4 0 010 8z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
+                                    <p class="text-2xl text-blue-100 mb-2 font-medium">${profileData.title}</p>
+                                    <p class="text-xl text-indigo-100 mb-4">${profileData.institution}</p>
+                                    <div class="flex flex-wrap gap-3 mb-6">
+                                        <span class="bg-blue-400 text-blue-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            🎮 Gamification & Engagement
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🎯 Goal-Setting Theory
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            📱 Mobile Marketing
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                        Professional Synopsis
+                                    </h2>
+                                    <div class="p-6 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-xl border-l-4 border-blue-500">
+                                        <p class="text-gray-700 text-lg leading-relaxed">${profileData.summary}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Core Research Program
+                                    </h2>
+                                    <div class="space-y-6">
+                                        <div class="p-6 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl border-l-4 border-green-500">
+                                            <h3 class="text-lg font-bold text-gray-900 mb-3">${profileData.theoretical_contribution.title}</h3>
+                                            <p class="text-gray-700 leading-relaxed">${profileData.theoretical_contribution.description}</p>
+                                        </div>
+                                        <div class="p-6 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl border-l-4 border-cyan-500">
+                                            <h3 class="text-lg font-bold text-gray-900 mb-3">${profileData.contextual_application.title}</h3>
+                                            <p class="text-gray-700 leading-relaxed">${profileData.contextual_application.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                        Key Publications & Impact
+                                    </h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                        <div class="p-4 bg-blue-50 rounded-xl border-2 border-blue-100 text-center">
+                                            <div class="text-3xl font-bold text-blue-600">${profileData.citation_metrics.citations}</div>
+                                            <div class="text-sm text-blue-700 font-medium">Total Citations</div>
+                                        </div>
+                                        <div class="p-4 bg-green-50 rounded-xl border-2 border-green-100 text-center">
+                                            <div class="text-3xl font-bold text-green-600">${profileData.citation_metrics.h_index}</div>
+                                            <div class="text-sm text-green-700 font-medium">H-Index</div>
+                                        </div>
+                                    </div>
+                                    <p class="text-center text-sm text-gray-600 mb-6">${profileData.citation_metrics.note}</p>
+                                    <div class="space-y-4">
+                                        ${profileData.key_publications.map((pub, index) => {
+                                             const colors = ['border-purple-500 bg-purple-50', 'border-indigo-500 bg-indigo-50', 'border-blue-500 bg-blue-50'];
+                                            return `
+                                                <div class="p-4 rounded-xl border-l-4 ${colors[index % colors.length]}">
+                                                    <p class="font-semibold text-gray-800 flex-1">"${pub.title}" (${pub.year})</p>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Contact & Info
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                                            <p class="text-sm font-medium text-gray-500">Department</p>
+                                            <p class="text-sm font-bold text-gray-900">${profileData.department}</p>
+                                        </div>
+                                        <div class="p-3 bg-indigo-50 rounded-lg border-l-4 border-indigo-400">
+                                            <p class="text-sm font-medium text-gray-500">Phone</p>
+                                            <p class="text-sm font-bold text-gray-900">${profileData.phone}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Research Focus
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${profileData.research_focus.map(focus => `
+                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">${focus}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                                        </svg>
+                                        Methodological Approach
+                                    </h3>
+                                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                        <p class="text-sm text-gray-700">${profileData.methodology}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-blue-900 mb-2">Scholar-Practitioner</h3>
+                                        <p class="text-blue-700 text-sm leading-relaxed">
+                                            Dr. Arshad's dual appointment as a Senior Lecturer and Coordinator of Corporate Communications positions him as a scholar-practitioner, effectively bridging the gap between abstract theory and applied practice.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+</body>
+</html>

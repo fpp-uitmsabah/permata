@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Dr. Jasmine Vivienne Andrew</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        const profileData = {
+            personalInfo: {
+                name: "Dr. Jasmine Vivienne Andrew",
+                title: "Senior Lecturer",
+                imageUrl: "https://i.imgur.com/RPrDp9X.png",
+                institution: "Universiti Teknologi MARA (UiTM)",
+                faculty: "Faculty of Business Management",
+                campus: "UiTM Sabah",
+                yearsOfExperience: "Over 10 years"
+            },
+            professionalBio: {
+                summary: "Dr. Jasmine Vivienne Andrew is a dynamic force at the forefront of marketing academia, serving as a distinguished Senior Lecturer at Universiti Teknologi MARA (UiTM). Her career is a testament to the power of translating rigorous scholarship into tangible business impact. Dr. Andrew's groundbreaking research dissects the complexities of service quality, pioneers studies into digital consumer behavior, and champions entrepreneurship within Malaysia.",
+                vision: "Dedicated educator and forward-thinking scholar committed to mentoring the next wave of business leaders and empowering a thriving, digitally-savvy Malaysian economy."
+            },
+            researchProfile: {
+                totalCitations: "Over 240",
+                researchAreas: ["Marketing", "Service Quality", "Digital Consumer Behavior", "Entrepreneurship", "E-wallet Adoption", "Banking Service Excellence", "SME Growth", "Digital Marketing"],
+                keyPublications: [
+                    { title: "The mediating effect of psychological empowerment on leadership styles and task performance of academic staff", citations: 70 },
+                    { title: "Growth Challenges of SMEs: Empirical Evidence in Sabah, Malaysia", citations: 38 },
+                    { title: "Systematic review on e-wallet usage intention in Malaysia integrating UTAUT2 framework with perceived security" },
+                    { title: "Identifying and validating dimensions of service quality for the banking industry in Malaysia" }
+                ]
+            },
+            teachingExpertise: {
+                specializations: ["Relationship Marketing", "Digital Marketing", "Service Marketing", "Marketing Fundamentals"],
+                onlineCourses: [{ courseName: "Relationship Marketing", platform: "UiTM MOOC Platform" }]
+            },
+            keyAchievements: [
+                "Over 240 global citations demonstrating international research impact",
+                "Pioneering research in Malaysian banking service quality",
+                "Development of innovative MOOC courses expanding educational access",
+                "Leadership in policy-relevant research on food security and youth entrepreneurship"
+            ]
+        };
+
+        function showProfile() {
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50">
+                    <div class="profile-header text-white relative overflow-hidden">
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                Back to Directory
+                            </a>
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="${profileData.personalInfo.imageUrl}" alt="${profileData.personalInfo.name}" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.personalInfo.name}</h1>
+                                    <p class="text-2xl text-yellow-100 mb-2 font-medium">${profileData.personalInfo.title}</p>
+                                    <p class="text-xl text-orange-100 mb-4">${profileData.personalInfo.institution}, ${profileData.personalInfo.campus}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Professional Biography</h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">${profileData.professionalBio.summary}</p>
+                                    <p class="text-gray-700 leading-relaxed font-semibold italic">"${profileData.professionalBio.vision}"</p>
+                                </div>
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Key Achievements</h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        ${profileData.keyAchievements.map(ach => `
+                                            <div class="p-4 bg-yellow-50 rounded-xl border-l-4 border-yellow-500">
+                                                <p class="text-yellow-800 font-semibold">${ach}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Key Publications</h2>
+                                    <div class="space-y-4">
+                                        ${profileData.researchProfile.keyPublications.map(pub => `
+                                            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-orange-500">
+                                                <p class="font-semibold text-gray-800">"${pub.title}"</p>
+                                                ${pub.citations ? `<span class="text-sm text-gray-600 font-bold">${pub.citations} Citations</span>` : ''}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Teaching Expertise</h3>
+                                    <div class="space-y-2">
+                                        ${profileData.teachingExpertise.specializations.map(spec => `<span class="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-semibold mr-2">${spec}</span>`).join('')}
+                                    </div>
+                                    <div class="mt-4 p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400">
+                                        <p class="font-bold text-gray-900">Online Course</p>
+                                        <p class="text-sm text-gray-700">${profileData.teachingExpertise.onlineCourses[0].courseName} on ${profileData.teachingExpertise.onlineCourses[0].platform}</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Research Profile</h3>
+                                    <p class="text-lg font-bold text-orange-600">${profileData.researchProfile.totalCitations} citations</p>
+                                    <div class="flex flex-wrap gap-2 mt-4">
+                                        ${profileData.researchProfile.researchAreas.map(area => `<span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">${area}</span>`).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+</body>
+</html>

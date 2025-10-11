@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Professor Ts. Dr. Imbarine bin Hj Bujang, JP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* Enhanced animations and transitions */
+        .faculty-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            </div>
+    </div>
+
+    <script>
+        // Data for the specific faculty member
+        const professorProfileData = {
+            name: "Professor Ts. Dr. Imbarine bin Hj Bujang, JP",
+            honorific: "ADK",
+            title: "Deputy Rector of Academic Affairs",
+            specialization: "Financial Econometrics",
+            institution: "Universiti Teknologi MARA (UiTM) Sabah",
+            career_start: "January 2010",
+            education: {
+                phd: {
+                    degree: "Doctor of Philosophy (PhD)",
+                    field: "Financial Econometrics",
+                    institution: "Edith Cowan University, Western Australia"
+                },
+                masters: {
+                    degree: "Master of Science (MSc)",
+                    field: "Finance",
+                    institution: "Universiti Putra Malaysia"
+                },
+                bachelors: {
+                    degree: "Bachelor of Business Administration (Hons)",
+                    field: "Finance",
+                    institution: "Universiti Teknologi MARA (UiTM), Shah Alam",
+                    distinction: "First Class honors"
+                },
+                diploma: {
+                    degree: "Diploma",
+                    field: "Banking",
+                    institution: "UiTM Cawangan Sabah"
+                }
+            },
+            achievements: [
+                "First UiTM Sabah graduate to hold Professor title in campus's 47-year history (2020)",
+                "Professional Technologist (Ts.) designation from Malaysia Board of Technologists",
+                "Deputy Rector of Academic Affairs, UiTM Sabah (Current)",
+                "Head of Postgraduate Studies (November 2016 - Present)",
+                "Anchor Campus Chairman, Diploma in Banking (2013 - October 2016)"
+            ],
+            research_focus: [
+                "Financial Econometrics",
+                "Corporate Finance",
+                "Banking and Finance",
+                "Economic Research",
+                "Postgraduate Supervision",
+                "PhD and Master's by Research Programs"
+            ],
+            leadership_roles: [
+                {
+                    title: "Deputy Rector of Academic Affairs",
+                    status: "Current",
+                    description: "Leading academic excellence and strategic development at UiTM Sabah"
+                },
+                {
+                    title: "Professor (VK7)",
+                    year: "2020",
+                    significance: "Historic achievement as first UiTM Sabah graduate to attain this distinction"
+                },
+                {
+                    title: "Head of Postgraduate Studies",
+                    period: "November 2016 - Present",
+                    responsibilities: "Monitoring, developing, and enhancing PhD and Master's by research programs"
+                }
+            ],
+            professional_designation: {
+                title: "Professional Technologist (Ts.)",
+                body: "Malaysia Board of Technologists (MBOT)",
+                description: "Expertise in practical application of econometric and financial technologies"
+            }
+        };
+
+        // Show Professor Imbarine's detailed profile
+        function showImbarineProfile() {
+            const profileData = professorProfileData;
+            
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+                    <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black opacity-10"></div>
+                        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                        
+                        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Back to Directory
+                            </a>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                        <img src="https://i.imgur.com/yK4vFQ9.png" alt="Professor Ts. Dr. Imbarine bin Hj Bujang, JP" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-8 h-8 text-yellow-900" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute -top-2 -left-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                        ${profileData.honorific}
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
+                                    <p class="text-2xl text-blue-100 mb-2 font-medium">${profileData.title}</p>
+                                    <p class="text-xl text-indigo-100 mb-4">${profileData.institution}</p>
+                                    <div class="flex flex-wrap gap-3 mb-6">
+                                        <span class="bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            🏆 First UiTM Sabah Professor Graduate
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            🎓 PhD Financial Econometrics
+                                        </span>
+                                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                            ⚡ Professional Technologist (Ts.)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2 space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-orange-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                        </svg>
+                                        Historic Achievement
+                                    </h2>
+                                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border-l-4 border-yellow-500">
+                                        <h3 class="text-xl font-bold text-gray-900 mb-3">🏆 Pioneering Excellence</h3>
+                                        <p class="text-gray-700 text-lg leading-relaxed">
+                                            In 2020, Professor Imbarine made history as the <strong>first graduate of UiTM Sabah to achieve the prestigious Professor title</strong> in the campus's 47-year history. This groundbreaking achievement represents not only personal excellence but also the maturation of UiTM Sabah as a center of academic distinction.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                        Research Impact & Metrics
+                                    </h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                        <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl text-center border-2 border-blue-200">
+                                            <div class="text-3xl font-bold text-blue-600 mb-2">1,334</div>
+                                            <div class="text-sm text-blue-700 font-medium">Google Scholar Citations</div>
+                                            <div class="text-xs text-blue-600 mt-1">80% since 2020</div>
+                                        </div>
+                                        <div class="p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl text-center border-2 border-green-200">
+                                            <div class="text-3xl font-bold text-green-600 mb-2">19</div>
+                                            <div class="text-sm text-green-700 font-medium">H-Index</div>
+                                            <div class="text-xs text-green-600 mt-1">Google Scholar</div>
+                                        </div>
+                                        <div class="p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl text-center border-2 border-purple-200">
+                                            <div class="text-3xl font-bold text-purple-600 mb-2">36</div>
+                                            <div class="text-sm text-purple-700 font-medium">i10-Index</div>
+                                            <div class="text-xs text-purple-600 mt-1">Publications with 10+ citations</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-4">
+                                        <h4 class="font-bold text-gray-900 mb-2">📊 Additional Metrics</h4>
+                                        <div class="flex flex-wrap gap-4 text-sm">
+                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Scopus H-Index: 5</span>
+                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">ResearchGate Citations: 587</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Academic Journey
+                                    </h2>
+                                    <div class="space-y-6">
+                                        <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
+                                            <h3 class="text-lg font-bold text-gray-900 mb-2">🎓 ${profileData.education.phd.degree}</h3>
+                                            <p class="text-gray-700 mb-1">${profileData.education.phd.field}</p>
+                                            <p class="text-sm text-gray-600">${profileData.education.phd.institution}</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl">
+                                                <h4 class="font-bold text-gray-900 mb-1">📚 ${profileData.education.masters.degree}</h4>
+                                                <p class="text-sm text-gray-600 mb-1">${profileData.education.masters.field}</p>
+                                                <p class="text-xs text-gray-500">${profileData.education.masters.institution}</p>
+                                            </div>
+                                            <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl">
+                                                <h4 class="font-bold text-gray-900 mb-1">🎯 ${profileData.education.bachelors.degree}</h4>
+                                                <p class="text-sm text-gray-600 mb-1">${profileData.education.bachelors.field}</p>
+                                                <p class="text-xs text-gray-500">${profileData.education.bachelors.institution}</p>
+                                                <span class="inline-block mt-1 px-2 py-1 bg-yellow-200 text-yellow-800 text-xs font-bold rounded">
+                                                    ${profileData.education.bachelors.distinction}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                        </svg>
+                                        Leadership Excellence
+                                    </h2>
+                                    <div class="space-y-4">
+                                        ${profileData.leadership_roles.map(role => `
+                                            <div class="p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border-l-4 border-purple-500">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">${role.title}</h3>
+                                                ${role.period ? `<p class="text-sm text-purple-600 font-medium mb-2">${role.period}</p>` : ''}
+                                                ${role.year ? `<p class="text-sm text-purple-600 font-medium mb-2">Achieved: ${role.year}</p>` : ''}
+                                                ${role.status ? `<p class="text-sm text-green-600 font-medium mb-2">Status: ${role.status}</p>` : ''}
+                                                ${role.description ? `<p class="text-gray-700">${role.description}</p>` : ''}
+                                                ${role.responsibilities ? `<p class="text-gray-700">${role.responsibilities}</p>` : ''}
+                                                ${role.significance ? `<p class="text-gray-700 italic mt-2">${role.significance}</p>` : ''}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-8">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                        </svg>
+                                        Professional Recognition
+                                    </h3>
+                                    <div class="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-200">
+                                        <h4 class="font-bold text-indigo-900 mb-2">⚡ ${profileData.professional_designation.title}</h4>
+                                        <p class="text-sm text-indigo-700 mb-2">${profileData.professional_designation.body}</p>
+                                        <p class="text-xs text-indigo-600">${profileData.professional_designation.description}</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Research Expertise
+                                    </h3>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <div class="flex items-center p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-gray-700">Financial Econometrics</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-gray-700">Corporate Finance</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                            <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-gray-700">Behavioral Finance</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
+                                            <div class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-gray-700">FinTech & Digital Finance</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">
+                                            <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-gray-700">ESG Research</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                            <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                            <span class="text-sm font-medium text-gray-700">Investment Analysis</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-blue-900 mb-2">Get in Touch</h3>
+                                        <p class="text-blue-700 text-sm leading-relaxed mb-3">
+                                            Connect with Professor Imbarine for academic collaboration, research opportunities, or postgraduate supervision.
+                                        </p>
+                                        <p class="text-xs text-blue-600 font-medium">
+                                            📞 088 - 325151
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', showImbarineProfile);
+    </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Dewi binti Tajuddin - Academic Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Using a more modern font stack */
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        }
+        
+        /* Enhanced animations and transitions */
+        .section-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .section-card:hover::before {
+            left: 100%;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.1);
+        }
+        
+        /* Header styling */
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Gradient text for section titles */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Stagger animation for sections */
+        .section-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+        
+        .expertise-tag, .publication-theme-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .expertise-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50">
+    
+    <header class="profile-header text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="floating">
+                    <img src="https://i.imgur.com/KAwa8sg.png" 
+                         alt="Dr. Dewi binti Tajuddin" 
+                         class="w-48 h-48 rounded-3xl object-cover border-4 border-white/30 shadow-2xl">
+                </div>
+                <div class="text-center lg:text-left flex-1">
+                    <h1 class="text-5xl font-bold mb-3 tracking-tight">Dr. Dewi binti Tajuddin</h1>
+                    <p class="text-2xl text-blue-100 mb-4">Senior Lecturer & Head of Studies Center</p>
+                    <p class="text-xl text-blue-200 mb-6">Faculty of Business Management, UiTM Sabah</p>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="mailto:dewi400@uitm.edu.my" class="glass px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all text-sm font-medium">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                            dewi400@uitm.edu.my
+                        </a>
+                        <div class="glass px-6 py-3 rounded-xl flex items-center gap-3 text-sm font-medium">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                            +60 88-325 162
+                        </div>
+                         <div class="glass px-6 py-3 rounded-xl flex items-center gap-3 text-sm font-medium">
+                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                            +60 88-325 151
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <section class="section-card bg-white rounded-3xl shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold gradient-text mb-6">Professional Overview</h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-6">Dr. Dewi binti Tajuddin is a strategic HR scholar and academic leader whose work elevates talent management from an administrative function to a core business strategy. Anchored by institutionally supported doctoral training and long-term service at UiTM Sabah, her research, teaching, and leadership consistently bridge theory and practice to deliver measurable value for organizations and communities—particularly within Sabah’s socio-economic landscape.</p>
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Strategic Value Proposition</h3>
+                <p class="text-gray-700 mb-4">Designs and validates integrated talent strategies that strengthen employee value propositions, reduce organizational risk, and enhance brand performance.</p>
+                <ul class="space-y-2">
+                    <li class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 bg-indigo-500 rounded-full flex-shrink-0"></span><span class="text-gray-700"><strong>Banking Sector:</strong> Enhancing talent retention and building critical capabilities.</span></li>
+                    <li class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 bg-purple-500 rounded-full flex-shrink-0"></span><span class="text-gray-700"><strong>Public Sector:</strong> Driving culture assessment and behavior reform.</span></li>
+                    <li class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 bg-pink-500 rounded-full flex-shrink-0"></span><span class="text-gray-700"><strong>Regional Development:</strong> Creating entrepreneurship pathways to address graduate employability in Sabah.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section-card bg-white rounded-3xl shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold gradient-text mb-6">Research Agenda</h2>
+            <p class="text-gray-600 italic mb-6">A coherent programme that positions talent management as a core business strategy, extending to entrepreneurship, organizational behavior, and regional socio-economic challenges.</p>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="border-l-4 border-purple-500 pl-6 py-4 bg-purple-50 rounded-r-xl">
+                    <h3 class="text-lg font-bold text-gray-900">Talent Management & Strategic HR</h3>
+                    <p class="text-sm text-gray-600 mt-2">Extends the doctoral model of Talent Practices → Employee Value Proposition → Talent Brand. Focuses on banking talent retention and EVP as a lever for engagement.</p>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-6 py-4 bg-blue-50 rounded-r-xl">
+                    <h3 class="text-lg font-bold text-gray-900">Entrepreneurship & Socio-Economic Development</h3>
+                    <p class="text-sm text-gray-600 mt-2">Investigates entrepreneurial intentions among minority students in Sabah and enhancing graduate employability through entrepreneurship.</p>
+                </div>
+                <div class="border-l-4 border-green-500 pl-6 py-4 bg-green-50 rounded-r-xl">
+                    <h3 class="text-lg font-bold text-gray-900">Applied Organizational Behavior & Leadership</h3>
+                    <p class="text-sm text-gray-600 mt-2">Analyzes organizational culture in public institutions and the impact of job demands-resources on burnout and turnover in higher education.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card bg-white rounded-3xl shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold gradient-text mb-6">Expertise & Capabilities</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Core Expertise</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="expertise-tag bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-medium">Talent Management</span>
+                        <span class="expertise-tag bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-full font-medium">Talent Development</span>
+                        <span class="expertise-tag bg-gradient-to-r from-green-500 to-teal-500 text-white px-4 py-2 rounded-full font-medium">Human Resource Management</span>
+                        <span class="expertise-tag bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full font-medium">Strategic Management</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Research Capabilities</h3>
+                    <ul class="space-y-2 text-gray-700 list-disc list-inside">
+                        <li>SEM-based model building and validation</li>
+                        <li>Survey design and quantitative analysis</li>
+                        <li>Postgraduate research mentoring and quality assurance</li>
+                        <li>Curriculum leadership and programme governance</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card bg-white rounded-3xl shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold gradient-text mb-6">Selected Publications</h2>
+            <div class="space-y-6">
+                <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-200 transition-all">
+                    <p class="text-gray-800 font-semibold">Job Demand, Job Resources, Burnout, and Turnover Intention among Lecturers in Private Higher Institutions in Sabah</p>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mt-2">
+                        <span>International Journal of Academic Research in Business and Social Sciences (2022)</span>
+                        <span class="publication-theme-tag bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md font-medium">Organizational Behavior</span>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-200 transition-all">
+                    <p class="text-gray-800 font-semibold">The effect of career planning, talent management and training development towards employee retention</p>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mt-2">
+                        <span>International Journal of Academic Research in Business and Social Sciences (2022)</span>
+                        <span class="publication-theme-tag bg-purple-100 text-purple-800 px-2 py-0.5 rounded-md font-medium">Talent Management / HRM</span>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-200 transition-all">
+                    <p class="text-gray-800 font-semibold">Talent strategy for retaining banking talent in Malaysia</p>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mt-2">
+                        <span>Borneo Akademika (2016)</span>
+                        <span class="publication-theme-tag bg-purple-100 text-purple-800 px-2 py-0.5 rounded-md font-medium">Talent Management / HRM</span>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-200 transition-all">
+                    <p class="text-gray-800 font-semibold">Ethnic Entrepreneurships: Minority Ethnic Students in UiTM Sabah and UMS Perceptions towards Entrepreneurialism Business Interest</p>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mt-2">
+                        <span>Australian Journal of Basic and Applied Sciences (2015)</span>
+                        <span class="publication-theme-tag bg-green-100 text-green-800 px-2 py-0.5 rounded-md font-medium">Entrepreneurship</span>
+                    </div>
+                </div>
+                 <div class="p-4 rounded-xl border border-gray-200 hover:border-purple-200 transition-all">
+                    <p class="text-gray-800 font-semibold">Women Profiling in Leadership: A Case Study in Sabah</p>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mt-2">
+                        <span>Proceedings, Borneo Islamic International Conference (2023)</span>
+                        <span class="publication-theme-tag bg-pink-100 text-pink-800 px-2 py-0.5 rounded-md font-medium">Leadership</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card bg-white rounded-3xl shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold gradient-text mb-6">Leadership & Mentorship</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Supervision & Mentoring</h3>
+                    <p class="text-gray-600 mb-4">"Integrates intellectual rigor with supportive, student-centered mentoring to develop resilient scholars and practitioners."</p>
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                        <p class="font-semibold text-gray-800">Notable DBA Supervision (Main Supervisor, 2020)</p>
+                        <p class="text-sm text-gray-600 italic">"The Influence of Organizational Culture towards Organizational Misbehavior among Frontline Officers of the Royal Malaysia Police in Sabah"</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">University & Community Service</h3>
+                    <ul class="space-y-2 text-gray-700 list-disc list-inside">
+                        <li><strong>KPPS (Head of Postgraduate Studies):</strong> Oversees proposal processing, examiner nominations, and research quality.</li>
+                        <li><strong>Leadership Roles:</strong> Head of Diploma Studies Center, curriculum development.</li>
+                        <li><strong>Peer Reviewer:</strong> SSPHE2019 (Symposium on Social Science, Public Health and Education).</li>
+                        <li><strong>Community Engagement:</strong> Facilitator for research methodology and leadership workshops.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <section class="section-card bg-white rounded-3xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold gradient-text mb-6">Education</h2>
+                <div class="flex items-start gap-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                        PhD
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">PhD in Management</h3>
+                        <p class="text-md text-blue-600 font-medium">Universiti Malaysia Sabah (UMS), 2013</p>
+                        <p class="text-sm text-gray-500 mb-3">Thesis on talent management, brand strategy, and employee value proposition in the Malaysian banking industry.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">SEM</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">Survey</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section-card bg-white rounded-3xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold gradient-text mb-6">Scholarships</h2>
+                 <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0">🏆</div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Skim Tenaga Pengajar Muda (TPM) UiTM / SLAB-KPT</h3>
+                            <p class="text-sm text-gray-600">UiTM-sponsored young lecturer scheme for doctoral training (2009)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0">🎖️</div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Skim Latihan Akademik IPTA (SLAI)</h3>
+                            <p class="text-sm text-gray-600">Ministry of Higher Education award for doctoral studies (2009)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Animate sections on load for a staggered effect
+        function animateSections() {
+            const sections = document.querySelectorAll('.section-card');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+        document.addEventListener('DOMContentLoaded', animateSections);
+    </script>
+</body>
+</html>

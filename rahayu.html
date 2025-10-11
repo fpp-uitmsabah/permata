@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Dr. Siti Rahayu Binti Beli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        }
+
+        /* Card hover effect */
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Stagger animation for cards */
+        .stagger-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none;
+            }
+            .print-friendly {
+                box-shadow: none !important;
+                border: 1px solid #e5e7eb;
+            }
+            .print-bg-friendly {
+                 background: linear-gradient(135deg, #e0e7ff, #f3e8ff) !important;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-violet-50">
+                <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                    
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                        <a href="https://sirpoji.my/permata-fpp-uitmsabah/" class="back-button no-print inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            Back to Directory
+                        </a>
+                        <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                            <div class="relative">
+                                <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
+                                    <img src="https://i.imgur.com/gnIUTT6.png" alt="Dr. Siti Rahayu Binti Beli" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://i.imgur.com/AfTwVHA.png';">
+                                </div>
+                                <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-indigo-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-graduation-cap text-2xl text-indigo-900"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">Dr. Siti Rahayu Binti Beli</h1>
+                                <p class="text-2xl text-purple-100 mb-2 font-medium">Lecturer in Finance</p>
+                                <p class="text-xl text-indigo-100 mb-4">Universiti Teknologi MARA (UiTM), Sabah Campus</p>
+                                <div class="flex flex-wrap gap-3 mb-6">
+                                    <span class="bg-indigo-400 text-indigo-900 px-4 py-2 rounded-full text-sm font-bold">
+                                        <i class="fas fa-award mr-2"></i>Doctor of Business Administration (DBA)
+                                    </span>
+                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                        <i class="fas fa-brain mr-2"></i>Behavioral Corporate Finance
+                                    </span>
+                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                        <i class="fas fa-chart-line mr-2"></i>Managerial Overconfidence Expert
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 space-y-8">
+                            
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-8 stagger-in print-friendly" style="animation-delay: 0.1s;">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-violet-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-briefcase w-6 h-6 mr-3 text-purple-500"></i>
+                                    Executive Summary
+                                </h2>
+                                <div class="p-6 bg-gradient-to-r from-purple-50 via-indigo-50 to-violet-50 rounded-xl border-l-4 border-purple-500 print-bg-friendly">
+                                    <p class="text-gray-700 text-lg leading-relaxed">Dr. Siti Rahayu Binti Beli is a qualified academic with contemporary and specialized expertise in behavioral finance. Her doctoral work demonstrates a capacity for rigorous empirical research. She is an early-career academic with deep, specialized knowledge in the effects of managerial overconfidence on corporate capital structure. Her value lies in this niche expertise and her documented engagement in teaching, positioning her as an expert in applying cognitive psychology to solve practical corporate finance problems.</p>
+                                </div>
+                            </div>
+
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-8 stagger-in print-friendly" style="animation-delay: 0.2s;">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-blue-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-user-graduate w-6 h-6 mr-3 text-indigo-500"></i>
+                                    Academic Credentials
+                                </h2>
+                                <div class="p-6 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl border-l-4 border-indigo-500 print-bg-friendly">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2"><i class="fas fa-award mr-2"></i> Doctor of Business Administration (DBA)</h3>
+                                    <p class="text-gray-700 mb-1">Arshad Ayub Graduate Business School, UiTM</p>
+                                    <p class="text-sm text-indigo-600 font-medium mb-3">Thesis defended on April 2, 2021</p>
+                                    <div class="p-4 bg-white bg-opacity-60 rounded-lg">
+                                        <p class="text-sm font-medium text-gray-500">Doctoral Thesis</p>
+                                        <p class="text-md font-semibold text-gray-800 italic">"The Roles Of Managerial Overconfidence On The Firms Leverage"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-8 stagger-in print-friendly" style="animation-delay: 0.3s;">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 to-pink-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-lightbulb w-6 h-6 mr-3 text-violet-500"></i>
+                                    Research & Scholarly Contributions
+                                </h2>
+                                <div class="space-y-6">
+                                    <div class="p-6 bg-gradient-to-r from-violet-50 to-pink-50 rounded-xl border-l-4 border-violet-500 print-bg-friendly">
+                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Area of Specialization</h3>
+                                        <p class="text-gray-700 mb-4">Dr. Beli's research is firmly situated within the sub-discipline of behavioral corporate finance, providing niche expertise in how managerial psychological biases, such as overconfidence, influence corporate capital structure decisions and firm leverage.</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Behavioral Finance</span>
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Managerial Psychology</span>
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Capital Structure</span>
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Corporate Finance</span>
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Cognitive Biases</span>
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Firm Leverage</span>
+                                            <span class="px-3 py-1 bg-violet-200 text-violet-800 rounded-full text-xs font-semibold">Empirical Research</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-6 bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl border-l-4 border-pink-500 print-bg-friendly">
+                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Primary Scholarly Contribution</h3>
+                                        <p class="text-gray-700">Her doctoral thesis, "The Roles Of Managerial Overconfidence On The Firms Leverage", stands as her most significant research output available in the public domain, establishing her as an expert in the application of cognitive psychology to corporate finance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-8 stagger-in print-friendly" style="animation-delay: 0.4s;">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500 to-cyan-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-balance-scale w-6 h-6 mr-3 text-teal-500"></i>
+                                    Professional Profile Assessment
+                                </h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h3 class="font-bold text-lg mb-3 text-gray-700 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Strengths</h3>
+                                        <div class="space-y-3">
+                                            <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400 print-bg-friendly">
+                                                <p class="font-medium text-green-900">Specialized Expertise in Behavioral Finance</p>
+                                            </div>
+                                            <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400 print-bg-friendly">
+                                                <p class="font-medium text-green-900">Demonstrated Capacity for Rigorous Research</p>
+                                            </div>
+                                            <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400 print-bg-friendly">
+                                                <p class="font-medium text-green-900">Documented Pedagogical Engagement</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg mb-3 text-gray-700 flex items-center"><i class="fas fa-hourglass-half text-orange-500 mr-2"></i>Career Stage Considerations</h3>
+                                        <div class="space-y-3">
+                                             <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400 print-bg-friendly">
+                                                <p class="font-medium text-orange-900">Early-Career Academic Status</p>
+                                            </div>
+                                             <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400 print-bg-friendly">
+                                                <p class="font-medium text-orange-900">Broader Research Impact Yet to be Established</p>
+                                            </div>
+                                             <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400 print-bg-friendly">
+                                                <p class="font-medium text-orange-900">Opportunity to Develop Public Scholarly Profile</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="space-y-8">
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-8 text-center stagger-in print-friendly" style="animation-delay: 0.15s;">
+                                 <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center justify-center">
+                                    <i class="fas fa-tachometer-alt w-6 h-6 mr-3 text-indigo-500"></i>
+                                    Statistics
+                                </h2>
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div class="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-200 print-bg-friendly">
+                                        <div class="text-3xl font-bold text-indigo-600">2021</div>
+                                        <div class="text-sm text-indigo-700 font-medium">DBA Awarded</div>
+                                    </div>
+                                    <div class="p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl border-2 border-purple-200 print-bg-friendly">
+                                        <div class="text-3xl font-bold text-purple-600">Finance</div>
+                                        <div class="text-sm text-purple-700 font-medium">Primary Discipline</div>
+                                    </div>
+                                    <div class="p-4 bg-gradient-to-r from-violet-50 to-pink-50 rounded-xl border-2 border-violet-200 print-bg-friendly">
+                                        <div class="text-3xl font-bold text-violet-600">UiTM</div>
+                                        <div class="text-sm text-violet-700 font-medium">Institution</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-6 stagger-in print-friendly" style="animation-delay: 0.25s;">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-building w-5 h-5 mr-2 text-purple-500"></i>
+                                    Professional Position
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-purple-50 rounded-lg border-l-4 border-purple-400 print-bg-friendly">
+                                        <p class="text-sm font-medium text-gray-500">Title</p>
+                                        <p class="text-sm font-bold text-gray-900">Lecturer in Finance</p>
+                                    </div>
+                                    <div class="p-3 bg-indigo-50 rounded-lg border-l-4 border-indigo-400 print-bg-friendly">
+                                        <p class="text-sm font-medium text-gray-500">Faculty</p>
+                                        <p class="text-sm font-bold text-gray-900">Faculty of Business Management</p>
+                                    </div>
+                                    <div class="p-3 bg-violet-50 rounded-lg border-l-4 border-violet-400 print-bg-friendly">
+                                        <p class="text-sm font-medium text-gray-500">Campus</p>
+                                        <p class="text-sm font-bold text-gray-900">Universiti Teknologi MARA (UiTM), Sabah</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card bg-white rounded-2xl shadow-xl border border-gray-100 p-6 stagger-in print-friendly" style="animation-delay: 0.35s;">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-globe w-5 h-5 mr-2 text-gray-500"></i>
+                                    Digital Footprint
+                                </h3>
+                                <div class="p-4 bg-gray-100 rounded-lg border-l-4 border-gray-400 print-bg-friendly">
+                                    <p class="text-sm text-gray-700">An assessment reveals a minimal and fragmented public-facing profile. Key sources are institutional directories, with a notable information gap on official university expert portals and major academic networking platforms.</p>
+                                </div>
+                            </div>
+
+                             <div class="bg-gradient-to-br from-purple-500 to-indigo-500 border-2 border-purple-200 rounded-2xl p-6 stagger-in print-friendly" style="animation-delay: 0.45s;">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-quote-left text-3xl gradient-text"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-white mb-2">Professional Summary</h3>
+                                    <p class="text-indigo-100 text-sm leading-relaxed">
+                                        A highly qualified early-career academic poised to make significant contributions to behavioral finance through both research and teaching.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button onclick="window.print()" class="no-print fixed bottom-5 right-5 z-50 w-14 h-14 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full flex items-center justify-center shadow-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-110" title="Print Portfolio">
+        <i class="fas fa-print text-2xl"></i>
+    </button>
+</body>
+</html>
