@@ -298,7 +298,7 @@
                                 <option value="KEWANGAN">💰 Finance</option>
                                 <option value="PEMASARAN">📈 Marketing</option>
                                 <option value="PENGURUSAN">👥 Management</option>
-                                <option value="PENGANGKUTAN">🚛 Transportation</option>
+                                <option value="PANGANGKUTAN">🚛 Transportation</option>
                             </select>
                             
                             <button id="clearFilters" class="px-6 py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
@@ -433,6 +433,29 @@
             {
                 "name":"DR PG. MOHD AUZA'E BIN PG ARSHAD","position":"PENSYARAH KANAN","field":"PENGURUSAN","phone":"088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/auzae.html", "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg"
             },
+            {
+                "name": "DR NORNAJIHAH NADIA HASBULLAH",
+                "position": "PENSYARAH KANAN",
+                "field": "KEWANGAN",
+                "phone": "088 - 325151",
+                "path": "/nornajihah.html",
+                "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg"
+            },
+            {
+                "name": "DR MOHD RAZUAN BIN ABD HISHAMUDDIN",
+                "position": "PENSYARAH KANAN",
+                "field": "PENGURUSAN",
+                "phone": "088 - 325151",
+                "path": "/razuan.html",
+                "imageUrl": "https://i.imgur.com/pYidT6V.jpeg"
+            },
+            {
+                "name": "MOHD ROZIE MOHD DAMIT",
+                "position": "PENSYARAH KANAN",
+                "field": "KEWANGAN",
+                "phone": "088 - 325151",
+                "imageUrl": "https://i.imgur.com/8a3J2k2.jpeg"
+            }
         ];
 
         let filteredFaculty = [...facultyData];
@@ -605,9 +628,15 @@
                             
                             <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
                                 <div class="relative">
-                                    <div class="w-32 h-32 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-3xl backdrop-blur-sm border border-white border-opacity-30 shadow-2xl">
-                                        ${initials}
-                                    </div>
+                                    ${faculty.imageUrl ? `
+                                        <div class="w-32 h-32 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
+                                            <img src="${faculty.imageUrl}" alt="${faculty.name}" class="w-full h-full object-cover">
+                                        </div>
+                                    ` : `
+                                        <div class="w-32 h-32 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-3xl backdrop-blur-sm border border-white border-opacity-30 shadow-2xl">
+                                            ${initials}
+                                        </div>
+                                    `}
                                     <div class="absolute -bottom-3 -right-3 w-10 h-10 bg-green-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
                                         <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                     </div>
