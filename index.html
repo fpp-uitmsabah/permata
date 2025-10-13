@@ -679,7 +679,7 @@
             
             return `
                 <div class="faculty-card bg-gradient-to-r ${cardGradient} rounded-3xl shadow-2xl p-8 relative group overflow-hidden" 
-                    onclick="showProfile(${index})" 
+                    onclick="window.open('${faculty.path}', '_blank')" 
                     style="animation-delay: ${delay}s;">
                     
                     <div class="absolute inset-0 bg-black opacity-10"></div>
@@ -731,7 +731,7 @@
                                 </div>
                                 
                                 <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 hover:border-opacity-50 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                    View Full Profile →
+                                    View Full Portfolio →
                                 </button>
                             </div>
                         </div>
