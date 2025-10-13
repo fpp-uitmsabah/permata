@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Ahmad Fauze bin Abdul Hamit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #059669, #065f46);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="app" class="min-h-screen">
+        <div id="profileView">
+            <div class="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-cyan-50">
+                <div class="bg-gradient-to-r from-green-600 via-teal-600 to-cyan-500 text-white relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                    
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                        <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            Back to Directory
+                        </a>
+                        
+                        <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                            <div class="relative">
+                                <div class="w-40 h-40 bg-white/20 rounded-3xl flex items-center justify-center backdrop-blur-sm border-4 border-white/30 shadow-2xl">
+                                    <i class="fas fa-user-tie text-6xl text-white"></i>
+                                </div>
+                                <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                    <i class="fab fa-google text-3xl text-green-900"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">Ahmad Fauze bin Abdul Hamit</h1>
+                                <p class="text-2xl text-green-100 mb-2 font-medium">Lecturer, Department of Finance</p>
+                                <p class="text-xl text-teal-100 mb-4">Universiti Teknologi MARA (UiTM) Sabah</p>
+                                <div class="flex flex-wrap gap-3 mb-6">
+                                    <span class="bg-green-400 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
+                                        <i class="fab fa-google mr-2"></i> Google Certified Educator, Gemini Certified Educator 
+                                    </span>
+                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                        <i class="fas fa-robot mr-2"></i> FinTech & Digital Banking Expert
+                                    </span>
+                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                                        <i class="fas fa-gamepad mr-2"></i> Gamified Learning Pioneer
+                                    </span>
+                                </div>
+                                 <div class="flex space-x-4">
+                                    <a href="https://sirpoji.myportfolio.com" target="_blank" class="text-white hover:text-teal-200 transition-colors" title="Personal Portfolio">
+                                        <i class="fas fa-briefcase text-xl"></i>
+                                    </a>
+                                    <a href="https://scholar.google.com/citations?user=eJvlXzIAAAAJ&hl=en" target="_blank" class="text-white hover:text-teal-200 transition-colors" title="Google Scholar">
+                                        <i class="fas fa-graduation-cap text-xl"></i>
+                                    </a>
+                                    <a href="https://www.behance.net/ahmadf4" target="_blank" class="text-white hover:text-teal-200 transition-colors" title="Behance">
+                                        <i class="fab fa-behance text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 space-y-8">
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-user-tie mr-3 text-green-500"></i>
+                                    Professional Summary
+                                </h2>
+                                <div class="p-6 bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50 rounded-xl border-l-4 border-green-500">
+                                    <p class="text-gray-700 text-lg leading-relaxed">Ahmad Fauze bin Abdul Hamit stands as a dynamic finance educator and digital innovation advocate at UiTM Sabah. As a Google Certified Innovator, he bridges traditional financial education with cutting-edge digital pedagogical approaches, making him a distinctive voice in Malaysia's higher education landscape.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-teal-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-microchip mr-3 text-blue-500"></i>
+                                    Innovation & Digital Pedagogy
+                                </h2>
+                                <div class="space-y-6">
+                                    <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
+                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Gamified Learning Pioneer</h3>
+                                        <p class="text-gray-700">Recognized as one of Malaysia's inaugural Quizizz Super Trainers, he researches and applies innovative pedagogical approaches in gamified learning, using AI and analytics to enhance instructional efficiency and student motivation.</p>
+                                    </div>
+                                    <div class="p-6 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl border-l-4 border-green-500">
+                                        <h3 class="text-lg font-bold text-gray-900 mb-2">VaRes Calculator Mobile App</h3>
+                                        <p class="text-gray-700">Co-developed a mobile application to estimate market risk using Exponentially Weighted Moving Average models. This tool provides sophisticated risk assessment capabilities for banking professionals and investors, capturing volatility clustering in stock returns.</p>
+                                    </div>
+                                    <div class="p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-l-4 border-yellow-500">
+                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Micro-Credential Instruction</h3>
+                                        <p class="text-gray-700">Offers specialized instruction in banking, investment, finance, and personal financial planning through UiTM's UFUTURE platform, making financial education accessible and practical.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-pink-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-book-open mr-3 text-red-500"></i>
+                                    Key Research & Publications
+                                </h2>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                        <h4 class="font-semibold text-gray-800">Dynamic Triangulation between Shariah Compliance, ESG Transparency, and Firm Profitability</h4>
+                                        <p class="text-sm text-gray-600 mt-1">Explores the intersection of Islamic finance principles with ESG practices, demonstrating how compliant firms with strong ESG can achieve superior financial performance.</p>
+                                    </div>
+                                     <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                                        <h4 class="font-semibold text-gray-800">The Effect of FinTech Adoption on Individual Over-Indebtedness</h4>
+                                        <p class="text-sm text-gray-600 mt-1">Reveals that FinTech adoption negatively correlates with over-indebtedness in ASEAN-5 countries, suggesting enhanced financial stability.</p>
+                                    </div>
+                                    <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                                        <h4 class="font-semibold text-gray-800">COVID-19 Vaccination's Effect on Malaysian Stock Market's Downside Risk</h4>
+                                        <p class="text-sm text-gray-600 mt-1">Analyzed 500 trading days to assess the impact of pandemic news and vaccination rates on market risk.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-8">
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-graduation-cap mr-2 text-teal-500"></i>
+                                    Academic Background
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-teal-50 rounded-lg border-l-4 border-teal-500">
+                                        <p class="text-sm font-bold text-gray-900">Master of Science (Business Management)</p>
+                                        <p class="text-xs text-gray-600">Universiti Teknologi MARA (UiTM)</p>
+                                    </div>
+                                    <div class="p-3 bg-cyan-50 rounded-lg border-l-4 border-cyan-500">
+                                        <p class="text-sm font-bold text-gray-900">Bachelor of Business Administration (Hons) Finance</p>
+                                        <p class="text-xs text-gray-600">Universiti Teknologi MARA (UiTM), First Class</p>
+                                    </div>
+                                    <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                        <p class="text-sm font-bold text-gray-900">Diploma in Business Studies</p>
+                                        <p class="text-xs text-gray-600">Universiti Teknologi MARA (UiTM)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-lightbulb mr-2 text-green-500"></i>
+                                    Research Interests
+                                </h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Sustainable Finance</span>
+                                    <span class="px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">Financial Risk</span>
+                                    <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">Digital Banking</span>
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Responsible Investing</span>
+                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">FinTech</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-teal-50 to-cyan-50 border-2 border-teal-200 rounded-2xl p-6 hover-lift">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-chart-line text-3xl text-white"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-teal-900 mb-2">Future-Forward Vision</h3>
+                                    <p class="text-teal-700 text-sm leading-relaxed">
+                                        Represents the evolution of financial education, combining academic rigor with innovative digital approaches to prepare students for the rapidly evolving FinTech landscape.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
