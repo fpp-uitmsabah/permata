@@ -337,173 +337,228 @@
     </div>
 
     <script>
- // Faculty data
- const facultyData = [
-    {
-        "name": "ASSOCIATE PROFESSOR DR ROZITA@UJI MOHAMMED", "position": "ACTING RECTOR", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/AfTwVHA.png", "isRector": true, "path": "https://fpp-uitmsabah.github.io/permata/rozita.html"
-    },
-    {
-        "name": "PROFESOR TS. DR. IMBARINE BIN HJ BUJANG, JP", "position": "PROFESOR (VK7)", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/yK4vFQ9.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/imbarine.html"
-    },
-    {
-        "name": "ASSOCIATE PROFESSOR DR SYLVIA@ NABILA AZWA AMBAD", "position": "PROFESOR MADYA", "field": "KEUSAHAWANAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/R4QSvdh.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/nabila.html"
-    },
-    {
-        "name": "ASSOCIATE PROFESSOR DR IMELDA ALBERT GISIP", "position": "PROFESOR MADYA", "field": "PEMASARAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/znk7EGc.png", "isMarketingExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/imelda.html"
-    },
-    {
-        "name": "ASSOCIATE PROFESSOR DR ABDUL AZIZ KARIA", "position": "PROFESOR MADYA", "field": "EKONOMI", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/pIBl3hM.png", "isEconomist": true, "path": "https://fpp-uitmsabah.github.io/permata/azizkaria.html"
-    },
-    {
-        "name": "ASSOCIATE PROFESSOR DR NOORZIAH MOHD SALLEH", "position": "PROFESOR MADYA", "field": "PENGURUSAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/YzT5qni.png", "isHumanCapitalExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/noorziah.html"
-    },
-    {
-        "name": "DR DEWI BINTI TAJUDDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dewi.html", "imageUrl": "https://i.imgur.com/KAwa8sg.png"
-    },
-    {
-        "name": "DR SITI RAHAYU BINTI BELI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rahayu.html", "imageUrl": "https://i.imgur.com/gnIUTT6.png"
-    },
-    {
-        "name": "DR RAINAH GINSAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rainah.html", "imageUrl": "https://i.imgur.com/wY54IiY.png"
-    },
-    {
-        "name": "DR JASMINE VIVIENNE ANDREW", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasmine.html", "imageUrl": "https://i.imgur.com/RPrDp9X.png"
-    },
-    {
-        "name": "DR SARMILA UDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sarmila.html", "imageUrl": "https://i.imgur.com/hH2M9wI.png"
-    },
-    {
-        "name": "DR FLICIA RIMIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/flicia.html", "imageUrl": "https://i.imgur.com/Lt3PoS4.png"
-    },
-    {
-        "name": "DR RAPHEEDAH MUSNEH", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rapheedah.html", "imageUrl": "https://i.imgur.com/4AU1ScM.png"
-    },
-    {
-        "name": "DR SHARIFAH NURAFIZAH SYED ANNUAR", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sharifah.html", "imageUrl": "https://i.imgur.com/mZx1OJe.png"
-    },
-    {
-        "name": "DR ABDUL AZIZ LAI MOHD FIKRI LAI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325213", "path": "https://fpp-uitmsabah.github.io/permata/azizlai.html", "imageUrl": "https://i.imgur.com/6Fx6Uc8.jpeg"
-    },
-    {
-        "name": "AHMAD FAUZE ABDUL HAMIT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/fauze.html", "imageUrl": "https://i.imgur.com/wvOF6kd.jpeg"
-    },
-    {
-        "name": "AHMAD GHAZALI BIN ISMAIL", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 513867", "path": "https://fpp-uitmsabah.github.io/permata/ghazali.html", "imageUrl": "https://i.imgur.com/6vXlmtW.jpeg"
-    },
-    {
-        "name": "ANASTASIAH BINTI HARBI", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/anastasia.html", "imageUrl": "https://i.imgur.com/AAs2gaX.jpeg"
-    },
-    {
-        "name": "DR CYNTHIA @ ANNAMARIA ROBERT DAWAYAN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cynthia.html", "imageUrl": "https://i.imgur.com/n748h8z.png"
-    },
-    {
-        "name": "CYRIL SUPAIN @ CHRISTOPHER", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cyril.html", "imageUrl": "https://i.imgur.com/aBd1Bme.jpeg"
-    },
-    {
-        "name": "DR DAYANG HARYANI DIANA BT AG DAMIT", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dayang.html", "imageUrl": "https://i.imgur.com/Q66orWt.jpeg"
-    },
-    {
-        "name": "DG KAMISAH BINTI AG BUDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN SUMBER MANUSIA", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkamisah.html", "imageUrl": "https://i.imgur.com/LLv1xol.jpeg" 
-    },
-    {
-        "name": "DGKU ALMAHIRAH AWANG KEE", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkualmahirah.html", "imageUrl": "#"
-    },
-    {
-        "name": "FAIQAH BINTI MAWARDI", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faiqah.html", "imageUrl": "https://i.imgur.com/IojOXXu.jpeg"
-    },
-    {
-        "name": "FARIDAH BINTI MOHD SHAH", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faridah.html", "imageUrl": "https://i.imgur.com/9kyxtX1.jpeg"
-    },
-    {
-        "name": "FRANKLIN HAZLEY LAI", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/franklin.html", "imageUrl": "https://i.imgur.com/FUaqmnE.jpeg"
-    },
-    {
-        "name": "DR HASNAWATI HAJI GULILING", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hasnawati.html", "imageUrl": "https://i.imgur.com/YqCHyq5.jpeg"
-    },
-    {
-        "name": "HERNIZA ROXANNE MARCUS", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/herniza.html", "imageUrl": "https://i.imgur.com/B2WoXT6.jpeg"
-    },
-    {
-        "name": "DR HYLMEE MATAHIR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hylmee.html", "imageUrl": "https://i.imgur.com/KzSNZUc.jpeg"
-    },
-    {
-        "name": "DR JAIN YASSIN", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jain.html", "imageUrl": "https://i.imgur.com/iyNGGCy.jpeg"
-    },
-    {
-        "name": "DR JASMAN TUYON", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasman.html", "imageUrl": "https://i.imgur.com/4u4oIcY.jpeg"
-    },
-    {
-        "name": "KAMARULZAMAN B ISHAK", "position": "PENSYARAH KANAN", "field": "PENGANGKUTAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/kamarulzaman.html", "imageUrl": "https://i.imgur.com/ojqbTPz.jpeg"
-    },
-    {
-        "name": "DR JACQUELINE KOH SIEW LEN BTE STEPHEN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jacqueline.html", "imageUrl": "https://i.imgur.com/jeP92pB.jpeg"
-    },
-    {
-        "name": "KHAIRIAH MAZDIAH BINTI KALIMIN", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/khairiah.html", "imageUrl": "https://i.imgur.com/ISFXj5V.jpeg"
-    },
-    {
-        "name": "MARYAM QAAMEELAH OTHMAN", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maryam.html", "imageUrl": "https://i.imgur.com/cwzclWd.jpeg"
-    },
-    {
-        "name": "MOHAMAD ZULFADHLI BIN JUSOH", "position": "PENSYARAH", "field": "PENGANGKUTAN", "phone": "088 - 951611", "path": "https://fpp-uitmsabah.github.io/permata/zulfadhli.html", "imageUrl": "https://i.imgur.com/UNWImiZ.jpeg"
-    },
-    {
-        "name": "MOHAMMAD FIRDAUS BIN MOHAMAD", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/firdaus.html", "imageUrl": "https://i.imgur.com/T2BGkeh.jpeg"
-    },
-    {
-        "name": "DR MAILY PATRICK", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maily.html", "imageUrl": "https://i.imgur.com/KFn1sic.jpeg"
-    },
-    {
-        "name": "DR MOHD ADZWIN FARIS NIASIN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/adzwin.html", "imageUrl": "https://i.imgur.com/fpzCzj9.jpeg"
-    },
-    {
-        "name": "MYDAH @ MYLENDA ERIC", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/mydah.html", "imageUrl": "#"
-    },
-    {
-        "name": "NINALYN FRIDRICT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/ninalyn.html", "imageUrl": "https://i.imgur.com/j8qifBN.jpeg"
-    },
-    {
-        "name": "NURUL HIDAYAH MAT NOR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hidayah.html", "imageUrl": "#"
-    },
-    {
-        "name": "NUR HAZILAH OMAR", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hazilah.html", "imageUrl": "https://i.imgur.com/LSw0Z0g.jpeg"
-    },
-    {
-        "name": "DR PG. MOHD AUZA'E BIN PG ARSHAD", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/auzae.html", "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg"
-    },
-    {
-        "name": "DR NORNAJIHAH NADIA HASBULLAH", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nornajihah.html", "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg"
-    },
-    {
-        "name": "DR MOHD RAZUAN BIN ABD HISHAMUDDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/razuan.html", "imageUrl": "https://i.imgur.com/pYidT6V.jpeg"
-    },
-    {
-        "name": "DR TAUFIK ABD HAKIM", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/taufik.html", "imageUrl": "https://i.imgur.com/8m4ozuO.jpeg"
-    },
-    {
-        "name": "MOHD ROZIE MOHD DAMIT", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/BHVplSw.png", "path": "https://fpp-uitmsabah.github.io/permata/rozie.html"
-    },
-    {
-        "name": "SITI JULEA BINTI SUPAR", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sitijulea.html", "imageUrl": "https://i.imgur.com/T9WUIx4.jpeg"
-    },
-    {
-        "name": "SUMAFFIATIE SULONG", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sumaffiatie.html", "imageUrl": "https://i.imgur.com/4jYnFqX.jpeg"
-    },
-    {
-        "name": "NUR SHAHAFIQAH NADIAH BINTI JAFFERY", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nurshahafiqah.html", "imageUrl": "https://i.imgur.com/w5Qc4D5.jpeg"
-    },
-    {
-        "name": "HJ. S. JUNAIDI BIN MOHAMMAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/junaidi.html", "imageUrl": "#"
-    },
-    {
-        "name": "SUALI @ SUHAILIE BAKRIN", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 513870", "path": "https://fpp-uitmsabah.github.io/permata/suali.html", "imageUrl": "https://i.imgur.com/yHMd3b4.jpeg"
-    },
-    {
-        "name": "MELINDA AZZALEA TAI ABDULLAH @ TAI NYUK CHIN", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325102", "path": "https://fpp-uitmsabah.github.io/permata/melinda.html", "imageUrl": "https://i.imgur.com/f5olmQB.jpeg"
-    }
+        // Replace with your actual SerpApi key
+        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
+
+        // Faculty data with added orcidId and scholarId where available
+        const facultyData = [
+            {
+                "name": "ASSOCIATE PROFESSOR DR ROZITA@UJI MOHAMMED", "position": "ACTING RECTOR", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/AfTwVHA.png", "isRector": true, "path": "https://fpp-uitmsabah.github.io/permata/rozita.html"
+            },
+            {
+                "name": "PROFESOR TS. DR. IMBARINE BIN HJ BUJANG, JP", "position": "PROFESOR (VK7)", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/yK4vFQ9.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/imbarine.html", "scholarId": "PQPF3kkAAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR SYLVIA@ NABILA AZWA AMBAD", "position": "PROFESOR MADYA", "field": "KEUSAHAWANAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/R4QSvdh.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/nabila.html", "scholarId": "P0Q0iT0AAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR IMELDA ALBERT GISIP", "position": "PROFESOR MADYA", "field": "PEMASARAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/znk7EGc.png", "isMarketingExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/imelda.html"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR ABDUL AZIZ KARIA", "position": "PROFESOR MADYA", "field": "EKONOMI", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/pIBl3hM.png", "isEconomist": true, "path": "https://fpp-uitmsabah.github.io/permata/azizkaria.html", "scholarId": "wEU9sPoAAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR NOORZIAH MOHD SALLEH", "position": "PROFESOR MADYA", "field": "PENGURUSAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/YzT5qni.png", "isHumanCapitalExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/noorziah.html", "orcidId": "0000-0003-0243-3443", "scholarId": "UEdCve8AAAAJ"
+            },
+            {
+                "name": "DR DEWI BINTI TAJUDDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dewi.html", "imageUrl": "https://i.imgur.com/KAwa8sg.png"
+            },
+            {
+                "name": "DR SITI RAHAYU BINTI BELI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rahayu.html", "imageUrl": "https://i.imgur.com/gnIUTT6.png"
+            },
+            {
+                "name": "DR RAINAH GINSAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rainah.html", "imageUrl": "https://i.imgur.com/wY54IiY.png", "scholarId": "DTVW8oMAAAAJ"
+            },
+            {
+                "name": "DR JASMINE VIVIENNE ANDREW", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasmine.html", "imageUrl": "https://i.imgur.com/RPrDp9X.png"
+            },
+            {
+                "name": "DR SARMILA UDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sarmila.html", "imageUrl": "https://i.imgur.com/hH2M9wI.png"
+            },
+            {
+                "name": "DR FLICIA RIMIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/flicia.html", "imageUrl": "https://i.imgur.com/Lt3PoS4.png"
+            },
+            {
+                "name": "DR RAPHEEDAH MUSNEH", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rapheedah.html", "imageUrl": "https://i.imgur.com/4AU1ScM.png"
+            },
+            {
+                "name": "DR SHARIFAH NURAFIZAH SYED ANNUAR", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sharifah.html", "imageUrl": "https://i.imgur.com/mZx1OJe.png"
+            },
+            {
+                "name": "DR ABDUL AZIZ LAI MOHD FIKRI LAI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325213", "path": "https://fpp-uitmsabah.github.io/permata/azizlai.html", "imageUrl": "https://i.imgur.com/6Fx6Uc8.jpeg"
+            },
+            {
+                "name": "AHMAD FAUZE ABDUL HAMIT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/fauze.html", "imageUrl": "https://i.imgur.com/wvOF6kd.jpeg"
+            },
+            {
+                "name": "AHMAD GHAZALI BIN ISMAIL", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 513867", "path": "https://fpp-uitmsabah.github.io/permata/ghazali.html", "imageUrl": "https://i.imgur.com/6vXlmtW.jpeg"
+            },
+            {
+                "name": "ANASTASIAH BINTI HARBI", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/anastasia.html", "imageUrl": "https://i.imgur.com/AAs2gaX.jpeg"
+            },
+            {
+                "name": "DR CYNTHIA @ ANNAMARIA ROBERT DAWAYAN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cynthia.html", "imageUrl": "https://i.imgur.com/n748h8z.png"
+            },
+            {
+                "name": "CYRIL SUPAIN @ CHRISTOPHER", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cyril.html", "imageUrl": "https://i.imgur.com/aBd1Bme.jpeg"
+            },
+            {
+                "name": "DR DAYANG HARYANI DIANA BT AG DAMIT", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dayang.html", "imageUrl": "https://i.imgur.com/Q66orWt.jpeg"
+            },
+            {
+                "name": "DG KAMISAH BINTI AG BUDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN SUMBER MANUSIA", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkamisah.html", "imageUrl": "https://i.imgur.com/LLv1xol.jpeg" 
+            },
+            {
+                "name": "DGKU ALMAHIRAH AWANG KEE", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkualmahirah.html", "imageUrl": "#"
+            },
+            {
+                "name": "FAIQAH BINTI MAWARDI", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faiqah.html", "imageUrl": "https://i.imgur.com/IojOXXu.jpeg"
+            },
+            {
+                "name": "FARIDAH BINTI MOHD SHAH", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faridah.html", "imageUrl": "https://i.imgur.com/9kyxtX1.jpeg"
+            },
+            {
+                "name": "FRANKLIN HAZLEY LAI", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/franklin.html", "imageUrl": "https://i.imgur.com/FUaqmnE.jpeg"
+            },
+            {
+                "name": "DR HASNAWATI HAJI GULILING", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hasnawati.html", "imageUrl": "https://i.imgur.com/YqCHyq5.jpeg"
+            },
+            {
+                "name": "HERNIZA ROXANNE MARCUS", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/herniza.html", "imageUrl": "https://i.imgur.com/B2WoXT6.jpeg"
+            },
+            {
+                "name": "DR HYLMEE MATAHIR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hylmee.html", "imageUrl": "https://i.imgur.com/KzSNZUc.jpeg"
+            },
+            {
+                "name": "DR JAIN YASSIN", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jain.html", "imageUrl": "https://i.imgur.com/iyNGGCy.jpeg"
+            },
+            {
+                "name": "DR JASMAN TUYON", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasman.html", "imageUrl": "https://i.imgur.com/4u4oIcY.jpeg"
+            },
+            {
+                "name": "KAMARULZAMAN B ISHAK", "position": "PENSYARAH KANAN", "field": "PENGANGKUTAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/kamarulzaman.html", "imageUrl": "https://i.imgur.com/ojqbTPz.jpeg"
+            },
+            {
+                "name": "DR JACQUELINE KOH SIEW LEN BTE STEPHEN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jacqueline.html", "imageUrl": "https://i.imgur.com/jeP92pB.jpeg"
+            },
+            {
+                "name": "KHAIRIAH MAZDIAH BINTI KALIMIN", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/khairiah.html", "imageUrl": "https://i.imgur.com/ISFXj5V.jpeg"
+            },
+            {
+                "name": "MARYAM QAAMEELAH OTHMAN", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maryam.html", "imageUrl": "https://i.imgur.com/cwzclWd.jpeg"
+            },
+            {
+                "name": "MOHAMAD ZULFADHLI BIN JUSOH", "position": "PENSYARAH", "field": "PENGANGKUTAN", "phone": "088 - 951611", "path": "https://fpp-uitmsabah.github.io/permata/zulfadhli.html", "imageUrl": "https://i.imgur.com/UNWImiZ.jpeg"
+            },
+            {
+                "name": "MOHAMMAD FIRDAUS BIN MOHAMAD", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/firdaus.html", "imageUrl": "https://i.imgur.com/T2BGkeh.jpeg"
+            },
+            {
+                "name": "DR MAILY PATRICK", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maily.html", "imageUrl": "https://i.imgur.com/KFn1sic.jpeg"
+            },
+            {
+                "name": "DR MOHD ADZWIN FARIS NIASIN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/adzwin.html", "imageUrl": "https://i.imgur.com/fpzCzj9.jpeg"
+            },
+            {
+                "name": "MYDAH @ MYLENDA ERIC", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/mydah.html", "imageUrl": "#"
+            },
+            {
+                "name": "NINALYN FRIDRICT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/ninalyn.html", "imageUrl": "https://i.imgur.com/j8qifBN.jpeg"
+            },
+            {
+                "name": "NURUL HIDAYAH MAT NOR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hidayah.html", "imageUrl": "#"
+            },
+            {
+                "name": "NUR HAZILAH OMAR", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hazilah.html", "imageUrl": "https://i.imgur.com/LSw0Z0g.jpeg"
+            },
+            {
+                "name": "DR PG. MOHD AUZA'E BIN PG ARSHAD", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/auzae.html", "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg"
+            },
+            {
+                "name": "DR NORNAJIHAH NADIA HASBULLAH", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nornajihah.html", "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg"
+            },
+            {
+                "name": "DR MOHD RAZUAN BIN ABD HISHAMUDDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/razuan.html", "imageUrl": "https://i.imgur.com/pYidT6V.jpeg"
+            },
+            {
+                "name": "DR TAUFIK ABD HAKIM", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/taufik.html", "imageUrl": "https://i.imgur.com/8m4ozuO.jpeg"
+            },
+            {
+                "name": "MOHD ROZIE MOHD DAMIT", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/BHVplSw.png", "path": "https://fpp-uitmsabah.github.io/permata/rozie.html"
+            },
+            {
+                "name": "SITI JULEA BINTI SUPAR", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sitijulea.html", "imageUrl": "https://i.imgur.com/T9WUIx4.jpeg"
+            },
+            {
+                "name": "SUMAFFIATIE SULONG", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sumaffiatie.html", "imageUrl": "https://i.imgur.com/4jYnFqX.jpeg"
+            },
+            {
+                "name": "NUR SHAHAFIQAH NADIAH BINTI JAFFERY", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nurshahafiqah.html", "imageUrl": "https://i.imgur.com/w5Qc4D5.jpeg"
+            },
+            {
+                "name": "HJ. S. JUNAIDI BIN MOHAMMAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/junaidi.html", "imageUrl": "#"
+            },
+            {
+                "name": "SUALI @ SUHAILIE BAKRIN", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 513870", "path": "https://fpp-uitmsabah.github.io/permata/suali.html", "imageUrl": "https://i.imgur.com/yHMd3b4.jpeg"
+            },
+            {
+                "name": "MELINDA AZZALEA TAI ABDULLAH @ TAI NYUK CHIN", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325102", "path": "https://fpp-uitmsabah.github.io/permata/melinda.html", "imageUrl": "https://i.imgur.com/f5olmQB.jpeg"
+            }
         ];
 
         let filteredFaculty = [...facultyData];
+
+        // Fetch ORCID works (publications)
+        async function fetchOrcidWorks(orcidId) {
+            if (!orcidId) return null;
+            try {
+                const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return data['group']?.map(group => ({
+                    title: group['work-summary'][0]['title']['title']['value'],
+                    year: group['work-summary'][0]['publication-date']['year']['value'],
+                    type: group['work-summary'][0]['type']
+                })) || [];
+            } catch (error) {
+                console.error('ORCID fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Google Scholar data via SerpApi
+        async function fetchScholarData(scholarId, apiKey) {
+            if (!scholarId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'google_scholar_author',
+                    author_id: scholarId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    citedBy: data['cited_by'] || 0,  // Total citations
+                    publications: data['publications']?.slice(0, 5) || []  // Top 5 pubs
+                };
+            } catch (error) {
+                console.error('Scholar fetch error:', error);
+                return null;
+            }
+        }
+
+        // Cache helper
+        function getCached(key, ttl = 3600000) {  // 1 hour TTL
+            const item = localStorage.getItem(key);
+            if (!item) return null;
+            const { data, timestamp } = JSON.parse(item);
+            return Date.now() - timestamp < ttl ? data : null;
+        }
+
+        function setCached(key, data) {
+            localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+        }
 
         // Get field class for styling
         function getFieldClass(field) {
@@ -646,22 +701,71 @@
         }
 
         // Main profile routing function
-        function showProfile(index) {
+        async function showProfile(index) {
             const faculty = facultyData[index];
-            
-            if (faculty.path) {
-                const cleanPath = faculty.path.replace(/\[|\]/g, '');
-                window.open(cleanPath, '_blank');
-            } else {
-                showGenericProfile(faculty);
+            const cacheKey = `profile_${index}`;
+            let profileData = getCached(cacheKey);
+
+            if (!profileData) {
+                // Fetch data if IDs exist
+                const [orcidWorks, scholarData] = await Promise.all([
+                    faculty.orcidId ? fetchOrcidWorks(faculty.orcidId) : null,
+                    faculty.scholarId ? fetchScholarData(faculty.scholarId, SERPAPI_KEY) : null
+                ]);
+                profileData = { orcidWorks, scholarData };
+                setCached(cacheKey, profileData);
             }
+
+            showEnhancedProfile(faculty, profileData);
         }
-        
-        // Show generic profile detail
-        function showGenericProfile(faculty) {
+
+        // Show enhanced profile detail
+        function showEnhancedProfile(faculty, profileData) {
             const initials = getInitials(faculty.name);
             const fieldClass = getFieldClass(faculty.field);
-            
+            const { orcidWorks = [], scholarData = null } = profileData;
+
+            let researchSection = `
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">Loading detailed portfolio...</p>
+            `;
+
+            if (orcidWorks && orcidWorks.length > 0) {
+                researchSection = `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Recent Publications (ORCID)</h3>
+                        <ul class="space-y-2">
+                            ${orcidWorks.slice(0, 5).map(work => `<li class="text-gray-700">• ${work.title} (${work.year})</li>`).join('')}
+                        </ul>
+                        ${orcidWorks.length > 5 ? '<p class="text-sm text-gray-500 mt-2">... and ${orcidWorks.length - 5} more</p>' : ''}
+                    </div>
+                `;
+            }
+
+            if (scholarData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Google Scholar Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${scholarData.citedBy}</p>
+                        ${scholarData.publications && scholarData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${scholarData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (!orcidWorks && !scholarData) {
+                researchSection = `
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        A detailed portfolio for this faculty member, including research interests, publications, achievements, and a detailed biography, will be available here soon.
+                    </p>
+                `;
+            }
+
             const profileHTML = `
                 <div class="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50">
                     <div class="profile-header text-white relative z-10">
@@ -700,10 +804,15 @@
                     
                     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
                         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-                            <h2 class="text-2xl font-bold text-gray-900 mb-6">More Details Coming Soon</h2>
-                             <p class="text-gray-700 leading-relaxed">
-                                A detailed portfolio for this faculty member, including research interests, publications, achievements, and a detailed biography, will be available here soon.
-                            </p>
+                            ${researchSection}
+                            ${faculty.path ? `
+                                <div class="mt-6 pt-6 border-t border-gray-200">
+                                    <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        View Full Portfolio on GitHub
+                                    </a>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
