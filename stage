@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Directory & Portfolio Gateway</title>
+
+    <meta property="og:title" content="Faculty Directory & Portfolio Gateway">
+    <meta property="og:description" content="Discover distinguished faculty members from UiTM Sabah and explore their expertise.">
+    <meta property="og:image" content="https://i.imgur.com/SEXIf1W.jpeg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Faculty Directory & Portfolio Gateway">
+    <meta name="twitter:description" content="Discover distinguished faculty members from UiTM Sabah and explore their expertise.">
+    <meta name="twitter:image" content="https://i.imgur.com/SEXIf1W.jpeg">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* Enhanced animations and transitions */
+        .faculty-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faculty-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .faculty-card:hover::before {
+            left: 100%;
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.1);
+        }
+        
+        .faculty-avatar {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .faculty-card:hover .faculty-avatar {
+            transform: scale(1.1);
+        }
+        
+        .field-badge {
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .field-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .field-badge:hover::before {
+            left: 100%;
+        }
+        
+        /* Enhanced field colors with gradients */
+        .ekonomi { 
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .kewangan { 
+            background: linear-gradient(135deg, #10b981, #047857);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        .pemasaran { 
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        .pengurusan { 
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .pengangkutan { 
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        .default { 
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            z-index: 10;
+        }
+        
+        .search-input {
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Stagger animation for cards */
+        .faculty-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Pulse effect for count */
+        .count-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <audio id="backgroundMusic" loop>
+        <source src="https://sirpoji.my/permata-fpp-uitmsabah/uitmdihatikuinstru.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="audioControl" class="fixed bottom-5 right-5 z-50 w-12 h-12 glass rounded-full text-white flex items-center justify-center hover:bg-opacity-20 transition-all duration-300" title="Toggle Music">
+        <svg id="playIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M4.018 14.384A1 1 0 013 13.5V6.5a1 1 0 011.555-.832l6 3.5a1 1 0 010 1.664l-6 3.5a1 1 0 01-.537.152z"></path>
+        </svg>
+        <svg id="pauseIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5 4h3a1 1 0 011 1v10a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1zm7 0h3a1 1 0 011 1v10a1 1 0 01-1 1h-3a1 1 0 01-1-1V5a1 1 0 011-1z"></path>
+        </svg>
+    </button>
+
+    <div id="app" class="min-h-screen">
+        
+        <div id="homepage" class="block">
+            <header class="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
+                <div class="absolute inset-0 bg-black opacity-10"></div>
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="text-center">
+                        <div class="floating mb-6">
+                            <div class="inline-flex items-center justify-center w-24 h-24 bg-white bg-opacity-20 rounded-full backdrop-blur-sm border border-white border-opacity-30 mb-6">
+                                <img src="https://i.imgur.com/3IfJvBe.png" alt="UiTM Logo" class="w-20 h-20 object-contain">
+                            </div>
+                        </div>
+                        <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+                            Faculty <span class="text-yellow-300">Directory</span>
+                        </h1>
+                        <p class="text-xl text-indigo-100 max-w-2xl mx-auto leading-relaxed">
+                            Discover our distinguished faculty members and explore their expertise across various academic disciplines
+                        </p>
+                        <div class="mt-8 flex justify-center">
+                            <div class="glass px-6 py-3 rounded-full">
+                                <span class="text-white font-semibold">🎓 Excellence in Education</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="absolute top-10 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full blur-xl"></div>
+                <div class="absolute bottom-10 right-10 w-32 h-32 bg-pink-300 bg-opacity-20 rounded-full blur-2xl"></div>
+                <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-300 bg-opacity-20 rounded-full blur-lg"></div>
+            </header>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0">
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 mb-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-6 items-center">
+                        <div class="search-container flex-1">
+                            <div class="search-icon">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                placeholder="🔍 Search faculty by name, position, or field..." 
+                                class="search-input w-full pl-14 pr-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-20 focus:border-indigo-500 text-lg font-medium transition-all duration-300"
+                            >
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 items-center">
+                            <select id="fieldFilter" class="px-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-20 focus:border-indigo-500 text-lg font-medium bg-white transition-all duration-300 min-w-[200px]">
+                                <option value="">🎯 All Fields</option>
+                                <option value="EKONOMI">📊 Economics</option>
+                                <option value="KEWANGAN">💰 Finance</option>
+                                <option value="PEMASARAN">📈 Marketing</option>
+                                <option value="PENGURUSAN">👥 Management</option>
+                                <option value="PENGANGKUTAN">🚛 Transportation</option>
+                            </select>
+                            
+                            <button id="clearFilters" class="px-6 py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex flex-col sm:flex-row justify-between items-center">
+                        <div class="text-lg text-gray-700 font-medium">
+                            <span class="inline-flex items-center">
+                                <span class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                                <span id="facultyCount" class="count-pulse font-bold text-indigo-600">0</span> 
+                                <span class="ml-1">faculty members found</span>
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+                            <div class="text-sm text-gray-500">Sort by:</div>
+                            <select id="sortBy" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="name">Name</option>
+                                <option value="position">Position</option>
+                                <option value="field">Field</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="facultyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+            </div>
+        </div>
+
+        <div id="profileView" class="hidden">
+            </div>
+    </div>
+
+    <script>
+        // Replace with your actual SerpApi key
+        const SERPAPI_KEY = 'YOUR_SERPAPI_KEY';
+
+        // Faculty data with added orcidId and scholarId where available
+        const facultyData = [
+            {
+                "name": "ASSOCIATE PROFESSOR DR ROZITA@UJI MOHAMMED", "position": "ACTING RECTOR", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/AfTwVHA.png", "isRector": true, "path": "https://fpp-uitmsabah.github.io/permata/rozita.html"
+            },
+            {
+                "name": "PROFESOR TS. DR. IMBARINE BIN HJ BUJANG, JP", "position": "PROFESOR (VK7)", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/yK4vFQ9.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/imbarine.html", "scholarId": "PQPF3kkAAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR SYLVIA@ NABILA AZWA AMBAD", "position": "PROFESOR MADYA", "field": "KEUSAHAWANAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/R4QSvdh.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/nabila.html", "scholarId": "P0Q0iT0AAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR IMELDA ALBERT GISIP", "position": "PROFESOR MADYA", "field": "PEMASARAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/znk7EGc.png", "isMarketingExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/imelda.html"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR ABDUL AZIZ KARIA", "position": "PROFESOR MADYA", "field": "EKONOMI", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/pIBl3hM.png", "isEconomist": true, "path": "https://fpp-uitmsabah.github.io/permata/azizkaria.html", "scholarId": "wEU9sPoAAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR NOORZIAH MOHD SALLEH", "position": "PROFESOR MADYA", "field": "PENGURUSAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/YzT5qni.png", "isHumanCapitalExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/noorziah.html", "orcidId": "0000-0003-0243-3443", "scholarId": "UEdCve8AAAAJ"
+            },
+            {
+                "name": "DR DEWI BINTI TAJUDDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dewi.html", "imageUrl": "https://i.imgur.com/KAwa8sg.png"
+            },
+            {
+                "name": "DR SITI RAHAYU BINTI BELI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rahayu.html", "imageUrl": "https://i.imgur.com/gnIUTT6.png"
+            },
+            {
+                "name": "DR RAINAH GINSAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rainah.html", "imageUrl": "https://i.imgur.com/wY54IiY.png", "scholarId": "DTVW8oMAAAAJ"
+            },
+            {
+                "name": "DR JASMINE VIVIENNE ANDREW", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasmine.html", "imageUrl": "https://i.imgur.com/RPrDp9X.png"
+            },
+            {
+                "name": "DR SARMILA UDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sarmila.html", "imageUrl": "https://i.imgur.com/hH2M9wI.png"
+            },
+            {
+                "name": "DR FLICIA RIMIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/flicia.html", "imageUrl": "https://i.imgur.com/Lt3PoS4.png"
+            },
+            {
+                "name": "DR RAPHEEDAH MUSNEH", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rapheedah.html", "imageUrl": "https://i.imgur.com/4AU1ScM.png"
+            },
+            {
+                "name": "DR SHARIFAH NURAFIZAH SYED ANNUAR", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sharifah.html", "imageUrl": "https://i.imgur.com/mZx1OJe.png"
+            },
+            {
+                "name": "DR ABDUL AZIZ LAI MOHD FIKRI LAI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325213", "path": "https://fpp-uitmsabah.github.io/permata/azizlai.html", "imageUrl": "https://i.imgur.com/6Fx6Uc8.jpeg"
+            },
+            {
+                "name": "AHMAD FAUZE ABDUL HAMIT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/fauze.html", "imageUrl": "https://i.imgur.com/wvOF6kd.jpeg"
+            },
+            {
+                "name": "AHMAD GHAZALI BIN ISMAIL", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 513867", "path": "https://fpp-uitmsabah.github.io/permata/ghazali.html", "imageUrl": "https://i.imgur.com/6vXlmtW.jpeg"
+            },
+            {
+                "name": "ANASTASIAH BINTI HARBI", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/anastasia.html", "imageUrl": "https://i.imgur.com/AAs2gaX.jpeg"
+            },
+            {
+                "name": "DR CYNTHIA @ ANNAMARIA ROBERT DAWAYAN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cynthia.html", "imageUrl": "https://i.imgur.com/n748h8z.png"
+            },
+            {
+                "name": "CYRIL SUPAIN @ CHRISTOPHER", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cyril.html", "imageUrl": "https://i.imgur.com/aBd1Bme.jpeg"
+            },
+            {
+                "name": "DR DAYANG HARYANI DIANA BT AG DAMIT", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dayang.html", "imageUrl": "https://i.imgur.com/Q66orWt.jpeg"
+            },
+            {
+                "name": "DG KAMISAH BINTI AG BUDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN SUMBER MANUSIA", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkamisah.html", "imageUrl": "https://i.imgur.com/LLv1xol.jpeg" 
+            },
+            {
+                "name": "DGKU ALMAHIRAH AWANG KEE", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkualmahirah.html", "imageUrl": "#"
+            },
+            {
+                "name": "FAIQAH BINTI MAWARDI", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faiqah.html", "imageUrl": "https://i.imgur.com/IojOXXu.jpeg"
+            },
+            {
+                "name": "FARIDAH BINTI MOHD SHAH", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faridah.html", "imageUrl": "https://i.imgur.com/9kyxtX1.jpeg"
+            },
+            {
+                "name": "FRANKLIN HAZLEY LAI", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/franklin.html", "imageUrl": "https://i.imgur.com/FUaqmnE.jpeg"
+            },
+            {
+                "name": "DR HASNAWATI HAJI GULILING", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hasnawati.html", "imageUrl": "https://i.imgur.com/YqCHyq5.jpeg"
+            },
+            {
+                "name": "HERNIZA ROXANNE MARCUS", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/herniza.html", "imageUrl": "https://i.imgur.com/B2WoXT6.jpeg"
+            },
+            {
+                "name": "DR HYLMEE MATAHIR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hylmee.html", "imageUrl": "https://i.imgur.com/KzSNZUc.jpeg"
+            },
+            {
+                "name": "DR JAIN YASSIN", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jain.html", "imageUrl": "https://i.imgur.com/iyNGGCy.jpeg"
+            },
+            {
+                "name": "DR JASMAN TUYON", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasman.html", "imageUrl": "https://i.imgur.com/4u4oIcY.jpeg"
+            },
+            {
+                "name": "KAMARULZAMAN B ISHAK", "position": "PENSYARAH KANAN", "field": "PENGANGKUTAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/kamarulzaman.html", "imageUrl": "https://i.imgur.com/ojqbTPz.jpeg"
+            },
+            {
+                "name": "DR JACQUELINE KOH SIEW LEN BTE STEPHEN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jacqueline.html", "imageUrl": "https://i.imgur.com/jeP92pB.jpeg"
+            },
+            {
+                "name": "KHAIRIAH MAZDIAH BINTI KALIMIN", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/khairiah.html", "imageUrl": "https://i.imgur.com/ISFXj5V.jpeg"
+            },
+            {
+                "name": "MARYAM QAAMEELAH OTHMAN", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maryam.html", "imageUrl": "https://i.imgur.com/cwzclWd.jpeg"
+            },
+            {
+                "name": "MOHAMAD ZULFADHLI BIN JUSOH", "position": "PENSYARAH", "field": "PENGANGKUTAN", "phone": "088 - 951611", "path": "https://fpp-uitmsabah.github.io/permata/zulfadhli.html", "imageUrl": "https://i.imgur.com/UNWImiZ.jpeg"
+            },
+            {
+                "name": "MOHAMMAD FIRDAUS BIN MOHAMAD", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/firdaus.html", "imageUrl": "https://i.imgur.com/T2BGkeh.jpeg"
+            },
+            {
+                "name": "DR MAILY PATRICK", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maily.html", "imageUrl": "https://i.imgur.com/KFn1sic.jpeg"
+            },
+            {
+                "name": "DR MOHD ADZWIN FARIS NIASIN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/adzwin.html", "imageUrl": "https://i.imgur.com/fpzCzj9.jpeg"
+            },
+            {
+                "name": "MYDAH @ MYLENDA ERIC", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/mydah.html", "imageUrl": "#"
+            },
+            {
+                "name": "NINALYN FRIDRICT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/ninalyn.html", "imageUrl": "https://i.imgur.com/j8qifBN.jpeg"
+            },
+            {
+                "name": "NURUL HIDAYAH MAT NOR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hidayah.html", "imageUrl": "#"
+            },
+            {
+                "name": "NUR HAZILAH OMAR", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hazilah.html", "imageUrl": "https://i.imgur.com/LSw0Z0g.jpeg"
+            },
+            {
+                "name": "DR PG. MOHD AUZA'E BIN PG ARSHAD", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/auzae.html", "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg"
+            },
+            {
+                "name": "DR NORNAJIHAH NADIA HASBULLAH", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nornajihah.html", "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg"
+            },
+            {
+                "name": "DR MOHD RAZUAN BIN ABD HISHAMUDDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/razuan.html", "imageUrl": "https://i.imgur.com/pYidT6V.jpeg"
+            },
+            {
+                "name": "DR TAUFIK ABD HAKIM", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/taufik.html", "imageUrl": "https://i.imgur.com/8m4ozuO.jpeg"
+            },
+            {
+                "name": "MOHD ROZIE MOHD DAMIT", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/BHVplSw.png", "path": "https://fpp-uitmsabah.github.io/permata/rozie.html"
+            },
+            {
+                "name": "SITI JULEA BINTI SUPAR", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sitijulea.html", "imageUrl": "https://i.imgur.com/T9WUIx4.jpeg"
+            },
+            {
+                "name": "SUMAFFIATIE SULONG", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sumaffiatie.html", "imageUrl": "https://i.imgur.com/4jYnFqX.jpeg"
+            },
+            {
+                "name": "NUR SHAHAFIQAH NADIAH BINTI JAFFERY", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nurshahafiqah.html", "imageUrl": "https://i.imgur.com/w5Qc4D5.jpeg"
+            },
+            {
+                "name": "HJ. S. JUNAIDI BIN MOHAMMAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/junaidi.html", "imageUrl": "#"
+            },
+            {
+                "name": "SUALI @ SUHAILIE BAKRIN", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 513870", "path": "https://fpp-uitmsabah.github.io/permata/suali.html", "imageUrl": "https://i.imgur.com/yHMd3b4.jpeg"
+            },
+            {
+                "name": "MELINDA AZZALEA TAI ABDULLAH @ TAI NYUK CHIN", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325102", "path": "https://fpp-uitmsabah.github.io/permata/melinda.html", "imageUrl": "https://i.imgur.com/f5olmQB.jpeg"
+            }
+        ];
+
+        let filteredFaculty = [...facultyData];
+
+        // Fetch ORCID works (publications)
+        async function fetchOrcidWorks(orcidId) {
+            if (!orcidId) return null;
+            try {
+                const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return data['group']?.map(group => ({
+                    title: group['work-summary'][0]['title']['title']['value'],
+                    year: group['work-summary'][0]['publication-date']['year']['value'],
+                    type: group['work-summary'][0]['type']
+                })) || [];
+            } catch (error) {
+                console.error('ORCID fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Google Scholar data via SerpApi
+        async function fetchScholarData(scholarId, apiKey) {
+            if (!scholarId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'google_scholar_author',
+                    author_id: scholarId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    citedBy: data['cited_by'] || 0,  // Total citations
+                    publications: data['publications']?.slice(0, 5) || []  // Top 5 pubs
+                };
+            } catch (error) {
+                console.error('Scholar fetch error:', error);
+                return null;
+            }
+        }
+
+        // Cache helper
+        function getCached(key, ttl = 3600000) {  // 1 hour TTL
+            const item = localStorage.getItem(key);
+            if (!item) return null;
+            const { data, timestamp } = JSON.parse(item);
+            return Date.now() - timestamp < ttl ? data : null;
+        }
+
+        function setCached(key, data) {
+            localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+        }
+
+        // Get field class for styling
+        function getFieldClass(field) {
+            const fieldMap = {
+                'EKONOMI': 'ekonomi',
+                'KEWANGAN': 'kewangan',
+                'PEMASARAN': 'pemasaran',
+                'PENGURUSAN': 'pengurusan',
+                'PENGURUSAN SUMBER MANUSIA': 'pengurusan',
+                'PENGURUSAN OPERASI': 'pengurusan',
+                'PENGANGKUTAN': 'pengangkutan'
+            };
+            return fieldMap[field] || 'default';
+        }
+
+        // Generate initials for avatar
+        function getInitials(name) {
+            return name.split(' ')
+                .filter(word => word.length > 2)
+                .slice(0, 2)
+                .map(word => word[0])
+                .join('');
+        }
+
+        // Get gradient colors for cards
+        function getCardGradient(index) {
+            const gradients = [
+                'from-purple-600 via-pink-500 to-red-500',
+                'from-blue-600 via-indigo-500 to-purple-500',
+                'from-green-500 via-emerald-500 to-teal-500',
+                'from-orange-500 via-red-500 to-pink-500',
+                'from-indigo-600 via-purple-600 to-pink-500',
+                'from-cyan-500 via-blue-500 to-indigo-500',
+                'from-yellow-500 via-orange-500 to-red-500',
+                'from-emerald-500 via-green-500 to-teal-500',
+                'from-pink-500 via-rose-500 to-red-500',
+                'from-violet-600 via-purple-600 to-indigo-600'
+            ];
+            return gradients[index % gradients.length];
+        }
+
+        // Create faculty card
+        function createFacultyCard(faculty, index) {
+            const initials = getInitials(faculty.name);
+            const delay = (index % 12) * 0.1; // Stagger animation
+            const cardGradient = getCardGradient(index);
+            
+            const isDistinguished = !!faculty.path;
+            const profileImage = faculty.imageUrl || '';
+            
+            return `
+                <div class="faculty-card bg-gradient-to-r ${cardGradient} rounded-3xl shadow-2xl p-8 relative group overflow-hidden" 
+                    onclick="showProfile(${index})" 
+                    style="animation-delay: ${delay}s;">
+                    
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white bg-opacity-10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white bg-opacity-10 rounded-full translate-y-12 -translate-x-12"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex flex-col space-y-6">
+                            <div class="flex items-start justify-between">
+                                <div class="faculty-avatar relative">
+                                    ${profileImage ? `
+                                        <div class="w-24 h-24 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
+                                            <img src="${profileImage}" alt="${faculty.name}" class="w-full h-full object-cover">
+                                        </div>
+                                    ` : `
+                                        <div class="w-24 h-24 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-2xl backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
+                                            ${initials}
+                                        </div>
+                                    `}
+                                    <div class="absolute -bottom-2 -right-2 w-8 h-8 ${isDistinguished ? 'bg-yellow-400' : 'bg-green-400'} rounded-full border-3 border-white flex items-center justify-center shadow-lg">
+                                        ${isDistinguished ? `
+                                            <svg class="w-4 h-4 text-yellow-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        ` : `
+                                            <svg class="w-4 h-4 text-green-900" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                        `}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-white">
+                                <h3 class="text-2xl font-bold mb-2 leading-tight group-hover:text-yellow-200 transition-colors duration-300">
+                                    ${faculty.name}
+                                </h3>
+                                <p class="text-lg font-medium mb-4 text-white text-opacity-90">
+                                    ${faculty.position}
+                                </p>
+                                
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm border border-white border-opacity-30">
+                                        ${faculty.field}
+                                    </span>
+                                </div>
+                                
+                                <div class="flex items-center text-white text-opacity-90 mb-6">
+                                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                    <span class="font-medium">${faculty.phone}</span>
+                                </div>
+                                
+                                <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 hover:border-opacity-50 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    View Full Profile →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render faculty grid
+        function renderFacultyGrid() {
+            const grid = document.getElementById('facultyGrid');
+            grid.innerHTML = filteredFaculty.map((faculty, index) => 
+                createFacultyCard(faculty, facultyData.indexOf(faculty))
+            ).join('');
+            
+            document.getElementById('facultyCount').textContent = filteredFaculty.length;
+        }
+
+        // Filter faculty
+        function filterFaculty() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const fieldFilter = document.getElementById('fieldFilter').value;
+            
+            filteredFaculty = facultyData.filter(faculty => {
+                const matchesSearch = faculty.name.toLowerCase().includes(searchTerm) ||
+                                      faculty.position.toLowerCase().includes(searchTerm) ||
+                                      faculty.field.toLowerCase().includes(searchTerm);
+                
+                const matchesField = !fieldFilter || faculty.field === fieldFilter;
+                
+                return matchesSearch && matchesField;
+            });
+            
+            renderFacultyGrid();
+        }
+
+        // Main profile routing function
+        async function showProfile(index) {
+            const faculty = facultyData[index];
+            const cacheKey = `profile_${index}`;
+            let profileData = getCached(cacheKey);
+
+            if (!profileData) {
+                // Fetch data if IDs exist
+                const [orcidWorks, scholarData] = await Promise.all([
+                    faculty.orcidId ? fetchOrcidWorks(faculty.orcidId) : null,
+                    faculty.scholarId ? fetchScholarData(faculty.scholarId, SERPAPI_KEY) : null
+                ]);
+                profileData = { orcidWorks, scholarData };
+                setCached(cacheKey, profileData);
+            }
+
+            showEnhancedProfile(faculty, profileData);
+        }
+
+        // Show enhanced profile detail
+        function showEnhancedProfile(faculty, profileData) {
+            const initials = getInitials(faculty.name);
+            const fieldClass = getFieldClass(faculty.field);
+            const { orcidWorks = [], scholarData = null } = profileData;
+
+            let researchSection = `
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">Loading detailed portfolio...</p>
+            `;
+
+            if (orcidWorks && orcidWorks.length > 0) {
+                researchSection = `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Recent Publications (ORCID)</h3>
+                        <ul class="space-y-2">
+                            ${orcidWorks.slice(0, 5).map(work => `<li class="text-gray-700">• ${work.title} (${work.year})</li>`).join('')}
+                        </ul>
+                        ${orcidWorks.length > 5 ? '<p class="text-sm text-gray-500 mt-2">... and ${orcidWorks.length - 5} more</p>' : ''}
+                    </div>
+                `;
+            }
+
+            if (scholarData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Google Scholar Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${scholarData.citedBy}</p>
+                        ${scholarData.publications && scholarData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${scholarData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (!orcidWorks && !scholarData) {
+                researchSection = `
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        A detailed portfolio for this faculty member, including research interests, publications, achievements, and a detailed biography, will be available here soon.
+                    </p>
+                `;
+            }
+
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50">
+                    <div class="profile-header text-white relative z-10">
+                        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <button onclick="showHomepage()" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                Back to Directory
+                            </button>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    ${faculty.imageUrl ? `
+                                        <div class="w-32 h-32 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
+                                            <img src="${faculty.imageUrl}" alt="${faculty.name}" class="w-full h-full object-cover">
+                                        </div>
+                                    ` : `
+                                        <div class="w-32 h-32 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-3xl backdrop-blur-sm border border-white border-opacity-30 shadow-2xl">
+                                            ${initials}
+                                        </div>
+                                    `}
+                                    <div class="absolute -bottom-3 -right-3 w-10 h-10 bg-green-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight">${faculty.name}</h1>
+                                    <p class="text-xl text-indigo-100 mb-4 font-medium">${faculty.position}</p>
+                                    <div class="flex flex-wrap gap-3">
+                                        <span class="field-badge ${fieldClass} text-sm">${faculty.field}</span>
+                                        <span class="glass px-4 py-2 rounded-full text-sm font-medium">📞 ${faculty.phone}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                            ${researchSection}
+                            ${faculty.path ? `
+                                <div class="mt-6 pt-6 border-t border-gray-200">
+                                    <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        View Full Portfolio on GitHub
+                                    </a>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+            document.getElementById('homepage').classList.add('hidden');
+            document.getElementById('profileView').classList.remove('hidden');
+        }
+
+        // Show homepage
+        function showHomepage() {
+            document.getElementById('profileView').classList.add('hidden');
+            document.getElementById('homepage').classList.remove('hidden');
+        }
+
+        // Sort faculty
+        function sortFaculty() {
+            const sortBy = document.getElementById('sortBy').value;
+            
+            filteredFaculty.sort((a, b) => {
+                switch(sortBy) {
+                    case 'name': return a.name.localeCompare(b.name);
+                    case 'position': return a.position.localeCompare(b.position);
+                    case 'field': return a.field.localeCompare(b.field);
+                    default: return 0;
+                }
+            });
+            
+            renderFacultyGrid();
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('fieldFilter').value = '';
+            document.getElementById('sortBy').value = 'name';
+            filteredFaculty = [...facultyData];
+            renderFacultyGrid();
+        }
+
+        // Enhanced filter with debounce
+        let filterTimeout;
+        function debouncedFilter() {
+            clearTimeout(filterTimeout);
+            filterTimeout = setTimeout(() => {
+                filterFaculty();
+            }, 300);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('searchInput').addEventListener('input', debouncedFilter);
+            document.getElementById('fieldFilter').addEventListener('change', filterFaculty);
+            document.getElementById('sortBy').addEventListener('change', sortFaculty);
+            document.getElementById('clearFilters').addEventListener('click', clearFilters);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    showHomepage();
+                }
+            });
+
+            // Initial render
+            renderFacultyGrid();
+
+            // --- Audio Control Logic ---
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const audioControl = document.getElementById('audioControl');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+
+            // Set a subtle initial volume
+            backgroundMusic.volume = 0.15;
+
+            function updateButtonState() {
+                if (backgroundMusic.paused) {
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                } else {
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                }
+            }
+
+            audioControl.addEventListener('click', () => {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e => console.log("Playback was prevented by browser."));
+                } else {
+                    backgroundMusic.pause();
+                }
+            });
+            
+            // Autoplay workaround: Attempt to play on the first user interaction anywhere on the page
+            const playOnFirstInteraction = () => {
+                backgroundMusic.play().catch(e => {
+                    console.log("User must click the play button to start music.");
+                });
+                // Remove this listener after the first interaction
+                document.body.removeEventListener('click', playOnFirstInteraction);
+                document.body.removeEventListener('touchend', playOnFirstInteraction);
+            };
+            document.body.addEventListener('click', playOnFirstInteraction, { once: true });
+            document.body.addEventListener('touchend', playOnFirstInteraction, { once: true });
+
+
+            backgroundMusic.addEventListener('play', updateButtonState);
+            backgroundMusic.addEventListener('pause', updateButtonState);
+
+            // Set initial button state
+            updateButtonState();
+        });
+    </script>
+</body>
+</html>
