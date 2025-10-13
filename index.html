@@ -340,7 +340,7 @@
         // Replace with your actual SerpApi key
         const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
 
-        // Faculty data with added orcidId and scholarId where available
+        // Faculty data with added orcidId, scholarId, scopusId, wosId, adScientificId, googleDriveLink where available
         const facultyData = [
             {
                 "name": "ASSOCIATE PROFESSOR DR ROZITA@UJI MOHAMMED", "position": "ACTING RECTOR", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/AfTwVHA.png", "isRector": true, "path": "https://fpp-uitmsabah.github.io/permata/rozita.html"
@@ -349,7 +349,7 @@
                 "name": "PROFESOR TS. DR. IMBARINE BIN HJ BUJANG, JP", "position": "PROFESOR (VK7)", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/yK4vFQ9.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/imbarine.html", "scholarId": "PQPF3kkAAAAJ"
             },
             {
-                "name": "ASSOCIATE PROFESSOR DR SYLVIA@ NABILA AZWA AMBAD", "position": "PROFESOR MADYA", "field": "KEUSAHAWANAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/R4QSvdh.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/nabila.html", "scholarId": "P0Q0iT0AAAAJ"
+                "name": "ASSOCIATE PROFESSOR DR SYLVIA@ NABILA AZWA AMBAD", "position": "PROFESOR MADYA", "field": "KEUSAHAWANAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/R4QSvdh.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/nabila.html", "scholarId": "P0Q0iT0AAAAJ", "orcidId": "0000-0003-1693-8514", "wosId": "AAN-4346-2021", "scopusId": "57190841191", "adScientificId": "331732"
             },
             {
                 "name": "ASSOCIATE PROFESSOR DR IMELDA ALBERT GISIP", "position": "PROFESOR MADYA", "field": "PEMASARAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/znk7EGc.png", "isMarketingExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/imelda.html"
@@ -475,7 +475,7 @@
                 "name": "DR PG. MOHD AUZA'E BIN PG ARSHAD", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/auzae.html", "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg"
             },
             {
-                "name": "DR NORNAJIHAH NADIA HASBULLAH", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nornajihah.html", "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg"
+                "name": "DR NORNAJIHAH NADIA HASBULLAH", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nornajihah.html", "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg", "scholarId": "ypjhvzcAAAAJ", "orcidId": "0000-0002-6097-9981", "wosId": "AFI-9812-2022", "scopusId": "57216148170", "googleDriveLink": "https://drive.google.com/open?id=1h_Z56SST-31mgOqKOWgD4M490PGrsY3p"
             },
             {
                 "name": "DR MOHD RAZUAN BIN ABD HISHAMUDDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/razuan.html", "imageUrl": "https://i.imgur.com/pYidT6V.jpeg"
@@ -539,11 +539,79 @@
                 if (!response.ok) return null;
                 const data = await response.json();
                 return {
-                    citedBy: data['cited_by'] || 0,  // Total citations
-                    publications: data['publications']?.slice(0, 5) || []  // Top 5 pubs
+                    citedBy: data['cited_by'] || 0,
+                    publications: data['publications']?.slice(0, 5) || []
                 };
             } catch (error) {
                 console.error('Scholar fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Scopus data via SerpApi
+        async function fetchScopusData(scopusId, apiKey) {
+            if (!scopusId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'scopus',
+                    author_id: scopusId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    hIndex: data['h-index'] || 0,
+                    citedBy: data['cited_by'] || 0,
+                    publications: data['publications']?.slice(0, 5) || []
+                };
+            } catch (error) {
+                console.error('Scopus fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Web of Science data via SerpApi
+        async function fetchWosData(wosId, apiKey) {
+            if (!wosId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'web_of_science',
+                    author_id: wosId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    citedBy: data['cited_by'] || 0,
+                    publications: data['publications']?.slice(0, 5) || []
+                };
+            } catch (error) {
+                console.error('WoS fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch AD Scientific Index data (placeholder - may require custom API or scraping, but using SerpApi if possible)
+        async function fetchAdScientificData(adScientificId, apiKey) {
+            if (!adScientificId || !apiKey) return null;
+            try {
+                // Assuming SerpApi has a way, but for now, placeholder
+                const params = new URLSearchParams({
+                    engine: 'google',  // Fallback to Google search for AD Scientific
+                    q: `site:adsciencelibrary.com ${adScientificId}`,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                // Parse results as needed
+                return {
+                    rank: data['organic_results']?.[0]?.snippet || 'N/A'
+                };
+            } catch (error) {
+                console.error('AD Scientific fetch error:', error);
                 return null;
             }
         }
@@ -708,11 +776,14 @@
 
             if (!profileData) {
                 // Fetch data if IDs exist
-                const [orcidWorks, scholarData] = await Promise.all([
+                const [orcidWorks, scholarData, scopusData, wosData, adScientificData] = await Promise.all([
                     faculty.orcidId ? fetchOrcidWorks(faculty.orcidId) : null,
-                    faculty.scholarId ? fetchScholarData(faculty.scholarId, SERPAPI_KEY) : null
+                    faculty.scholarId ? fetchScholarData(faculty.scholarId, SERPAPI_KEY) : null,
+                    faculty.scopusId ? fetchScopusData(faculty.scopusId, SERPAPI_KEY) : null,
+                    faculty.wosId ? fetchWosData(faculty.wosId, SERPAPI_KEY) : null,
+                    faculty.adScientificId ? fetchAdScientificData(faculty.adScientificId, SERPAPI_KEY) : null
                 ]);
-                profileData = { orcidWorks, scholarData };
+                profileData = { orcidWorks, scholarData, scopusData, wosData, adScientificData };
                 setCached(cacheKey, profileData);
             }
 
@@ -723,15 +794,14 @@
         function showEnhancedProfile(faculty, profileData) {
             const initials = getInitials(faculty.name);
             const fieldClass = getFieldClass(faculty.field);
-            const { orcidWorks = [], scholarData = null } = profileData;
+            const { orcidWorks = [], scholarData = null, scopusData = null, wosData = null, adScientificData = null } = profileData;
 
             let researchSection = `
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
-                <p class="text-gray-700 leading-relaxed mb-6">Loading detailed portfolio...</p>
             `;
 
             if (orcidWorks && orcidWorks.length > 0) {
-                researchSection = `
+                researchSection += `
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">Recent Publications (ORCID)</h3>
                         <ul class="space-y-2">
@@ -757,9 +827,48 @@
                 `;
             }
 
-            if (!orcidWorks && !scholarData) {
-                researchSection = `
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
+            if (scopusData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Scopus Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>H-Index:</strong> ${scopusData.hIndex}</p>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${scopusData.citedBy}</p>
+                        ${scopusData.publications && scopusData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${scopusData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (wosData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Web of Science Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${wosData.citedBy}</p>
+                        ${wosData.publications && wosData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${wosData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (adScientificData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">AD Scientific Index</h3>
+                        <p class="text-gray-700 mb-2"><strong>Rank:</strong> ${adScientificData.rank}</p>
+                    </div>
+                `;
+            }
+
+            if (!orcidWorks && !scholarData && !scopusData && !wosData && !adScientificData) {
+                researchSection += `
                     <p class="text-gray-700 leading-relaxed">
                         A detailed portfolio for this faculty member, including research interests, publications, achievements, and a detailed biography, will be available here soon.
                     </p>
@@ -810,6 +919,14 @@
                                     <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                         View Full Portfolio on GitHub
+                                    </a>
+                                </div>
+                            ` : ''}
+                            ${faculty.googleDriveLink ? `
+                                <div class="mt-6 pt-6 border-t border-gray-200">
+                                    <a href="${faculty.googleDriveLink}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-semibold">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                        View Additional Resources on Google Drive
                                     </a>
                                 </div>
                             ` : ''}
