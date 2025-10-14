@@ -336,7 +336,26 @@
             </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
     <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log("Firebase has been initialized successfully!");
+
+        // --- Your existing JavaScript code continues below ---
+
         // Replace with your actual SerpApi key
         const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
 
