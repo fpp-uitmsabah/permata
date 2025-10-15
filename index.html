@@ -346,39 +346,113 @@
     </div>
 
     <!-- AI Insights Modal -->
-    <div id="aiModal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
-        <div class="modal-content bg-white rounded-2xl shadow-xl m-4 md:m-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-white p-6 border-b border-gray-200 flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-800">AI-Generated Insights</h2>
-                <button onclick="closeAiModal()" class="text-gray-500 hover:text-gray-800 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div id="aiInsightsContent" class="p-8">
-                <!-- AI content will be injected here -->
-            </div>
-        </div>
+<div id="aiModal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
+  <div class="modal-content bg-white rounded-2xl shadow-xl m-4 md:m-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="sticky top-0 bg-white p-6 border-b border-gray-200 flex justify-between items-center">
+      <h2 class="text-2xl font-bold text-gray-800">AI-Generated Insights</h2>
+      <button onclick="closeAiModal()" class="text-gray-500 hover:text-gray-800 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
     </div>
+    <div id="aiInsightsContent" class="p-8">
+      <!-- AI content will be injected here -->
+    </div>
+  </div>
+</div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
-            authDomain: "academiq-9c9zg.firebaseapp.com",
-            projectId: "academiq-9c9zg",
-            storageBucket: "academiq-9c9zg.firebasestorage.app",
-            messagingSenderId: "779034912138",
-            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
-            measurementId: "G-DGZHBZBYLW"
-        };
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+    authDomain: "academiq-9c9zg.firebaseapp.com",
+    projectId: "academiq-9c9zg",
+    storageBucket: "academiq-9c9zg.firebasestorage.app",
+    messagingSenderId: "779034912138",
+    appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+    measurementId: "G-DGZHBZBYLW"
+  };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         console.log("Firebase has been initialized successfully!");
 
         // --- Your existing JavaScript code continues below ---
+        <!-- AI Insights Functions -->
+async function getAiInsights(facultyName) {
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwwzPHM2sCWQ_vDbmtjflhe2ObDawlP7X-6p0uNemEyBl-fpjPU-30E6e8L7KKjpVI/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: facultyName })
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      document.getElementById("aiInsightsContent").innerHTML =
+        `<p class="text-red-600">${data.error}</p>`;
+      openAiModal();
+      return;
+    }
+
+    const summary = data.summary || "";
+    const analysis = data.analysis || "";
+
+    // Split analysis into preview + rest
+    const lines = analysis.split("\n").filter(l => l.trim() !== "");
+    const preview = lines.slice(0, 3).join("<br>");
+    const rest = lines.slice(3).join("<br>");
+
+    document.getElementById("aiInsightsContent").innerHTML = `
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold text-gray-700">Summary</h3>
+        <p class="text-gray-800">${summary}</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Detailed Analysis</h3>
+        <div class="prose prose-sm max-w-none text-gray-800">
+          <div id="analysisPreview">${preview}</div>
+          <div id="analysisMore" class="hidden">${rest}</div>
+          ${rest ? `<button id="toggleBtn" class="mt-2 text-blue-600 hover:underline">Read More</button>` : ""}
+        </div>
+      </div>
+    `;
+
+    if (rest) {
+      document.getElementById("toggleBtn").addEventListener("click", function() {
+        const more = document.getElementById("analysisMore");
+        const btn = document.getElementById("toggleBtn");
+        if (more.classList.contains("hidden")) {
+          more.classList.remove("hidden");
+          btn.textContent = "Show Less";
+        } else {
+          more.classList.add("hidden");
+          btn.textContent = "Read More";
+        }
+      });
+    }
+
+    openAiModal();
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+    document.getElementById("aiInsightsContent").innerHTML =
+      `<p class="text-red-600">Failed to load insights.</p>`;
+    openAiModal();
+  }
+}
+
+function openAiModal() {
+  document.getElementById("aiModal").classList.remove("hidden");
+}
+
+function closeAiModal() {
+  document.getElementById("aiModal").classList.add("hidden");
+}
 
         // Replace with your actual SerpApi key
         const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
