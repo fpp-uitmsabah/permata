@@ -345,23 +345,19 @@
             </div>
     </div>
 
-    <!-- AI Insights Modal -->
-<div id="aiModal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
-  <div class="modal-content bg-white rounded-2xl shadow-xl m-4 md:m-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-    <div class="sticky top-0 bg-white p-6 border-b border-gray-200 flex justify-between items-center">
-      <h2 class="text-2xl font-bold text-gray-800">AI-Generated Insights</h2>
-      <button onclick="closeAiModal()" class="text-gray-500 hover:text-gray-800 transition-colors">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-    </div>
-    <div id="aiInsightsContent" class="p-8">
-      <!-- AI content will be injected here -->
-    </div>
-  </div>
-</div>
+    Insights Modal -->
+    <div id="aiModal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
+        <div class="modal-content bg-white rounded-2xl shadow-xl m-4 md:m-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white p-6 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">AI-Generated Insights</h2>
+                <button onclick="closeAiModal()" class="text-gray-500 hover:text-gray-800 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="aiInsightsContent" class="p-8">
+                <!-- AI content will be injected here -->
+            </div>
+        </div>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
