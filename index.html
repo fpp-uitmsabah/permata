@@ -222,6 +222,53 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
+
+        /* --- Gemini Modal Styles --- */
+        .gemini-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .gemini-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .gemini-modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .gemini-modal-overlay.active .gemini-modal-content {
+            transform: scale(1);
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -698,7 +745,7 @@
             
             return `
                 <div class="faculty-card bg-gradient-to-r ${cardGradient} rounded-3xl shadow-2xl p-8 relative group overflow-hidden" 
-                    onclick="window.open('${faculty.path}', '_blank')" 
+                    onclick="showProfile(${index})" 
                     style="animation-delay: ${delay}s;">
                     
                     <div class="absolute inset-0 bg-black opacity-10"></div>
@@ -750,7 +797,7 @@
                                 </div>
                                 
                                 <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 hover:border-opacity-50 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                    View Full Portfolio →
+                                    View Profile & Insights →
                                 </button>
                             </div>
                         </div>
@@ -933,19 +980,28 @@
                     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
                         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
                             ${researchSection}
-                            ${faculty.path ? `
-                                <div class="mt-6 pt-6 border-t border-gray-200">
-                                    <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                        View Full Portfolio on GitHub
-                                    </a>
+                            
+                            ${faculty.path || faculty.googleDriveLink ? `
+                                <div class="mt-6 pt-6 border-t border-gray-200 flex flex-wrap gap-4 items-center">
+                                    ${faculty.path ? `
+                                        <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                            View Full Portfolio
+                                        </a>
+                                    ` : ''}
+                                    
+                                    <button onclick='askGeminiAboutFaculty(${JSON.stringify(faculty)}, ${JSON.stringify(profileData)})' class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 7.072l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 101.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+                                        Get Collaboration Ideas
+                                    </button>
                                 </div>
                             ` : ''}
+
                             ${faculty.googleDriveLink ? `
-                                <div class="mt-6 pt-6 border-t border-gray-200">
-                                    <a href="${faculty.googleDriveLink}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-semibold">
+                                <div class="mt-4">
+                                    <a href="${faculty.googleDriveLink}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
                                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                        View Additional Resources on Google Drive
+                                        View Additional Resources
                                     </a>
                                 </div>
                             ` : ''}
@@ -1061,7 +1117,89 @@
             // Set initial button state
             updateButtonState();
         });
+
+        // --- Gemini Integration Functions ---
+
+        // Your specific Google Apps Script URL is now integrated.
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwzPHM2sCWQ_vDbmtjflhe2ObDawlP7X-6p0uNemEyBl-fpjPU-30E6e8L7KKjpVI/exec';
+
+        // Opens the modal and shows the loading spinner
+        function openGeminiModal(facultyName) {
+            document.getElementById('geminiFacultyName').textContent = `For ${facultyName}`;
+            document.getElementById('geminiResponse').innerHTML = '<div class="loader"></div>';
+            document.getElementById('geminiModal').classList.add('active');
+        }
+
+        // Closes the modal
+        function closeGeminiModal() {
+            document.getElementById('geminiModal').classList.remove('active');
+        }
+
+        // Main function to call the Apps Script backend with the new, advanced prompt
+        async function askGeminiAboutFaculty(faculty, profileData) {
+            openGeminiModal(faculty.name);
+
+            // This new, more sophisticated prompt asks Gemini to act as a collaboration advisor.
+            const prompt = `
+            You are an expert academic collaboration advisor for a university. 
+            Your task is to generate three distinct and actionable collaboration ideas for visitors based on a faculty member's profile.
+
+            The ideas should be concrete and inspiring, covering potential research projects, interdisciplinary studies, or community/industry partnerships. For each idea, provide a clear title and a brief, compelling rationale (2-3 sentences).
+
+            Faculty Profile:
+            - Name: ${faculty.name}
+            - Position: ${faculty.position}
+            - Primary Field: ${faculty.field}
+            - Known Research Metrics (if available): ${JSON.stringify(profileData.scholarData || profileData.scopusData || {})}
+
+            Based on this profile, generate three collaboration ideas. Format the output in markdown with bullet points for each idea, using bold titles. For example:
+
+            * **Project Title 1:** Rationale and potential outcomes.
+            * **Project Title 2:** Rationale and potential outcomes.
+            * **Project Title 3:** Rationale and potential outcomes.
+            `;
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache', // Important for development to avoid stale responses
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // Use text/plain for Apps Script
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const result = await response.json();
+                const geminiResponseContainer = document.getElementById('geminiResponse');
+
+                if (result.error) {
+                    geminiResponseContainer.innerHTML = `<p class="text-red-500 text-center"><strong>Error:</strong> ${result.error}</p>`;
+                } else {
+                    // Convert basic markdown (bold and lists) to HTML for display
+                    let html = result.text
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                        .replace(/^\s*\*\s(.*)/gm, '<li class="mb-2">$1</li>'); // List items
+                    geminiResponseContainer.innerHTML = `<ul class="list-disc list-inside space-y-3">${html}</ul>`;
+                }
+
+            } catch (error) {
+                console.error('Error calling Gemini API via Apps Script:', error);
+                document.getElementById('geminiResponse').innerHTML = `<p class="text-red-500 text-center"><strong>Error:</strong> Could not connect to the AI service. Please check the browser console for details.</p>`;
+            }
+        }
     </script>
+    
+    <div id="geminiModal" class="gemini-modal-overlay">
+        <div class="gemini-modal-content relative">
+            <button onclick="closeGeminiModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">💡 Gemini Collaboration Insights</h2>
+                <p id="geminiFacultyName" class="text-gray-500 mt-1"></p>
+            </div>
+            <div id="geminiResponse" class="text-gray-700 leading-relaxed max-h-[60vh] overflow-y-auto pr-2 text-left">
+                </div>
+        </div>
+    </div>
 </body>
 </html>
- 
