@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-8">
+    <div class="max-w-4xl w-full">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">Gemini API Integration Test</h1>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Test Prompt:</label>
+                <textarea 
+                    id="testPrompt" 
+                    rows="6" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Enter your test prompt here...">Provide a brief professional analysis of a lecturer in Finance with expertise in FinTech and Digital Banking. Include their strengths and potential project ideas.</textarea>
+            </div>
+
+            <button 
+                id="testButton" 
+                class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors mb-6"
+                onclick="testGeminiAPI()">
+                Test Gemini API
+            </button>
+
+            <div id="results" class="hidden">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Results:</h2>
+                <div id="resultsContent" class="bg-gray-50 p-6 rounded-lg border border-gray-200"></div>
+            </div>
+
+            <div id="error" class="hidden">
+                <h2 class="text-xl font-bold text-red-800 mb-4">Error:</h2>
+                <div id="errorContent" class="bg-red-50 p-6 rounded-lg border border-red-200"></div>
+            </div>
+
+            <div id="loading" class="hidden flex items-center justify-center py-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-indigo-600"></div>
+                <span class="ml-4 text-gray-600">Testing API...</span>
+            </div>
+
+            <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                <h3 class="text-lg font-semibold text-blue-900 mb-3">Testing Instructions:</h3>
+                <ol class="list-decimal list-inside space-y-2 text-blue-800">
+                    <li>Ensure you have a working internet connection</li>
+                    <li>Make sure the Google Apps Script is deployed and accessible</li>
+                    <li>Click "Test Gemini API" to send a request</li>
+                    <li>Check the results or error messages below</li>
+                    <li>Open browser DevTools (F12) to see detailed logs</li>
+                </ol>
+            </div>
+
+            <div class="mt-6 p-6 bg-yellow-50 rounded-lg border border-yellow-200">
+                <h3 class="text-lg font-semibold text-yellow-900 mb-3">API Endpoint:</h3>
+                <code class="text-sm text-yellow-800 break-all" id="apiEndpoint">https://script.google.com/macros/s/AKfycbwwzPHM2sCWQ_vDbmtjflhe2ObDawlP7X-6p0uNemEyBl-fpjPU-30E6e8L7KKjpVI/exec</code>
+            </div>
+
+            <div class="mt-6 p-6 bg-green-50 rounded-lg border border-green-200">
+                <h3 class="text-lg font-semibold text-green-900 mb-3">Expected Response Format:</h3>
+                <pre class="text-sm text-green-800 overflow-x-auto"><code>{
+  "text": "AI-generated response in markdown format..."
+}
+// or
+{
+  "error": "Error message if something went wrong"
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwwzPHM2sCWQ_vDbmtjflhe2ObDawlP7X-6p0uNemEyBl-fpjPU-30E6e8L7KKjpVI/exec';
+
+        async function testGeminiAPI() {
+            const prompt = document.getElementById('testPrompt').value;
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            const error = document.getElementById('error');
+            const testButton = document.getElementById('testButton');
+            
+            // Reset UI
+            loading.classList.remove('hidden');
+            results.classList.add('hidden');
+            error.classList.add('hidden');
+            testButton.disabled = true;
+            testButton.textContent = 'Testing...';
+
+            console.log('Testing Gemini API with prompt:', prompt);
+            console.log('Sending request to:', WEB_APP_URL);
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', [...response.headers.entries()]);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log('Parsed response:', result);
+
+                loading.classList.add('hidden');
+
+                if (result.error) {
+                    error.classList.remove('hidden');
+                    document.getElementById('errorContent').innerHTML = `
+                        <p class="text-red-700 font-medium mb-2">API Error:</p>
+                        <p class="text-red-600">${result.error}</p>
+                    `;
+                } else if (result.text) {
+                    results.classList.remove('hidden');
+                    
+                    // Enhanced markdown to HTML conversion (same as in index.html)
+                    let htmlContent = result.text;
+                    htmlContent = htmlContent.replace(/### (.*?)(\n|$)/g, '<h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">$1</h3>$2');
+                    htmlContent = htmlContent.replace(/## (.*?)(\n|$)/g, '<h2 class="text-2xl font-bold text-gray-900 mt-6 mb-4">$1</h2>$2');
+                    htmlContent = htmlContent.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+                    htmlContent = htmlContent.replace(/^[\-\*] (.*?)$/gm, '<li class="ml-6 mb-2">$1</li>');
+                    htmlContent = htmlContent.replace(/(<li.*?<\/li>\s*)+/g, '<ul class="list-disc my-4">$&</ul>');
+                    htmlContent = htmlContent.split('\n\n').map(para => {
+                        if (para.trim() && !para.includes('<h') && !para.includes('<ul') && !para.includes('<li')) {
+                            return `<p class="text-gray-700 mb-4 leading-relaxed">${para.trim()}</p>`;
+                        }
+                        return para;
+                    }).join('\n');
+                    
+                    document.getElementById('resultsContent').innerHTML = `
+                        <div class="mb-4 p-4 bg-green-100 border border-green-300 rounded-lg">
+                            <p class="text-green-800 font-semibold">✅ API call successful!</p>
+                        </div>
+                        <div class="prose max-w-none">${htmlContent}</div>
+                        <div class="mt-6 p-4 bg-gray-100 rounded-lg">
+                            <p class="text-sm text-gray-600 mb-2">Raw Response:</p>
+                            <pre class="text-xs overflow-x-auto"><code>${JSON.stringify(result, null, 2)}</code></pre>
+                        </div>
+                    `;
+                } else {
+                    error.classList.remove('hidden');
+                    document.getElementById('errorContent').innerHTML = `
+                        <p class="text-red-700 font-medium mb-2">Invalid Response Format:</p>
+                        <p class="text-red-600 mb-4">The API returned a response but it doesn't match the expected format.</p>
+                        <pre class="text-xs bg-red-100 p-3 rounded overflow-x-auto"><code>${JSON.stringify(result, null, 2)}</code></pre>
+                    `;
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+                loading.classList.add('hidden');
+                error.classList.remove('hidden');
+                document.getElementById('errorContent').innerHTML = `
+                    <p class="text-red-700 font-medium mb-2">Network/Fetch Error:</p>
+                    <p class="text-red-600 mb-4">${err.message}</p>
+                    <details class="mt-4">
+                        <summary class="cursor-pointer text-red-600 hover:text-red-700">Stack trace</summary>
+                        <pre class="text-xs mt-2 bg-red-100 p-3 rounded overflow-x-auto"><code>${err.stack || 'No stack trace available'}</code></pre>
+                    </details>
+                    <div class="mt-4 p-4 bg-yellow-100 rounded">
+                        <p class="text-sm text-yellow-800"><strong>Common causes:</strong></p>
+                        <ul class="list-disc list-inside text-sm text-yellow-700 mt-2">
+                            <li>CORS policy blocking the request</li>
+                            <li>Apps Script deployment not set to "Anyone" access</li>
+                            <li>Network connectivity issues</li>
+                            <li>Invalid Apps Script URL</li>
+                        </ul>
+                    </div>
+                `;
+            } finally {
+                testButton.disabled = false;
+                testButton.textContent = 'Test Gemini API';
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('testPrompt').addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                testGeminiAPI();
+            }
+        });
+    </script>
+</body>
+</html>
