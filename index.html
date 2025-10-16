@@ -358,8 +358,9 @@
                 <!-- AI content will be injected here -->
             </div>
         </div>
+    </div>
 
-<!-- Firebase -->
+    <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script>
   const firebaseConfig = {
@@ -378,77 +379,7 @@
 
         // --- Your existing JavaScript code continues below ---
         <!-- AI Insights Functions -->
-async function getAiInsights(facultyName) {
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwwzPHM2sCWQ_vDbmtjflhe2ObDawlP7X-6p0uNemEyBl-fpjPU-30E6e8L7KKjpVI/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: facultyName })
-    });
-
-    const data = await res.json();
-
-    if (data.error) {
-      document.getElementById("aiInsightsContent").innerHTML =
-        `<p class="text-red-600">${data.error}</p>`;
-      openAiModal();
-      return;
-    }
-
-    const summary = data.summary || "";
-    const analysis = data.analysis || "";
-
-    // Split analysis into preview + rest
-    const lines = analysis.split("\n").filter(l => l.trim() !== "");
-    const preview = lines.slice(0, 3).join("<br>");
-    const rest = lines.slice(3).join("<br>");
-
-    document.getElementById("aiInsightsContent").innerHTML = `
-      <div class="mb-4">
-        <h3 class="text-lg font-semibold text-gray-700">Summary</h3>
-        <p class="text-gray-800">${summary}</p>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-gray-700">Detailed Analysis</h3>
-        <div class="prose prose-sm max-w-none text-gray-800">
-          <div id="analysisPreview">${preview}</div>
-          <div id="analysisMore" class="hidden">${rest}</div>
-          ${rest ? `<button id="toggleBtn" class="mt-2 text-blue-600 hover:underline">Read More</button>` : ""}
-        </div>
-      </div>
-    `;
-
-    if (rest) {
-      document.getElementById("toggleBtn").addEventListener("click", function() {
-        const more = document.getElementById("analysisMore");
-        const btn = document.getElementById("toggleBtn");
-        if (more.classList.contains("hidden")) {
-          more.classList.remove("hidden");
-          btn.textContent = "Show Less";
-        } else {
-          more.classList.add("hidden");
-          btn.textContent = "Read More";
-        }
-      });
-    }
-
-    openAiModal();
-
-  } catch (err) {
-    console.error("Fetch error:", err);
-    document.getElementById("aiInsightsContent").innerHTML =
-      `<p class="text-red-600">Failed to load insights.</p>`;
-    openAiModal();
-  }
-}
-
-function openAiModal() {
-  document.getElementById("aiModal").classList.remove("hidden");
-}
-
-function closeAiModal() {
-  document.getElementById("aiModal").classList.add("hidden");
-}
+        // This function is removed - see the improved version below at line 1111
 
         // Replace with your actual SerpApi key
         const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
@@ -1098,22 +1029,20 @@ function closeAiModal() {
             }, 300);
         }
 
-        function openAiModal() {
-            document.getElementById('aiModal').classList.remove('hidden');
-            document.getElementById('aiModal').classList.add('flex');
-        }
-
-        function closeAiModal() {
-            document.getElementById('aiModal').classList.add('hidden');
-            document.getElementById('aiModal').classList.remove('flex');
-        }
-
+        // AI Insights function with improved error handling and loading states
         async function getAiInsights(facultyIndex) {
             const faculty = facultyData[facultyIndex];
             const insightsContent = document.getElementById('aiInsightsContent');
             
+            // Open modal and show loading state
             openAiModal();
-            insightsContent.innerHTML = '<p class="text-center text-gray-500">Generating insights...</p>';
+            insightsContent.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-12">
+                    <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600 mb-4"></div>
+                    <p class="text-center text-gray-600 text-lg font-medium">Generating AI insights...</p>
+                    <p class="text-center text-gray-500 text-sm mt-2">This may take a few moments</p>
+                </div>
+            `;
 
             const prompt = `Provide a professional analysis of the following faculty member for potential collaboration and future projects. Based on their details, highlight their strengths, suggest innovative project ideas, and recommend collaboration opportunities.
 
@@ -1131,24 +1060,110 @@ function closeAiModal() {
                 const response = await fetch(WEB_APP_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'text/plain', // As per your Google Apps Script
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ prompt: prompt })
                 });
 
+                // Check if response is ok
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const result = await response.json();
 
                 if (result.error) {
-                    insightsContent.innerHTML = `<p class="text-red-500">Error: ${result.error}</p>`;
+                    insightsContent.innerHTML = `
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div>
+                                    <h3 class="text-red-800 font-semibold mb-1">Error Loading Insights</h3>
+                                    <p class="text-red-700">${result.error}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (result.text) {
+                    // Enhanced markdown to HTML conversion
+                    let htmlContent = result.text;
+                    
+                    // Convert headers (##, ###)
+                    htmlContent = htmlContent.replace(/### (.*?)(\n|$)/g, '<h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">$1</h3>$2');
+                    htmlContent = htmlContent.replace(/## (.*?)(\n|$)/g, '<h2 class="text-2xl font-bold text-gray-900 mt-6 mb-4">$1</h2>$2');
+                    
+                    // Convert bold (**text**)
+                    htmlContent = htmlContent.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+                    
+                    // Convert bullet points (- item or * item)
+                    htmlContent = htmlContent.replace(/^[\-\*] (.*?)$/gm, '<li class="ml-6 mb-2">$1</li>');
+                    
+                    // Wrap consecutive <li> in <ul>
+                    htmlContent = htmlContent.replace(/(<li.*?<\/li>\s*)+/g, '<ul class="list-disc my-4">$&</ul>');
+                    
+                    // Convert newlines to paragraphs
+                    htmlContent = htmlContent.split('\n\n').map(para => {
+                        if (para.trim() && !para.includes('<h') && !para.includes('<ul') && !para.includes('<li')) {
+                            return `<p class="text-gray-700 mb-4 leading-relaxed">${para.trim()}</p>`;
+                        }
+                        return para;
+                    }).join('\n');
+                    
+                    insightsContent.innerHTML = `
+                        <div class="prose prose-lg max-w-none">
+                            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl mb-6">
+                                <div class="flex items-center mb-4">
+                                    <svg class="w-8 h-8 text-indigo-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"></path>
+                                    </svg>
+                                    <h2 class="text-2xl font-bold text-indigo-900">AI-Generated Insights</h2>
+                                </div>
+                                <p class="text-indigo-700 text-sm">Powered by Google Gemini AI</p>
+                            </div>
+                            ${htmlContent}
+                        </div>
+                    `;
                 } else {
-                    // Basic markdown to HTML conversion
-                    let htmlContent = result.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
-                    htmlContent = htmlContent.replace(/\n/g, '<br>'); // Newlines
-                    insightsContent.innerHTML = `<div class="prose max-w-none">${htmlContent}</div>`;
+                    throw new Error('Invalid response format from API');
                 }
             } catch (error) {
-                insightsContent.innerHTML = `<p class="text-red-500">An error occurred while fetching insights.</p>`;
-                console.error('Fetch error:', error);
+                console.error('AI Insights fetch error:', error);
+                insightsContent.innerHTML = `
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-yellow-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <h3 class="text-yellow-800 font-semibold mb-1">Unable to Load AI Insights</h3>
+                                <p class="text-yellow-700 mb-3">There was a problem connecting to the AI service. Please try again later.</p>
+                                <details class="mt-2">
+                                    <summary class="cursor-pointer text-yellow-600 text-sm hover:text-yellow-700">Technical details</summary>
+                                    <p class="text-yellow-600 text-xs mt-2 font-mono">${error.message}</p>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Modal functions for AI Insights
+        function openAiModal() {
+            const modal = document.getElementById("aiModal");
+            if (modal) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+            }
+        }
+
+        function closeAiModal() {
+            const modal = document.getElementById("aiModal");
+            if (modal) {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
             }
         }
 
