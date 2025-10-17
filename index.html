@@ -381,6 +381,83 @@
         <!-- AI Insights Functions -->
         // This function is removed - see the improved version below at line 1111
 
+        // NEW: AI Insights and Modal Functions
+        
+        /**
+         * Opens the AI modal and fetches insights for a given faculty member.
+         * @param {number} facultyIndex - The index of the faculty member in the facultyData array.
+         */
+        async function getAiInsights(facultyIndex) {
+            const modal = document.getElementById('aiModal');
+            const contentDiv = document.getElementById('aiInsightsContent');
+            
+            // Show the modal and a loading message
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            contentDiv.innerHTML = '<p class="text-center text-gray-500">Generating AI insights, please wait...</p>';
+
+            const faculty = facultyData[facultyIndex];
+            if (!faculty) {
+                contentDiv.innerHTML = '<p class="text-red-500">Error: Faculty member not found.</p>';
+                return;
+            }
+
+            // Create a detailed prompt for the AI
+            const userPrompt = `
+                Name: ${faculty.name}
+                Position: ${faculty.position}
+                Field: ${faculty.field}
+                Phone: ${faculty.phone}
+            `;
+
+            try {
+                // Fetch data from the Google Apps Script Web App
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: userPrompt }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                // Format the AI-generated content using a markdown parser if you have one,
+                // or display it directly. Here's a simple display.
+                const insightsHTML = `
+                    <div class="prose max-w-none">
+                        <h3 class="font-bold text-lg mb-2">Summary</h3>
+                        <p class="mb-6 p-4 bg-gray-100 rounded-lg">${data.summary || 'No summary available.'}</p>
+                        
+                        <h3 class="font-bold text-lg mb-2">Detailed Analysis</h3>
+                        <div>${data.analysis.replace(/\n/g, '<br>') || 'No analysis available.'}</div>
+                    </div>
+                `;
+                contentDiv.innerHTML = insightsHTML;
+
+            } catch (error) {
+                console.error('AI Insights Error:', error);
+                contentDiv.innerHTML = `<p class="text-red-500">An error occurred while generating insights: ${error.message}</p>`;
+            }
+        }
+
+        /**
+         * Closes the AI insights modal.
+         */
+        function closeAiModal() {
+            const modal = document.getElementById('aiModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    
         // Replace with your actual SerpApi key
         const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwwzPHM2sCWQ_vDbmtjflhe2ObDawlP7X-6p0uNemEyBl-fpjPU-30E6e8L7KKjpVI/exec';
