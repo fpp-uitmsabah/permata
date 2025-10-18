@@ -47,14 +47,30 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
+
+        /* Subtle fade-in animation for sections */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced gradient overlays */
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(4, 120, 87, 0.1));
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-slate-50 font-sans">
     <div id="app" class="min-h-screen">
         <div id="profileView">
             <div class="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-cyan-50">
                 <div class="bg-gradient-to-r from-green-600 via-teal-600 to-cyan-500 text-white relative overflow-hidden">
                     <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="absolute inset-0 gradient-overlay"></div>
                     <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
                     
                     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -70,115 +86,213 @@
                                 <div class="w-40 h-40 rounded-3xl border-4 border-white/30 shadow-2xl overflow-hidden">
                                     <img src="https://i.imgur.com/wvOF6kd.jpeg" alt="Ahmad Fauze bin Abdul Hamit" class="w-full h-full object-cover">
                                 </div>
-                                <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
-                                    <i class="fab fa-google text-3xl text-green-900"></i>
+                                <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-white rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-robot text-xl text-green-600"></i>
                                 </div>
                             </div>
                             <div class="flex-1">
                                 <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">Ahmad Fauze bin Abdul Hamit</h1>
-                                <p class="text-2xl text-green-100 mb-2 font-medium">Lecturer, Department of Finance</p>
-                                <p class="text-xl text-teal-100 mb-4">Universiti Teknologi MARA (UiTM) Sabah</p>
+                                <p class="text-2xl text-green-100 mb-2 font-medium">Lecturer (Banking & Finance)</p>
+                                <p class="text-xl text-teal-100 mb-4">Faculty of Business and Management, UiTM Sabah</p>
                                 <div class="flex flex-wrap gap-3 mb-6">
                                     <span class="bg-green-400 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
-                                        <i class="fab fa-google mr-2"></i> Google Certified Educator, Gemini Certified Educator 
+                                        <i class="fab fa-google mr-2"></i> Google Certified Educator
+                                    </span>
+                                     <span class="bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold">
+                                        <i class="fas fa-brain mr-2"></i> Gemini Certified Educator
+                                    </span>
+                                    <span class="bg-purple-400 text-purple-900 px-4 py-2 rounded-full text-sm font-bold">
+                                        <i class="fas fa-gamepad mr-2"></i> Quizizz Super Trainer
                                     </span>
                                     <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                                        <i class="fas fa-robot mr-2"></i> FinTech & Digital Banking Expert
+                                        <i class="fas fa-palette mr-2"></i> Canva Educator Creator
                                     </span>
                                     <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                                        <i class="fas fa-gamepad mr-2"></i> Gamified Learning Pioneer
+                                        <i class="fab fa-microsoft mr-2"></i> Microsoft Innovative Educator
                                     </span>
                                 </div>
-                                 <div class="flex space-x-4">
-                                    <a href="https://sirpoji.myportfolio.com" target="_blank" class="text-white hover:text-teal-200 transition-colors" title="Personal Portfolio">
-                                        <i class="fas fa-briefcase text-xl"></i>
+                                 <div class="flex items-center space-x-4 my-6">
+                                    <a href="https://expert.uitm.edu.my/V2/page-detail.php?id=wLAfnZR23CMWA3jw8ybnDBekOKy1qQHUX4fkJGJQNEM%3D" target="_blank" rel="noopener noreferrer" title="UiTM Expert" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <img src="https://i.imgur.com/lspSvPG.png" alt="UiTM Expert" class="w-12 h-12">
                                     </a>
-                                    <a href="https://scholar.google.com/citations?user=eJvlXzIAAAAJ&hl=en" target="_blank" class="text-white hover:text-teal-200 transition-colors" title="Google Scholar">
-                                        <i class="fas fa-graduation-cap text-xl"></i>
+                                    <a href="https://scholar.google.com/citations?user=eJvlXzIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <img src="https://i.imgur.com/mYgMKZM.png" alt="Google Scholar" class="w-10 h-10">
                                     </a>
+                                    <a href="https://orcid.org/0000-0002-4343-6037" target="_blank" rel="noopener noreferrer" title="ORCID" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <img src="https://i.imgur.com/E1qAhFM.png" alt="ORCID" class="w-10 h-10">
+                                    </a>
+                                    <a href="https://www.webofscience.com/wos/author/record/JVD-7667-2023" target="_blank" rel="noopener noreferrer" title="Web of Science" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <img src="https://i.imgur.com/G7tHW2m.png" alt="Web of Science" class="w-10 h-10">
+                                    </a>
+                                     <a href="mailto:ahmad920@uitm.edu.my" title="Contact Email" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110 flex items-center justify-center w-10 h-10">
+                                        <i class="fas fa-envelope text-2xl"></i>
                                     </a>
                                 </div>
-                                    <div class="flex items-center space-x-4 my-6">
-                                        <a href="https://expert.uitm.edu.my/V2/page-detail.php?id=wLAfnZR23CMWA3jw8ybnDBekOKy1qQHUX4fkJGJQNEM%3D" target="_blank" rel="noopener noreferrer" title="UiTM Expert" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                            <img src="https://i.imgur.com/lspSvPG.png" alt="UiTM Expert" class="w-12 h-12">
-                                        </a>
-                                        <a href="https://scholar.google.com/citations?user=eJvlXzIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar link" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                            <img src="https://i.imgur.com/mYgMKZM.png" alt="Google Scholar" class="w-10 h-10">
-                                        </a>
-                                        <a href="https://orcid.org/0000-0002-4343-6037" target="_blank" rel="noopener noreferrer" title="OrcId" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                            <img src="https://i.imgur.com/E1qAhFM.png" alt="ORCID" class="w-10 h-10">
-                                        </a>
-                                        <a href="https://www.webofscience.com/wos/author/record/JVD-7667-2023" target="_blank" rel="noopener noreferrer" title="WoS profile link" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                            <img src="https://i.imgur.com/G7tHW2m.png" alt="Web of Science" class="w-10 h-10">
-                                        </a>
-                                    </div>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-16 relative z-20">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div class="lg:col-span-2 space-y-8">
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift">
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
                                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500"></div>
                                 <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                     <i class="fas fa-user-tie mr-3 text-green-500"></i>
                                     Professional Summary
                                 </h2>
                                 <div class="p-6 bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50 rounded-xl border-l-4 border-green-500">
-                                    <p class="text-gray-700 text-lg leading-relaxed">Ahmad Fauze bin Abdul Hamit stands as a dynamic finance educator and digital innovation advocate at UiTM Sabah. As a Google Certified Educator, he bridges traditional financial education with cutting-edge digital pedagogical approaches, making him a distinctive voice in Malaysia's higher education landscape.</p>
+                                    <p class="text-gray-700 text-lg leading-relaxed">A dynamic and award-winning finance lecturer at UiTM Sabah with a passion for integrating technology into education. As a Google Certified Educator and one of Malaysia's first Quizizz Super Trainers, he excels in creating engaging, gamified learning experiences. His research focuses on sustainable finance, FinTech, and risk management, contributing actively to both academic literature and practical financial tools.</p>
                                 </div>
                             </div>
 
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift">
+                             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-trophy mr-3 text-yellow-500"></i>
+                                    Awards & Recognitions
+                                </h2>
+                                <ul class="space-y-4 list-disc list-inside text-gray-700">
+                                    <li><b>GOLD Award & Best Presentation Award</b> for "KadazanlinGO! Gamified Learning Application" at ILEIID 2025.</li>
+                                    <li><b>GOLD Award</b> for "ARQAMified Arabic Learning Application" at ILEIID 2025.</li>
+                                    <li><b>GOLD Award</b> for the research "Enhancing Financial Literacy and Sustainability Via Strategic Digital Initiatives to Empower Female Graduates in Sabah" at the 2025 Interfaculty Research Competition.</li>
+                                    <li><b>GOLD Medal & Special Award for Uniqueness and Research Innovation</b> for the research "KadazanlinGO!: A Collaborative Product-Based Research" at the International Research Competition (IRC) 2025.</li>
+                                    <li><b>SILVER Medal</b> for the innovation "KadazanlinGO!: A Gamified Mobile Learning Application" at the National Language Innovation Competition B-Inovatif 2025 (UPSI).</li>
+                                    <li><b>BRONZE Award</b> for the research "ESG Leaders Vs. Laggards: The Financial Impact of Sincere ESG Engagement in Shariah-Compliant Firms" at the 2025 Interfaculty Research Competition.</li>
+                                    <li><b>GOLD Award</b>, Micro-credential Competition (eCONDEV 2024 & 2022)</li>
+                                    <li><b>GOLD Award</b>, Massive Open Online Course Competition (eCONDEV 2022)</li>
+                                    <li><b>Anugerah Khas Fasilitator Micro-Credential Paling Aktif</b> (UiTM 2019-2022)</li>
+                                    <li><b>Johan Pertandingan Inovasi (Berkumpulan)</b>, MAIJASA UiTM Cawangan Sabah 2022</li>
+                                    <li><b>DIAMOND AWARD</b>, International Invention & Innovative Competition (Series 2/2019)</li>
+                                    <li><b>Tun Abdul Razak Award</b> & <b>UiTM Best Graduate Award</b> (Bachelor's Degree)</li>
+                                     <li><b>KPTM President Award</b> & <b>UiTM Vice Chancellor Award</b> (Diploma)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-copyright mr-3 text-purple-500"></i>
+                                    Intellectual Property (Copyrights)
+                                </h2>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                        <h4 class="font-semibold text-gray-800">ARQAMified Eduplay</h4>
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            <b>Type:</b> Educational Interactive Mobile Application (Gamification)<br>
+                                            <b>Role:</b> Creator / Co-Creator<br>
+                                            <b>Registration No.:</b> LY2025590135<br>
+                                            <b>Registered with:</b> Intellectual Property Corporation of Malaysia (MyIPO)<br>
+                                            <b>Registration Date:</b> 12 September 2025
+                                        </p>
+                                    </div>
+                                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                        <h4 class="font-semibold text-gray-800">KadazanlinGO! A Gamified Language Learning Hub</h4>
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            <b>Type:</b> Educational Interactive Mobile Application (Gamification)<br>
+                                            <b>Role:</b> Creator / Co-Creator<br>
+                                            <b>Registration No.:</b> ???<br>
+                                            <b>Registered with:</b> Intellectual Property Corporation of Malaysia (MyIPO)<br>
+                                            <b>Registration Date:</b> 21 September 2025
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
                                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-teal-500"></div>
                                 <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                    <i class="fas fa-microchip mr-3 text-blue-500"></i>
-                                    Innovation & Digital Pedagogy
+                                    <i class="fas fa-sitemap mr-3 text-blue-500"></i>
+                                    Administrative Roles & University Governance
                                 </h2>
-                                <div class="space-y-6">
-                                    <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Gamified Learning Pioneer</h3>
-                                        <p class="text-gray-700">Recognized as one of Malaysia's inaugural Quizizz Super Trainers, he researches and applies innovative pedagogical approaches in gamified learning, using AI and analytics to enhance instructional efficiency and student motivation.</p>
+                                <div class="space-y-4">
+                                     <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                                        <h4 class="font-semibold text-gray-800">Coordinator of Program 'Service-Learning Malaysia University for Society' (SULAM)</h4>
+                                        <p class="text-sm text-gray-600 mt-1">UiTM Sabah Branch (2023-2026)</p>
                                     </div>
-                                    <div class="p-6 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl border-l-4 border-green-500">
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2">VaRes Calculator Mobile App</h3>
-                                        <p class="text-gray-700">Co-developed a mobile application to estimate market risk using Exponentially Weighted Moving Average models. This tool provides sophisticated risk assessment capabilities for banking professionals and investors, capturing volatility clustering in stock returns.</p>
+                                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400">
+                                        <h4 class="font-semibold text-gray-800">Resource Person (Course Lead)</h4>
+                                        <p class="text-sm text-gray-600 mt-1">Led curriculum for FIN333 (2022-2023), FIN365 (2021-2022), and FIN242 (2020-2021)</p>
                                     </div>
-                                    <div class="p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-l-4 border-yellow-500">
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Micro-Credential Instruction</h3>
-                                        <p class="text-gray-700">Offers specialized instruction in banking, investment, finance, and personal financial planning through UiTM's UFUTURE platform, making financial education accessible and practical.</p>
+                                    <div class="p-4 bg-gray-100 rounded-lg border-l-4 border-gray-400">
+                                        <h4 class="font-semibold text-gray-800">Faculty Representative & Committee Roles</h4>
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            Served as Faculty Representative for Media, National Outcomes Based Education (NOBLe for BA242 & BA272), and Research, Publication & Innovation. Also a member of the UFUTURE (E-Learning) Committee.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift">
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
                                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-pink-500"></div>
                                 <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                     <i class="fas fa-book-open mr-3 text-red-500"></i>
                                     Key Research & Publications
                                 </h2>
-                                <div class="space-y-4">
-                                    <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
-                                        <h4 class="font-semibold text-gray-800">Dynamic Triangulation between Shariah Compliance, ESG Transparency, and Firm Profitability</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Explores the intersection of Islamic finance principles with ESG practices, demonstrating how compliant firms with strong ESG can achieve superior financial performance.</p>
+                                <div class="space-y-5">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Web of Science (WoS) Indexed Journal</h3>
+                                        <div class="space-y-4">
+                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                                <h4 class="font-semibold text-gray-800">Dynamic Triangulation between Shariah Compliance, ESG Transparency, and Firm Profitability</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFA. <span class="font-medium">International Journal of Research and Innovation in Social Science (IJRISS)</span>, Vol. 8(12), pp. 1159-1170. January 2025. This article explores the more important responsibility to businesses, long-term governance (ESG) is a goal. Ethical conduct, sustainability, and financial perf...</p>
+                                            </div>
+                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                                <h4 class="font-semibold text-gray-800">The Effect of Financial Technology (FinTech) Adoption on Individual Over-Indebtedness in ASEAN-5 Countries</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFB, Naily, N, et al. <span class="font-medium">Economics</span>, Vol. ?, pp. ?-?. December 2024. This article examines the impact of financial technology (FinTech) on individual over-indebtedness in ASEAN-5 countries (Malaysia, Indonesia, Thailand, Singapore, and the Philippines).</p>
+                                            </div>
+                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                                <h4 class="font-semibold text-gray-800">A realistic assessment of COVID-19 vaccination’s effect on the Malaysian stock market’s downside risk</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFA, Othman, MQ, et al. <span class="font-medium">Journal of Business Management & Accounting (JBMA)</span>, Vol. 14(1), pp. 1-22. May 2023. Recent studies have emerging devastating negative impact of the global-scale widespread coronavirus disease (COVID-19) pandemic on the economy, especially widespread on the development of the stock market...</p>
+                                            </div>
+                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                                <h4 class="font-semibold text-gray-800">Estimating the precision of market risk within the tiger cub economies’ region through VaR backtesting</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFA, Frick, N, et al. <span class="font-medium">Journal of Emerging Economies and Islamic Research</span>, Vol. 10(3), pp. 63-78. September 2022. Tiger cub economies this region is in calm and stormy market conditions. The primary objective of this empirical research is...</p>
+                                            </div>
+                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                                <h4 class="font-semibold text-gray-800">A parametric survival analysis of fundamental factors and sentiment index towards future stock returns: new chapter global financial crisis 2007</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Bujang, I, Hamit, AFA, et al. <span class="font-medium">Journal of Business & Retail Management Research</span>, Vol. 10(2), pp. 158-170. April 2016. The secondary objective of the empirical research is...</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                     <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-                                        <h4 class="font-semibold text-gray-800">The Effect of FinTech Adoption on Individual Over-Indebtedness</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Reveals that FinTech adoption negatively correlates with over-indebtedness in ASEAN-5 countries, suggesting enhanced financial stability.</p>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Book Chapters</h3>
+                                         <div class="space-y-3">
+                                            <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                                <h4 class="font-semibold text-gray-800">Rethinking Zakat and Waqf Management for Society 5.0</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Chapter in the book: <span class="font-medium">"New Ideas and Concepts on Zakat and Waqf towards Society 5.0"</span> by PPZ-MAIWP.</p>
+                                            </div>
+                                            <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                                                <h4 class="font-semibold text-gray-800">Financing your Business</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Chapter in the book: <span class="font-medium">"Entrepreneurship in Malaysia: Navigating Opportunities in a Dynamic Landscape"</span>.</p>
+                                            </div>
+                                            <div class="p-4 bg-cyan-50 rounded-lg border-l-4 border-cyan-400">
+                                                <h4 class="font-semibold text-gray-800">Enhancing Financial Literacy and Sustainability via Strategic Digital Initiatives to Empower Female Graduates in Sabah</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Chapter published in conjunction with the <span class="font-medium">1st ASEAN Women’s Conference on Best Practices (AWCOBP) 2025</span>.</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
-                                        <h4 class="font-semibold text-gray-800">COVID-19 Vaccination's Effect on Malaysian Stock Market's Downside Risk</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Analyzed 500 trading days to assess the impact of pandemic news and vaccination rates on market risk.</p>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Other Selected Publications</h3>
+                                        <div class="space-y-3">
+                                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                                                <h4 class="font-semibold text-gray-800">Innovative Pedagogical Approaches in Gamified Learning: Insights from Malaysia’s Inaugural Quizizz Super Trainers (Aug 2025)</h4>
+                                            </div>
+                                            <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                                                <h4 class="font-semibold text-gray-800">Assessing the Impact of Microprudential Policy towards Household Loan Deliquency (Mar 2023)</h4>
+                                            </div>
+                                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
+                                                <h4 class="font-semibold text-gray-800">The Triangulation of Shariah-compliancy, ESG-transparency, and the Financial Performance of Malaysia Islamic Equities (Feb 2023)</h4>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="space-y-8">
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift">
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
                                 <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                                     <i class="fas fa-graduation-cap mr-2 text-teal-500"></i>
                                     Academic Background
@@ -186,42 +300,95 @@
                                 <div class="space-y-3">
                                     <div class="p-3 bg-teal-50 rounded-lg border-l-4 border-teal-500">
                                         <p class="text-sm font-bold text-gray-900">Master of Science (Business Management)</p>
-                                        <p class="text-xs text-gray-600">Universiti Teknologi MARA (UiTM)</p>
+                                        <p class="text-xs text-gray-600">UiTM Shah Alam - <span class="font-semibold">Recipient of Research Excellence Award</span></p>
                                     </div>
                                     <div class="p-3 bg-cyan-50 rounded-lg border-l-4 border-cyan-500">
-                                        <p class="text-sm font-bold text-gray-900">Bachelor of Business Administration (Hons) Finance</p>
-                                        <p class="text-xs text-gray-600">Universiti Teknologi MARA (UiTM), First Class</p>
+                                        <p class="text-sm font-bold text-gray-900">Bachelor of Business Admin (Hons) Finance</p>
+                                        <p class="text-xs text-gray-600">UiTM Sabah - <span class="font-semibold">First Class, Tun Abdul Razak Award</span></p>
                                     </div>
                                     <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
                                         <p class="text-sm font-bold text-gray-900">Diploma in Business Studies</p>
-                                        <p class="text-xs text-gray-600">Universiti Teknologi MARA (UiTM)</p>
+                                        <p class="text-xs text-gray-600">Kolej Poly-Tech MARA - <span class="font-semibold">President & Vice Chancellor Awards</span></p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift">
+                             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-hands-helping mr-2 text-sky-500"></i>
+                                    Professional Service
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
+                                        <p class="text-sm font-bold text-gray-900">National Examination Question Setter</p>
+                                        <p class="text-xs text-gray-600">Appointed for Business Management 1, Matriculation Program Semester Examination (PSPM) by the Ministry of Education Malaysia (2025).</p>
+                                    </div>
+                                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
+                                        <p class="text-sm font-bold text-gray-900">National Examination Script Examiner</p>
+                                        <p class="text-xs text-gray-600">Appointed for the Matriculation Program Semester Examination (PSPM), Semesters I & III, Session 2025/2026.</p>
+                                    </div>
+                                     <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
+                                        <p class="text-sm font-bold text-gray-900">Invitational Speaker & Trainer</p>
+                                        <p class="text-xs text-gray-600">Invited speaker on "Magic Canva for Productive Works" by UiTM Permatang Pauh and served as a Trainer for the HRD Corp National Training Week (NTW).</p>
+                                    </div>
+                                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
+                                        <p class="text-sm font-bold text-gray-900">Journal Reviewer</p>
+                                        <p class="text-xs text-gray-600">Appointed reviewer for journals including <span class="font-semibold">Journal of Business Management and Accounting (JBMA)</span>, <span class="font-semibold">International Journal of Research and Innovation in Social Science (IJRISS)</span>, and <span class="font-semibold">International Journal of Latest Technology in Engineering, Management & Applied Science</span>.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-chalkboard-teacher mr-2 text-indigo-500"></i>
+                                    Teaching Portfolio
+                                </h3>
+                                <div class="flex flex-wrap gap-2">
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Corporate Finance</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Islamic Finance</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Investment & Portfolio Mgt.</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Technical Analysis</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Personal Financial Planning</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Quantitative Research</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Futures and Options</span>
+                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Risk and Insurance</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
                                 <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                                     <i class="fas fa-lightbulb mr-2 text-green-500"></i>
                                     Research Interests
                                 </h3>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Sustainable Finance</span>
-                                    <span class="px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">Financial Risk</span>
-                                    <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">Digital Banking</span>
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Responsible Investing</span>
-                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">FinTech</span>
+                                    <span class="px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">Financial Risk Management</span>
+                                    <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">Digital Banking & FinTech</span>
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">ESG & Responsible Investment</span>
+                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">Financial Inclusion</span>
                                 </div>
                             </div>
                             
-                            <div class="bg-gradient-to-br from-teal-50 to-cyan-50 border-2 border-teal-200 rounded-2xl p-6 hover-lift">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                        <i class="fas fa-chart-line text-3xl text-white"></i>
+                             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-chart-line mr-2 text-rose-500"></i>
+                                    Performance & Impact
+                                </h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">Annual Performance (MYATP)</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                                            <div class="bg-gradient-to-r from-rose-500 to-red-500 h-2.5 rounded-full" style="width: 91%"></div>
+                                        </div>
+                                        <p class="text-xs text-right text-gray-500 mt-1">Consistently high performer, reaching <b>91%</b> in 2022.</p>
                                     </div>
-                                    <h3 class="text-lg font-bold text-teal-900 mb-2">Future-Forward Vision</h3>
-                                    <p class="text-teal-700 text-sm leading-relaxed">
-                                        Represents the evolution of financial education, combining academic rigor with innovative digital approaches to prepare students for the rapidly evolving FinTech landscape.
-                                    </p>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">Student Feedback (SUFO)</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                                            <div class="bg-gradient-to-r from-teal-400 to-cyan-500 h-2.5 rounded-full" style="width: 96%"></div>
+                                        </div>
+                                        <p class="text-xs text-right text-gray-500 mt-1">Consistently rated <b>"Excellent"</b> & <b>"Very Good"</b>, with scores up to <b>96.55</b>.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -232,4 +399,3 @@
     </div>
 </body>
 </html>
- 
