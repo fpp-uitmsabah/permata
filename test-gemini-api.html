@@ -60,13 +60,31 @@
 
             <div class="mt-6 p-6 bg-green-50 rounded-lg border border-green-200">
                 <h3 class="text-lg font-semibold text-green-900 mb-3">Expected Response Format:</h3>
-                <pre class="text-sm text-green-800 overflow-x-auto"><code>{
-  "text": "AI-generated response in markdown format..."
+                <pre class="text-sm text-green-800 overflow-x-auto"><code>✅ CORRECT (what frontend expects):
+{
+  "text": "## Strengths:\n- Expert in..."
 }
-// or
+
+❌ WRONG (old format, causes errors):
+{
+  "summary": "Short summary...",
+  "analysis": "Detailed analysis..."
+}
+
+⚠️ ERROR RESPONSE:
 {
   "error": "Error message if something went wrong"
 }</code></pre>
+            </div>
+            
+            <div class="mt-6 p-6 bg-purple-50 rounded-lg border border-purple-200">
+                <h3 class="text-lg font-semibold text-purple-900 mb-3">🔍 Common Issues:</h3>
+                <ul class="text-sm text-purple-800 space-y-2">
+                    <li><strong>"Invalid response format":</strong> Apps Script is returning {summary, analysis} instead of {text}</li>
+                    <li><strong>"Failed to fetch":</strong> CORS issue or wrong URL</li>
+                    <li><strong>"API Key is not set":</strong> Missing GEMINI_API_KEY in Script Properties</li>
+                    <li><strong>Empty response:</strong> Check Apps Script Executions tab for errors</li>
+                </ul>
             </div>
         </div>
     </div>
