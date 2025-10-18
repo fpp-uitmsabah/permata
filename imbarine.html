@@ -9,7 +9,7 @@
         body {
             box-sizing: border-box;
         }
-        
+
         /* Enhanced animations and transitions */
         .faculty-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -17,23 +17,23 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .back-button {
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
-        
+
         .back-button:hover {
             transform: translateX(-4px);
             background-color: rgba(255, 255, 255, 0.2);
         }
-        
+
         .profile-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             position: relative;
             overflow: hidden;
         }
-        
+
         .profile-header::before {
             content: '';
             position: absolute;
@@ -43,7 +43,7 @@
             bottom: 0;
             background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        
+
         /* Gradient text */
         .gradient-text {
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -51,21 +51,21 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         /* Enhanced scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 4px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
@@ -151,7 +151,7 @@
         // Show Professor Imbarine's detailed profile
         function showImbarineProfile() {
             const profileData = professorProfileData;
-            
+
             const profileHTML = `
                 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
                     <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white relative overflow-hidden">
@@ -195,6 +195,18 @@
                                             ⚡ Professional Technologist (Ts.)
                                         </span>
                                     </div>
+                                    <div class="flex items-center space-x-4 my-6">
+                                        <a href="https://expert.uitm.edu.my/V2/page-detail.php?id=8TD8WsyZkylccLodNB4aIs9lylQrRKuDvmlQrhCe29Q%3D" target="_blank" rel="noopener noreferrer" title="UiTM Expert" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                            <img src="https://i.imgur.com/lspSvPG.png" alt="UiTM Expert" class="w-12 h-12">
+                                        </a>
+                                        <a href="https://scholar.google.com/citations?user=PQPF3kkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar link" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                            <img src="https://i.imgur.com/mYgMKZM.png" alt="Google Scholar" class="w-10 h-10">
+                                        </a>
+                                        <a href="https://orcid.org/0000-0002-1427-0963" target="_blank" rel="noopener noreferrer" title="OrcId" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                            <img src="https://i.imgur.com/E1qAhFM.png" alt="ORCID" class="w-10 h-10">
+                                        </a>
+                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -380,7 +392,7 @@
                     </div>
                 </div>
             `;
-            
+
             document.getElementById('profileView').innerHTML = profileHTML;
         }
 
