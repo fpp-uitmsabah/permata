@@ -477,8 +477,12 @@
   };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        console.log("Firebase has been initialized successfully!");
+        try {
+            firebase.initializeApp(firebaseConfig);
+            console.log("Firebase has been initialized successfully!");
+        } catch (error) {
+            console.log("Firebase initialization failed, but continuing without it:", error);
+        }
 
 
         // --- NEW Gemini API Integration (from portfolio) ---
@@ -1199,6 +1203,7 @@
         let aiModal, modalTitle, modalBody, closeModalButton, copyAiContentButton;
         // NEW Contact Modal variables
         let contactModal, contactModalTitle, closeContactModalButton, contactForm;
+        let currentContactFaculty = null; // Store the currently selected faculty for contact
 
         function showLoadingInModal() {
             if (modalTitle) modalTitle.textContent = 'AI Generated Content';
@@ -1273,6 +1278,7 @@
         function handleContactClick(event, facultyIndex) {
             event.stopPropagation(); // Stop click from propagating to the card's link
             const faculty = facultyData[facultyIndex];
+            currentContactFaculty = faculty; // Store the selected faculty
             
             if (contactModal) {
                 contactModalTitle.innerHTML = `Initiate Contact with <span style="color: #047857;">${faculty.name}</span>`;
@@ -1368,10 +1374,50 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(event) {
                     event.preventDefault(); // Prevent actual form submission
-                    // For now, just show an alert and close the modal
-                    // In a real app, this would send data to a backend or mailto
-                    alert('Thank you! Your contact request has been noted. (This is a demo)');
-                    closeContactModal();
+                    
+                    // Get form data
+                    const visitorEmail = document.getElementById('contactEmail').value;
+                    const visitorPhone = document.getElementById('contactPhone').value || 'Not provided';
+                    const visitorMessage = document.getElementById('contactMessage').value || '';
+                    
+                    // Check if faculty is selected and has an email
+                    if (!currentContactFaculty) {
+                        alert('Error: No faculty member selected. Please try again.');
+                        closeContactModal();
+                        return;
+                    }
+                    
+                    if (!currentContactFaculty.email) {
+                        alert('Sorry, email address is not available for this faculty member.');
+                        closeContactModal();
+                        return;
+                    }
+                    
+                    // Construct email subject and body
+                    const subject = encodeURIComponent(`Contact Request from Faculty Portfolio Website`);
+                    let body = `Dear ${currentContactFaculty.name},\n\n`;
+                    body += `I would like to get in touch with you.\n\n`;
+                    body += `My Contact Details:\n`;
+                    body += `Email: ${visitorEmail}\n`;
+                    body += `Phone: ${visitorPhone}\n\n`;
+                    
+                    if (visitorMessage) {
+                        body += `Message:\n${visitorMessage}\n\n`;
+                    }
+                    
+                    body += `\nBest regards`;
+                    
+                    const encodedBody = encodeURIComponent(body);
+                    
+                    // Create mailto link and open it
+                    const mailtoLink = `mailto:${currentContactFaculty.email}?subject=${subject}&body=${encodedBody}`;
+                    window.location.href = mailtoLink;
+                    
+                    // Show confirmation and close modal
+                    setTimeout(() => {
+                        alert(`Your email client should open shortly. If not, please email ${currentContactFaculty.email} directly.`);
+                        closeContactModal();
+                    }, 500);
                 });
             }
             // --- End of NEW Contact Modal Listeners ---
