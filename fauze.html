@@ -3,12 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio: Ahmad Fauze bin Abdul Hamit</title>
+    <title>Faculty Directory & Portfolio Gateway</title>
+
+    <meta property="og:title" content="Faculty Directory & Portfolio Gateway">
+    <meta property="og:description" content="Discover distinguished faculty members from UiTM Sabah and explore their expertise.">
+    <meta property="og:image" content="https://i.imgur.com/SEXIf1W.jpeg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Faculty Directory & Portfolio Gateway">
+    <meta name="twitter:description" content="Discover distinguished faculty members from UiTM Sabah and explore their expertise.">
+    <meta name="twitter:image" content="https://i.imgur.com/SEXIf1W.jpeg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             box-sizing: border-box;
+        }
+        
+        /* Enhanced animations and transitions */
+        .faculty-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faculty-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .faculty-card:hover::before {
+            left: 100%;
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.1);
+        }
+        
+        .faculty-avatar {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .faculty-card:hover .faculty-avatar {
+            transform: scale(1.1);
+        }
+        
+        .field-badge {
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .field-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .field-badge:hover::before {
+            left: 100%;
+        }
+        
+        /* Enhanced field colors with gradients */
+        .ekonomi { 
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .kewangan { 
+            background: linear-gradient(135deg, #10b981, #047857);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        .pemasaran { 
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        .pengurusan { 
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .pengangkutan { 
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        .default { 
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            z-index: 10;
+        }
+        
+        .search-input {
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
         .back-button {
@@ -21,6 +148,63 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
         
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Stagger animation for cards */
+        .faculty-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Pulse effect for count */
+        .count-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
         /* Enhanced scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -31,371 +215,1169 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #10b981, #047857);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 4px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #059669, #065f46);
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
 
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* --- NEW AI Modal styles (from portfolio, adapted for light mode) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #ffffff; /* Adapted for light mode */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
         }
         
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        /* --- MODIFIED Button Styles --- */
+        .ai-button {
+            background-color: #7c3aed; /* purple-600 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600; /* font-semibold */
+            transition: background-color 0.2s ease;
+            margin-bottom: 0.5rem; /* Changed from margin-top/right */
+            cursor: pointer;
+            border: none;
+        }
+        .ai-button:hover {
+            background-color: #6d28d9; /* purple-700 */
         }
 
-        /* Subtle fade-in animation for sections */
-        .fade-in {
-            animation: fadeIn 0.6s ease-in-out;
+        /* --- NEW Contact Button Style --- */
+        .contact-button {
+            background-color: #059669; /* green-600 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600; /* font-semibold */
+            transition: background-color 0.2s ease;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            border: none;
+            width: 100%; /* Make it full width */
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .contact-button:hover {
+            background-color: #047857; /* green-700 */
         }
-
-        /* Enhanced gradient overlays */
-        .gradient-overlay {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(4, 120, 87, 0.1));
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #7c3aed; /* purple-600 */
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #modalBody {
+            color: #374151; /* gray-700, adapted for light mode */
+            line-height: 1.6;
+        }
+        #modalTitle {
+            color: #6d28d9; /* purple-700 */
         }
     </style>
 </head>
-<body class="bg-slate-50 font-sans">
+<body class="bg-gray-50 font-sans">
+    <audio id="backgroundMusic" loop>
+        <source src="https://sirpoji.my/permata-fpp-uitmsabah/uitmdihatikuinstru.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="audioControl" class="fixed bottom-5 right-5 z-50 w-12 h-12 glass rounded-full text-white flex items-center justify-center hover:bg-opacity-20 transition-all duration-300" title="Toggle Music">
+        <svg id="playIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M4.018 14.384A1 1 0 013 13.5V6.5a1 1 0 011.555-.832l6 3.5a1 1 0 010 1.664l-6 3.5a1 1 0 01-.537.152z"></path>
+        </svg>
+        <svg id="pauseIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5 4h3a1 1 0 011 1v10a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1zm7 0h3a1 1 0 011 1v10a1 1 0 01-1 1h-3a1 1 0 01-1-1V5a1 1 0 011-1z"></path>
+        </svg>
+    </button>
+
     <div id="app" class="min-h-screen">
-        <div id="profileView">
-            <div class="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-cyan-50">
-                <div class="bg-gradient-to-r from-green-600 via-teal-600 to-cyan-500 text-white relative overflow-hidden">
-                    <div class="absolute inset-0 bg-black opacity-10"></div>
-                    <div class="absolute inset-0 gradient-overlay"></div>
-                    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-                    
-                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                        <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            Back to Directory
-                        </a>
-                        
-                        <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
-                            <div class="relative">
-                                <div class="w-40 h-40 rounded-3xl border-4 border-white/30 shadow-2xl overflow-hidden">
-                                    <img src="https://i.imgur.com/wvOF6kd.jpeg" alt="Ahmad Fauze bin Abdul Hamit" class="w-full h-full object-cover">
-                                </div>
-                                <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-white rounded-full border-4 border-white flex items-center justify-center shadow-lg">
-                                    <i class="fas fa-robot text-xl text-green-600"></i>
-                                </div>
+        
+        <div id="homepage" class="block">
+            <header class="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
+                <div class="absolute inset-0 bg-black opacity-10"></div>
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="text-center">
+                        <div class="floating mb-6">
+                            <div class="inline-flex items-center justify-center w-24 h-24 bg-white bg-opacity-20 rounded-full backdrop-blur-sm border border-white border-opacity-30 mb-6">
+                                <img src="https://i.imgur.com/3IfJvBe.png" alt="UiTM Logo" class="w-20 h-20 object-contain">
                             </div>
-                            <div class="flex-1">
-                                <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">Ahmad Fauze bin Abdul Hamit</h1>
-                                <p class="text-2xl text-green-100 mb-2 font-medium">Lecturer (Banking & Finance)</p>
-                                <p class="text-xl text-teal-100 mb-4">Faculty of Business and Management, UiTM Sabah</p>
-                                <div class="flex flex-wrap gap-3 mb-6">
-                                    <span class="bg-green-400 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
-                                        <i class="fab fa-google mr-2"></i> Google Certified Educator
-                                    </span>
-                                     <span class="bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold">
-                                        <i class="fas fa-brain mr-2"></i> Gemini Certified Educator
-                                    </span>
-                                    <span class="bg-purple-400 text-purple-900 px-4 py-2 rounded-full text-sm font-bold">
-                                        <i class="fas fa-gamepad mr-2"></i> Quizizz Super Trainer
-                                    </span>
-                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                                        <i class="fas fa-palette mr-2"></i> Canva Educator Creator
-                                    </span>
-                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                                        <i class="fab fa-microsoft mr-2"></i> Microsoft Innovative Educator
-                                    </span>
-                                </div>
-                                 <div class="flex items-center space-x-4 my-6">
-                                    <a href="https://expert.uitm.edu.my/V2/page-detail.php?id=wLAfnZR23CMWA3jw8ybnDBekOKy1qQHUX4fkJGJQNEM%3D" target="_blank" rel="noopener noreferrer" title="UiTM Expert" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                        <img src="https://i.imgur.com/lspSvPG.png" alt="UiTM Expert" class="w-12 h-12">
-                                    </a>
-                                    <a href="https://scholar.google.com/citations?user=eJvlXzIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                        <img src="https://i.imgur.com/mYgMKZM.png" alt="Google Scholar" class="w-10 h-10">
-                                    </a>
-                                    <a href="https://orcid.org/0000-0002-4343-6037" target="_blank" rel="noopener noreferrer" title="ORCID" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                        <img src="https://i.imgur.com/E1qAhFM.png" alt="ORCID" class="w-10 h-10">
-                                    </a>
-                                    <a href="https://www.webofscience.com/wos/author/record/JVD-7667-2023" target="_blank" rel="noopener noreferrer" title="Web of Science" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                        <img src="https://i.imgur.com/G7tHW2m.png" alt="Web of Science" class="w-10 h-10">
-                                    </a>
-                                     <a href="mailto:ahmad920@uitm.edu.my" title="Contact Email" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110 flex items-center justify-center w-10 h-10">
-                                        <i class="fas fa-envelope text-2xl"></i>
-                                    </a>
-                                </div>
+                        </div>
+                        <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+                            FPP UiTM SABAH'S <span class="text-yellow-300">DIRECTORY</span>
+                        </h1>
+                        <p class="text-xl text-indigo-100 max-w-2xl mx-auto leading-relaxed">
+                            Discover our distinguished faculty members and explore their expertise across various academic disciplines
+                        </p>
+                        <div class="mt-8 flex justify-center">
+                            <div class="glass px-6 py-3 rounded-full">
+                                <span class="text-white font-semibold">“Where Wisdom Inspires Minds, the Future Thrives”</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-16 relative z-20">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 space-y-8">
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500"></div>
-                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                    <i class="fas fa-user-tie mr-3 text-green-500"></i>
-                                    Professional Summary
-                                </h2>
-                                <div class="p-6 bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50 rounded-xl border-l-4 border-green-500">
-                                    <p class="text-gray-700 text-lg leading-relaxed">A dynamic and award-winning finance lecturer at UiTM Sabah with a passion for integrating technology into education. As a Google Certified Educator and one of Malaysia's first Quizizz Super Trainers, he excels in creating engaging, gamified learning experiences. His research focuses on sustainable finance, FinTech, and risk management, contributing actively to both academic literature and practical financial tools.</p>
-                                </div>
-                            </div>
+                <div class="absolute top-10 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full blur-xl"></div>
+                <div class="absolute bottom-10 right-10 w-32 h-32 bg-pink-300 bg-opacity-20 rounded-full blur-2xl"></div>
+                <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-300 bg-opacity-20 rounded-full blur-lg"></div>
+            </header>
 
-                             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-500"></div>
-                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                    <i class="fas fa-trophy mr-3 text-yellow-500"></i>
-                                    Awards & Recognitions
-                                </h2>
-                                <ul class="space-y-4 list-disc list-inside text-gray-700">
-                                    <li><b>GOLD Award & Best Presentation Award</b> for "KadazanlinGO! Gamified Learning Application" at ILEIID 2025.</li>
-                                    <li><b>GOLD Award</b> for "ARQAMified Arabic Learning Application" at ILEIID 2025.</li>
-                                    <li><b>GOLD Award</b> for the research "Enhancing Financial Literacy and Sustainability Via Strategic Digital Initiatives to Empower Female Graduates in Sabah" at the 2025 Interfaculty Research Competition.</li>
-                                    <li><b>GOLD Medal & Special Award for Uniqueness and Research Innovation</b> for the research "KadazanlinGO!: A Collaborative Product-Based Research" at the International Research Competition (IRC) 2025.</li>
-                                    <li><b>SILVER Medal</b> for the innovation "KadazanlinGO!: A Gamified Mobile Learning Application" at the National Language Innovation Competition B-Inovatif 2025 (UPSI).</li>
-                                    <li><b>BRONZE Award</b> for the research "ESG Leaders Vs. Laggards: The Financial Impact of Sincere ESG Engagement in Shariah-Compliant Firms" at the 2025 Interfaculty Research Competition.</li>
-                                    <li><b>GOLD Award</b>, Micro-credential Competition (eCONDEV 2024 & 2022)</li>
-                                    <li><b>GOLD Award</b>, Massive Open Online Course Competition (eCONDEV 2022)</li>
-                                    <li><b>Anugerah Khas Fasilitator Micro-Credential Paling Aktif</b> (UiTM 2019-2022)</li>
-                                    <li><b>Johan Pertandingan Inovasi (Berkumpulan)</b>, MAIJASA UiTM Cawangan Sabah 2022</li>
-                                    <li><b>DIAMOND AWARD</b>, International Invention & Innovative Competition (Series 2/2019)</li>
-                                    <li><b>Tun Abdul Razak Award</b> & <b>UiTM Best Graduate Award</b> (Bachelor's Degree)</li>
-                                     <li><b>KPTM President Award</b> & <b>UiTM Vice Chancellor Award</b> (Diploma)</li>
-                                </ul>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0">
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 mb-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-6 items-center">
+                        <div class="search-container flex-1">
+                            <div class="search-icon">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
                             </div>
-                            
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
-                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                    <i class="fas fa-copyright mr-3 text-purple-500"></i>
-                                    Intellectual Property (Copyrights)
-                                </h2>
-                                <div class="space-y-4">
-                                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
-                                        <h4 class="font-semibold text-gray-800">ARQAMified Eduplay</h4>
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            <b>Type:</b> Educational Interactive Mobile Application (Gamification)<br>
-                                            <b>Role:</b> Creator / Co-Creator<br>
-                                            <b>Registration No.:</b> LY2025590135<br>
-                                            <b>Registered with:</b> Intellectual Property Corporation of Malaysia (MyIPO)<br>
-                                            <b>Registration Date:</b> 12 September 2025
-                                        </p>
-                                    </div>
-                                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
-                                        <h4 class="font-semibold text-gray-800">KadazanlinGO! A Gamified Language Learning Hub</h4>
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            <b>Type:</b> Educational Interactive Mobile Application (Gamification)<br>
-                                            <b>Role:</b> Creator / Co-Creator<br>
-                                            <b>Registration No.:</b> ???<br>
-                                            <b>Registered with:</b> Intellectual Property Corporation of Malaysia (MyIPO)<br>
-                                            <b>Registration Date:</b> 21 September 2025
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-teal-500"></div>
-                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                    <i class="fas fa-sitemap mr-3 text-blue-500"></i>
-                                    Administrative Roles & University Governance
-                                </h2>
-                                <div class="space-y-4">
-                                     <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-                                        <h4 class="font-semibold text-gray-800">Coordinator of Program 'Service-Learning Malaysia University for Society' (SULAM)</h4>
-                                        <p class="text-sm text-gray-600 mt-1">UiTM Sabah Branch (2023-2026)</p>
-                                    </div>
-                                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400">
-                                        <h4 class="font-semibold text-gray-800">Resource Person (Course Lead)</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Led curriculum for FIN333 (2022-2023), FIN365 (2021-2022), and FIN242 (2020-2021)</p>
-                                    </div>
-                                    <div class="p-4 bg-gray-100 rounded-lg border-l-4 border-gray-400">
-                                        <h4 class="font-semibold text-gray-800">Faculty Representative & Committee Roles</h4>
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            Served as Faculty Representative for Media, National Outcomes Based Education (NOBLe for BA242 & BA272), and Research, Publication & Innovation. Also a member of the UFUTURE (E-Learning) Committee.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-pink-500"></div>
-                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                                    <i class="fas fa-book-open mr-3 text-red-500"></i>
-                                    Key Research & Publications
-                                </h2>
-                                <div class="space-y-5">
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Web of Science (WoS) Indexed Journal</h3>
-                                        <div class="space-y-4">
-                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
-                                                <h4 class="font-semibold text-gray-800">Dynamic Triangulation between Shariah Compliance, ESG Transparency, and Firm Profitability</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFA. <span class="font-medium">International Journal of Research and Innovation in Social Science (IJRISS)</span>, Vol. 8(12), pp. 1159-1170. January 2025. This article explores the more important responsibility to businesses, long-term governance (ESG) is a goal. Ethical conduct, sustainability, and financial perf...</p>
-                                            </div>
-                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
-                                                <h4 class="font-semibold text-gray-800">The Effect of Financial Technology (FinTech) Adoption on Individual Over-Indebtedness in ASEAN-5 Countries</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFB, Naily, N, et al. <span class="font-medium">Economics</span>, Vol. ?, pp. ?-?. December 2024. This article examines the impact of financial technology (FinTech) on individual over-indebtedness in ASEAN-5 countries (Malaysia, Indonesia, Thailand, Singapore, and the Philippines).</p>
-                                            </div>
-                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
-                                                <h4 class="font-semibold text-gray-800">A realistic assessment of COVID-19 vaccination’s effect on the Malaysian stock market’s downside risk</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFA, Othman, MQ, et al. <span class="font-medium">Journal of Business Management & Accounting (JBMA)</span>, Vol. 14(1), pp. 1-22. May 2023. Recent studies have emerging devastating negative impact of the global-scale widespread coronavirus disease (COVID-19) pandemic on the economy, especially widespread on the development of the stock market...</p>
-                                            </div>
-                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
-                                                <h4 class="font-semibold text-gray-800">Estimating the precision of market risk within the tiger cub economies’ region through VaR backtesting</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Hamit, AFA, Frick, N, et al. <span class="font-medium">Journal of Emerging Economies and Islamic Research</span>, Vol. 10(3), pp. 63-78. September 2022. Tiger cub economies this region is in calm and stormy market conditions. The primary objective of this empirical research is...</p>
-                                            </div>
-                                            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
-                                                <h4 class="font-semibold text-gray-800">A parametric survival analysis of fundamental factors and sentiment index towards future stock returns: new chapter global financial crisis 2007</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Bujang, I, Hamit, AFA, et al. <span class="font-medium">Journal of Business & Retail Management Research</span>, Vol. 10(2), pp. 158-170. April 2016. The secondary objective of the empirical research is...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Book Chapters</h3>
-                                         <div class="space-y-3">
-                                            <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
-                                                <h4 class="font-semibold text-gray-800">Rethinking Zakat and Waqf Management for Society 5.0</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Chapter in the book: <span class="font-medium">"New Ideas and Concepts on Zakat and Waqf towards Society 5.0"</span> by PPZ-MAIWP.</p>
-                                            </div>
-                                            <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
-                                                <h4 class="font-semibold text-gray-800">Financing your Business</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Chapter in the book: <span class="font-medium">"Entrepreneurship in Malaysia: Navigating Opportunities in a Dynamic Landscape"</span>.</p>
-                                            </div>
-                                            <div class="p-4 bg-cyan-50 rounded-lg border-l-4 border-cyan-400">
-                                                <h4 class="font-semibold text-gray-800">Enhancing Financial Literacy and Sustainability via Strategic Digital Initiatives to Empower Female Graduates in Sabah</h4>
-                                                <p class="text-sm text-gray-600 mt-1">Chapter published in conjunction with the <span class="font-medium">1st ASEAN Women’s Conference on Best Practices (AWCOBP) 2025</span>.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Other Selected Publications</h3>
-                                        <div class="space-y-3">
-                                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
-                                                <h4 class="font-semibold text-gray-800">Innovative Pedagogical Approaches in Gamified Learning: Insights from Malaysia’s Inaugural Quizizz Super Trainers (Aug 2025)</h4>
-                                            </div>
-                                            <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-                                                <h4 class="font-semibold text-gray-800">Assessing the Impact of Microprudential Policy towards Household Loan Deliquency (Mar 2023)</h4>
-                                            </div>
-                                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-400">
-                                                <h4 class="font-semibold text-gray-800">The Triangulation of Shariah-compliancy, ESG-transparency, and the Financial Performance of Malaysia Islamic Equities (Feb 2023)</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                placeholder="🔍 Search faculty by name, position, or field..." 
+                                class="search-input w-full pl-14 pr-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-20 focus:border-indigo-500 text-lg transition-all duration-300"
+                            >
                         </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 items-center">
+                            <select id="fieldFilter" class="px-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-20 focus:border-indigo-500 text-lg transition-all duration-300">
+                                <option value="">🎯 All Fields</option>
+                                <option value="EKONOMI">📊 Economics</option>
+                                <option value="KEWANGAN">💰 Finance</option>
+                                <option value="PEMASARAN">📈 Marketing</option>
+                                <option value="PENGURUSAN">👥 Management</option>
+                                <option value="PENGANGKUTAN">🚛 Transportation</option>
+                            </select>
+                            
+                            <button id="clearFilters" class="px-6 py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl hover:from-gray-600 hover:to-gray-700 transition-all duration-300">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex flex-col sm:flex-row justify-between items-center">
+                        <div class="text-lg text-gray-700 font-medium">
+                            <span class="inline-flex items-center">
+                                <span class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                                <span id="facultyCount" class="count-pulse font-bold text-indigo-600">0</span> 
+                                <span class="ml-1">faculty members found</span>
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+                            <div class="text-sm text-gray-500">Sort by:</div>
+                            <select id="sortBy" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="name">Name</option>
+                                <option value="position">Position</option>
+                                <option value="field">Field</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="space-y-8">
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                    <i class="fas fa-graduation-cap mr-2 text-teal-500"></i>
-                                    Academic Background
-                                </h3>
-                                <div class="space-y-3">
-                                    <div class="p-3 bg-teal-50 rounded-lg border-l-4 border-teal-500">
-                                        <p class="text-sm font-bold text-gray-900">Master of Science (Business Management)</p>
-                                        <p class="text-xs text-gray-600">UiTM Shah Alam - <span class="font-semibold">Recipient of Research Excellence Award</span></p>
-                                    </div>
-                                    <div class="p-3 bg-cyan-50 rounded-lg border-l-4 border-cyan-500">
-                                        <p class="text-sm font-bold text-gray-900">Bachelor of Business Admin (Hons) Finance</p>
-                                        <p class="text-xs text-gray-600">UiTM Sabah - <span class="font-semibold">First Class, Tun Abdul Razak Award</span></p>
-                                    </div>
-                                    <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
-                                        <p class="text-sm font-bold text-gray-900">Diploma in Business Studies</p>
-                                        <p class="text-xs text-gray-600">Kolej Poly-Tech MARA - <span class="font-semibold">President & Vice Chancellor Awards</span></p>
-                                    </div>
-                                </div>
-                            </div>
+                <div id="facultyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+            </div>
+        </div>
 
-                             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                    <i class="fas fa-hands-helping mr-2 text-sky-500"></i>
-                                    Professional Service
-                                </h3>
-                                <div class="space-y-3">
-                                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
-                                        <p class="text-sm font-bold text-gray-900">National Examination Question Setter</p>
-                                        <p class="text-xs text-gray-600">Appointed for Business Management 1, Matriculation Program Semester Examination (PSPM) by the Ministry of Education Malaysia (2025).</p>
-                                    </div>
-                                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
-                                        <p class="text-sm font-bold text-gray-900">National Examination Script Examiner</p>
-                                        <p class="text-xs text-gray-600">Appointed for the Matriculation Program Semester Examination (PSPM), Semesters I & III, Session 2025/2026.</p>
-                                    </div>
-                                     <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
-                                        <p class="text-sm font-bold text-gray-900">Invitational Speaker & Trainer</p>
-                                        <p class="text-xs text-gray-600">Invited speaker on "Magic Canva for Productive Works" by UiTM Permatang Pauh and served as a Trainer for the HRD Corp National Training Week (NTW).</p>
-                                    </div>
-                                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
-                                        <p class="text-sm font-bold text-gray-900">Journal Reviewer</p>
-                                        <p class="text-xs text-gray-600">Appointed reviewer for journals including <span class="font-semibold">Journal of Business Management and Accounting (JBMA)</span>, <span class="font-semibold">International Journal of Research and Innovation in Social Science (IJRISS)</span>, and <span class="font-semibold">International Journal of Latest Technology in Engineering, Management & Applied Science</span>.</p>
-                                    </div>
-                                </div>
-                            </div>
+        <div id="profileView" class="hidden">
+            </div>
+    </div>
 
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                    <i class="fas fa-chalkboard-teacher mr-2 text-indigo-500"></i>
-                                    Teaching Portfolio
-                                </h3>
-                                <div class="flex flex-wrap gap-2">
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Corporate Finance</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Islamic Finance</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Investment & Portfolio Mgt.</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Technical Analysis</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Personal Financial Planning</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Quantitative Research</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Futures and Options</span>
-                                     <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Risk and Insurance</span>
-                                </div>
-                            </div>
+    <div id="aiModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalTitle" class="text-2xl font-bold mb-4">AI Generated Content</h3>
+            <div id="modalBody" class="text-gray-300 prose prose-invert max-w-none">
+                </div>
+            <button id="copyAiContent" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors">Copy to Clipboard</button>
+            <button id="closeModal" class="mt-6 ml-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors">Close</button>
+        </div>
+    </div>
 
-                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                    <i class="fas fa-lightbulb mr-2 text-green-500"></i>
-                                    Research Interests
-                                </h3>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Sustainable Finance</span>
-                                    <span class="px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">Financial Risk Management</span>
-                                    <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">Digital Banking & FinTech</span>
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">ESG & Responsible Investment</span>
-                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">Financial Inclusion</span>
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="contactModalTitle" class="text-2xl font-bold mb-4" style="color: #059669;">Initiate Contact</h3>
+            <p class="mb-6 text-gray-600">Your details will be forwarded to this faculty member.</p>
+            <form id="contactForm">
+                <div class="mb-4">
+                    <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-2">Your Email*</label>
+                    <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                </div>
+                <div class="mb-4">
+                    <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-2">Your Contact Number</label>
+                    <input type="tel" id="contactPhone" name="phone" placeholder="+60 12-345 6789" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                </div>
+                <div class="mb-6">
+                    <label for="contactMessage" class="block text-sm font-medium text-gray-700 mb-2">Message (Optional)</label>
+                    <textarea id="contactMessage" name="message" rows="4" placeholder="I'm interested in collaborating on..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500"></textarea>
+                </div>
+                <div class="flex justify-end gap-4">
+                    <button type="button" id="closeContactModal" class="mt-6 ml-2 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors">Cancel</button>
+                    <button type="submit" id="submitContactForm" class="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+    authDomain: "academiq-9c9zg.firebaseapp.com",
+    projectId: "academiq-9c9zg",
+    storageBucket: "academiq-9c9zg.firebasestorage.app",
+    messagingSenderId: "779034912138",
+    appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+    measurementId: "G-DGZHBZBYLW"
+  };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log("Firebase has been initialized successfully!");
+
+
+        // --- NEW Gemini API Integration (from portfolio) ---
+        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M"; 
+        const GEMINI_API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+
+        // Replace with your actual SerpApi key
+        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
+        
+        // Faculty data with added orcidId, scholarId, scopusId, wosId, adScientificId, googleDriveLink where available
+        const facultyData = [
+            {
+                "name": "ASSOCIATE PROFESSOR DR ROZITA@UJI MOHAMMED", "position": "ACTING RECTOR", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/AfTwVHA.png", "isRector": true, "path": "https://fpp-uitmsabah.github.io/permata/rozita.html", "scholarId": "X8mOPWwAAAAJ"
+            },
+            {
+                "name": "PROFESOR TS. DR. IMBARINE BIN HJ BUJANG, JP", "position": "PROFESOR (VK7)", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/yK4vFQ9.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/imbarine.html", "scholarId": "PQPF3kkAAAAJ", "orcidId": "0000-0002-1427-0963"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR SYLVIA@ NABILA AZWA AMBAD", "position": "PROFESOR MADYA", "field": "KEUSAHAWANAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/R4QSvdh.png", "distinguished": true, "path": "https://fpp-uitmsabah.github.io/permata/nabila.html", "scholarId": "P0Q0iT0AAAAJ", "orcidId": "0000-0003-1693-8514", "wosId": "AAN-4346-2021", "scopusId": "57190841191", "adScientificId": "331732"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR IMELDA ALBERT GISIP", "position": "PROFESOR MADYA", "field": "PEMASARAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/56wH97R.jpeg", "isMarketingExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/imelda.html", "scholarId": "ZKyK4ocAAAAJ"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR ABDUL AZIZ KARIA", "position": "PROFESOR MADYA", "field": "EKONOMI", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/pIBl3hM.png", "isEconomist": true, "path": "https://fpp-uitmsabah.github.io/permata/azizkaria.html", "scholarId": "wEU9sPoAAAAJ", "orcidId": "0000-0002-4888-682X"
+            },
+            {
+                "name": "ASSOCIATE PROFESSOR DR NOORZIAH MOHD SALLEH", "position": "PROFESOR MADYA", "field": "PENGURUSAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/YzT5qni.png", "isHumanCapitalExpert": true, "path": "https://fpp-uitmsabah.github.io/permata/noorziah.html", "orcidId": "0000-0003-0243-3443", "scholarId": "UEdCve8AAAAJ"
+            },
+            {
+                "name": "DR DEWI BINTI TAJUDDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dewi.html", "imageUrl": "https://i.imgur.com/KAwa8sg.png", "scholarId": "T2gMxekAAAAJ"
+            },
+            {
+                "name": "DR SITI RAHAYU BINTI BELI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rahayu.html", "imageUrl": "https://i.imgur.com/gnIUTT6.png", "orcidId": "0000-0001-6555-570X"
+            },
+            {
+                "name": "DR RAINAH GINSAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rainah.html", "imageUrl": "https://i.imgur.com/wY54IiY.png", "scholarId": "DTVW8oMAAAAJ"
+            },
+            {
+                "name": "DR JASMINE VIVIENNE ANDREW", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasmine.html", "imageUrl": "https://i.imgur.com/RPrDp9X.png", "scholarId": "_zG17NIAAAAJ", "orcidId": "0000-0001-9872-5963"
+            },
+            {
+                "name": "DR SARMILA UDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sarmila.html", "imageUrl": "https://i.imgur.com/hH2M9wI.png", "scholarId": "EgBvSlQAAAAJ"
+            },
+            {
+                "name": "DR FLICIA RIMIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/flicia.html", "imageUrl": "https://i.imgur.com/Lt3PoS4.png", "scholarId": "u91NzqEAAAAJ", "orcidId": "0000-0001-8720-2227"
+            },
+            {
+                "name": "DR RAPHEEDAH MUSNEH", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/rapheedah.html", "imageUrl": "https://i.imgur.com/4AU1ScM.png"
+            },
+            {
+                "name": "DR SHARIFAH NURAFIZAH SYED ANNUAR", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/sharifah.html", "imageUrl": "https://i.imgur.com/mZx1OJe.png", "scholarId": "IQ3ZUJUAAAAJ", "orcidId": "0000-0001-7494-3333"
+            },
+            {
+                "name": "DR ABDUL AZIZ LAI MOHD FIKRI LAI", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325213", "path": "https://fpp-uitmsabah.github.io/permata/azizlai.html", "imageUrl": "https://i.imgur.com/6Fx6Uc8.jpeg", "scholarId": "3X8Dic4AAAAJ", "orcidId": "0000-0001-8718-5148"
+            },
+            {
+                "name": "AHMAD FAUZE ABDUL HAMIT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/fauze.html", "imageUrl": "https://i.imgur.com/wvOF6kd.jpeg", "scholarId": "eJvlXzIAAAAJ", "orcidId": "0000-0002-4343-6037", "wosId": "JVD-7667-2023"
+            },
+            {
+                "name": "AHMAD GHAZALI BIN ISMAIL", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 513867", "path": "https://fpp-uitmsabah.github.io/permata/ghazali.html", "imageUrl": "https://i.imgur.com/6vXlmtW.jpeg", "scholarId": "3WpZ5zUAAAAJ", "orcidId": "0000-0001-8088-6275"
+            },
+            {
+                "name": "ANASTASIAH BINTI HARBI", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/anastasia.html", "imageUrl": "https://i.imgur.com/AAs2gaX.jpeg"
+            },
+            {
+                "name": "DR CYNTHIA @ ANNAMARIA ROBERT DAWAYAN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cynthia.html", "imageUrl": "https://i.imgur.com/n748h8z.png", "scholarId": "QFPJ7qQAAAAJ", "orcidId": "0000-0001-8497-2699"
+            },
+            {
+                "name": "CYRIL SUPAIN @ CHRISTOPHER", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/cyril.html", "imageUrl": "https://i.imgur.com/aBd1Bme.jpeg"
+            },
+            {
+                "name": "DR DAYANG HARYANI DIANA BT AG DAMIT", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dayang.html", "imageUrl": "https://i.imgur.com/Q66orWt.jpeg", "scholarId": "LZ7JqvoAAAAJ", "orcidId": "0000-0002-7824-8087"
+            },
+            {
+                "name": "DG KAMISAH BINTI AG BUDIN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN SUMBER MANUSIA", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkamisah.html", "imageUrl": "https://i.imgur.com/LLv1xol.jpeg", "scholarId": "G68gNywAAAAJ"
+            },
+            {
+                "name": "DGKU ALMAHIRAH AWANG KEE", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/dgkualmahirah.html", "imageUrl": "#"
+            },
+            {
+                "name": "FAIQAH BINTI MAWARDI", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faiqah.html", "imageUrl": "https://i.imgur.com/IojOXXu.jpeg", "scholarId": "uoK9CtAAAAAJ"
+            },
+            {
+                "name": "FARIDAH BINTI MOHD SHAH", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/faridah.html", "imageUrl": "https://i.imgur.com/9kyxtX1.jpeg", "orcidId": "0000-0002-0790-9626"
+            },
+            {
+                "name": "FRANKLIN HAZLEY LAI", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/franklin.html", "imageUrl": "https://i.imgur.com/FUaqmnE.jpeg"
+            },
+            {
+                "name": "DR HASNAWATI HAJI GULILING", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hasnawati.html", "imageUrl": "https://i.imgur.com/YqCHyq5.jpeg", "orcidId": "0000-0002-4860-1820"
+            },
+            {
+                "name": "HERNIZA ROXANNE MARCUS", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/herniza.html", "imageUrl": "https://i.imgur.com/B2WoXT6.jpeg"
+            },
+            {
+                "name": "DR HYLMEE MATAHIR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hylmee.html", "imageUrl": "https://i.imgur.com/KzSNZUc.jpeg"
+            },
+            {
+                "name": "DR JAIN YASSIN", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jain.html", "imageUrl": "https://i.imgur.com/iyNGGCy.jpeg", "orcidId": "0000-0002-4190-5960"
+            },
+            {
+                "name": "DR JASMAN TUYON", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jasman.html", "imageUrl": "https://i.imgur.com/4u4oIcY.jpeg"
+            },
+            {
+                "name": "KAMARULZAMAN B ISHAK", "position": "PENSYARAH KANAN", "field": "PENGANGKUTAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/kamarulzaman.html", "imageUrl": "https://i.imgur.com/ojqbTPz.jpeg"
+            },
+            {
+                "name": "DR JACQUELINE KOH SIEW LEN BTE STEPHEN", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/jacqueline.html", "imageUrl": "https://i.imgur.com/jeP92pB.jpeg"
+            },
+            {
+                "name": "KHAIRIAH MAZDIAH BINTI KALIMIN", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/khairiah.html", "imageUrl": "https://i.imgur.com/ISFXj5V.jpeg"
+            },
+            {
+                "name": "MARYAM QAAMEELAH OTHMAN", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maryam.html", "imageUrl": "https://i.imgur.com/cwzclWd.jpeg"
+            },
+            {
+                "name": "MOHAMAD ZULFADHLI BIN JUSOH", "position": "PENSYARAH", "field": "PENGANGKUTAN", "phone": "088 - 951611", "path": "https://fpp-uitmsabah.github.io/permata/zulfadhli.html", "imageUrl": "https://i.imgur.com/UNWImiZ.jpeg"
+            },
+            {
+                "name": "MOHAMMAD FIRDAUS BIN MOHAMAD", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/firdaus.html", "imageUrl": "https://i.imgur.com/T2BGkeh.jpeg"
+            },
+            {
+                "name": "DR MAILY PATRICK", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/maily.html", "imageUrl": "https://i.imgur.com/KFn1sic.jpeg"
+            },
+            {
+                "name": "DR MOHD ADZWIN FARIS NIASIN", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/adzwin.html", "imageUrl": "https://i.imgur.com/fpzCzj9.jpeg"
+            },
+            {
+                "name": "MYDAH @ MYLENDA ERIC", "position": "PENSYARAH KANAN", "field": "PENGURUSAN OPERASI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/mydah.html", "imageUrl": "#"
+            },
+            {
+                "name": "NINALYN FRIDRICT", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/ninalyn.html", "imageUrl": "https://i.imgur.com/j8qifBN.jpeg"
+            },
+            {
+                "name": "NURUL HIDAYAH MAT NOR", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hidayah.html", "imageUrl": "#"
+            },
+            {
+                "name": "NUR HAZILAH OMAR", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/hazilah.html", "imageUrl": "https://i.imgur.com/LSw0Z0g.jpeg"
+            },
+            {
+                "name": "DR PG. MOHD AUZA'E BIN PG ARSHAD", "position": "PENSYARAH KANAN", "field": "PENGURUSAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/auzae.html", "imageUrl": "https://i.imgur.com/ylpeVSG.jpeg"
+            },
+            {
+                "name": "DR NORNAJIHAH NADIA HASBULLAH", "position": "PENSYARAH KANAN", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nornajihah.html", "imageUrl": "https://i.imgur.com/4v3GwBm.jpeg", "scholarId": "ypjhvzcAAAAJ", "orcidId": "0000-0002-6097-9981", "wosId": "AFI-9812-2022", "scopusId": "57216148170", "googleDriveLink": "https://drive.google.com/open?id=1h_Z56SST-31mgOqKOWgD4M490PGrsY3p"
+            },
+            {
+                "name": "DR MOHD RAZUAN BIN ABD HISHAMUDDIN", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/razuan.html", "imageUrl": "https://i.imgur.com/pYidT6V.jpeg"
+            },
+            {
+                "name": "DR TAUFIK ABD HAKIM", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/taufik.html", "imageUrl": "https://i.imgur.com/8m4ozuO.jpeg"
+            },
+            {
+                "name": "MOHD ROZIE MOHD DAMIT", "position": "PENSYARAH KANAN", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/BHVplSw.png", "path": "https://fpp-uitmsabah.github.io/permata/rozie.html"
+            },
+            {
+                "name": "SITI JULEA BINTI SUPAR", "position": "PENSYARAH", "field": "KEWANGAN", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sitijulea.html", "imageUrl": "https://i.imgur.com/T9WUIx4.jpeg"
+            },
+            {
+                "name": "SUMAFFIATIE SULONG", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325219", "path": "https://fpp-uitmsabah.github.io/permata/sumaffiatie.html", "imageUrl": "https://i.imgur.com/4jYnFqX.jpeg"
+            },
+            {
+                "name": "NUR SHAHAFIQAH NADIAH BINTI JAFFERY", "position": "PENSYARAH", "field": "PEMASARAN", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/nurshahafiqah.html", "imageUrl": "https://i.imgur.com/w5Qc4D5.jpeg"
+            },
+            {
+                "name": "HJ. S. JUNAIDI BIN MOHAMMAD", "position": "PENSYARAH KANAN", "field": "EKONOMI", "phone": "088 - 325151", "path": "https://fpp-uitmsabah.github.io/permata/junaidi.html", "imageUrl": "#"
+            },
+            {
+                "name": "SUALI @ SUHAILIE BAKRIN", "position": "PENSYARAH", "field": "PENGURUSAN", "phone": "088 - 513870", "path": "https://fpp-uitmsabah.github.io/permata/suali.html", "imageUrl": "https://i.imgur.com/yHMd3b4.jpeg"
+            },
+            {
+                "name": "MELINDA AZZALEA TAI ABDULLAH @ TAI NYUK CHIN", "position": "PENSYARAH", "field": "EKONOMI", "phone": "088 - 325102", "path": "https://fpp-uitmsabah.github.io/permata/melinda.html", "imageUrl": "https://i.imgur.com/f5olmQB.jpeg"
+            }
+        ];
+
+        let filteredFaculty = [...facultyData];
+
+        // Fetch ORCID works (publications)
+        async function fetchOrcidWorks(orcidId) {
+            if (!orcidId) return null;
+            try {
+                const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return data['group']?.map(group => ({
+                    title: group['work-summary'][0]['title']['title']['value'],
+                    year: group['work-summary'][0]['publication-date']['year']['value'],
+                    type: group['work-summary'][0]['type']
+                })) || [];
+            } catch (error) {
+                console.error('ORCID fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Google Scholar data via SerpApi
+        async function fetchScholarData(scholarId, apiKey) {
+            if (!scholarId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'google_scholar_author',
+                    author_id: scholarId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    citedBy: data['cited_by'] || 0,
+                    publications: data['publications']?.slice(0, 5) || []
+                };
+            } catch (error) {
+                console.error('Scholar fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Scopus data via SerpApi
+        async function fetchScopusData(scopusId, apiKey) {
+            if (!scopusId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'scopus',
+                    author_id: scopusId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    hIndex: data['h-index'] || 0,
+                    citedBy: data['cited_by'] || 0,
+                    publications: data['publications']?.slice(0, 5) || []
+                };
+            } catch (error) {
+                console.error('Scopus fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch Web of Science data via SerpApi
+        async function fetchWosData(wosId, apiKey) {
+            if (!wosId || !apiKey) return null;
+            try {
+                const params = new URLSearchParams({
+                    engine: 'web_of_science',
+                    author_id: wosId,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return {
+                    citedBy: data['cited_by'] || 0,
+                    publications: data['publications']?.slice(0, 5) || []
+                };
+            } catch (error) {
+                console.error('WoS fetch error:', error);
+                return null;
+            }
+        }
+
+        // Fetch AD Scientific Index data (placeholder - may require custom API or scraping, but using SerpApi if possible)
+        async function fetchAdScientificData(adScientificId, apiKey) {
+            if (!adScientificId || !apiKey) return null;
+            try {
+                // Assuming SerpApi has a way, but for now, placeholder
+                const params = new URLSearchParams({
+                    engine: 'google',  // Fallback to Google search for AD Scientific
+                    q: `site:adsciencelibrary.com ${adScientificId}`,
+                    api_key: apiKey
+                });
+                const response = await fetch(`https://serpapi.com/search?${params}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                // Parse results as needed
+                return {
+                    rank: data['organic_results']?.[0]?.snippet || 'N/A'
+                };
+            } catch (error) {
+                console.error('AD Scientific fetch error:', error);
+                return null;
+            }
+        }
+
+        // Cache helper
+        function getCached(key, ttl = 3600000) {  // 1 hour TTL
+            const item = localStorage.getItem(key);
+            if (!item) return null;
+            const { data, timestamp } = JSON.parse(item);
+            return Date.now() - timestamp < ttl ? data : null;
+        }
+
+        function setCached(key, data) {
+            localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+        }
+
+        // Get field class for styling
+        function getFieldClass(field) {
+            const fieldMap = {
+                'EKONOMI': 'ekonomi',
+                'KEWANGAN': 'kewangan',
+                'PEMASARAN': 'pemasaran',
+                'PENGURUSAN': 'pengurusan',
+                'PENGURUSAN SUMBER MANUSIA': 'pengurusan',
+                'PENGURUSAN OPERASI': 'pengurusan',
+                'PENGANGKUTAN': 'pengangkutan'
+            };
+            return fieldMap[field] || 'default';
+        }
+
+        // Generate initials for avatar
+        function getInitials(name) {
+            return name.split(' ')
+                .filter(word => word.length > 2)
+                .slice(0, 2)
+                .map(word => word[0])
+                .join('');
+        }
+
+        // Get gradient colors for cards
+        function getCardGradient(index) {
+            const gradients = [
+                'from-purple-600 via-pink-500 to-red-500',
+                'from-blue-600 via-indigo-500 to-purple-500',
+                'from-green-500 via-emerald-500 to-teal-500',
+                'from-orange-500 via-red-500 to-pink-500',
+                'from-indigo-600 via-purple-600 to-pink-500',
+                'from-cyan-500 via-blue-500 to-indigo-500',
+                'from-yellow-500 via-orange-500 to-red-500',
+                'from-emerald-500 via-green-500 to-teal-500',
+                'from-pink-500 via-rose-500 to-red-500',
+                'from-violet-600 via-purple-600 to-indigo-600'
+            ];
+            return gradients[index % gradients.length];
+        }
+
+        // Create faculty card
+        function createFacultyCard(faculty, index) {
+            const initials = getInitials(faculty.name);
+            const delay = (index % 12) * 0.1; // Stagger animation
+            const cardGradient = getCardGradient(index);
+            
+            const isDistinguished = !!faculty.path;
+            const profileImage = faculty.imageUrl || '';
+            const facultyIndex = facultyData.indexOf(faculty);
+            
+            return `
+                <div class="faculty-card bg-gradient-to-r ${cardGradient} rounded-3xl shadow-2xl p-8 relative group overflow-hidden" 
+                    onclick="window.open('${faculty.path}', '_blank')" 
+                    style="animation-delay: ${delay}s;">
+                    
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white bg-opacity-10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white bg-opacity-10 rounded-full translate-y-12 -translate-x-12"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex flex-col space-y-6">
+                            <div class="flex items-start justify-between">
+                                <div class="faculty-avatar relative">
+                                    ${profileImage ? `
+                                        <div class="w-24 h-24 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
+                                            <img src="${profileImage}" alt="${faculty.name}" class="w-full h-full object-cover">
+                                        </div>
+                                    ` : `
+                                        <div class="w-24 h-24 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-2xl backdrop-blur-sm border-4 border-white border-opacity-30">
+                                            ${initials}
+                                        </div>
+                                    `}
+                                    <div class="absolute -bottom-2 -right-2 w-8 h-8 ${isDistinguished ? 'bg-yellow-400' : 'bg-green-400'} rounded-full border-3 border-white flex items-center justify-center shadow-lg">
+                                        ${isDistinguished ? `
+                                            <svg class="w-4 h-4 text-yellow-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        ` : `
+                                            <svg class="w-4 h-4 text-green-900" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                        `}
+                                    </div>
                                 </div>
                             </div>
                             
-                             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                                    <i class="fas fa-chart-line mr-2 text-rose-500"></i>
-                                    Performance & Impact
+                            <div class="text-white">
+                                <h3 class="text-2xl font-bold mb-2 leading-tight group-hover:text-yellow-200 transition-colors duration-300">
+                                    ${faculty.name}
                                 </h3>
-                                <div class="space-y-4">
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-600">Annual Performance (MYATP)</p>
-                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
-                                            <div class="bg-gradient-to-r from-rose-500 to-red-500 h-2.5 rounded-full" style="width: 91%"></div>
+                                <p class="text-lg font-medium mb-4 text-white text-opacity-90">
+                                    ${faculty.position}
+                                </p>
+                                
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm border border-white border-opacity-30">
+                                        ${faculty.field}
+                                    </span>
+                                </div>
+                                
+                                <div class="flex items-center text-white text-opacity-90 mb-6">
+                                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                    <span class="font-medium">${faculty.phone}</span>
+                                </div>
+                                
+                                <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 mb-2">
+                                    View Full Portfolio →
+                                </button>
+
+                                <button onclick="handleContactClick(event, ${facultyIndex})" class="contact-button" title="Initiate contact with ${faculty.name}">
+                                    🔗 Initiate Contact
+                                </button>
+                                
+                                <button onclick="handleAiClick(event, ${facultyIndex}, 'pitch')" class="ai-button w-full" title="Generate AI Collaboration Pitch">
+                                    ✨ Curious? (AI Pitch)
+                                </button>
+                                
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+
+        // Render faculty grid
+        function renderFacultyGrid() {
+            const grid = document.getElementById('facultyGrid');
+            grid.innerHTML = filteredFaculty.map((faculty, index) => 
+                createFacultyCard(faculty, index)
+            ).join('');
+            
+            document.getElementById('facultyCount').textContent = filteredFaculty.length;
+        }
+
+        // Filter faculty
+        function filterFaculty() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const fieldFilter = document.getElementById('fieldFilter').value;
+            
+            filteredFaculty = facultyData.filter(faculty => {
+                const matchesSearch = faculty.name.toLowerCase().includes(searchTerm) ||
+                                      faculty.position.toLowerCase().includes(searchTerm) ||
+                                      faculty.field.toLowerCase().includes(searchTerm);
+                
+                const matchesField = !fieldFilter || faculty.field === fieldFilter;
+                
+                return matchesSearch && matchesField;
+            });
+            
+            renderFacultyGrid();
+        }
+
+        // Main profile routing function
+        async function showProfile(index) {
+            const faculty = facultyData[index];
+            const cacheKey = `profile_${index}`;
+            let profileData = getCached(cacheKey);
+
+            if (!profileData) {
+                // Fetch data if IDs exist
+                const [orcidWorks, scholarData, scopusData, wosData, adScientificData] = await Promise.all([
+                    faculty.orcidId ? fetchOrcidWorks(faculty.orcidId) : null,
+                    faculty.scholarId ? fetchScholarData(faculty.scholarId, SERPAPI_KEY) : null,
+                    faculty.scopusId ? fetchScopusData(faculty.scopusId, SERPAPI_KEY) : null,
+                    faculty.wosId ? fetchWosData(faculty.wosId, SERPAPI_KEY) : null,
+                    faculty.adScientificId ? fetchAdScientificData(faculty.adScientificId, SERPAPI_KEY) : null
+                ]);
+                profileData = { orcidWorks, scholarData, scopusData, wosData, adScientificData };
+                setCached(cacheKey, profileData);
+            }
+
+            showEnhancedProfile(faculty, profileData);
+        }
+
+        // Show enhanced profile detail
+        function showEnhancedProfile(faculty, profileData) {
+            const initials = getInitials(faculty.name);
+            const fieldClass = getFieldClass(faculty.field);
+            const { orcidWorks = [], scholarData = null, scopusData = null, wosData = null, adScientificData = null } = profileData;
+
+            let researchSection = `
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
+            `;
+
+            if (orcidWorks && orcidWorks.length > 0) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Recent Publications (ORCID)</h3>
+                        <ul class="space-y-2">
+                            ${orcidWorks.slice(0, 5).map(work => `<li class="text-gray-700">• ${work.title} (${work.year})</li>`).join('')}
+                        </ul>
+                        ${orcidWorks.length > 5 ? '<p class="text-sm text-gray-500 mt-2">... and ${orcidWorks.length - 5} more</p>' : ''}
+                    </div>
+                `;
+            }
+
+            if (scholarData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Google Scholar Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${scholarData.citedBy}</p>
+                        ${scholarData.publications && scholarData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${scholarData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (scopusData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Scopus Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>H-Index:</strong> ${scopusData.hIndex}</p>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${scopusData.citedBy}</p>
+                        ${scopusData.publications && scopusData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${scopusData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (wosData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Web of Science Metrics</h3>
+                        <p class="text-gray-700 mb-2"><strong>Total Citations:</strong> ${wosData.citedBy}</p>
+                        ${wosData.publications && wosData.publications.length > 0 ? `
+                            <h4 class="font-medium text-gray-800 mb-2">Top Publications:</h4>
+                            <ul class="space-y-1">
+                                ${wosData.publications.slice(0, 3).map(pub => `<li class="text-sm text-gray-700">• ${pub.title} (${pub.year || 'N/A'})</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (adScientificData) {
+                researchSection += `
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">AD Scientific Index</h3>
+                        <p class="text-gray-700 mb-2"><strong>Rank:</strong> ${adScientificData.rank}</p>
+                    </div>
+                `;
+            }
+
+            if (!orcidWorks && !scholarData && !scopusData && !wosData && !adScientificData) {
+                researchSection += `
+                    <p class="text-gray-700 leading-relaxed">
+                        A detailed portfolio for this faculty member, including research interests, publications, achievements, and a detailed biography, will be available here soon.
+                    </p>
+                `;
+            }
+
+            const profileHTML = `
+                <div class="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50">
+                    <div class="profile-header text-white relative z-10">
+                        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                            <button onclick="showHomepage()" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                Back to Directory
+                            </button>
+                            
+                            <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                                <div class="relative">
+                                    ${faculty.imageUrl ? `
+                                        <div class="w-32 h-32 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
+                                            <img src="${faculty.imageUrl}" alt="${faculty.name}" class="w-full h-full object-cover">
                                         </div>
-                                        <p class="text-xs text-right text-gray-500 mt-1">Consistently high performer, reaching <b>91%</b> in 2022.</p>
+                                    ` : `
+                                        <div class="w-32 h-32 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-3xl backdrop-blur-sm border border-white border-opacity-30">
+                                            ${initials}
+                                        </div>
+                                    `}
+                                    <div class="absolute -bottom-3 -right-3 w-10 h-10 bg-green-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                                     </div>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-600">Student Feedback (SUFO)</p>
-                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
-                                            <div class="bg-gradient-to-r from-teal-400 to-cyan-500 h-2.5 rounded-full" style="width: 96%"></div>
-                                        </div>
-                                        <p class="text-xs text-right text-gray-500 mt-1">Consistently rated <b>"Excellent"</b> & <b>"Very Good"</b>, with scores up to <b>96.55</b>.</p>
+                                </div>
+                                <div class="flex-1">
+                                    <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight">${faculty.name}</h1>
+                                    <p class="text-xl text-indigo-100 mb-4 font-medium">${faculty.position}</p>
+                                    <div class="flex flex-wrap gap-3">
+                                        <span class="field-badge ${fieldClass} text-sm">${faculty.field}</span>
+                                        <span class="glass px-4 py-2 rounded-full text-sm font-medium">📞 ${faculty.phone}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+                        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                            ${researchSection}
+                            ${faculty.path ? `
+                                <div class="mt-6 pt-6 border-t border-gray-200">
+                                    <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        View Full Portfolio on GitHub
+                                    </a>
+                                </div>
+                            ` : ''}
+                            ${faculty.googleDriveLink ? `
+                                <div class="mt-6 pt-6 border-t border-gray-200">
+                                    <a href="${faculty.googleDriveLink}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                        View Additional Resources on Google Drive
+                                    </a>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            `;
+            
+            document.getElementById('profileView').innerHTML = profileHTML;
+            document.getElementById('homepage').classList.add('hidden');
+            document.getElementById('profileView').classList.remove('hidden');
+        }
+
+        // Show homepage
+        function showHomepage() {
+            document.getElementById('profileView').classList.add('hidden');
+            document.getElementById('homepage').classList.remove('hidden');
+        }
+
+        // Sort faculty
+        function sortFaculty() {
+            const sortBy = document.getElementById('sortBy').value;
+            
+            filteredFaculty.sort((a, b) => {
+                switch(sortBy) {
+                    case 'name': return a.name.localeCompare(b.name);
+                    case 'position': return a.position.localeCompare(b.position);
+                    case 'field': return a.field.localeCompare(b.field);
+                    default: return 0;
+                }
+            });
+            
+            renderFacultyGrid();
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('fieldFilter').value = '';
+            document.getElementById('sortBy').value = 'name';
+            filteredFaculty = [...facultyData];
+            renderFacultyGrid();
+        }
+
+        // Enhanced filter with debounce
+        let filterTimeout;
+        function debouncedFilter() {
+            clearTimeout(filterTimeout);
+            filterTimeout = setTimeout(() => {
+                filterFaculty();
+            }, 300);
+        }
+
+        // --- NEW/UPDATED AI Functions (Vanilla JS) ---
+
+        async function callGeminiAPI(prompt) {
+            showLoadingInModal();
+            const apiUrl = `${GEMINI_API_URL_BASE}?key=${GEMINI_API_KEY}`;
+
+            try {
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("Gemini API Error:", errorData);
+                    let errorMessage = `API request failed with status ${response.status}`;
+                    if (errorData.error && errorData.error.message) {
+                        errorMessage += `: ${errorData.error.message}`;
+                    }
+                    if (response.status === 400 && errorData.error?.message.toLowerCase().includes("api key not valid")) {
+                            errorMessage += " Please check if your API key is correct and has the Gemini API enabled.";
+                    } else if (response.status === 403) {
+                        errorMessage += " Permission denied. This might be due to an incorrect API key or insufficient permissions for the key.";
+                    }
+                    throw new Error(errorMessage);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].finishReason === "SAFETY") {
+                    console.warn("Gemini API response blocked due to safety settings:", result.candidates[0]);
+                    return "The AI-generated content could not be displayed due to safety restrictions. Please try a different prompt or check your safety settings.";
+                } else {
+                    console.error("Unexpected API response structure:", result);
+                    throw new Error("Failed to parse AI response. The structure was unexpected or content was missing.");
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                let displayError = error.message;
+                if (error.message.includes("API key")) {
+                    displayError = "There seems to be an issue with the API key. Please ensure it's correct and has the necessary permissions. (Details in console)";
+                } else if (error.message.includes("Failed to fetch")) {
+                        displayError = "Network error: Could not connect to the AI service. Please check your internet connection. (Details in console)";
+                }
+                return `Error: ${displayError}`;
+            }
+        }
+
+        // Global modal variables
+        let aiModal, modalTitle, modalBody, closeModalButton, copyAiContentButton;
+        // NEW Contact Modal variables
+        let contactModal, contactModalTitle, closeContactModalButton, contactForm;
+
+        function showLoadingInModal() {
+            if (modalTitle) modalTitle.textContent = 'AI Generated Content';
+            if (modalBody) modalBody.innerHTML = '<div class="spinner"></div><p style="text-align: center; color: #6b7280;">Generating content with AI...</p>';
+            if (aiModal) aiModal.classList.add('active');
+        }
+
+        function displayInModal(title, content) {
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalBody) {
+                // Format markdown-like text to HTML
+                let formattedContent = content
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italics
+                    .replace(/\n\*/g, '<br>•') // Bullet points
+                    .replace(/\n/g, '<br>'); // Newlines
+                
+                // Handle formatted titles (like "**Expertise Snapshot:**")
+                formattedContent = formattedContent.replace(/<br><strong>(.*?):<\/strong>/g, '<br><br><strong style="color: #6d28d9; font-size: 1.1em;">$1:</strong>');
+
+                modalBody.innerHTML = formattedContent;
+            }
+            if (aiModal) aiModal.classList.add('active');
+        }
+
+        // --- UPDATED handleAiClick function ---
+        async function handleAiClick(event, facultyIndex, type) {
+            event.stopPropagation(); // Stop click from propagating to the card's link
+            
+            // Only 'pitch' type is left
+            if (type !== 'pitch') return; 
+
+            const faculty = facultyData[facultyIndex];
+            
+            // NEW refined prompt as requested
+            let prompt = `You are an expert academic and industry liaison. A global visitor is exploring this faculty member's profile and is curious about collaboration.
+            
+            Generate a punchy and concise (3-4 paragraphs max) profile highlighting potential collaboration opportunities.
+            
+            **Faculty Member Details:**
+            * **Name:** ${faculty.name}
+            * **Position:** ${faculty.position}
+            * **Field of Expertise:** ${faculty.field}
+            
+            **Your Task:**
+            1.  Start with a strong, engaging summary of their expertise based on their position and field.
+            2.  **Critically, identify and recommend 3-5 specific areas or topics for collaboration.** These should be logical extensions of their field (e.g., if "Finance", suggest "FinTech research", "Sustainable Finance modeling", "Corporate finance consulting").
+            3.  Conclude with a call to action inviting collaboration.
+            4.  The tone should be professional, enthusiastic, and globally accessible.
+            
+            **Output Format:**
+            **Expertise Snapshot:**
+            [Your summary here]
+            
+            **Potential Collaboration Areas:**
+            * [Recommendation 1]
+            * [Recommendation 2]
+            * [Recommendation 3]
+            
+            **Get in Touch:**
+            [Your call to action here]`;
+                
+            let title = `Curious about ${faculty.name}? (AI-Generated)`;
+
+            const aiResponse = await callGeminiAPI(prompt);
+            displayInModal(title, aiResponse);
+        }
+        // Make handleAiClick global so onclick can find it
+        window.handleAiClick = handleAiClick;
+
+        // --- NEW handleContactClick function ---
+        function handleContactClick(event, facultyIndex) {
+            event.stopPropagation(); // Stop click from propagating to the card's link
+            const faculty = facultyData[facultyIndex];
+            
+            if (contactModal) {
+                contactModalTitle.innerHTML = `Initiate Contact with <span style="color: #047857;">${faculty.name}</span>`;
+                contactForm.reset(); // Clear any previous input
+                contactModal.classList.add('active');
+            }
+        }
+        // Make it global
+        window.handleContactClick = handleContactClick;
+
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('searchInput').addEventListener('input', debouncedFilter);
+            document.getElementById('fieldFilter').addEventListener('change', filterFaculty);
+            document.getElementById('sortBy').addEventListener('change', sortFaculty);
+            document.getElementById('clearFilters').addEventListener('click', clearFilters);
+            
+            const audio = document.getElementById('backgroundMusic');
+            const audioControl = document.getElementById('audioControl');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+
+            audioControl.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                } else {
+                    audio.pause();
+                    pauseIcon.classList.add('hidden');
+                    playIcon.classList.remove('hidden');
+                }
+            });
+
+            // --- AI Modal Event Listeners ---
+            aiModal = document.getElementById('aiModal');
+            modalTitle = document.getElementById('modalTitle');
+            modalBody = document.getElementById('modalBody');
+            closeModalButton = document.getElementById('closeModal');
+            copyAiContentButton = document.getElementById('copyAiContent');
+
+            function closeAiModal() {
+                if (aiModal) aiModal.classList.remove('active');
+            }
+
+            // Close modal listeners
+            if (closeModalButton) closeModalButton.addEventListener('click', closeAiModal);
+            if (aiModal) {
+                aiModal.addEventListener('click', function(event) {
+                    if (event.target === this) {
+                        closeAiModal();
+                    }
+                });
+            }
+            
+            // Copy to clipboard listener
+            if (copyAiContentButton) {
+                copyAiContentButton.addEventListener('click', function() {
+                    const textToCopy = modalBody.innerText; // Use innerText to get text without HTML
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        this.textContent = 'Copied!';
+                        setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+                    }, (err) => {
+                        console.error('Failed to copy text: ', err);
+                        this.textContent = 'Copy Failed';
+                        setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+                    });
+                });
+            }
+            // --- End of AI Modal Listeners ---
+
+            // --- NEW Contact Modal Listeners ---
+            contactModal = document.getElementById('contactModal');
+            contactModalTitle = document.getElementById('contactModalTitle');
+            closeContactModalButton = document.getElementById('closeContactModal');
+            contactForm = document.getElementById('contactForm');
+
+            function closeContactModal() {
+                if (contactModal) contactModal.classList.remove('active');
+            }
+
+            if (closeContactModalButton) closeContactModalButton.addEventListener('click', closeContactModal);
+            
+            if (contactModal) {
+                contactModal.addEventListener('click', function(event) {
+                    if (event.target === this) {
+                        closeContactModal();
+                    }
+                });
+            }
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent actual form submission
+                    // For now, just show an alert and close the modal
+                    // In a real app, this would send data to a backend or mailto
+                    alert('Thank you! Your contact request has been noted. (This is a demo)');
+                    closeContactModal();
+                });
+            }
+            // --- End of NEW Contact Modal Listeners ---
+
+            renderFacultyGrid();
+        });
+    </script>
 </body>
 </html>
