@@ -223,13 +223,76 @@
             background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
 
-        /* Modal styles */
+        /* --- NEW AI Modal styles (from portfolio, adapted for light mode) --- */
         .modal-overlay {
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         .modal-content {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            background-color: #ffffff; /* Adapted for light mode */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .ai-button {
+            background-color: #7c3aed; /* purple-600 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600; /* font-semibold */
+            transition: background-color 0.2s ease;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            border: none;
+        }
+        .ai-button:hover {
+            background-color: #6d28d9; /* purple-700 */
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #7c3aed; /* purple-600 */
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #modalBody {
+            color: #374151; /* gray-700, adapted for light mode */
+            line-height: 1.6;
+        }
+        #modalTitle {
+            color: #6d28d9; /* purple-700 */
         }
     </style>
 </head>
@@ -345,23 +408,17 @@
             </div>
     </div>
 
-    Insights Modal -->
-    <div id="aiModal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
-        <div class="modal-content bg-white rounded-2xl shadow-xl m-4 md:m-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-white p-6 border-b border-gray-200 flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-gray-800">AI-Generated Insights</h2>
-                <button onclick="closeAiModal()" class="text-gray-500 hover:text-gray-800 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div id="aiInsightsContent" class="p-8">
-                <!-- AI content will be injected here -->
-            </div>
+    <div id="aiModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalTitle" class="text-2xl font-bold mb-4">AI Generated Content</h3>
+            <div id="modalBody" class="text-gray-300 prose prose-invert max-w-none">
+                </div>
+            <button id="copyAiContent" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors">Copy to Clipboard</button>
+            <button id="closeModal" class="mt-6 ml-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors">Close</button>
         </div>
     </div>
 
-    <!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
@@ -377,15 +434,14 @@
         firebase.initializeApp(firebaseConfig);
         console.log("Firebase has been initialized successfully!");
 
-        // --- Your existing JavaScript code continues below ---
-        <!-- AI Insights Functions -->
-        // NOTE: The main getAiInsights function is defined later in the code (around line 1110)
-        // This section intentionally left minimal to avoid duplicate function definitions
-    
+
+        // --- NEW Gemini API Integration (from portfolio) ---
+        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M"; 
+        const GEMINI_API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+
         // Replace with your actual SerpApi key
         const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyLAUWgdzHz5AY7ZP22fndd-6msLgCpj-dOPNS9tsadTobRzIbuvGQ4I6_k1A5ANGA/exec';
-
+        
         // Faculty data with added orcidId, scholarId, scopusId, wosId, adScientificId, googleDriveLink where available
         const facultyData = [
             {
@@ -780,8 +836,12 @@
                                 <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 mb-2">
                                     View Full Portfolio →
                                 </button>
-                                <button onclick="getAiInsights(${facultyIndex}); event.stopPropagation();" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300">
-                                    ✨ AI Insights
+
+                                <button onclick="handleAiClick(event, ${facultyIndex}, 'enhance')" class="ai-button w-full">
+                                    ✨ Enhance Description
+                                </button>
+                                <button onclick="handleAiClick(event, ${facultyIndex}, 'pitch')" class="ai-button w-full">
+                                    ✨ Generate Pitch
                                 </button>
                             </div>
                         </div>
@@ -1030,143 +1090,105 @@
             }, 300);
         }
 
-        // AI Insights function with improved error handling and loading states
-        async function getAiInsights(facultyIndex) {
-            const faculty = facultyData[facultyIndex];
-            const insightsContent = document.getElementById('aiInsightsContent');
-            
-            // Open modal and show loading state
-            openAiModal();
-            insightsContent.innerHTML = `
-                <div class="flex flex-col items-center justify-center py-12">
-                    <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600 mb-4"></div>
-                    <p class="text-center text-gray-600 text-lg font-medium">Generating AI insights...</p>
-                    <p class="text-center text-gray-500 text-sm mt-2">This may take a few moments</p>
-                </div>
-            `;
+        // --- NEW AI Functions (Vanilla JS) ---
 
-            const prompt = `Provide a professional analysis of the following faculty member for potential collaboration and future projects. Based on their details, highlight their strengths, suggest innovative project ideas, and recommend collaboration opportunities.
-
-            **Faculty Details:**
-            - **Name:** ${faculty.name}
-            - **Position:** ${faculty.position}
-            - **Field:** ${faculty.field}
-
-            **Please structure your response in markdown format with the following sections:**
-            - **Strengths:**
-            - **Potential Project Innovations:**
-            - **Collaboration Recommendations:**`;
+        async function callGeminiAPI(prompt) {
+            showLoadingInModal();
+            const apiUrl = `${GEMINI_API_URL_BASE}?key=${GEMINI_API_KEY}`;
 
             try {
-                const response = await fetch(WEB_APP_URL, {
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+                const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ prompt: prompt })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
                 });
 
-                // Check if response is ok
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    const errorData = await response.json();
+                    console.error("Gemini API Error:", errorData);
+                    let errorMessage = `API request failed with status ${response.status}`;
+                    if (errorData.error && errorData.error.message) {
+                        errorMessage += `: ${errorData.error.message}`;
+                    }
+                    if (response.status === 400 && errorData.error?.message.toLowerCase().includes("api key not valid")) {
+                            errorMessage += " Please check if your API key is correct and has the Gemini API enabled.";
+                    } else if (response.status === 403) {
+                        errorMessage += " Permission denied. This might be due to an incorrect API key or insufficient permissions for the key.";
+                    }
+                    throw new Error(errorMessage);
                 }
 
                 const result = await response.json();
-
-                if (result.error) {
-                    insightsContent.innerHTML = `
-                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
-                            <div class="flex items-start">
-                                <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <h3 class="text-red-800 font-semibold mb-1">Error Loading Insights</h3>
-                                    <p class="text-red-700">${result.error}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                } else if (result.text) {
-                    // Enhanced markdown to HTML conversion
-                    let htmlContent = result.text;
-                    
-                    // Convert headers (##, ###)
-                    htmlContent = htmlContent.replace(/### (.*?)(\n|$)/g, '<h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">$1</h3>$2');
-                    htmlContent = htmlContent.replace(/## (.*?)(\n|$)/g, '<h2 class="text-2xl font-bold text-gray-900 mt-6 mb-4">$1</h2>$2');
-                    
-                    // Convert bold (**text**)
-                    htmlContent = htmlContent.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
-                    
-                    // Convert bullet points (- item or * item)
-                    htmlContent = htmlContent.replace(/^[\-\*] (.*?)$/gm, '<li class="ml-6 mb-2">$1</li>');
-                    
-                    // Wrap consecutive <li> in <ul>
-                    htmlContent = htmlContent.replace(/(<li.*?<\/li>\s*)+/g, '<ul class="list-disc my-4">$&</ul>');
-                    
-                    // Convert newlines to paragraphs
-                    htmlContent = htmlContent.split('\n\n').map(para => {
-                        if (para.trim() && !para.includes('<h') && !para.includes('<ul') && !para.includes('<li')) {
-                            return `<p class="text-gray-700 mb-4 leading-relaxed">${para.trim()}</p>`;
-                        }
-                        return para;
-                    }).join('\n');
-                    
-                    insightsContent.innerHTML = `
-                        <div class="prose prose-lg max-w-none">
-                            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl mb-6">
-                                <div class="flex items-center mb-4">
-                                    <svg class="w-8 h-8 text-indigo-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"></path>
-                                    </svg>
-                                    <h2 class="text-2xl font-bold text-indigo-900">AI-Generated Insights</h2>
-                                </div>
-                                <p class="text-indigo-700 text-sm">Powered by Google Gemini AI</p>
-                            </div>
-                            ${htmlContent}
-                        </div>
-                    `;
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].finishReason === "SAFETY") {
+                    console.warn("Gemini API response blocked due to safety settings:", result.candidates[0]);
+                    return "The AI-generated content could not be displayed due to safety restrictions. Please try a different prompt or check your safety settings.";
                 } else {
-                    throw new Error('Invalid response format from API');
+                    console.error("Unexpected API response structure:", result);
+                    throw new Error("Failed to parse AI response. The structure was unexpected or content was missing.");
                 }
             } catch (error) {
-                console.error('AI Insights fetch error:', error);
-                insightsContent.innerHTML = `
-                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
-                        <div class="flex items-start">
-                            <svg class="w-6 h-6 text-yellow-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                            </svg>
-                            <div>
-                                <h3 class="text-yellow-800 font-semibold mb-1">Unable to Load AI Insights</h3>
-                                <p class="text-yellow-700 mb-3">There was a problem connecting to the AI service. Please try again later.</p>
-                                <details class="mt-2">
-                                    <summary class="cursor-pointer text-yellow-600 text-sm hover:text-yellow-700">Technical details</summary>
-                                    <p class="text-yellow-600 text-xs mt-2 font-mono">${error.message}</p>
-                                </details>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                console.error("Error calling Gemini API:", error);
+                let displayError = error.message;
+                if (error.message.includes("API key")) {
+                    displayError = "There seems to be an issue with the API key. Please ensure it's correct and has the necessary permissions. (Details in console)";
+                } else if (error.message.includes("Failed to fetch")) {
+                        displayError = "Network error: Could not connect to the AI service. Please check your internet connection. (Details in console)";
+                }
+                return `Error: ${displayError}`;
             }
         }
 
-        // Modal functions for AI Insights
-        function openAiModal() {
-            const modal = document.getElementById("aiModal");
-            if (modal) {
-                modal.classList.remove("hidden");
-                modal.classList.add("flex");
-            }
+        // Global modal variables
+        let aiModal, modalTitle, modalBody, closeModalButton, copyAiContentButton;
+
+        function showLoadingInModal() {
+            if (modalTitle) modalTitle.textContent = 'AI Generated Content';
+            if (modalBody) modalBody.innerHTML = '<div class="spinner"></div><p style="text-align: center; color: #6b7280;">Generating content with AI...</p>';
+            if (aiModal) aiModal.classList.add('active');
         }
 
-        function closeAiModal() {
-            const modal = document.getElementById("aiModal");
-            if (modal) {
-                modal.classList.add("hidden");
-                modal.classList.remove("flex");
+        function displayInModal(title, content) {
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalBody) {
+                // Format markdown-like text to HTML
+                let formattedContent = content
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                    .replace(/\n/g, '<br>'); // Newlines
+                modalBody.innerHTML = formattedContent;
+            }
+            if (aiModal) aiModal.classList.add('active');
+        }
+
+        async function handleAiClick(event, facultyIndex, type) {
+            event.stopPropagation(); // Stop click from propagating to the card's link
+            const faculty = facultyData[facultyIndex];
+            let prompt = '';
+            let title = '';
+
+            if (type === 'enhance') {
+                prompt = `You are an expert copywriter. Enhance the following faculty member's profile for a professional directory. Make it more engaging, detailed, and highlight their key achievements and impact. Original Name: "${faculty.name}". Position: "${faculty.position}". Field: "${faculty.field}". Enhanced Description:`;
+                title = `✨ Enhanced Description for: ${faculty.name}`;
+            } else if (type === 'pitch') {
+                prompt = `You are a collaboration strategist. Generate a concise and compelling 2-3 sentence elevator pitch for potential research or industry collaboration with this faculty member. Focus on their unique value proposition. Name: "${faculty.name}". Position: "${faculty.position}". Field: "${faculty.field}". Elevator Pitch:`;
+                title = `✨ Project Pitch for: ${faculty.name}`;
+            }
+
+            if (prompt) {
+                const aiResponse = await callGeminiAPI(prompt);
+                displayInModal(title, aiResponse);
             }
         }
+        // Make handleAiClick global so onclick can find it
+        window.handleAiClick = handleAiClick;
+
 
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
@@ -1191,6 +1213,43 @@
                     playIcon.classList.remove('hidden');
                 }
             });
+
+            // --- NEW Modal Event Listeners ---
+            aiModal = document.getElementById('aiModal');
+            modalTitle = document.getElementById('modalTitle');
+            modalBody = document.getElementById('modalBody');
+            closeModalButton = document.getElementById('closeModal');
+            copyAiContentButton = document.getElementById('copyAiContent');
+
+            function closeAiModal() {
+                if (aiModal) aiModal.classList.remove('active');
+            }
+
+            // Close modal listeners
+            if (closeModalButton) closeModalButton.addEventListener('click', closeAiModal);
+            if (aiModal) {
+                aiModal.addEventListener('click', function(event) {
+                    if (event.target === this) {
+                        closeAiModal();
+                    }
+                });
+            }
+            
+            // Copy to clipboard listener
+            if (copyAiContentButton) {
+                copyAiContentButton.addEventListener('click', function() {
+                    const textToCopy = modalBody.innerText; // Use innerText to get text without HTML
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        this.textContent = 'Copied!';
+                        setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+                    }, (err) => {
+                        console.error('Failed to copy text: ', err);
+                        this.textContent = 'Copy Failed';
+                        setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+                    });
+                });
+            }
+            // --- End of NEW Modal Listeners ---
 
             renderFacultyGrid();
         });
