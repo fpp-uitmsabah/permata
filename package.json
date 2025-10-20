@@ -1,0 +1,21 @@
+{
+  "name": "permata",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "test:db": "node test-db-connection.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.17.1",
+    "prisma": "^6.17.1"
+  }
+}
