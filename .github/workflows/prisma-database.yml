@@ -1,0 +1,39 @@
+name: Setup Prisma Database
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  setup-database:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Create Prisma Postgres Database
+        uses: prisma/create-prisma-postgres-database-action@v1.0.3
+        with:
+          database-url: ${{ secrets.DATABASE_URL }}
+      
+      - name: Generate Prisma Client
+        run: npm run prisma:generate
+      
+      - name: Push database schema
+        run: npm run prisma:push
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
