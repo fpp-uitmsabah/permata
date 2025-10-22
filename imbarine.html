@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio: Professor Ts. Dr. Imbarine bin Hj Bujang, JP</title>
+    <title>Portfolio: Professor Ts. Dr. Imbarine bin Bujang</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -69,6 +69,53 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
+
+        /* New: Smooth fade-in animation for sections */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* New: Publication card hover effects */
+        .pub-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .pub-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* New: Award badge glow */
+        .award-badge {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .award-badge:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* New: Mentorship metric cards */
+        .mentor-metric {
+            transition: all 0.3s ease;
+        }
+
+        .mentor-metric:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -78,55 +125,72 @@
     </div>
 
     <script>
-        // Data for the specific faculty member
+        // Enriched Data for Professor Ts. Dr. Imbarine bin Bujang, integrated with CV details
         const professorProfileData = {
-            name: "Professor Ts. Dr. Imbarine bin Hj Bujang, JP",
-            honorific: "ADK",
-            title: "Deputy Rector of Academic Affairs",
-            specialization: "Financial Econometrics",
-            institution: "Universiti Teknologi MARA (UiTM) Sabah",
+            name: "Professor Ts. Dr. Imbarine bin Bujang,JP",
+            honorific: "JP,ADK",
+            title: "Professor in Finance and Financial Econometrics",
+            specialization: "Economic Modelling and Forecasting",
+            institution: "Universiti Teknologi MARA (UiTM) Kota Kinabalu Campus, Faculty of Business Management",
+            email: "imbar074@uitm.edu.my",
             career_start: "January 2010",
             education: {
                 phd: {
                     degree: "Doctor of Philosophy (PhD)",
-                    field: "Financial Econometrics",
-                    institution: "Edith Cowan University, Western Australia"
+                    field: "Finance",
+                    institution: "Edith Cowan University (Western Australia College of Advanced Education), Australia"
                 },
                 masters: {
                     degree: "Master of Science (MSc)",
                     field: "Finance",
                     institution: "Universiti Putra Malaysia"
                 },
-                bachelors: {
-                    degree: "Bachelor of Business Administration (Hons)",
-                    field: "Finance",
-                    institution: "Universiti Teknologi MARA (UiTM), Shah Alam",
-                    distinction: "First Class honors"
+                professional: {
+                    degree: "Professional Technologist (Ts.)",
+                    field: "Technological Professional Qualification",
+                    institution: "Malaysia Board of Technologists (MBOT)"
                 },
                 diploma: {
                     degree: "Diploma",
                     field: "Banking",
-                    institution: "UiTM Cawangan Sabah"
+                    institution: "Universiti Teknologi MARA (UiTM), Sabah Campus"
+                },
+                bachelors: {
+                    degree: "Bachelor of Business Administration (BBA) (Hons)",
+                    field: "Finance",
+                    institution: "Universiti Teknologi MARA (UiTM), Shah Alam Campus",
+                    distinction: "First Class Honors"
                 }
             },
             achievements: [
                 "First UiTM Sabah graduate to hold Professor title in campus's 47-year history (2020)",
-                "Professional Technologist (Ts.) designation from Malaysia Board of Technologists",
-                "Deputy Rector of Academic Affairs, UiTM Sabah (Current)",
-                "Head of Postgraduate Studies (November 2016 - Present)",
-                "Anchor Campus Chairman, Diploma in Banking (2013 - October 2016)"
+                "Professional Technologist (Ts.) designation from Malaysia Board of Technologists (MBOT)",
+                "Acting Deputy Rector of Academic Affairs, UiTM Sabah (Current)",
+                "Head of Postgraduate Studies, UiTM Sabah (November 2016)",
+                "Anchor Campus Chairman, Diploma in Banking (2013 - October 2016)",
+                "Best Supervisor, Jewel in the Crown Award (2018)",
+                "Honorary Fellowship from CBER London",
+                "Principal Investigator on multiple funded research projects totaling over RM 50,000 in active grants",
+                "Extensive publication record with 30+ indexed articles in Scopus/WoS journals (2020-2025)"
             ],
             research_focus: [
+                "Economic Modelling and Forecasting",
                 "Financial Econometrics",
+                "Corporate Governance",
+                "Behavioral Finance",
+                "Intellectual Capital",
+                "Financial Market Analysis",
                 "Corporate Finance",
                 "Banking and Finance",
-                "Economic Research",
+                "Tax Aggressiveness and CSR",
+                "Fintech and P2P Lending",
+                "ESG and Shariah Compliance",
                 "Postgraduate Supervision",
                 "PhD and Master's by Research Programs"
             ],
             leadership_roles: [
                 {
-                    title: "Deputy Rector of Academic Affairs",
+                    title: "Acting Deputy Rector of Academic Affairs",
                     status: "Current",
                     description: "Leading academic excellence and strategic development at UiTM Sabah"
                 },
@@ -137,15 +201,177 @@
                 },
                 {
                     title: "Head of Postgraduate Studies",
-                    period: "November 2016 - Present",
+                    period: "November 2016",
                     responsibilities: "Monitoring, developing, and enhancing PhD and Master's by research programs"
+                },
+                {
+                    title: "Anchor Campus Chairman, Diploma in Banking",
+                    period: "2013 - October 2016",
+                    responsibilities: "Oversaw curriculum and program development for banking education"
                 }
             ],
             professional_designation: {
                 title: "Professional Technologist (Ts.)",
                 body: "Malaysia Board of Technologists (MBOT)",
-                description: "Expertise in practical application of econometric and financial technologies"
-            }
+                description: "Recognized for expertise in practical application of econometric and financial technologies in social sciences"
+            },
+            research_impact: {
+                google_citations: "~1,334+",
+                h_index: "19",
+                i10_index: "36 (Google Scholar)",
+                scopus_h_index: "5",
+                wos_h_index: "0",
+                researchgate_citations: "~587"
+            },
+            selected_publications: [
+                {
+                    title: "The Dynamics Of Cointegration Between Equity Crowdfunding Performance And Economic Indicators In Malaysia: Ardl Approach",
+                    year: "2025",
+                    description: "Explores long-run relationships using ARDL bounds testing in Malaysian context.",
+                    venue: "Journal (Scopus Indexed), Vol. 11, Issue 1, pp. 158-171"
+                },
+                {
+                    title: "Examining The Industrial Impact Of Fintech Lending In The Post-next Normal Era",
+                    year: "2025",
+                    description: "Analyzes fintech's role in industrial recovery post-pandemic.",
+                    venue: "Journal (Scopus Indexed), Vol. 17, Issue 1, pp. 1-16"
+                },
+                {
+                    title: "Unravelling The Divergent Effects Of Platform Interest Rates In P2p Lending: A Segregation Approach",
+                    year: "2024",
+                    description: "Investigates interest rate impacts on P2P lending success using segregation methods.",
+                    venue: "Journal (Scopus Indexed), Vol. 19, Issue 11, pp. 199-209"
+                },
+                {
+                    title: "The Interaction Of Maqasid Al-shariah In The Relationship Between Esg And Firm Financial Performance",
+                    year: "2024",
+                    description: "Examines Shariah principles moderating ESG-firm performance link.",
+                    venue: "Journal (Scopus Indexed), Vol. 41, Issue 2, pp. 209-216"
+                },
+                {
+                    title: "Does The Foreign Direct Investment In Emerging Asian Countries Get ‘greased’ Or ‘sanded’ By Corruption? Evidence From Gets Model",
+                    year: "2024",
+                    description: "Uses GETS model to assess corruption's impact on FDI in Asia.",
+                    venue: "Journal (Scopus Indexed), Vol. 41, Special Issue, pp. 173-179"
+                },
+                {
+                    title: "A Beacon Of Climate Change And Green Financing Toward Bank Stability Among Tiger Cub Economics",
+                    year: "2024",
+                    description: "Links green finance to bank stability amid climate challenges.",
+                    venue: "Journal (Scopus Indexed), Vol. 41, Issue 2, pp. 185-190"
+                },
+                {
+                    title: "Thriving In Turbulent Times: The Dynamic Link Between Economic Condition And Fintech Business Lending Success",
+                    year: "2024",
+                    description: "Dynamic analysis of economic factors on fintech lending.",
+                    venue: "Journal (Scopus Indexed), Vol. 41, Issue 1, pp. 110-115"
+                },
+                {
+                    title: "Combating Corporate Fraud Through The Lens Of Corporate Governance In Malaysia",
+                    year: "2024",
+                    description: "Governance mechanisms to mitigate fraud in Malaysian firms.",
+                    venue: "Journal (Scopus Indexed), Vol. 41, Special Issue, pp. 55-62"
+                },
+                {
+                    title: "Investor Sentiment Under The Maqasid Al-shari'ah Compliance Asset Pricing Model: A Behavioral Finance Approach To Islamic Finance",
+                    year: "2023",
+                    description: "Behavioral insights into Shariah-compliant asset pricing.",
+                    venue: "Journal (Scopus Indexed), Vol. 18, Issue 2, pp. 165-190"
+                },
+                {
+                    title: "Corporate Reporting, Corporate Governance Mechanisms And Tax Aggressiveness: Evidence From Indonesia",
+                    year: "2023",
+                    description: "Governance and reporting effects on tax strategies in Indonesia.",
+                    venue: "Journal (Scopus Indexed), Vol. 18, Issue 2, pp. 29-56"
+                }
+            ],
+            profiles: {
+                uitm_expert: "https://expert.uitm.edu.my/V2/page-detail.php?id=8TD8WsyZkylccLodNB4aIs9lylQrRKuDvmlQrhCe29Q=",
+                google_scholar: "https://scholar.google.com/citations?user=PQPF3kkAAAAJ&hl=en",
+                orcid: "https://orcid.org/0000-0002-1427-0963",
+                scopus: "https://www.scopus.com/authid/detail.uri?authorId=57205364032",
+                web_of_science: "https://www.webofscience.com/wos/author/record/AAV-8832-2021"
+            },
+            mentorship: {
+                phd_graduates: "25+",
+                postgraduates_supervised: "50+",
+                highlights: [
+                    "Best Supervisor, Jewel in the Crown Award (2018)",
+                    "Supervised university's youngest PhD graduate at age 25",
+                    "Four PhD graduates received university excellence research award in 2018",
+                    "Actively builds research capacity through a 'hub-and-spoke' mentorship model",
+                    "Completed supervision of 16 PhDs and 14 Masters (latest 5 years)",
+                    "Ongoing supervision of 5 PhDs in areas like digital transformation and financial distress"
+                ]
+            },
+            active_research: [
+                {
+                    title: "Estimating Palm Oil Price Based On Multivariate Hybrid Model For Malaysia And Indonesia",
+                    role: "Principal Investigator",
+                    funding: "RM 21,600.00",
+                    period: "2023-2024",
+                    status: "Active",
+                    grant: "Geran Insentif Penyeliaan (GIP)"
+                },
+                {
+                    title: "Interaction Effect Of Csr Disclosures, Aggressive Financial Reporting, And Board Structures On Tax Aggressiveness In Indonesian Public Listed Companies",
+                    role: "Principal Investigator",
+                    funding: "RM 15,000.00",
+                    period: "2023-2024",
+                    status: "Active",
+                    grant: "Accounting Research Institute (ARI)"
+                },
+                {
+                    title: "Pembinaan Model Pemulihan Bankrupsi Ke Arah Kelestarian Kesejahteraan Di Kalangan Belia",
+                    role: "Project Member",
+                    funding: "RM 83,750.00",
+                    period: "2023-2026",
+                    status: "Active",
+                    grant: "Fundamental Research Grant Scheme (FRGS)"
+                },
+                {
+                    title: "Corruption And Asset Mismanagement",
+                    role: "Project Member",
+                    funding: "RM 100,000.00",
+                    period: "2023-2025",
+                    status: "Active",
+                    grant: "Geran Dalaman Dana Jabatan (DDJ)"
+                }
+            ],
+            consultations: [
+                {
+                    title: "Kajian Penubuhnan Agensi Regulatori Dan Penguatkuasaan Agromakanan Malaysia",
+                    role: "Member",
+                    funding: "RM 1,834,228.80",
+                    period: "2025",
+                    status: "Appointed",
+                    type: "Contract Research"
+                },
+                {
+                    title: "Indirect Taxation: Addressing Differential Excise Duty Based On Level Of Harm Of Smoking Products And Its Alternatives",
+                    role: "Member",
+                    funding: "RM 120,640.00",
+                    period: "2022",
+                    status: "Appointed",
+                    type: "Contract Research"
+                },
+                {
+                    title: "Appointment As Consultant For Kajian Mengoptimumkan Program Subsidi Di Bawah Kementerian Perdagangan Dalam Negeri Dan Hal Ehawal Pengguna (Kpdnhep)",
+                    role: "Head",
+                    funding: "RM 35,000.00",
+                    period: "2021-2022",
+                    status: "Completed",
+                    type: "Contract Research"
+                },
+                {
+                    title: "Kursus Analisis Kewangan",
+                    role: "Head",
+                    funding: "RM 23,520.00",
+                    period: "2021",
+                    status: "Completed",
+                    type: "Training"
+                }
+            ]
         };
 
         // Show Professor Imbarine's detailed profile
@@ -169,7 +395,7 @@
                             <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
                                 <div class="relative">
                                     <div class="w-40 h-40 rounded-3xl overflow-hidden shadow-2xl border-4 border-white border-opacity-30">
-                                        <img src="https://i.imgur.com/yK4vFQ9.png" alt="Professor Ts. Dr. Imbarine bin Hj Bujang, JP" class="w-full h-full object-cover">
+                                        <img src="https://i.imgur.com/yK4vFQ9.png" alt="Professor Ts. Dr. Imbarine bin Bujang" class="w-full h-full object-cover">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
                                         <svg class="w-8 h-8 text-yellow-900" fill="currentColor" viewBox="0 0 20 20">
@@ -183,30 +409,38 @@
                                 <div class="flex-1">
                                     <h1 class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">${profileData.name}</h1>
                                     <p class="text-2xl text-blue-100 mb-2 font-medium">${profileData.title}</p>
-                                    <p class="text-xl text-indigo-100 mb-4">${profileData.institution}</p>
+                                    <p class="text-xl text-indigo-100 mb-4">${profileData.specialization} | ${profileData.institution}</p>
                                     <div class="flex flex-wrap gap-3 mb-6">
                                         <span class="bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold">
                                             🏆 First UiTM Sabah Professor Graduate
                                         </span>
                                         <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                                            🎓 PhD Financial Econometrics
+                                            🎓 PhD Finance, Edith Cowan University
                                         </span>
                                         <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
                                             ⚡ Professional Technologist (Ts.)
                                         </span>
+                                        <span class="bg-green-400 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
+                                            📧 ${profileData.email}
+                                        </span>
                                     </div>
                                     <div class="flex items-center space-x-4 my-6">
-                                        <a href="https://expert.uitm.edu.my/V2/page-detail.php?id=8TD8WsyZkylccLodNB4aIs9lylQrRKuDvmlQrhCe29Q%3D" target="_blank" rel="noopener noreferrer" title="UiTM Expert" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <a href="${profileData.profiles.uitm_expert}" target="_blank" rel="noopener noreferrer" title="UiTM Expert" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
                                             <img src="https://i.imgur.com/lspSvPG.png" alt="UiTM Expert" class="w-12 h-12">
                                         </a>
-                                        <a href="https://scholar.google.com/citations?user=PQPF3kkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar link" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <a href="${profileData.profiles.google_scholar}" target="_blank" rel="noopener noreferrer" title="Google Scholar" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
                                             <img src="https://i.imgur.com/mYgMKZM.png" alt="Google Scholar" class="w-10 h-10">
                                         </a>
-                                        <a href="https://orcid.org/0000-0002-1427-0963" target="_blank" rel="noopener noreferrer" title="OrcId" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                        <a href="${profileData.profiles.orcid}" target="_blank" rel="noopener noreferrer" title="ORCID" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
                                             <img src="https://i.imgur.com/E1qAhFM.png" alt="ORCID" class="w-10 h-10">
                                         </a>
+                                        <a href="${profileData.profiles.scopus}" target="_blank" rel="noopener noreferrer" title="Scopus" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                            <img src="https://i.imgur.com/GZ3l9Hy.png" alt="Scopus" class="w-10 h-10">
+                                        </a>
+                                        <a href="${profileData.profiles.web_of_science}" target="_blank" rel="noopener noreferrer" title="Web of Science" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                            <img src="https://i.imgur.com/G7tHW2m.png" alt="Web of Science" class="w-10 h-10">
+                                        </a>
                                     </div>
-                                
                                 </div>
                             </div>
                         </div>
@@ -215,23 +449,31 @@
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             <div class="lg:col-span-2 space-y-8">
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in">
                                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-orange-500"></div>
                                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                         <svg class="w-6 h-6 mr-3 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                                         </svg>
-                                        Historic Achievement
+                                        Historic Achievement & Awards
                                     </h2>
-                                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border-l-4 border-yellow-500">
+                                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border-l-4 border-yellow-500 mb-6">
                                         <h3 class="text-xl font-bold text-gray-900 mb-3">🏆 Pioneering Excellence</h3>
                                         <p class="text-gray-700 text-lg leading-relaxed">
-                                            In 2020, Professor Imbarine made history as the <strong>first graduate of UiTM Sabah to achieve the prestigious Professor title</strong> in the campus's 47-year history. This groundbreaking achievement represents not only personal excellence but also the maturation of UiTM Sabah as a center of academic distinction.
+                                            Joined UiTM in January 2010. In 2020, Professor Imbarine made history as the <strong>first graduate of UiTM Sabah to achieve the prestigious Professor title</strong> in the campus's 47-year history. Expertise in Social Sciences (Economics/Applied Economics) with focus on Economic Modelling and Forecasting.
                                         </p>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        ${profileData.achievements.slice(0, 4).map(award => `
+                                            <div class="award-badge bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 border-l-4 border-yellow-500 text-center">
+                                                <h4 class="font-bold text-yellow-900 mb-2">${award.includes('Best Supervisor') ? '🏅 Best Supervisor Award' : award.includes('Honorary Fellowship') ? '🎖️ Honorary Fellowship' : '🏆 ' + award.split(' ')[0]}</h4>
+                                                <p class="text-sm text-yellow-700">${award}</p>
+                                            </div>
+                                        `).join('')}
                                     </div>
                                 </div>
 
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in" style="animation-delay: 0.1s;">
                                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
                                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                         <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,31 +483,32 @@
                                     </h2>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                                         <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl text-center border-2 border-blue-200">
-                                            <div class="text-3xl font-bold text-blue-600 mb-2">1,334</div>
+                                            <div class="text-3xl font-bold text-blue-600 mb-2">${profileData.research_impact.google_citations}</div>
                                             <div class="text-sm text-blue-700 font-medium">Google Scholar Citations</div>
-                                            <div class="text-xs text-blue-600 mt-1">80% since 2020</div>
+                                            <div class="text-xs text-blue-600 mt-1">High-impact since 2010</div>
                                         </div>
                                         <div class="p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl text-center border-2 border-green-200">
-                                            <div class="text-3xl font-bold text-green-600 mb-2">19</div>
-                                            <div class="text-sm text-green-700 font-medium">H-Index</div>
-                                            <div class="text-xs text-green-600 mt-1">Google Scholar</div>
+                                            <div class="text-3xl font-bold text-green-600 mb-2">${profileData.research_impact.h_index}</div>
+                                            <div class="text-sm text-green-700 font-medium">H-Index (Google Scholar)</div>
+                                            <div class="text-xs text-green-600 mt-1">16 Publications</div>
                                         </div>
                                         <div class="p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl text-center border-2 border-purple-200">
-                                            <div class="text-3xl font-bold text-purple-600 mb-2">36</div>
-                                            <div class="text-sm text-purple-700 font-medium">i10-Index</div>
-                                            <div class="text-xs text-purple-600 mt-1">Publications with 10+ citations</div>
+                                            <div class="text-3xl font-bold text-purple-600 mb-2">${profileData.research_impact.scopus_h_index}</div>
+                                            <div class="text-sm text-purple-700 font-medium">H-Index (Scopus)</div>
+                                            <div class="text-xs text-purple-600 mt-1">5 | WoS: ${profileData.research_impact.wos_h_index}</div>
                                         </div>
                                     </div>
                                     <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-4">
                                         <h4 class="font-bold text-gray-900 mb-2">📊 Additional Metrics</h4>
                                         <div class="flex flex-wrap gap-4 text-sm">
-                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Scopus H-Index: 5</span>
-                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">ResearchGate Citations: 587</span>
+                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">ResearchGate Citations: ${profileData.research_impact.researchgate_citations}</span>
+                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">Scopus Author ID: 57205364032</span>
+                                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full">WoS ID: AAV-8832-2021</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in" style="animation-delay: 0.2s;">
                                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
                                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                         <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,10 +537,22 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl">
+                                                <h4 class="font-bold text-gray-900 mb-1">⚡ ${profileData.education.professional.degree}</h4>
+                                                <p class="text-sm text-gray-600 mb-1">${profileData.education.professional.field}</p>
+                                                <p class="text-xs text-gray-500">${profileData.education.professional.institution}</p>
+                                            </div>
+                                            <div class="p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl text-center">
+                                                <h4 class="font-bold text-gray-900 mb-1">📜 ${profileData.education.diploma.degree}</h4>
+                                                <p class="text-sm text-gray-600 mb-1">${profileData.education.diploma.field}</p>
+                                                <p class="text-xs text-gray-500">${profileData.education.diploma.institution}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in" style="animation-delay: 0.3s;">
                                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
                                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                         <svg class="w-6 h-6 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,10 +574,81 @@
                                         `).join('')}
                                     </div>
                                 </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in" style="animation-delay: 0.4s;">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-cyan-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                        Mentorship Excellence
+                                    </h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                        <div class="mentor-metric p-6 bg-gradient-to-r from-indigo-50 to-cyan-50 rounded-xl text-center border-2 border-indigo-200">
+                                            <div class="text-3xl font-bold text-indigo-600 mb-2">${profileData.mentorship.phd_graduates}</div>
+                                            <div class="text-sm text-indigo-700 font-medium">PhD Graduates Supervised</div>
+                                            <div class="text-xs text-indigo-600 mt-1">Completed & Ongoing</div>
+                                        </div>
+                                        <div class="mentor-metric p-6 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-xl text-center border-2 border-teal-200">
+                                            <div class="text-3xl font-bold text-teal-600 mb-2">${profileData.mentorship.postgraduates_supervised}</div>
+                                            <div class="text-sm text-teal-700 font-medium">Total Postgraduates Supervised</div>
+                                            <div class="text-xs text-teal-600 mt-1">PhD & Masters (Career Total)</div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-4">
+                                        ${profileData.mentorship.highlights.map(highlight => `
+                                            <div class="p-4 bg-gradient-to-r from-gray-50 to-indigo-50 rounded-xl border-l-4 border-indigo-500">
+                                                <h4 class="font-bold text-indigo-900 mb-1">👥 ${highlight}</h4>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in" style="animation-delay: 0.5s;">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Selected Publications (2023-2025)
+                                    </h2>
+                                    <div class="space-y-4">
+                                        ${profileData.selected_publications.slice(0, 5).map(pub => `
+                                            <div class="pub-card p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-gray-200">
+                                                <h3 class="text-lg font-bold text-gray-900 mb-2">${pub.title}</h3>
+                                                <p class="text-gray-700 mb-2">(${pub.year}) ${pub.description}</p>
+                                                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">${pub.venue}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <div class="mt-6 p-4 bg-blue-50 rounded-xl text-center">
+                                        <p class="text-sm text-blue-700 mb-2">Explore full publication record (30+ indexed) via <a href="${profileData.profiles.google_scholar}" target="_blank" class="font-bold hover:underline">Google Scholar</a>, <a href="${profileData.profiles.scopus}" target="_blank" class="font-bold hover:underline">Scopus</a>, or <a href="${profileData.profiles.web_of_science}" target="_blank" class="font-bold hover:underline">Web of Science</a>.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden fade-in" style="animation-delay: 0.6s;">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500 to-green-500"></div>
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                        <svg class="w-6 h-6 mr-3 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        Active Research Projects
+                                    </h2>
+                                    <div class="space-y-4">
+                                        ${profileData.active_research.map(project => `
+                                            <div class="p-4 bg-gradient-to-r from-teal-50 to-green-50 rounded-xl border-l-4 border-teal-500">
+                                                <h3 class="font-bold text-gray-900 mb-1">${project.title}</h3>
+                                                <p class="text-sm text-teal-600 mb-1"><strong>Role:</strong> ${project.role} | <strong>Funding:</strong> RM ${project.funding}</p>
+                                                <p class="text-xs text-gray-600 mb-1"><strong>Period:</strong> ${project.period} | <strong>Status:</strong> ${project.status}</p>
+                                                <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">${project.grant}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="space-y-8">
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 fade-in">
                                     <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                                         <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
@@ -336,42 +662,40 @@
                                     </div>
                                 </div>
 
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 fade-in" style="animation-delay: 0.1s;">
                                     <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                                         <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                                         </svg>
                                         Research Expertise
                                     </h3>
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <div class="flex items-center p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                                            <span class="text-sm font-medium text-gray-700">Financial Econometrics</span>
-                                        </div>
-                                        <div class="flex items-center p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
-                                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                                            <span class="text-sm font-medium text-gray-700">Corporate Finance</span>
-                                        </div>
-                                        <div class="flex items-center p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500">
-                                            <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                            <span class="text-sm font-medium text-gray-700">Behavioral Finance</span>
-                                        </div>
-                                        <div class="flex items-center p-3 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
-                                            <div class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
-                                            <span class="text-sm font-medium text-gray-700">FinTech & Digital Finance</span>
-                                        </div>
-                                        <div class="flex items-center p-3 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">
-                                            <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
-                                            <span class="text-sm font-medium text-gray-700">ESG Research</span>
-                                        </div>
-                                        <div class="flex items-center p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500">
-                                            <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
-                                            <span class="text-sm font-medium text-gray-700">Investment Analysis</span>
-                                        </div>
+                                    <div class="grid grid-cols-1 gap-2 max-h-96 overflow-y-auto">
+                                        ${profileData.research_focus.map(focus => `
+                                            <div class="flex items-center p-3 bg-gradient-to-r from-gray-50 to-indigo-50 rounded-lg border-l-4 border-indigo-500 hover:bg-indigo-100 transition-colors">
+                                                <div class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
+                                                <span class="text-sm font-medium text-gray-700">${focus}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 fade-in" style="animation-delay: 0.2s;">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08 .402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                        </svg>
+                                        Key Consultations
+                                    </h3>
+                                    <div class="space-y-2">
+                                        ${profileData.consultations.slice(0, 3).map(consult => `
+                                            <div class="p-3 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg text-xs">
+                                                <strong>${consult.title}</strong> | ${consult.role} | RM ${consult.funding} | ${consult.status}
+                                            </div>
+                                        `).join('')}
                                     </div>
                                 </div>
                                 
-                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6">
+                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6 fade-in" style="animation-delay: 0.3s;">
                                     <div class="text-center">
                                         <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -380,10 +704,13 @@
                                         </div>
                                         <h3 class="text-lg font-bold text-blue-900 mb-2">Get in Touch</h3>
                                         <p class="text-blue-700 text-sm leading-relaxed mb-3">
-                                            Connect with Professor Imbarine for academic collaboration, research opportunities, or postgraduate supervision.
+                                            Connect with Professor Imbarine for academic collaboration, research opportunities, or postgraduate supervision in finance and econometrics.
+                                        </p>
+                                        <p class="text-xs text-blue-600 font-medium mb-2">
+                                            📧 ${profileData.email}
                                         </p>
                                         <p class="text-xs text-blue-600 font-medium">
-                                            📞 088 - 325151
+                                            📅 Service Since: ${profileData.career_start}
                                         </p>
                                     </div>
                                 </div>
