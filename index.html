@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Directory & Portfolio Gateway</title>
 
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.gstatic.com https://generativelanguage.googleapis.com https://serpapi.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' https: data:; font-src 'self' data:; connect-src 'self' https://www.gstatic.com https://pub.orcid.org https://serpapi.com https://generativelanguage.googleapis.com https://firebasestorage.googleapis.com; media-src 'self' https://sirpoji.my; frame-ancestors 'self';">
+
     <meta property="og:title" content="Faculty Directory & Portfolio Gateway">
     <meta property="og:description" content="Discover distinguished faculty members from UiTM Sabah and explore their expertise.">
     <meta property="og:image" content="https://i.imgur.com/SEXIf1W.jpeg">
@@ -466,31 +472,64 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
-    authDomain: "academiq-9c9zg.firebaseapp.com",
-    projectId: "academiq-9c9zg",
-    storageBucket: "academiq-9c9zg.firebasestorage.app",
-    messagingSenderId: "779034912138",
-    appId: "1:779034912138:web:b2bdd60d01622bf9261473",
-    measurementId: "G-DGZHBZBYLW"
-  };
+        // WARNING: API keys should be moved to environment variables and accessed via a backend server
+        // These keys are currently exposed and should be rotated immediately
+        // TODO: Implement backend API to securely handle API calls
+        
+        // Firebase configuration - SECURITY WARNING: Should be in environment variables
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w", // TODO: Move to backend
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
 
-        // Initialize Firebase
+        // Initialize Firebase with error handling
         try {
             firebase.initializeApp(firebaseConfig);
-            console.log("Firebase has been initialized successfully!");
+            // Remove detailed logging in production
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log("Firebase initialized");
+            }
         } catch (error) {
-            console.log("Firebase initialization failed, but continuing without it:", error);
+            // Don't expose error details in production
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.error("Firebase initialization failed:", error);
+            }
         }
 
-
-        // --- NEW Gemini API Integration (from portfolio) ---
-        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M"; 
+        // SECURITY WARNING: API keys should never be in client-side code
+        // TODO: Move to backend server with proper authentication
+        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M"; // TODO: Move to backend
         const GEMINI_API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241'; // TODO: Move to backend
 
-        // Replace with your actual SerpApi key
-        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
+        // HTML Sanitization Helper Function
+        function sanitizeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // URL validation helper
+        function isValidURL(string) {
+            try {
+                const url = new URL(string);
+                return url.protocol === "http:" || url.protocol === "https:";
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Email validation helper
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
         
         // Faculty data with added orcidId, scholarId, scopusId, wosId, adScientificId, googleDriveLink where available
         const facultyData = [
@@ -820,19 +859,28 @@
             return gradients[index % gradients.length];
         }
 
-        // Create faculty card
+        // Create faculty card with sanitization
         function createFacultyCard(faculty, index) {
-            const initials = getInitials(faculty.name);
+            // Sanitize all user-facing content
+            const initials = getInitials(sanitizeHTML(faculty.name));
             const delay = (index % 12) * 0.1; // Stagger animation
             const cardGradient = getCardGradient(index);
             
             const isDistinguished = !!faculty.path;
-            const profileImage = faculty.imageUrl || '';
+            // Validate URL before using
+            const profileImage = (faculty.imageUrl && isValidURL(faculty.imageUrl)) ? faculty.imageUrl : '';
             const facultyIndex = facultyData.indexOf(faculty);
+            
+            // Sanitize all dynamic content
+            const sanitizedName = sanitizeHTML(faculty.name);
+            const sanitizedPosition = sanitizeHTML(faculty.position);
+            const sanitizedField = sanitizeHTML(faculty.field);
+            const sanitizedPhone = sanitizeHTML(faculty.phone);
+            const sanitizedPath = faculty.path && isValidURL(faculty.path) ? faculty.path : '#';
             
             return `
                 <div class="faculty-card bg-gradient-to-r ${cardGradient} rounded-3xl shadow-2xl p-8 relative group overflow-hidden" 
-                    onclick="window.open('${faculty.path}', '_blank')" 
+                    onclick="window.open('${sanitizedPath}', '_blank')" 
                     style="animation-delay: ${delay}s;">
                     
                     <div class="absolute inset-0 bg-black opacity-10"></div>
@@ -845,7 +893,7 @@
                                 <div class="faculty-avatar relative">
                                     ${profileImage ? `
                                         <div class="w-24 h-24 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
-                                            <img src="${profileImage}" alt="${faculty.name}" class="w-full h-full object-cover">
+                                            <img src="${profileImage}" alt="${sanitizedName}" class="w-full h-full object-cover" loading="lazy">
                                         </div>
                                     ` : `
                                         <div class="w-24 h-24 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-2xl backdrop-blur-sm border-4 border-white border-opacity-30">
@@ -864,15 +912,15 @@
                             
                             <div class="text-white">
                                 <h3 class="text-2xl font-bold mb-2 leading-tight group-hover:text-yellow-200 transition-colors duration-300">
-                                    ${faculty.name}
+                                    ${sanitizedName}
                                 </h3>
                                 <p class="text-lg font-medium mb-4 text-white text-opacity-90">
-                                    ${faculty.position}
+                                    ${sanitizedPosition}
                                 </p>
                                 
                                 <div class="flex items-center justify-between mb-6">
                                     <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm border border-white border-opacity-30">
-                                        ${faculty.field}
+                                        ${sanitizedField}
                                     </span>
                                 </div>
                                 
@@ -880,14 +928,14 @@
                                     <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                     </svg>
-                                    <span class="font-medium">${faculty.phone}</span>
+                                    <span class="font-medium">${sanitizedPhone}</span>
                                 </div>
                                 
                                 <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 mb-2">
                                     View Full Portfolio →
                                 </button>
 
-                                <button onclick="handleContactClick(event, ${facultyIndex})" class="contact-button" title="Initiate contact with ${faculty.name}">
+                                <button onclick="handleContactClick(event, ${facultyIndex})" class="contact-button" title="Initiate contact with ${sanitizedName}">
                                     🔗 Initiate Contact
                                 </button>
                                 
@@ -913,17 +961,23 @@
             document.getElementById('facultyCount').textContent = filteredFaculty.length;
         }
 
-        // Filter faculty
+        // Filter faculty with input sanitization
         function filterFaculty() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            // Sanitize search input to prevent XSS
+            const searchInput = document.getElementById('searchInput').value;
+            const sanitizedSearchTerm = sanitizeHTML(searchInput).toLowerCase();
             const fieldFilter = document.getElementById('fieldFilter').value;
             
+            // Validate field filter to prevent injection
+            const validFields = ['', 'EKONOMI', 'KEWANGAN', 'PEMASARAN', 'PENGURUSAN', 'PENGANGKUTAN'];
+            const safeFieldFilter = validFields.includes(fieldFilter) ? fieldFilter : '';
+            
             filteredFaculty = facultyData.filter(faculty => {
-                const matchesSearch = faculty.name.toLowerCase().includes(searchTerm) ||
-                                      faculty.position.toLowerCase().includes(searchTerm) ||
-                                      faculty.field.toLowerCase().includes(searchTerm);
+                const matchesSearch = faculty.name.toLowerCase().includes(sanitizedSearchTerm) ||
+                                      faculty.position.toLowerCase().includes(sanitizedSearchTerm) ||
+                                      faculty.field.toLowerCase().includes(sanitizedSearchTerm);
                 
-                const matchesField = !fieldFilter || faculty.field === fieldFilter;
+                const matchesField = !safeFieldFilter || faculty.field === safeFieldFilter;
                 
                 return matchesSearch && matchesField;
             });
@@ -953,10 +1007,21 @@
             showEnhancedProfile(faculty, profileData);
         }
 
-        // Show enhanced profile detail
+        // Show enhanced profile detail with sanitization
         function showEnhancedProfile(faculty, profileData) {
-            const initials = getInitials(faculty.name);
-            const fieldClass = getFieldClass(faculty.field);
+            // Sanitize all faculty data before rendering
+            const sanitizedFaculty = {
+                name: sanitizeHTML(faculty.name),
+                position: sanitizeHTML(faculty.position),
+                field: sanitizeHTML(faculty.field),
+                phone: sanitizeHTML(faculty.phone),
+                imageUrl: (faculty.imageUrl && isValidURL(faculty.imageUrl)) ? faculty.imageUrl : '',
+                path: (faculty.path && isValidURL(faculty.path)) ? faculty.path : '',
+                googleDriveLink: (faculty.googleDriveLink && isValidURL(faculty.googleDriveLink)) ? faculty.googleDriveLink : ''
+            };
+            
+            const initials = getInitials(sanitizedFaculty.name);
+            const fieldClass = getFieldClass(faculty.field); // Safe since it's from enum
             const { orcidWorks = [], scholarData = null, scopusData = null, wosData = null, adScientificData = null } = profileData;
 
             let researchSection = `
@@ -1049,9 +1114,9 @@
                             
                             <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
                                 <div class="relative">
-                                    ${faculty.imageUrl ? `
+                                    ${sanitizedFaculty.imageUrl ? `
                                         <div class="w-32 h-32 rounded-3xl overflow-hidden backdrop-blur-sm border-4 border-white border-opacity-30 shadow-2xl">
-                                            <img src="${faculty.imageUrl}" alt="${faculty.name}" class="w-full h-full object-cover">
+                                            <img src="${sanitizedFaculty.imageUrl}" alt="${sanitizedFaculty.name}" class="w-full h-full object-cover" loading="lazy">
                                         </div>
                                     ` : `
                                         <div class="w-32 h-32 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center text-white font-bold text-3xl backdrop-blur-sm border border-white border-opacity-30">
@@ -1063,11 +1128,11 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight">${faculty.name}</h1>
-                                    <p class="text-xl text-indigo-100 mb-4 font-medium">${faculty.position}</p>
+                                    <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight">${sanitizedFaculty.name}</h1>
+                                    <p class="text-xl text-indigo-100 mb-4 font-medium">${sanitizedFaculty.position}</p>
                                     <div class="flex flex-wrap gap-3">
-                                        <span class="field-badge ${fieldClass} text-sm">${faculty.field}</span>
-                                        <span class="glass px-4 py-2 rounded-full text-sm font-medium">📞 ${faculty.phone}</span>
+                                        <span class="field-badge ${fieldClass} text-sm">${sanitizedFaculty.field}</span>
+                                        <span class="glass px-4 py-2 rounded-full text-sm font-medium">📞 ${sanitizedFaculty.phone}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1077,17 +1142,17 @@
                     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
                         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
                             ${researchSection}
-                            ${faculty.path ? `
+                            ${sanitizedFaculty.path ? `
                                 <div class="mt-6 pt-6 border-t border-gray-200">
-                                    <a href="${faculty.path}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300">
+                                    <a href="${sanitizedFaculty.path}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                         View Full Portfolio on GitHub
                                     </a>
                                 </div>
                             ` : ''}
-                            ${faculty.googleDriveLink ? `
+                            ${sanitizedFaculty.googleDriveLink ? `
                                 <div class="mt-6 pt-6 border-t border-gray-200">
-                                    <a href="${faculty.googleDriveLink}" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300">
+                                    <a href="${sanitizedFaculty.googleDriveLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300">
                                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                                         View Additional Resources on Google Drive
                                     </a>
@@ -1375,10 +1440,21 @@
                 contactForm.addEventListener('submit', function(event) {
                     event.preventDefault(); // Prevent actual form submission
                     
-                    // Get form data
-                    const visitorEmail = document.getElementById('contactEmail').value;
-                    const visitorPhone = document.getElementById('contactPhone').value || 'Not provided';
-                    const visitorMessage = document.getElementById('contactMessage').value || '';
+                    // Get and sanitize form data
+                    const visitorEmail = document.getElementById('contactEmail').value.trim();
+                    const visitorPhone = document.getElementById('contactPhone').value.trim() || 'Not provided';
+                    const visitorMessage = document.getElementById('contactMessage').value.trim() || '';
+                    
+                    // Validate email format
+                    if (!isValidEmail(visitorEmail)) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+                    
+                    // Sanitize inputs to prevent injection
+                    const sanitizedEmail = sanitizeHTML(visitorEmail);
+                    const sanitizedPhone = sanitizeHTML(visitorPhone);
+                    const sanitizedMessage = sanitizeHTML(visitorMessage);
                     
                     // Check if faculty is selected and has an email
                     if (!currentContactFaculty) {
@@ -1387,22 +1463,22 @@
                         return;
                     }
                     
-                    if (!currentContactFaculty.email) {
-                        alert('Sorry, email address is not available for this faculty member.');
+                    if (!currentContactFaculty.email || !isValidEmail(currentContactFaculty.email)) {
+                        alert('Sorry, a valid email address is not available for this faculty member.');
                         closeContactModal();
                         return;
                     }
                     
-                    // Construct email subject and body
+                    // Construct email subject and body with sanitized data
                     const subject = encodeURIComponent(`Contact Request from Faculty Portfolio Website`);
-                    let body = `Dear ${currentContactFaculty.name},\n\n`;
+                    let body = `Dear ${sanitizeHTML(currentContactFaculty.name)},\n\n`;
                     body += `I would like to get in touch with you.\n\n`;
                     body += `My Contact Details:\n`;
-                    body += `Email: ${visitorEmail}\n`;
-                    body += `Phone: ${visitorPhone}\n\n`;
+                    body += `Email: ${sanitizedEmail}\n`;
+                    body += `Phone: ${sanitizedPhone}\n\n`;
                     
-                    if (visitorMessage) {
-                        body += `Message:\n${visitorMessage}\n\n`;
+                    if (sanitizedMessage) {
+                        body += `Message:\n${sanitizedMessage}\n\n`;
                     }
                     
                     body += `\nBest regards`;
@@ -1410,7 +1486,7 @@
                     const encodedBody = encodeURIComponent(body);
                     
                     // Create mailto link and open it
-                    const mailtoLink = `mailto:${currentContactFaculty.email}?subject=${subject}&body=${encodedBody}`;
+                    const mailtoLink = `mailto:${encodeURIComponent(currentContactFaculty.email)}?subject=${subject}&body=${encodedBody}`;
                     window.location.href = mailtoLink;
                     
                     // Show confirmation and close modal
