@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio: MOHD ROZIE MOHD DAMIT</title>
+    <title>Portfolio: DR. MOHD ROZIE MOHD DAMIT</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        body { box-sizing: border-box; }
+        body { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
         .back-button { transition: all 0.3s; backdrop-filter: blur(10px);}
         .back-button:hover { transform: translateX(-4px); background-color: rgba(255,255,255,0.2);}
         .profile-header { background: linear-gradient(135deg, #10b981 0%, #047857 100%); position: relative; overflow: hidden;}
@@ -15,6 +17,8 @@
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #10b981, #047857); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: linear-gradient(135deg, #047857, #10b981);}
+        .experience-item { transition: all 0.3s ease-in-out; }
+        .experience-item:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -39,13 +43,22 @@
                         </div>
                     </div>
                     <div class="flex-1">
-                        <h1 class="text-4xl lg:text-5xl font-bold mb-3 leading-tight">MOHD ROZIE MOHD DAMIT</h1>
-                        <p class="text-xl text-green-100 mb-2 font-medium">PENSYARAH KANAN</p>
-                        <p class="text-lg text-green-100 mb-4">Field: KEWANGAN</p>
+                        <h1 class="text-4xl lg:text-5xl font-extrabold mb-2 leading-tight tracking-tight">DR. MOHD ROZIE MOHD DAMIT</h1>
+                        <p class="text-xl text-green-100 mb-2 font-medium">Credit Manager & Lecturer | Doctor in Business Administration</p>
+                        <p class="text-lg text-green-100 mb-4">Finance, Credit Management & Business Strategy</p>
                         <div class="flex flex-wrap gap-3 mb-6">
-                            <span class="bg-green-400 text-green-900 px-4 py-2 rounded-full text-sm font-bold">
-                                💼 Lecturer
-                            </span>
+                            <span class="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">Credit Management</span>
+                            <span class="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">Financial Management</span>
+                            <span class="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">International Finance</span>
+                            <span class="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">Business Administration</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://scholar.google.com/citations?user=AcSN3v0AAAAJ&hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                <img src="https://i.imgur.com/mYgMKZM.png" alt="Google Scholar" class="w-10 h-10">
+                            </a>
+                            <a href="https://orcid.org/0009-0002-6894-6356" target="_blank" rel="noopener noreferrer" title="ORCID" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                                <img src="https://i.imgur.com/E1qAhFM.png" alt="ORCID" class="w-10 h-10">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -56,38 +69,404 @@
                 <div class="lg:col-span-2 space-y-8">
                     <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                            <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
+                            <i class="fa-solid fa-user-tie text-green-500 mr-3"></i>
                             Professional Summary
                         </h2>
-                        <div class="p-6 bg-gradient-to-r from-green-50 to-green-100 rounded-xl border-l-4 border-green-500">
+                        <div class="p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500">
                             <p class="text-gray-700 text-lg leading-relaxed">
-                                This is a placeholder profile for MOHD ROZIE MOHD DAMIT, PENSYARAH KANAN in the field of KEWANGAN at UiTM Sabah. More details about teaching, research, and achievements will be updated soon.
+                                Dr. Mohd Rozie Mohd Damit is a seasoned finance professional with over 17 years of comprehensive experience in credit management, banking operations, and financial services. Currently serving as Credit Manager at Perkasa Trading Sdn. Bhd. since 2019, he has successfully led credit divisions, reduced non-performing accounts, and implemented strategic credit policies. His academic credentials include a recently completed <strong>Doctor in Business Administration (DBA)</strong> from Universiti Teknologi MARA (UiTM), an MBA, and a Bachelor of International Finance from Universiti Malaysia Sabah. He is a certified credit professional with designations from AICB and IBBM, bringing both theoretical depth and practical expertise to finance and business management.
                             </p>
                         </div>
                     </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-graduation-cap text-green-500 mr-3"></i>
+                            Academic Background
+                        </h2>
+                        <div class="space-y-4">
+                            <div class="experience-item p-5 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Doctor in Business Administration (DBA)</h4>
+                                <p class="text-gray-600 text-sm mt-1">Universiti Teknologi MARA (UiTM), Sabah | 2018 - 2024</p>
+                            </div>
+                            <div class="experience-item p-5 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Diploma in Accounting and Finance</h4>
+                                <p class="text-gray-600 text-sm mt-1">eLearning College, Leicester, United Kingdom | 2023</p>
+                            </div>
+                            <div class="experience-item p-5 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Diploma in Financial Accounting</h4>
+                                <p class="text-gray-600 text-sm mt-1">Alison.com, Galway, Ireland | 2022</p>
+                            </div>
+                            <div class="experience-item p-5 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Master of Business Administration (MBA)</h4>
+                                <p class="text-gray-600 text-sm mt-1">Universiti Teknologi MARA (UiTM), Sabah | 2016</p>
+                            </div>
+                            <div class="experience-item p-5 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Bachelor of International Finance (Hons.)</h4>
+                                <p class="text-gray-600 text-sm mt-1">International & Offshore Banking Finance<br>Universiti Malaysia Sabah (UMS), Sabah | 2006</p>
+                            </div>
+                            <div class="experience-item p-5 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Certificate of Accounting</h4>
+                                <p class="text-gray-600 text-sm mt-1">Labuan Matriculation College, Labuan Federal Territory | 2003</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-briefcase text-green-500 mr-3"></i>
+                            Working Experience
+                        </h2>
+                        <div class="space-y-5">
+                            <div class="experience-item p-6 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Credit Manager</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">Perkasa Trading Sdn. Bhd. | Sep 2019 - Present</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Head of Credit division overseeing administration, processing, collection, recovery, and litigation</li>
+                                    <li>Successfully reduced non-performing accounts and recovered bad debts</li>
+                                    <li>Reviewed and enhanced internal credit policies and SOPs</li>
+                                    <li>Conducted monthly debtors' ageing meetings and credit compliance investigations</li>
+                                    <li>Liaison with solicitors, insolvency departments, and trained sales/marketing teams</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Deputy Vice-Chancellor (Business Corporate) & Dean, Borneo Business School</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">North Borneo University College | Apr 2019 - Aug 2019</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Head of Business School with responsibilities in fund acquisition and marketing</li>
+                                    <li>Academic oversight, lectures, paper review, and training events coordination</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Branch Manager</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">Co-opbank Pertama, Kota Kinabalu | Dec 2016 - Mar 2019</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Oversaw branch operations, marketing, and administration</li>
+                                    <li>Approved credit applications and new account openings</li>
+                                    <li>Monitored collection activities and branch performance reporting</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Accounts Manager</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">MIDF Berhad, Sabah | Aug 2012 - Dec 2016</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Supervised credit monitoring and attended creditors' meetings</li>
+                                    <li>Liaison with panel solicitors for legal matters</li>
+                                    <li>Conducted financial reviews and site inspections</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Branch Executive</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">Credit Guarantee Corporation, Wangsa Maju, KL | Apr 2012 - Jul 2012</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Conducted site visits, annual reviews, and portfolio monitoring</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Executive (Credit Processing)</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">Affin Islamic Bank Berhad, Kuala Lumpur | Mar 2010 - Mar 2012</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Evaluated and recommended credit applications with policy compliance</li>
+                                    <li>Trained new staff and developed new Loan Origination System</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-green-900">Management Trainee</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">Affin Bank Berhad, Kuala Lumpur | Sep 2009 - Feb 2010</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Comprehensive training across all departments under HR supervision</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item p-6 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-lg text-emerald-900">Clerk (Teller)</h4>
+                                <p class="text-gray-600 text-sm mt-1 mb-2">Affin Bank Berhad, Sandakan | Aug 2006 - Aug 2009</p>
+                                <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                    <li>Teller operations, ATM/CDM management, cheque clearing</li>
+                                    <li>Marketing, CASA audits, and customer service excellence</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-award text-green-500 mr-3"></i>
+                            Achievements & Certifications
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <h4 class="font-bold text-green-900">Certified Credit Executive</h4>
+                                <p class="text-sm text-gray-600">AICB | 2015</p>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">
+                                <h4 class="font-bold text-emerald-900">Certified Credit Professional</h4>
+                                <p class="text-sm text-gray-600">IBBM | 2013</p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <h4 class="font-bold text-green-900">Anugerah Gema Tautan Kasih ke-6</h4>
+                                <p class="text-sm text-gray-600">Leadership Project, UMS-KAL | 2006</p>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">
+                                <h4 class="font-bold text-emerald-900">Anugerah Dekan (Dean's List)</h4>
+                                <p class="text-sm text-gray-600">2003/04</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-certificate text-green-500 mr-3"></i>
+                            Professional Development Training
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Business English Communication (Intermediate)</span>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Basics of Compliance Management</span>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Digital Transformation</span>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Introduction to Corporate Finance</span>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Introduction to Financial Management</span>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Fundamentals of Commercial Law</span>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Fundamentals of Credit Management</span>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Internal Auditing - Principles & Concepts</span>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">Internal Auditors Training ISO 9001:2008</span>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                <span class="text-sm text-gray-700">ISO Management System Audit Techniques</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-users text-green-500 mr-3"></i>
+                            Conferences & Seminars
+                        </h2>
+                        <div class="space-y-4">
+                            <div class="p-4 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-green-900">1st International Conference on Business Studies (ICoBS)</h4>
+                                <p class="text-sm text-gray-600 mt-1">Presenter | 2019</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-emerald-900">World Marketing Conference</h4>
+                                <p class="text-sm text-gray-600 mt-1">Co-Author | 2020</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-green-900">World Islamic Economic Forum</h4>
+                                <p class="text-sm text-gray-600 mt-1">Participant | 2020</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-emerald-900">CTOS & BNM Webinar: Financial Scams</h4>
+                                <p class="text-sm text-gray-600 mt-1">Participant | 2022</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-green-900">CTOS & CIMB Bank Webinar: SME Score & Credit Evaluation</h4>
+                                <p class="text-sm text-gray-600 mt-1">Participant | 2022</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-emerald-900">Program Pelan Pembangunan Sektor Perkhidmatan Kewangan Koperasi</h4>
+                                <p class="text-sm text-gray-600 mt-1">Participant | 2018</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-green-900">Building Your Wealth Seminar</h4>
+                                <p class="text-sm text-gray-600 mt-1">Speaker | 2016</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-emerald-500 bg-emerald-50 rounded-r-lg">
+                                <h4 class="font-bold text-emerald-900">HR Summit: Resource Skills & Competencies</h4>
+                                <p class="text-sm text-gray-600 mt-1">Participant | 2016</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-green-500 bg-green-50 rounded-r-lg">
+                                <h4 class="font-bold text-green-900">Economic Talk: Role of Government in Macroeconomics</h4>
+                                <p class="text-sm text-gray-600 mt-1">Speaker | 2015</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-handshake text-green-500 mr-3"></i>
+                            Memberships & Contributions
+                        </h2>
+                        <div class="space-y-3">
+                            <div class="p-4 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-building text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Affiliate Member, AICB</h4>
+                                    <p class="text-sm text-gray-600">Asian Institute of Chartered Bankers | ID: 506519</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-building text-emerald-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Affiliate Member, Alison.com</h4>
+                                    <p class="text-sm text-gray-600">ID: 28054890</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-wallet text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Treasurer, Dewan Perdagangan Islam Malaysia Sabah</h4>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-wallet text-emerald-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Treasurer, Pertubuhan Insan Bakti Sabah</h4>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-wallet text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Treasurer, Pertubuhan Pencegahan Dadah dan Jenayah Sabah</h4>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-user-check text-emerald-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Industry Advisor, Institut Usahawan Muda Malaysia (IUMM)</h4>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-users text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Committee Member, Consumer's Association Progressive Sabah</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="space-y-8">
                     <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
                         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
+                            <i class="fa-solid fa-circle-info text-green-500 mr-2"></i>
                             Contact & Info
                         </h3>
                         <div class="space-y-3">
                             <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
-                                <p class="text-sm font-medium text-gray-500">Phone</p>
+                                <p class="text-sm font-medium text-gray-500">Email</p>
+                                <p class="text-sm font-bold text-gray-900">rujidamit@yahoo.com</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg border-l-4 border-emerald-400">
+                                <p class="text-sm font-medium text-gray-500">Mobile</p>
+                                <p class="text-sm font-bold text-gray-900">(013) 548 5337</p>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+                                <p class="text-sm font-medium text-gray-500">Office</p>
                                 <p class="text-sm font-bold text-gray-900">088 - 325151</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg border-l-4 border-emerald-400">
+                                <p class="text-sm font-medium text-gray-500">Location</p>
+                                <p class="text-sm font-bold text-gray-900">Kota Kinabalu, Sabah</p>
                             </div>
                             <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
                                 <p class="text-sm font-medium text-gray-500">Portfolio Link</p>
-                                <p class="text-sm font-bold text-gray-900">https://fpp-uitmsabah.github.io/permata/rozie.html</p>
+                                <a href="https://fpp-uitmsabah.github.io/permata/rozie.html" class="text-sm font-bold text-green-700 hover:underline break-all">fpp-uitmsabah.github.io/permata/rozie.html</a>
                             </div>
-                            <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
-                                <p class="text-sm font-medium text-gray-500">Image Placeholder</p>
-                                <p class="text-sm font-bold text-gray-900">https://i.imgur.com/BHVplSw.png</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                            <i class="fa-solid fa-laptop-code text-green-500 mr-2"></i>
+                            Skills
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Computer Skills</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">SPSS v22</span>
+                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">eVIEWS v5</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">Excel QM</span>
+                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">MS Office 365</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">Zoho</span>
+                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">HubSpot</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">Jotform</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Languages</h4>
+                                <div class="space-y-2">
+                                    <div class="p-2 bg-green-50 rounded">
+                                        <p class="text-sm font-medium text-gray-700">Malay</p>
+                                        <p class="text-xs text-gray-600">Oral: Excellent | Writing: Excellent</p>
+                                    </div>
+                                    <div class="p-2 bg-emerald-50 rounded">
+                                        <p class="text-sm font-medium text-gray-700">English</p>
+                                        <p class="text-xs text-gray-600">Oral: Good | Writing: Good</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                            <i class="fa-solid fa-id-card text-green-500 mr-2"></i>
+                            Licenses
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-green-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-car text-green-500 mt-1 mr-2"></i>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900">Driving License (D Class)</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg flex items-start">
+                                <i class="fa-solid fa-chalkboard-teacher text-emerald-500 mt-1 mr-2"></i>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900">Lifetime Teaching Permit</p>
+                                    <p class="text-xs text-gray-600">PM/IPTS/2018/09/6275</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                            <i class="fa-solid fa-user-friends text-green-500 mr-2"></i>
+                            References
+                        </h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="p-3 bg-green-50 rounded-lg">
+                                <h4 class="font-semibold text-gray-900">Assoc. Prof. Dr. Rozita @ Uji Binti Mohamed</h4>
+                                <p class="text-gray-600 mt-1">Universiti Teknologi MARA (UiTM) Sabah</p>
+                                <p class="text-gray-600">010-766 3008</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-lg">
+                                <h4 class="font-semibold text-gray-900">Mejar (K) Dr. Zhamrie Ghulam Rasul</h4>
+                                <p class="text-gray-600 mt-1">Executive Director, IUMM</p>
+                                <p class="text-gray-600">017-811 0067</p>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-lg">
+                                <h4 class="font-semibold text-gray-900">Encik Zainuddin Bin Sulaiman</h4>
+                                <p class="text-gray-600 mt-1">General Manager, Perkasa Trading Sdn. Bhd.</p>
+                                <p class="text-gray-600">088-222 800 (ext. 103)</p>
                             </div>
                         </div>
                     </div>
