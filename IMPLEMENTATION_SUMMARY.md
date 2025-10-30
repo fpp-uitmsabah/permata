@@ -1,5 +1,31 @@
 # Portfolio Authentication Implementation - Complete Summary
 
+## 📌 Version Information
+
+- **Version**: 1.0.0
+- **Release Date**: October 2025
+- **Status**: ✅ Complete and Ready for Testing
+
+## 🔧 Requirements
+
+### System Requirements
+- **Node.js**: v14.x or higher (v18.x recommended)
+- **npm**: v6.x or higher
+- **Database**: PostgreSQL 12+ (via Prisma)
+
+### Browser Compatibility
+- **Chrome**: 90+
+- **Firefox**: 88+
+- **Safari**: 14+
+- **Edge**: 90+
+- **Mobile**: iOS Safari 14+, Chrome Android 90+
+
+### Dependencies
+- Firebase Authentication (v8.10.1)
+- Express.js (v4.18.2)
+- Prisma (v6.17.1)
+- Firebase Admin SDK (v11.11.1)
+
 ## 🎯 What Was Implemented
 
 This implementation adds a complete authentication system to the Faculty Portfolio Directory, allowing faculty members to securely edit their portfolio pages using either Google Sign-In or a Staff ID with secret code.
