@@ -10,6 +10,7 @@
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
     "test:db": "node test-db-connection.js",
+    "test:auth": "node test-auth-setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
