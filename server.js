@@ -17,9 +17,17 @@ app.use(express.json());
 
 // Initialize Firebase Admin (for custom token generation)
 // Note: You'll need to download and add your Firebase service account key
-// admin.initializeApp({
-//     credential: admin.credential.cert(require('./firebase-service-account.json'))
-// });
+let firebaseAdmin = null;
+try {
+    const serviceAccount = require('./firebase-service-account.json');
+    firebaseAdmin = admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
+    console.log('✅ Firebase Admin initialized successfully');
+} catch (error) {
+    console.warn('⚠️ Firebase Admin not configured. Staff ID authentication will not work.');
+    console.warn('   Please add firebase-service-account.json to enable this feature.');
+}
 
 /**
  * Staff ID Authentication Endpoint
@@ -44,6 +52,12 @@ app.post('/api/auth/staff-login', async (req, res) => {
 
         if (!faculty) {
             return res.status(401).json({ error: 'Invalid credentials or unauthorized' });
+        }
+
+        if (!firebaseAdmin) {
+            return res.status(503).json({ 
+                error: 'Firebase Admin not configured. Please contact system administrator.' 
+            });
         }
 
         // Generate custom token with employee ID claim
@@ -73,6 +87,12 @@ async function verifyToken(req, res, next) {
     
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ error: 'No token provided' });
+    }
+
+    if (!firebaseAdmin) {
+        return res.status(503).json({ 
+            error: 'Firebase Admin not configured. Please contact system administrator.' 
+        });
     }
 
     const token = authHeader.split('Bearer ')[1];
