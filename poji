@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio: Ahmad Fauze bin Abdul Hamit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Add Inter font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        .back-button {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #059669, #065f46);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Subtle fade-in animation for sections */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced gradient overlays */
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(4, 120, 87, 0.1));
+        }
+
+        /* Styles for Admin UI */
+        #adminButton {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        #loginModal, #notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        #notification {
+            z-index: 1003;
+            background-color: transparent;
+            pointer-events: none;
+        }
+
+        /* Edit form styles */
+        #editView {
+            padding-top: 2rem;
+            padding-bottom: 5rem;
+        }
+
+        .edit-label {
+            @apply block text-sm font-medium text-gray-700 mb-1 mt-4;
+        }
+        
+        .edit-input {
+            @apply block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm;
+        }
+        
+        .edit-textarea {
+            @apply block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm;
+            min-height: 100px;
+        }
+        
+        .edit-group {
+            @apply p-4 border border-gray-200 rounded-lg mt-4 bg-gray-50;
+        }
+        
+        .edit-section-title {
+            @apply text-xl font-semibold text-gray-800 border-b pb-2 mb-4;
+        }
+        
+        .remove-btn {
+            @apply ml-2 px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600;
+        }
+        
+        .add-btn {
+            @apply mt-2 px-4 py-2 bg-green-500 text-white rounded-md text-sm hover:bg-green-600;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans">
+    
+    <!-- ======== ADMIN UI ELEMENTS (Hidden by default) ======== -->
+    
+    <!-- Admin Login Modal -->
+    <div id="loginModal" class="hidden">
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 text-center">Admin Access</h2>
+            <p class="text-center text-gray-600 mb-6">Enter the secret code to edit.</p>
+            <form id="loginForm">
+                <label for="secretCode" class="block text-sm font-medium text-gray-700">Secret Code</label>
+                <input type="password" id="secretCode" name="secretCode" class="edit-input mt-1" placeholder="••••••••">
+                <p id="loginError" class="text-red-500 text-sm mt-2 hidden">Invalid code. Please try again.</p>
+                <div class="flex gap-4 mt-6">
+                    <button type="button" id="cancelLoginBtn" class="w-full px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
+                    <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Notification Popup -->
+    <div id="notification" class="hidden">
+        <div class="bg-green-600 text-white px-6 py-4 rounded-xl shadow-lg text-lg font-semibold">
+            <i class="fas fa-check-circle mr-2"></i>
+            Portfolio Updated!
+        </div>
+    </div>
+    
+    <!-- Admin Edit Button -->
+    <button id="adminButton" class="hidden px-5 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-pencil-alt mr-2"></i> Admin Edit
+    </button>
+    <!-- ======== END ADMIN UI ELEMENTS ======== -->
+    
+
+    <!-- Main App Container -->
+    <div id="app" class="min-h-screen">
+
+        <!-- ============================================= -->
+        <!-- ========      PROFILE VIEW       ======== -->
+        <!-- ============================================= -->
+        <div id="profileView">
+            <div class="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-cyan-50">
+                <div class="bg-gradient-to-r from-green-600 via-teal-600 to-cyan-500 text-white relative overflow-hidden">
+                    <!-- Header Background Elements -->
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="absolute inset-0 gradient-overlay"></div>
+                    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                    
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                        <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            Back to Directory
+                        </a>
+                        
+                        <!-- Header Content (Dynamic) -->
+                        <div id="header-content" class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+                            <!-- Profile Image -->
+                            <div class="relative">
+                                <div class="w-40 h-40 rounded-3xl border-4 border-white/30 shadow-2xl overflow-hidden">
+                                    <img id="header-image" src="https://placehold.co/160x160/e0e0e0/333?text=Loading..." alt="Ahmad Fauze bin Abdul Hamit" class="w-full h-full object-cover">
+                                </div>
+                                <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-white rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-robot text-xl text-green-600"></i>
+                                </div>
+                            </div>
+                            <!-- Header Text -->
+                            <div class="flex-1">
+                                <h1 id="header-name" class="text-5xl lg:text-6xl font-bold mb-3 leading-tight">Loading...</h1>
+                                <p id="header-title" class="text-2xl text-green-100 mb-2 font-medium"></p>
+                                <p id="header-faculty" class="text-xl text-teal-100 mb-4"></p>
+                                <!-- Badges -->
+                                <div id="header-badges" class="flex flex-wrap gap-3 mb-6">
+                                    <!-- Badges will be injected by JS -->
+                                </div>
+                                <!-- Links -->
+                                <div id="header-links" class="flex items-center space-x-4 my-6">
+                                    <!-- Links will be injected by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-16 relative z-20">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 space-y-8">
+                            
+                            <!-- Professional Summary (Dynamic) -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-user-tie mr-3 text-green-500"></i>
+                                    Professional Summary
+                                </h2>
+                                <div class="p-6 bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50 rounded-xl border-l-4 border-green-500">
+                                    <p id="professional-summary" class="text-gray-700 text-lg leading-relaxed">
+                                        Loading...
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Awards (Dynamic) -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-trophy mr-3 text-yellow-500"></i>
+                                    Awards & Recognitions
+                                </h2>
+                                <ul id="awards-list" class="space-y-4 list-disc list-inside text-gray-700">
+                                    <li>Loading...</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Intellectual Property (Dynamic) -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-copyright mr-3 text-purple-500"></i>
+                                    Intellectual Property (Copyrights)
+                                </h2>
+                                <div id="ip-list" class="space-y-4">
+                                    <!-- IPs will be injected by JS -->
+                                </div>
+                            </div>
+
+                            <!-- Admin Roles (Dynamic) -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-teal-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-sitemap mr-3 text-blue-500"></i>
+                                    Administrative Roles & University Governance
+                                </h2>
+                                <div id="roles-list" class="space-y-4">
+                                    <!-- Roles will be injected by JS -->
+                                </div>
+                            </div>
+                            
+                            <!-- Research (Dynamic) -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover-lift relative overflow-hidden fade-in">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-pink-500"></div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                                    <i class="fas fa-book-open mr-3 text-red-500"></i>
+                                    Key Research & Publications
+                                </h2>
+                                <div class="space-y-5">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Web of Science (WoS) Indexed Journal</h3>
+                                        <div id="research-wos-list" class="space-y-4">
+                                            <!-- WoS research will be injected by JS -->
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Book Chapters</h3>
+                                        <div id="research-book-list" class="space-y-3">
+                                            <!-- Book chapters will be injected by JS -->
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-2">Other Selected Publications</h3>
+                                        <div id="research-other-list" class="space-y-3">
+                                            <!-- Other research will be injected by JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Sidebar (Dynamic) -->
+                        <div class="space-y-8">
+                            <!-- Academic Background -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-graduation-cap mr-2 text-teal-500"></i>
+                                    Academic Background
+                                </h3>
+                                <div id="education-list" class="space-y-3">
+                                    <!-- Education will be injected by JS -->
+                                </div>
+                            </div>
+
+                            <!-- Professional Service -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-hands-helping mr-2 text-sky-500"></i>
+                                    Professional Service
+                                </h3>
+                                <div id="service-list" class="space-y-3">
+                                    <!-- Service will be injected by JS -->
+                                </div>
+                            </div>
+
+                            <!-- Teaching Portfolio -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-chalkboard-teacher mr-2 text-indigo-500"></i>
+                                    Teaching Portfolio
+                                </h3>
+                                <div id="teaching-list" class="flex flex-wrap gap-2">
+                                    <!-- Teaching items will be injected by JS -->
+                                </div>
+                            </div>
+
+                            <!-- Research Interests -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-lightbulb mr-2 text-green-500"></i>
+                                    Research Interests
+                                </h3>
+                                <div id="interests-list" class="flex flex-wrap gap-2">
+                                    <!-- Interests will be injected by JS -->
+                                </div>
+                            </div>
+                            
+                            <!-- Performance -->
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 hover-lift fade-in">
+                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                    <i class="fas fa-chart-line mr-2 text-rose-500"></i>
+                                    Performance & Impact
+                                </h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">Annual Performance (MYATP)</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                                            <div id="performance-myatp-bar" class="bg-gradient-to-r from-rose-500 to-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                        <p id="performance-myatp-text" class="text-xs text-right text-gray-500 mt-1"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">Student Feedback (SUFO)</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                                            <div id="performance-sufo-bar" class="bg-gradient-to-r from-teal-400 to-cyan-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                        <p id="performance-sufo-text" class="text-xs text-right text-gray-500 mt-1"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ============================================= -->
+        <!-- ========        EDIT VIEW          ======== -->
+        <!-- ============================================= -->
+        <div id="editView" class="hidden">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
+                <div class="flex justify-between items-center mb-6 border-b pb-4">
+                    <h1 class="text-3xl font-bold text-gray-900">Edit Portfolio</h1>
+                    <div>
+                        <button id="cancelEditBtn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition mr-2">Cancel</button>
+                        <button id="saveEditBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                            <i class="fas fa-save mr-2"></i>
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+                
+                <form id="editForm">
+                    <!-- Header Section -->
+                    <section>
+                        <h2 class="edit-section-title">Header</h2>
+                        <label class="edit-label" for="edit-header-name">Full Name</label>
+                        <input type="text" id="edit-header-name" class="edit-input">
+                        
+                        <label class="edit-label" for="edit-header-title">Title (e.g., Lecturer)</label>
+                        <input type="text" id="edit-header-title" class="edit-input">
+                        
+                        <label class="edit-label" for="edit-header-faculty">Faculty & Campus</label>
+                        <input type="text" id="edit-header-faculty" class="edit-input">
+                        
+                        <label class="edit-label" for="edit-header-image">Profile Image URL</label>
+                        <input type="text" id="edit-header-image" class="edit-input">
+                        
+                        <!-- Dynamic Badges -->
+                        <label class="edit-label">Badges</label>
+                        <div id="edit-header-badges-container" class="space-y-2">
+                            <!-- Badges edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-badge-btn" class="add-btn">Add Badge</button>
+
+                        <!-- Dynamic Links -->
+                        <label class="edit-label">Links</label>
+                        <div id="edit-header-links-container" class="space-y-2">
+                            <!-- Links edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-link-btn" class="add-btn">Add Link</button>
+                    </section>
+
+                    <!-- Professional Summary -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Professional Summary</h2>
+                        <label class="edit-label" for="edit-summary">Summary Text (HTML allowed)</label>
+                        <textarea id="edit-summary" class="edit-textarea"></textarea>
+                    </section>
+
+                    <!-- Awards -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Awards & Recognitions</h2>
+                        <div id="edit-awards-container" class="space-y-2">
+                            <!-- Awards edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-award-btn" class="add-btn">Add Award</button>
+                    </section>
+                    
+                    <!-- Intellectual Property -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Intellectual Property</h2>
+                        <div id="edit-ip-container" class="space-y-2">
+                            <!-- IP edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-ip-btn" class="add-btn">Add IP</button>
+                    </section>
+                    
+                    <!-- Admin Roles -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Administrative Roles</h2>
+                        <div id="edit-roles-container" class="space-y-2">
+                            <!-- Roles edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-role-btn" class="add-btn">Add Role</button>
+                    </section>
+
+                    <!-- Research: WoS -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Research: WoS Journals</h2>
+                        <div id="edit-research-wos-container" class="space-y-2">
+                            <!-- WoS edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-wos-btn" class="add-btn">Add WoS Publication</button>
+                    </section>
+
+                    <!-- Research: Book Chapters -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Research: Book Chapters</h2>
+                        <div id="edit-research-book-container" class="space-y-2">
+                            <!-- Book chapter edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-book-btn" class="add-btn">Add Book Chapter</button>
+                    </section>
+
+                    <!-- Research: Other -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Research: Other Publications</h2>
+                        <div id="edit-research-other-container" class="space-y-2">
+                            <!-- Other research edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-other-research-btn" class="add-btn">Add Other Publication</button>
+                    </section>
+                    
+                    <!-- Education -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Academic Background</h2>
+                        <div id="edit-education-container" class="space-y-2">
+                            <!-- Education edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-education-btn" class="add-btn">Add Education</button>
+                    </section>
+
+                    <!-- Professional Service -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Professional Service</h2>
+                        <div id="edit-service-container" class="space-y-2">
+                            <!-- Service edit fields will be injected by JS -->
+                        </div>
+                        <button type="button" id="add-service-btn" class="add-btn">Add Service</button>
+                    </section>
+
+                    <!-- Teaching Portfolio -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Teaching Portfolio</h2>
+                        <label class="edit-label" for="edit-teaching">Subjects (comma-separated)</label>
+                        <input type="text" id="edit-teaching" class="edit-input" placeholder="e.g., Corporate Finance, Islamic Finance, ...">
+                    </section>
+                    
+                    <!-- Research Interests -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Research Interests</h2>
+                        <label class="edit-label" for="edit-interests">Interests (comma-separated)</label>
+                        <input type="text" id="edit-interests" class="edit-input" placeholder="e.g., Sustainable Finance, FinTech, ...">
+                    </section>
+                    
+                    <!-- Performance -->
+                    <section class="mt-8">
+                        <h2 class="edit-section-title">Performance</h2>
+                        <label class="edit-label" for="edit-performance-myatp">MYATP Score (e.g., 91)</label>
+                        <input type="number" id="edit-performance-myatp" class="edit-input">
+                        <label class="edit-label" for="edit-performance-sufo">SUFO Score (e.g., 96)</label>
+                        <input type="number" id="edit-performance-sufo" class="edit-input">
+                    </section>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================= -->
+    <!-- ========        JAVASCRIPT         ======== -->
+    <!-- ============================================= -->
+    
+    <!-- Firebase SDK Imports -->
+    <script type="module">
+        // Firebase Services
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // ======== CONSTANTS ========
+        const SECRET_CODE = '365353';
+        const PORTFOLIO_DOC_ID = 'ahmad_fauze_main'; // Specific document ID for this portfolio
+
+        // ======== DATA STRUCTURE ========
+        const defaultPortfolioData = {
+            header: {
+                name: "Ahmad Fauze bin Abdul Hamit",
+                title: "Lecturer (Banking & Finance)",
+                faculty: "Faculty of Business and Management, UiTM Sabah",
+                imageUrl: "https://i.imgur.com/wvOF6kd.jpeg",
+                badges: [
+                    { text: "Google Certified Educator", icon: "fab fa-google", color: "bg-green-400 text-green-900" },
+                    { text: "Gemini Certified Educator", icon: "fas fa-brain", color: "bg-yellow-400 text-yellow-900" },
+                    { text: "Quizizz Super Trainer", icon: "fas fa-gamepad", color: "bg-purple-400 text-purple-900" },
+                    { text: "Canva Educator Creator", icon: "fas fa-palette", color: "bg-white bg-opacity-20" },
+                    { text: "Microsoft Innovative Educator", icon: "fab fa-microsoft", color: "bg-white bg-opacity-20" },
+                ],
+                links: [
+                    { title: "UiTM Expert", url: "https://expert.uitm.edu.my/V2/page-detail.php?id=wLAfnZR23CMWA3jw8ybnDBekOKy1qQHUX4fkJGJQNEM%3D", imageUrl: "https://i.imgur.com/lspSvPG.png", isIcon: false },
+                    { title: "Google Scholar", url: "https://scholar.google.com/citations?user=eJvlXzIAAAAJ&hl=en", imageUrl: "https://i.imgur.com/mYgMKZM.png", isIcon: false },
+                    { title: "ORCID", url: "https://orcid.org/0000-0002-4343-6037", imageUrl: "https://i.imgur.com/E1qAhFM.png", isIcon: false },
+                    { title: "Web of Science", url: "https://www.webofscience.com/wos/author/record/JVD-7667-2023", imageUrl: "https://i.imgur.com/G7tHW2m.png", isIcon: false },
+                    { title: "Contact Email", url: "mailto:ahmad920@uitm.edu.my", icon: "fas fa-envelope", isIcon: true },
+                ]
+            },
+            professionalSummary: "A dynamic and award-winning finance lecturer at UiTM Sabah with a passion for integrating technology into education. As a Google Certified Educator and one of Malaysia's first Quizizz Super Trainers, he excels in creating engaging, gamified learning experiences. His research focuses on sustainable finance, FinTech, and risk management, contributing actively to both academic literature and practical financial tools.",
+            awards: [
+                { text: "<b>GOLD Award & Best Presentation Award</b> for \"KadazanlinGO! Gamified Learning Application\" at ILEIID 2025." },
+                { text: "<b>GOLD Award</b> for \"ARQAMified Arabic Learning Application\" at ILEIID 2025." },
+                { text: "<b>GOLD Award</b> for the research \"Enhancing Financial Literacy and Sustainability Via Strategic Digital Initiatives to Empower Female Graduates in Sabah\" at the 2025 Interfaculty Research Competition." },
+                { text: "<b>GOLD Medal & Special Award for Uniqueness and Research Innovation</b> for the research \"KadazanlinGO!: A Collaborative Product-Based Research\" at the International Research Competition (IRC) 2025." },
+                { text: "<b>SILVER Medal</b> for the innovation \"KadazanlinGO!: A Gamified Mobile Learning Application\" at the National Language Innovation Competition B-Inovatif 2025 (UPSI)." },
+                { text: "<b>BRONZE Award</b> for the research \"ESG Leaders Vs. Laggards: The Financial Impact of Sincere ESG Engagement in Shariah-Compliant Firms\" at the 2025 Interfaculty Research Competition." },
+                { text: "<b>GOLD Award</b>, Micro-credential Competition (eCONDEV 2024 & 2022)" },
+                { text: "<b>GOLD Award</b>, Massive Open Online Course Competition (eCONDEV 2022)" },
+                { text: "<b>Anugerah Khas Fasilitator Micro-Credential Paling Aktif</b> (UiTM 2019-2022)" },
+                { text: "<b>Johan Pertandingan Inovasi (Berkumpulan)</b>, MAIJASA UiTM Cawangan Sabah 2022" },
+                { text: "<b>DIAMOND AWARD</b>, International Invention & Innovative Competition (Series 2/2019)" },
+                { text: "<b>Tun Abdul Razak Award</b> & <b>UiTM Best Graduate Award</b> (Bachelor's Degree)" },
+                { text: "<b>KPTM President Award</b> & <b>UiTM Vice Chancellor Award</b> (Diploma)" },
+            ],
+            ip: [
+                { title: "ARQAMified Eduplay", type: "Educational Interactive Mobile Application (Gamification)", role: "Creator / Co-Creator", regNo: "LY2025590135", regWith: "Intellectual Property Corporation of Malaysia (MyIPO)", date: "12 September 2025" },
+                { title: "KadazanlinGO! A Gamified Language Learning Hub", type: "Educational Interactive Mobile Application (Gamification)", role: "Creator / Co-Creator", regNo: "???", regWith: "Intellectual Property Corporation of Malaysia (MyIPO)", date: "21 September 2025" },
+            ],
+            adminRoles: [
+                { title: "Coordinator of Program 'Service-Learning Malaysia University for Society' (SULAM)", details: "UiTM Sabah Branch (2023-2026)", color: "blue" },
+                { title: "Resource Person (Course Lead)", details: "Led curriculum for FIN333 (2022-2023), FIN365 (2021-2022), and FIN242 (2020-2021)", color: "teal" },
+                { title: "Faculty Representative & Committee Roles", details: "Served as Faculty Representative for Media, National Outcomes Based Education (NOBLe for BA242 & BA272), and Research, Publication & Innovation. Also a member of the UFUTURE (E-Learning) Committee.", color: "gray" },
+            ],
+            research: {
+                wos: [
+                    { title: "Dynamic Triangulation between Shariah Compliance, ESG Transparency, and Firm Profitability", citation: "Hamit, AFA. <span class=\"font-medium\">International Journal of Research and Innovation in Social Science (IJRISS)</span>, Vol. 8(12), pp. 1159-1170. January 2025.", description: "This article explores the more important responsibility to businesses, long-term governance (ESG) is a goal. Ethical conduct, sustainability, and financial perf..." },
+                    { title: "The Effect of Financial Technology (FinTech) Adoption on Individual Over-Indebtedness in ASEAN-5 Countries", citation: "Hamit, AFB, Naily, N, et al. <span class=\"font-medium\">Economics</span>, Vol. ?, pp. ?-?. December 2024.", description: "This article examines the impact of financial technology (FinTech) on individual over-indebtedness in ASEAN-5 countries (Malaysia, Indonesia, Thailand, Singapore, and the Philippines)." },
+                    { title: "A realistic assessment of COVID-19 vaccination’s effect on the Malaysian stock market’s downside risk", citation: "Hamit, AFA, Othman, MQ, et al. <span class=\"font-medium\">Journal of Business Management & Accounting (JBMA)</span>, Vol. 14(1), pp. 1-22. May 2023.", description: "Recent studies have emerging devastating negative impact of the global-scale widespread coronavirus disease (COVID-11) pandemic on the economy, especially widespread on the development of the stock market..." },
+                    { title: "Estimating the precision of market risk within the tiger cub economies’ region through VaR backtesting", citation: "Hamit, AFA, Frick, N, et al. <span class=\"font-medium\">Journal of Emerging Economies and Islamic Research</span>, Vol. 10(3), pp. 63-78. September 2022.", description: "Tiger cub economies this region is in calm and stormy market conditions. The primary objective of this empirical research is..." },
+                    { title: "A parametric survival analysis of fundamental factors and sentiment index towards future stock returns: new chapter global financial crisis 2007", citation: "Bujang, I, Hamit, AFA, et al. <span class=\"font-medium\">Journal of Business & Retail Management Research</span>, Vol. 10(2), pp. 158-170. April 2016.", description: "The secondary objective of the empirical research is..." },
+                ],
+                bookChapters: [
+                    { title: "Rethinking Zakat and Waqf Management for Society 5.0", book: "Chapter in the book: <span class=\"font-medium\">\"New Ideas and Concepts on Zakat and Waqf towards Society 5.0\"</span> by PPZ-MAIWP.", color: "purple" },
+                    { title: "Financing your Business", book: "Chapter in the book: <span class=\"font-medium\">\"Entrepreneurship in Malaysia: Navigating Opportunities in a Dynamic Landscape\"</span>.", color: "purple" },
+                    { title: "Enhancing Financial Literacy and Sustainability via Strategic Digital Initiatives to Empower Female Graduates in Sabah", book: "Chapter published in conjunction with the <span class=\"font-medium\">1st ASEAN Women’s Conference on Best Practices (AWCOBP) 2025</span>.", color: "cyan" },
+                ],
+                other: [
+                    { title: "Innovative Pedagogical Approaches in Gamified Learning: Insights from Malaysia’s Inaugural Quizizz Super Trainers (Aug 2025)", color: "green" },
+                    { title: "Assessing the Impact of Microprudential Policy towards Household Loan Deliquency (Mar 2023)", color: "blue" },
+                    { title: "The Triangulation of Shariah-compliancy, ESG-transparency, and the Financial Performance of Malaysia Islamic Equities (Feb 2023)", color: "green" },
+                ]
+            },
+            education: [
+                { degree: "Master of Science (Business Management)", institution: "UiTM Shah Alam - <span class=\"font-semibold\">Recipient of Research Excellence Award</span>", color: "teal" },
+                { degree: "Bachelor of Business Admin (Hons) Finance", institution: "UiTM Sabah - <span class=\"font-semibold\">First Class, Tun Abdul Razak Award</span>", color: "cyan" },
+                { degree: "Diploma in Business Studies", institution: "Kolej Poly-Tech MARA - <span class=\"font-semibold\">President & Vice Chancellor Awards</span>", color: "green" },
+            ],
+            service: [
+                { title: "National Examination Question Setter", details: "Appointed for Business Management 1, Matriculation Program Semester Examination (PSPM) by the Ministry of Education Malaysia (2025)." },
+                { title: "National Examination Script Examiner", details: "Appointed for the Matriculation Program Semester Examination (PSPM), Semesters I & III, Session 2025/2026." },
+                { title: "Invitational Speaker & Trainer", details: "Invited speaker on \"Magic Canva for Productive Works\" by UiTM Permatang Pauh and served as a Trainer for the HRD Corp National Training Week (NTW)." },
+                { title: "Journal Reviewer", details: "Appointed reviewer for journals including <span class=\"font-semibold\">Journal of Business Management and Accounting (JBMA)</span>, <span class=\"font-semibold\">International Journal of Research and Innovation in Social Science (IJRISS)</span>, and <span class=\"font-semibold\">International Journal of Latest Technology in Engineering, Management & Applied Science</span>." },
+            ],
+            teaching: ["Corporate Finance", "Islamic Finance", "Investment & Portfolio Mgt.", "Technical Analysis", "Personal Financial Planning", "Quantitative Research", "Futures and Options", "Risk and Insurance"],
+            interests: ["Sustainable Finance", "Financial Risk Management", "Digital Banking & FinTech", "ESG & Responsible Investment", "Financial Inclusion"],
+            performance: {
+                myatp: "91",
+                sufo: "96"
+            }
+        };
+
+        // ======== GLOBAL STATE ========
+        let currentData = { ...defaultPortfolioData }; // Start with default data, will be overwritten by Firebase
+        let app, db, auth, appId, userId, portfolioDocRef;
+
+        // ======== DATA FUNCTIONS ========
+        
+        /**
+         * Loads data from Firestore in real-time.
+         * Sets up an onSnapshot listener.
+         */
+        function loadData() {
+            if (!db) {
+                console.error("Firestore (db) is not initialized.");
+                return;
+            }
+            
+            console.log("Setting up snapshot listener for:", portfolioDocRef.path);
+
+            // Set up real-time listener
+            onSnapshot(portfolioDocRef, async (docSnap) => {
+                if (docSnap.exists()) {
+                    console.log("Document data received:", docSnap.data());
+                    currentData = docSnap.data();
+                } else {
+                    console.log("Document does not exist. Creating with default data...");
+                    currentData = { ...defaultPortfolioData };
+                    // Save the default data to create the document
+                    await saveData(currentData); 
+                }
+                
+                // Render both views with the new data
+                renderProfileView(currentData);
+                renderEditForm(currentData);
+            }, (error) => {
+                console.error("Error listening to document:", error);
+            });
+        }
+
+        /**
+         * Saves data to Firestore.
+         * @param {object} data The complete portfolio data object to save.
+         */
+        async function saveData(data) {
+            if (!db || !portfolioDocRef) {
+                console.error("Firestore not initialized, cannot save.");
+                return;
+            }
+            
+            console.log("Saving data to Firestore...");
+            try {
+                // setDoc will overwrite the entire document
+                await setDoc(portfolioDocRef, data);
+                showNotification("Portfolio Updated!");
+            } catch (error) {
+                console.error("Error saving document:", error);
+                showNotification("Error saving data!", true);
+            }
+        }
+        
+        /**
+         * Shows a notification message.
+         * @param {string} message The message to display.
+         * @param {boolean} [isError=false] If true, shows a red error notification.
+         */
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            const colorClass = isError ? "bg-red-600" : "bg-green-600";
+            const iconClass = isError ? "fas fa-times-circle" : "fas fa-check-circle";
+            
+            notification.innerHTML = `<div class="${colorClass} text-white px-6 py-4 rounded-xl shadow-lg text-lg font-semibold"><i class="${iconClass} mr-2"></i> ${message}</div>`;
+            notification.classList.remove('hidden');
+            
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 2500);
+        }
+
+        // ======== RENDER PROFILE VIEW ========
+        function renderProfileView(data) {
+            if (!data) data = defaultPortfolioData;
+            
+            // Header
+            document.getElementById('header-name').textContent = data.header.name;
+            document.getElementById('header-title').textContent = data.header.title;
+            document.getElementById('header-faculty').textContent = data.header.faculty;
+            document.getElementById('header-image').src = data.header.imageUrl;
+            
+            // Header Badges
+            const badgesContainer = document.getElementById('header-badges');
+            badgesContainer.innerHTML = '';
+            (data.header.badges || []).forEach(badge => {
+                badgesContainer.innerHTML += `
+                    <span class="${badge.color} px-4 py-2 rounded-full text-sm font-bold">
+                        <i class="${badge.icon} mr-2"></i> ${badge.text}
+                    </span>
+                `;
+            });
+            
+            // Header Links
+            const linksContainer = document.getElementById('header-links');
+            linksContainer.innerHTML = '';
+            (data.header.links || []).forEach(link => {
+                if (link.isIcon) {
+                    linksContainer.innerHTML += `
+                        <a href="${link.url}" title="${link.title}" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110 flex items-center justify-center w-10 h-10">
+                            <i class="${link.icon} text-2xl"></i>
+                        </a>
+                    `;
+                } else {
+                    linksContainer.innerHTML += `
+                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" title="${link.title}" class="text-white p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
+                            <img src="${link.imageUrl}" alt="${link.title}" class="w-10 h-10">
+                        </a>
+                    `;
+                }
+            });
+
+            // Professional Summary
+            document.getElementById('professional-summary').innerHTML = data.professionalSummary;
+
+            // Awards
+            const awardsList = document.getElementById('awards-list');
+            awardsList.innerHTML = '';
+            (data.awards || []).forEach(award => {
+                awardsList.innerHTML += `<li>${award.text}</li>`;
+            });
+
+            // IP
+            const ipList = document.getElementById('ip-list');
+            ipList.innerHTML = '';
+            (data.ip || []).forEach(item => {
+                ipList.innerHTML += `
+                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                        <h4 class="font-semibold text-gray-800">${item.title}</h4>
+                        <p class="text-sm text-gray-600 mt-1">
+                            <b>Type:</b> ${item.type}<br>
+                            <b>Role:</b> ${item.role}<br>
+                            <b>Registration No.:</b> ${item.regNo}<br>
+                            <b>Registered with:</b> ${item.regWith}<br>
+                            <b>Registration Date:</b> ${item.date}
+                        </p>
+                    </div>
+                `;
+            });
+
+            // Admin Roles
+            const rolesList = document.getElementById('roles-list');
+            rolesList.innerHTML = '';
+            (data.adminRoles || []).forEach(role => {
+                const color = role.color || 'blue';
+                rolesList.innerHTML += `
+                    <div class="p-4 bg-${color}-50 rounded-lg border-l-4 border-${color}-400">
+                        <h4 class="font-semibold text-gray-800">${role.title}</h4>
+                        <p class="text-sm text-gray-600 mt-1">${role.details}</p>
+                    </div>
+                `;
+            });
+
+            // Research - WoS
+            const wosList = document.getElementById('research-wos-list');
+            wosList.innerHTML = '';
+            (data.research.wos || []).forEach(item => {
+                wosList.innerHTML += `
+                    <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-400">
+                        <h4 class="font-semibold text-gray-800">${item.title}</h4>
+                        <p class="text-sm text-gray-600 mt-1">${item.citation} ${item.description}</p>
+                    </div>
+                `;
+            });
+            
+            // Research - Book Chapters
+            const bookList = document.getElementById('research-book-list');
+            bookList.innerHTML = '';
+            (data.research.bookChapters || []).forEach(item => {
+                const color = item.color || 'purple';
+                bookList.innerHTML += `
+                    <div class="p-4 bg-${color}-50 rounded-lg border-l-4 border-${color}-400">
+                        <h4 class="font-semibold text-gray-800">${item.title}</h4>
+                        <p class="text-sm text-gray-600 mt-1">${item.book}</p>
+                    </div>
+                `;
+            });
+            
+            // Research - Other
+            const otherList = document.getElementById('research-other-list');
+            otherList.innerHTML = '';
+            (data.research.other || []).forEach(item => {
+                const color = item.color || 'green';
+                otherList.innerHTML += `
+                    <div class="p-4 bg-${color}-50 rounded-lg border-l-4 border-${color}-400">
+                        <h4 class="font-semibold text-gray-800">${item.title}</h4>
+                    </div>
+                `;
+            });
+
+            // Education
+            const educationList = document.getElementById('education-list');
+            educationList.innerHTML = '';
+            (data.education || []).forEach(item => {
+                const color = item.color || 'teal';
+                educationList.innerHTML += `
+                    <div class="p-3 bg-${color}-50 rounded-lg border-l-4 border-${color}-500">
+                        <p class="text-sm font-bold text-gray-900">${item.degree}</p>
+                        <p class="text-xs text-gray-600">${item.institution}</p>
+                    </div>
+                `;
+            });
+            
+            // Service
+            const serviceList = document.getElementById('service-list');
+            serviceList.innerHTML = '';
+            (data.service || []).forEach(item => {
+                serviceList.innerHTML += `
+                    <div class="p-3 bg-sky-50 rounded-lg border-l-4 border-sky-500">
+                        <p class="text-sm font-bold text-gray-900">${item.title}</p>
+                        <p class="text-xs text-gray-600">${item.details}</p>
+                    </div>
+                `;
+            });
+
+            // Teaching
+            const teachingList = document.getElementById('teaching-list');
+            teachingList.innerHTML = '';
+            (data.teaching || []).forEach(item => {
+                teachingList.innerHTML += `<span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">${item}</span>`;
+            });
+
+            // Interests
+            const interestsList = document.getElementById('interests-list');
+            interestsList.innerHTML = '';
+            const interestColors = ['green', 'teal', 'cyan', 'blue', 'emerald'];
+            (data.interests || []).forEach((item, index) => {
+                const color = interestColors[index % interestColors.length];
+                interestsList.innerHTML += `<span class="px-3 py-1 bg-${color}-100 text-${color}-800 rounded-full text-sm font-medium">${item}</span>`;
+            });
+
+            // Performance
+            const myatp = data.performance?.myatp || 0;
+            const sufo = data.performance?.sufo || 0;
+            document.getElementById('performance-myatp-bar').style.width = `${myatp}%`;
+            document.getElementById('performance-myatp-text').innerHTML = `Consistently high performer, reaching <b>${myatp}%</b> in 2022.`;
+            document.getElementById('performance-sufo-bar').style.width = `${sufo}%`;
+            document.getElementById('performance-sufo-text').innerHTML = `Consistently rated <b>"Excellent"</b> & <b>"Very Good"</b>, with scores up to <b>${sufo}</b>.`;
+        }
+
+        // ======== RENDER EDIT FORM ========
+        // (Populates the form with data)
+        function renderEditForm(data) {
+            if (!data) data = defaultPortfolioData;
+            
+            // Header
+            document.getElementById('edit-header-name').value = data.header.name;
+            document.getElementById('edit-header-title').value = data.header.title;
+            document.getElementById('edit-header-faculty').value = data.header.faculty;
+            document.getElementById('edit-header-image').value = data.header.imageUrl;
+            
+            // Dynamic simple list render
+            renderSimpleListEditor('edit-awards-container', data.awards || [], 'award', (item) => `<input type="text" class="edit-input w-full" value="${item.text.replace(/"/g, "'")}">`);
+            renderSimpleListEditor('edit-research-other-container', data.research.other || [], 'other-research', (item) => `<input type="text" class="edit-input w-full" value="${item.title.replace(/"/g, "'")}" data-color="${item.color}">`);
+
+            // Dynamic complex list renders
+            renderComplexListEditor('edit-header-badges-container', data.header.badges || [], 'badge', (item) => `
+                <input type="text" class="edit-input flex-1" data-key="text" value="${item.text}" placeholder="Badge Text">
+                <input type="text" class="edit-input w-1/3" data-key="icon" value="${item.icon}" placeholder="FontAwesome Icon (e.g., fas fa-brain)">
+                <input type="text" class="edit-input w-1/3" data-key="color" value="${item.color}" placeholder="Tailwind Color (e.g., bg-green-400)">
+            `);
+            
+            renderComplexListEditor('edit-header-links-container', data.header.links || [], 'link', (item) => `
+                <input type="text" class="edit-input flex-1" data-key="title" value="${item.title}" placeholder="Link Title">
+                <input type="text" class="edit-input flex-1" data-key="url" value="${item.url}" placeholder="URL">
+                <input type="text" class="edit-input w-1/4" data-key="imageUrl" value="${item.imageUrl || ''}" placeholder="Image URL (if not icon)">
+                <input type="text" class="edit-input w-1/4" data-key="icon" value="${item.icon || ''}" placeholder="Icon (if not image)">
+                <label class="flex items-center"><input type="checkbox" class="mr-2" data-key="isIcon" ${item.isIcon ? 'checked' : ''}> Is Icon?</label>
+            `);
+            
+            renderComplexListEditor('edit-ip-container', data.ip || [], 'ip', (item) => `
+                <input type="text" class="edit-input w-full" data-key="title" value="${item.title}" placeholder="Title">
+                <input type="text" class="edit-input w-full" data-key="type" value="${item.type}" placeholder="Type">
+                <input type="text" class="edit-input w-1/2" data-key="role" value="${item.role}" placeholder="Role">
+                <input type="text" class="edit-input w-1/4" data-key="regNo" value="${item.regNo}" placeholder="Reg No.">
+                <input type="text" class="edit-input w-1/2" data-key="regWith" value="${item.regWith}" placeholder="Registered With">
+                <input type="text" class="edit-input w-1/4" data-key="date" value="${item.date}" placeholder="Date">
+            `);
+            
+            renderComplexListEditor('edit-roles-container', data.adminRoles || [], 'role', (item) => `
+                <input type="text" class="edit-input flex-1" data-key="title" value="${item.title}" placeholder="Role Title">
+                <input type="text" class="edit-input flex-1" data-key="details" value="${item.details}" placeholder="Details">
+                <input type="text" class="edit-input w-1/4" data-key="color" value="${item.color}" placeholder="Color (e.g., blue)">
+            `);
+
+            renderComplexListEditor('edit-research-wos-container', data.research.wos || [], 'wos', (item) => `
+                <input type="text" class="edit-input w-full" data-key="title" value="${item.title}" placeholder="Title">
+                <input type="text" class="edit-input w-full" data-key="citation" value="${item.citation.replace(/"/g, "'")}" placeholder="Citation">
+                <textarea class="edit-textarea w-full" data-key="description" placeholder="Description">${item.description}</textarea>
+            `);
+
+            renderComplexListEditor('edit-research-book-container', data.research.bookChapters || [], 'book', (item) => `
+                <input type="text" class="edit-input flex-1" data-key="title" value="${item.title}" placeholder="Chapter Title">
+                <input type="text" class="edit-input flex-1" data-key="book" value="${item.book.replace(/"/g, "'")}" placeholder="Book Details">
+                <input type="text" class="edit-input w-1/4" data-key="color" value="${item.color}" placeholder="Color (e.g., purple)">
+            `);
+            
+            renderComplexListEditor('edit-education-container', data.education || [], 'education', (item) => `
+                <input type="text" class="edit-input flex-1" data-key="degree" value="${item.degree}" placeholder="Degree">
+                <input type="text" class="edit-input flex-1" data-key="institution" value="${item.institution.replace(/"/g, "'")}" placeholder="Institution">
+                <input type="text" class="edit-input w-1/4" data-key="color" value="${item.color}" placeholder="Color (e.g., teal)">
+            `);
+            
+            renderComplexListEditor('edit-service-container', data.service || [], 'service', (item) => `
+                <input type="text" class="edit-input flex-1" data-key="title" value="${item.title}" placeholder="Service Title">
+                <input type="text" class="edit-input flex-1" data-key="details" value="${item.details.replace(/"/g, "'")}" placeholder="Details">
+            `);
+
+            // Summary
+            document.getElementById('edit-summary').value = data.professionalSummary;
+
+            // Simple comma-separated lists
+            document.getElementById('edit-teaching').value = (data.teaching || []).join(', ');
+            document.getElementById('edit-interests').value = (data.interests || []).join(', ');
+            
+            // Performance
+            document.getElementById('edit-performance-myatp').value = data.performance?.myatp || 0;
+            document.getElementById('edit-performance-sufo').value = data.performance?.sufo || 0;
+        }
+
+        // --- Helper for simple list (e.g., awards) ---
+        function renderSimpleListEditor(containerId, data, dataAttr, templateFn) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            (data || []).forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center edit-group p-2';
+                div.setAttribute(`data-${dataAttr}-index`, index);
+                div.innerHTML = `
+                    ${templateFn(item)}
+                    <button type="button" class="remove-btn" data-type="${dataAttr}">Remove</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        // --- Helper for complex list (e.g., IPs) ---
+        function renderComplexListEditor(containerId, data, dataAttr, templateFn) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            (data || []).forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex flex-wrap gap-2 items-center edit-group';
+                div.setAttribute(`data-${dataAttr}-index`, index);
+                div.innerHTML = `
+                    ${templateFn(item)}
+                    <button type="button" class="remove-btn w-full mt-2" data-type="${dataAttr}">Remove</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        // ======== SAVE EDIT FORM ========
+        function saveEditForm() {
+            let newData = { research: {}, header: {} };
+
+            // Header
+            newData.header.name = document.getElementById('edit-header-name').value;
+            newData.header.title = document.getElementById('edit-header-title').value;
+            newData.header.faculty = document.getElementById('edit-header-faculty').value;
+            newData.header.imageUrl = document.getElementById('edit-header-image').value;
+            
+            // Dynamic simple lists
+            newData.awards = parseSimpleList('edit-awards-container', (input) => ({ text: input.value }));
+            newData.research.other = parseSimpleList('edit-research-other-container', (input) => ({ title: input.value, color: input.dataset.color || 'green' }));
+
+            // Dynamic complex lists
+            newData.header.badges = parseComplexList('edit-header-badges-container', (inputs) => ({
+                text: inputs.text.value,
+                icon: inputs.icon.value,
+                color: inputs.color.value
+            }));
+            
+            newData.header.links = parseComplexList('edit-header-links-container', (inputs) => ({
+                title: inputs.title.value,
+                url: inputs.url.value,
+                imageUrl: inputs.imageUrl.value,
+                icon: inputs.icon.value,
+                isIcon: inputs.isIcon.checked
+            }));
+
+            newData.ip = parseComplexList('edit-ip-container', (inputs) => ({
+                title: inputs.title.value,
+                type: inputs.type.value,
+                role: inputs.role.value,
+                regNo: inputs.regNo.value,
+                regWith: inputs.regWith.value,
+                date: inputs.date.value
+            }));
+
+            newData.adminRoles = parseComplexList('edit-roles-container', (inputs) => ({
+                title: inputs.title.value,
+                details: inputs.details.value,
+                color: inputs.color.value
+            }));
+
+            newData.research.wos = parseComplexList('edit-research-wos-container', (inputs) => ({
+                title: inputs.title.value,
+                citation: inputs.citation.value,
+                description: inputs.description.value
+            }));
+            
+            newData.research.bookChapters = parseComplexList('edit-research-book-container', (inputs) => ({
+                title: inputs.title.value,
+                book: inputs.book.value,
+                color: inputs.color.value
+            }));
+            
+            newData.education = parseComplexList('edit-education-container', (inputs) => ({
+                degree: inputs.degree.value,
+                institution: inputs.institution.value,
+                color: inputs.color.value
+            }));
+            
+            newData.service = parseComplexList('edit-service-container', (inputs) => ({
+                title: inputs.title.value,
+                details: inputs.details.value
+            }));
+
+            // Summary
+            newData.professionalSummary = document.getElementById('edit-summary').value;
+
+            // Simple comma-separated lists
+            newData.teaching = document.getElementById('edit-teaching').value.split(',').map(s => s.trim()).filter(Boolean);
+            newData.interests = document.getElementById('edit-interests').value.split(',').map(s => s.trim()).filter(Boolean);
+
+            // Performance
+            newData.performance = {
+                myatp: document.getElementById('edit-performance-myatp').value,
+                sufo: document.getElementById('edit-performance-sufo').value
+            };
+            
+            return newData;
+        }
+
+        // --- Helper for parsing simple list ---
+        function parseSimpleList(containerId, createItemFn) {
+            const container = document.getElementById(containerId);
+            const items = [];
+            container.querySelectorAll('.edit-group').forEach(group => {
+                const input = group.querySelector('input, textarea');
+                if(input) items.push(createItemFn(input));
+            });
+            return items;
+        }
+
+        // --- Helper for parsing complex list ---
+        function parseComplexList(containerId, createItemFn) {
+            const container = document.getElementById(containerId);
+            const items = [];
+            container.querySelectorAll('.edit-group').forEach(group => {
+                const inputs = {};
+                group.querySelectorAll('[data-key]').forEach(input => {
+                    inputs[input.dataset.key] = input;
+                });
+                items.push(createItemFn(inputs));
+            });
+            return items;
+        }
+
+        // ======== VIEW TOGGLING ========
+        function showProfileView() {
+            document.getElementById('profileView').classList.remove('hidden');
+            document.getElementById('editView').classList.add('hidden');
+            document.getElementById('adminButton').classList.remove('hidden');
+        }
+
+        function showEditView() {
+            document.getElementById('profileView').classList.add('hidden');
+            document.getElementById('editView').classList.remove('hidden');
+            document.getElementById('adminButton').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginError').classList.add('hidden');
+            document.getElementById('secretCode').value = '';
+        }
+        
+        function hideLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        /**
+         * Initializes Firebase app, auth, and Firestore.
+         * Sets up auth listener and loads data.
+         */
+        async function initializeFirebase() {
+            try {
+                // Get mandatory config from global variables
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const firebaseConfig = JSON.parse(__firebase_config);
+
+                // Initialize Firebase
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                // Enable debug logging
+                setLogLevel('Debug');
+
+                // Define the path to the single portfolio document
+                // Uses a public collection as per instructions
+                const collectionPath = `portfolios`;
+                portfolioDocRef = doc(db, "artifacts", appId, "public", "data", collectionPath, PORTFOLIO_DOC_ID);
+                console.log("Firestore document path:", portfolioDocRef.path);
+
+                // Auth state listener
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Authenticated with userId:", userId);
+                        // Once authenticated, load data
+                        loadData();
+                    } else {
+                        userId = null;
+                        console.log("User is not authenticated.");
+                    }
+                });
+
+                // Sign in
+                console.log("Attempting authentication...");
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                document.getElementById('header-name').textContent = "Error loading data.";
+            }
+        }
+
+        // ======== INITIALIZATION ========
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Initialize Firebase
+            initializeFirebase();
+
+            // --- Event Listeners ---
+            document.getElementById('adminButton').addEventListener('click', showLoginModal);
+            
+            document.getElementById('cancelLoginBtn').addEventListener('click', hideLoginModal);
+            
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const code = document.getElementById('secretCode').value;
+                if (code === SECRET_CODE) {
+                    hideLoginModal();
+                    showEditView();
+                } else {
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            });
+            
+            document.getElementById('cancelEditBtn').addEventListener('click', () => {
+                if (confirm('Are you sure? Any unsaved changes will be lost.')) {
+                    renderEditForm(currentData); // Reset form to last saved state
+                    showProfileView();
+                }
+            });
+            
+            // Make save button async to await saveData
+            document.getElementById('saveEditBtn').addEventListener('click', async () => {
+                try {
+                    const newData = saveEditForm();
+                    currentData = newData; // Update global state
+                    
+                    // Await the save operation to Firestore
+                    await saveData(currentData); 
+                    
+                    // Data is already updated via onSnapshot, but we can render
+                    // immediately for a snappier feel.
+                    renderProfileView(currentData); 
+                    renderEditForm(currentData); 
+                    showProfileView(); 
+                } catch (error) {
+                    console.error("Error saving data:", error);
+                    showNotification("An error occurred while saving.", true);
+                }
+            });
+            
+            // --- Add Button Listeners (Modifies local currentData, then re-renders form) ---
+            document.getElementById('add-badge-btn').addEventListener('click', () => {
+                if (!currentData.header.badges) currentData.header.badges = [];
+                currentData.header.badges.push({ text: "New Badge", icon: "fas fa-star", color: "bg-gray-400" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-link-btn').addEventListener('click', () => {
+                if (!currentData.header.links) currentData.header.links = [];
+                currentData.header.links.push({ title: "New Link", url: "https://", imageUrl: "", icon: "", isIcon: false });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-award-btn').addEventListener('click', () => {
+                if (!currentData.awards) currentData.awards = [];
+                currentData.awards.push({ text: "<b>New Award</b>" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-ip-btn').addEventListener('click', () => {
+                if (!currentData.ip) currentData.ip = [];
+                currentData.ip.push({ title: "New IP", type: "", role: "", regNo: "", regWith: "", date: "" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-role-btn').addEventListener('click', () => {
+                if (!currentData.adminRoles) currentData.adminRoles = [];
+                currentData.adminRoles.push({ title: "New Role", details: "", color: "blue" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-wos-btn').addEventListener('click', () => {
+                if (!currentData.research.wos) currentData.research.wos = [];
+                currentData.research.wos.push({ title: "New Publication", citation: "", description: "" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-book-btn').addEventListener('click', () => {
+                if (!currentData.research.bookChapters) currentData.research.bookChapters = [];
+                currentData.research.bookChapters.push({ title: "New Chapter", book: "", color: "purple" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-other-research-btn').addEventListener('click', () => {
+                if (!currentData.research.other) currentData.research.other = [];
+                currentData.research.other.push({ title: "New Publication", color: "green" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-education-btn').addEventListener('click', () => {
+                if (!currentData.education) currentData.education = [];
+                currentData.education.push({ degree: "New Degree", institution: "", color: "teal" });
+                renderEditForm(currentData);
+            });
+            document.getElementById('add-service-btn').addEventListener('click', () => {
+                if (!currentData.service) currentData.service = [];
+                currentData.service.push({ title: "New Service", details: "" });
+                renderEditForm(currentData);
+            });
+
+            // --- Remove Button Listener (Event Delegation) ---
+            document.getElementById('editForm').addEventListener('click', (e) => {
+                if (e.target && e.target.classList.contains('remove-btn')) {
+                    const type = e.target.dataset.type;
+                    const group = e.target.closest('.edit-group');
+                    if (!group) return;
+
+                    const container = group.parentElement;
+                    const index = Array.from(container.children).indexOf(group);
+                    
+                    if (index === -1) return;
+
+                    // Remove from data
+                    try {
+                        if (type === 'badge') currentData.header.badges.splice(index, 1);
+                        if (type === 'link') currentData.header.links.splice(index, 1);
+                        if (type === 'award') currentData.awards.splice(index, 1);
+                        if (type === 'ip') currentData.ip.splice(index, 1);
+                        if (type === 'role') currentData.adminRoles.splice(index, 1);
+                        if (type === 'wos') currentData.research.wos.splice(index, 1);
+                        if (type === 'book') currentData.research.bookChapters.splice(index, 1);
+                        if (type === 'other-research') currentData.research.other.splice(index, 1);
+                        if (type === 'education') currentData.education.splice(index, 1);
+                        if (type === 'service') currentData.service.splice(index, 1);
+                    } catch (error) {
+                        console.error("Error removing item:", error);
+                    }
+                    
+                    // Re-render form
+                    renderEditForm(currentData);
+                }
+            });
+
+            // Show admin button after a delay
+            setTimeout(() => {
+                document.getElementById('adminButton').classList.remove('hidden');
+            }, 500);
+        });
+
+    </script>
+</body>
+</html>
+
+
