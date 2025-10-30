@@ -20,14 +20,14 @@ console.log('==============================================\n');
 
 console.log('📍 SCENARIO 1: Google Sign-In\n');
 console.log('1. Faculty member opens their portfolio page');
-console.log('   → Example: https://fpp-uitmsabah.github.io/permata/nornajihah.html\n');
+console.log('   → Example: https://yourdomain.com/portfolio/faculty-name.html\n');
 
 console.log('2. Clicks "Sign In" button in top navigation\n');
 
 console.log('3. Selects "Google Sign-In" option\n');
 
 console.log('4. Signs in with institutional Google account');
-console.log('   → Email: najihahnadia@uitm.edu.my\n');
+console.log('   → Email: faculty.member@institution.edu.my\n');
 
 console.log('5. System checks authorization:');
 console.log('   ✓ Is the Google email authorized? → YES');
@@ -46,7 +46,7 @@ console.log('2. Clicks "Sign In" button\n');
 console.log('3. Selects "Staff ID" tab\n');
 
 console.log('4. Enters credentials:');
-console.log('   → Employee ID: 366566');
+console.log('   → Employee ID: EMP001');
 console.log('   → Secret Code: ********\n');
 
 console.log('5. System validates with backend API:');
@@ -81,7 +81,7 @@ console.log('5. Clicks "Save Changes"\n');
 console.log('6. System sends authenticated request to API:');
 console.log('   POST /api/portfolio/update');
 console.log('   Authorization: Bearer <firebase-token>');
-console.log('   Body: { employeeId: "366566", changes: {...} }\n');
+console.log('   Body: { employeeId: "EMP001", changes: {...} }\n');
 
 console.log('7. API verifies:');
 console.log('   ✓ Token is valid');
@@ -211,15 +211,15 @@ console.log('==============================================');
 console.log('  Faculty Member Experience');
 console.log('==============================================\n');
 
-console.log('👤 Dr. Nornajihah Nadia wants to update her bio:\n');
+console.log('👤 Dr. Example Faculty wants to update their bio:\n');
 
 console.log('Step 1: Navigate to portfolio');
-console.log('  → https://fpp-uitmsabah.github.io/permata/nornajihah.html\n');
+console.log('  → https://yourdomain.com/portfolio/faculty-name.html\n');
 
 console.log('Step 2: Sign in');
 console.log('  → Clicks "Sign In" button');
 console.log('  → Chooses Google Sign-In');
-console.log('  → Signs in with najihahnadia@uitm.edu.my\n');
+console.log('  → Signs in with faculty.member@institution.edu.my\n');
 
 console.log('Step 3: Enter edit mode');
 console.log('  → Clicks "Edit Portfolio" button');
@@ -244,14 +244,14 @@ console.log('==============================================');
 console.log('  Admin Experience');
 console.log('==============================================\n');
 
-console.log('👨‍💼 Admin wants to give Dr. Nornajihah edit access:\n');
+console.log('👨‍💼 Admin wants to give Dr. Example Faculty edit access:\n');
 
 console.log('Step 1: Open admin interface');
 console.log('  → http://localhost:3000/admin-auth-setup.html\n');
 
 console.log('Step 2: Fill in the form');
-console.log('  → Employee ID: 366566');
-console.log('  → Google Email: najihahnadia@uitm.edu.my');
+console.log('  → Employee ID: EMP001');
+console.log('  → Google Email: faculty.member@institution.edu.my');
 console.log('  → Secret Code: SecurePassword123');
 console.log('  → Can Edit: ✓ (checked)\n');
 
@@ -260,7 +260,7 @@ console.log('  → Clicks "Setup Authentication"');
 console.log('  → Sees "Authentication setup completed" message\n');
 
 console.log('Step 4: Inform faculty member');
-console.log('  → Email Dr. Nornajihah');
+console.log('  → Email the faculty member');
 console.log('  → Provide credentials if using Staff ID method\n');
 
 console.log('✅ Faculty member can now edit their portfolio!\n');
