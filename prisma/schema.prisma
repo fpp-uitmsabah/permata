@@ -15,18 +15,22 @@ datasource db {
 }
 
 model Faculty {
-  id          String   @id @default(cuid())
-  name        String
-  title       String?
-  department  String?
-  email       String?  @unique
-  phone       String?
-  expertise   String[]
-  bio         String?
-  imageUrl    String?
-  profileUrl  String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String
+  title        String?
+  department   String?
+  email        String?  @unique
+  phone        String?
+  expertise    String[]
+  bio          String?
+  imageUrl     String?
+  profileUrl   String?
+  employeeId   String?  @unique
+  secretCode   String?
+  googleEmail  String?
+  canEdit      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("faculties")
 }

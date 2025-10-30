@@ -3,3 +3,14 @@ node_modules
 .env
 
 /generated/prisma
+
+# Firebase service account credentials
+firebase-service-account.json
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

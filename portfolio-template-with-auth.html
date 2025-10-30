@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Template with Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    
+    <style>
+        /* Editable field styles */
+        .editable-active {
+            outline: 2px dashed #3b82f6;
+            outline-offset: 4px;
+            background-color: #eff6ff;
+            padding: 4px;
+            border-radius: 4px;
+            min-height: 1.5em;
+        }
+        
+        .editable-active:hover {
+            background-color: #dbeafe;
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tab-button.active {
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <!-- Authentication metadata (hidden) -->
+    <div id="portfolioMetadata" 
+         data-employee-id="366566" 
+         data-portfolio-email="najihahnadia@uitm.edu.my"
+         style="display: none;">
+    </div>
+
+    <!-- Top Navigation Bar with Auth -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-gray-700 hover:text-gray-900 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Directory
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div id="userInfo"></div>
+                    
+                    <button 
+                        id="editButton" 
+                        onclick="enterEditMode()" 
+                        class="hidden bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                        Edit Portfolio
+                    </button>
+                    
+                    <button 
+                        id="authButton" 
+                        onclick="showAuthModal()" 
+                        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Edit Controls (shown when in edit mode) -->
+    <div id="editControls" class="bg-yellow-50 border-b border-yellow-200 py-3" style="display: none;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center text-yellow-800">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="font-medium">Edit Mode Active - Click on highlighted fields to edit</span>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="saveChanges()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium">
+                        Save Changes
+                    </button>
+                    <button onclick="cancelEdit()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors font-medium">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <div class="flex items-start space-x-6 mb-8">
+                <img src="https://i.imgur.com/4v3GwBm.jpeg" alt="Profile" class="w-32 h-32 rounded-2xl object-cover shadow-lg">
+                <div class="flex-1">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-2" data-editable data-field="name">Dr. Nornajihah Nadia Hasbullah</h1>
+                    <p class="text-xl text-gray-600 mb-2" data-editable data-field="title">Senior Lecturer</p>
+                    <p class="text-gray-500" data-editable data-field="institution">Universiti Teknologi MARA (UiTM) Cawangan Sabah</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-1">Email</h3>
+                    <p class="text-gray-800" data-editable data-field="email">najihahnadia@uitm.edu.my</p>
+                </div>
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-1">Phone</h3>
+                    <p class="text-gray-800" data-editable data-field="phone">017-7496525</p>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Professional Summary</h2>
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 leading-relaxed" data-editable data-field="summary">
+                        Educator and marketing researcher with 5 years of experience in education and banking. 
+                        Passionate about teaching, reflective thinking, and nurturing future-ready students.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Research Expertise</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Management</span>
+                    <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">Sustainable Marketing</span>
+                    <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Consumer Behaviour</span>
+                    <span class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Digital Marketing</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Sign In to Edit Portfolio</h2>
+            
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200 mb-6">
+                <button class="tab-button active" onclick="switchAuthTab('google')">Google Sign-In</button>
+                <button class="tab-button" onclick="switchAuthTab('staffid')">Staff ID</button>
+            </div>
+            
+            <!-- Google Sign-In Tab -->
+            <div id="googleTab" class="tab-content active">
+                <p class="text-gray-600 mb-6">Sign in with your Google account to edit your portfolio page.</p>
+                <button 
+                    onclick="handleGoogleSignIn()" 
+                    class="w-full bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center font-medium">
+                    <svg class="w-5 h-5 mr-3" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Sign in with Google
+                </button>
+            </div>
+            
+            <!-- Staff ID Tab -->
+            <div id="staffidTab" class="tab-content">
+                <p class="text-gray-600 mb-6">Sign in using your staff ID and secret code.</p>
+                <form onsubmit="handleStaffIdSignIn(event)">
+                    <div class="mb-4">
+                        <label for="staffEmployeeId" class="block text-sm font-medium text-gray-700 mb-2">Employee ID</label>
+                        <input 
+                            type="text" 
+                            id="staffEmployeeId" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="e.g., 366566"
+                            required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="staffSecretCode" class="block text-sm font-medium text-gray-700 mb-2">Secret Code</label>
+                        <input 
+                            type="password" 
+                            id="staffSecretCode" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Enter your secret code"
+                            required>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        Sign In with Staff ID
+                    </button>
+                </form>
+            </div>
+            
+            <button 
+                onclick="hideAuthModal()" 
+                class="mt-6 w-full bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase Config and Auth Script -->
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <!-- Auth Module -->
+    <script src="js/auth.js"></script>
+    
+    <!-- Page-specific Scripts -->
+    <script>
+        // Switch authentication tabs
+        function switchAuthTab(tab) {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            if (tab === 'google') {
+                tabs[0].classList.add('active');
+                document.getElementById('googleTab').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('staffidTab').classList.add('active');
+            }
+        }
+        
+        // Initialize authentication when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initAuth();
+        });
+    </script>
+</body>
+</html>
