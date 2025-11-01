@@ -258,6 +258,9 @@
         };
 
         function showAssociateProfessorProfile() {
+                    // *** ENHANCEMENT: Make QR code instance globally accessible ***
+        let qrCodeInstance = null;
+        
 const profileData = associateProfessorProfileData;
             
             const profileHTML = `

@@ -147,6 +147,9 @@
 
         // Function to render the profile
         function showEconomistProfile() {
+                    // *** ENHANCEMENT: Make QR code instance globally accessible ***
+        let qrCodeInstance = null;
+        
 const profileData = economistProfileData.detailedProfile;
             
             const profileHTML = `
