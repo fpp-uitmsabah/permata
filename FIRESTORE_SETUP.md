@@ -28,19 +28,25 @@ The Firestore database needs proper security rules to allow users to interact wi
 
 #### Option A: Development/Testing Rules (Open Access)
 
-**Use for development and testing only:**
+**⚠️ CRITICAL WARNING: TESTING ONLY - DO NOT USE IN PRODUCTION! ⚠️**
+
+**These rules allow ANYONE on the internet to read, write, and delete ALL your data!**
+**Use ONLY for local development/testing and for a LIMITED TIME (24-48 hours max)**
 
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow anyone to read and write (TESTING ONLY)
+    // ⚠️ DANGER: Allow anyone to read and write (TESTING ONLY - EXPIRES SOON!)
+    // TODO: Replace with Option B (production rules) within 48 hours
     match /{document=**} {
-      allow read, write: if true;
+      allow read, write: if request.time < timestamp.date(2025, 12, 31);  // Set near expiry
     }
   }
 }
 ```
+
+**After testing, IMMEDIATELY switch to Option B (Production Rules) below!**
 
 #### Option B: Production Rules (Recommended)
 

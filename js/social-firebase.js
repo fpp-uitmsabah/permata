@@ -14,7 +14,7 @@
 function getUserId() {
     let userId = localStorage.getItem('social_user_id');
     if (!userId) {
-        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
         localStorage.setItem('social_user_id', userId);
     }
     return userId;
@@ -994,9 +994,33 @@ function shareToWhatsApp(url, title) {
 function copyShareUrl() {
     const input = document.getElementById('share-url-input');
     if (input) {
-        input.select();
+        // Use modern Clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(input.value)
+                .then(() => {
+                    showNotification('Link copied to clipboard!', 'success');
+                })
+                .catch((err) => {
+                    console.error('Failed to copy:', err);
+                    // Fallback to old method
+                    fallbackCopyToClipboard(input);
+                });
+        } else {
+            // Fallback for older browsers
+            fallbackCopyToClipboard(input);
+        }
+    }
+}
+
+// Fallback copy method for older browsers
+function fallbackCopyToClipboard(input) {
+    input.select();
+    try {
         document.execCommand('copy');
         showNotification('Link copied to clipboard!', 'success');
+    } catch (err) {
+        console.error('Failed to copy:', err);
+        showNotification('Failed to copy link. Please copy manually.', 'error');
     }
 }
 
