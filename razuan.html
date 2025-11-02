@@ -54,6 +54,11 @@
             background: linear-gradient(135deg, #16a34a, #2563eb);
         }
     </style>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 </head>
 <body class="bg-gray-50 font-sans">
     <div id="app" class="min-h-screen">
@@ -169,6 +174,27 @@
                                 </div>
 
                                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden">
+
+                <!-- Social Media Features -->
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                        </svg>
+                        Social Engagement
+                    </h2>
+                    <div id="social-actions-razuan">
+                        <!-- Social buttons will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Comments Section (Initially Hidden) -->
+                <div id="comments-section-razuan-container">
+                    <!-- Comments section will be inserted here by JavaScript -->
+                </div>
+
+
                                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
                                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                                         <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -279,6 +305,66 @@
 
         // Initial render on page load
         document.addEventListener('DOMContentLoaded', showProfile);
+    </script>
+    
+    <!-- Firebase Configuration -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
+        
+        // Initialize Firebase app
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            console.log('Firebase initialized successfully');
+        }
+    </script>
+    
+    <!-- Authentication Module (Optional) -->
+    <script src="js/auth-social.js"></script>
+    
+    <!-- Social Features Library (Firebase version) -->
+    <script src="js/social-firebase.js"></script>
+    
+    <script>
+        // Faculty ID for razuan
+        const FACULTY_ID = 'razuan';
+        
+        // Initialize social features and auth on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log('Initializing social features for razuan...');
+            
+            // Initialize authentication (optional)
+            initializeAuth();
+            
+            // Create and insert social buttons
+            const actionsContainer = document.getElementById('social-actions-razuan');
+            if (actionsContainer) {
+                const socialButtons = SocialUI.createSocialButtons(FACULTY_ID);
+                actionsContainer.appendChild(socialButtons);
+                
+                // Create and insert comments section
+                const commentsContainer = document.getElementById('comments-section-razuan-container');
+                if (commentsContainer) {
+                    const commentsSection = SocialUI.createCommentsSection(FACULTY_ID);
+                    commentsContainer.appendChild(commentsSection);
+                }
+                
+                // Initialize with current stats
+                await initSocialFeatures(FACULTY_ID);
+                
+                console.log('Social features initialized successfully!');
+            } else {
+                console.error('Social actions container not found!');
+            }
+        });
     </script>
 </body>
 </html>
