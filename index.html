@@ -344,6 +344,11 @@
                 <div class="absolute inset-0 bg-black opacity-10"></div>
                 <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
                 
+                <!-- Authentication Button in Header -->
+                <div class="absolute top-4 right-4 z-10">
+                    <div id="auth-container"></div>
+                </div>
+                
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                     <div class="text-center">
                         <div class="floating mb-6">
@@ -493,6 +498,7 @@
 
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script>
         // WARNING: API keys should be moved to environment variables and accessed via a backend server
         // These keys are currently exposed and should be rotated immediately
@@ -1521,6 +1527,15 @@
             // --- End of NEW Contact Modal Listeners ---
 
             renderFacultyGrid();
+        });
+    </script>
+    
+    <!-- Authentication Module -->
+    <script src="js/auth-social.js"></script>
+    <script>
+        // Initialize authentication on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuth();
         });
     </script>
 </body>

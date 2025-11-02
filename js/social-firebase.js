@@ -539,7 +539,7 @@ const SocialUI = {
     createCommentsSection(facultyId) {
         const section = document.createElement('div');
         section.id = `comments-section-${facultyId}`;
-        section.className = 'comments-section mt-6 hidden';
+        section.className = 'comments-section mt-6';  // Removed 'hidden' class to show by default
         section.innerHTML = `
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
@@ -686,6 +686,9 @@ async function initSocialFeatures(facultyId) {
             if (followText) followText.textContent = 'Following';
         }
         
+        // Load comments automatically on page load (new feature)
+        await loadComments(facultyId);
+        
         console.log('Social features initialized successfully');
     } catch (error) {
         console.error('Error initializing social features:', error);
@@ -751,6 +754,11 @@ async function handleCommentClick(facultyId) {
     } else {
         // Hide comments section
         commentsSection.classList.add('hidden');
+    }
+    
+    // Scroll to comments section if shown
+    if (!commentsSection.classList.contains('hidden')) {
+        commentsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 
