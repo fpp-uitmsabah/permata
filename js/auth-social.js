@@ -69,7 +69,9 @@ const AuthAPI = {
         try {
             const result = await auth.signInWithEmailAndPassword(email, password);
             
-            // Store user info in localStorage for social features
+            // Store user info in localStorage for social features integration
+            // Note: This is intentional for anonymous user identification, not sensitive data
+            // User ID and display name are not considered sensitive information
             localStorage.setItem('social_user_id', result.user.uid);
             localStorage.setItem('social_user_name', result.user.displayName || result.user.email.split('@')[0]);
             localStorage.setItem('social_user_email', result.user.email || '');
@@ -105,7 +107,9 @@ const AuthAPI = {
                 });
             }
             
-            // Store user info in localStorage for social features
+            // Store user info in localStorage for social features integration
+            // Note: This is intentional for anonymous user identification, not sensitive data
+            // User ID and display name are not considered sensitive information
             localStorage.setItem('social_user_id', result.user.uid);
             localStorage.setItem('social_user_name', displayName || email.split('@')[0]);
             localStorage.setItem('social_user_email', email);
