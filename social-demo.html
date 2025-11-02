@@ -18,6 +18,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
     <style>
         * {
             font-family: 'Inter', sans-serif;
@@ -279,8 +283,28 @@
         </div>
     </div>
     
-    <!-- Include Social Features Library -->
-    <script src="js/social.js"></script>
+    <!-- Firebase Configuration -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
+        
+        // Initialize Firebase app
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            console.log('Firebase initialized successfully');
+        }
+    </script>
+    
+    <!-- Include Social Features Library (Firebase version) -->
+    <script src="js/social-firebase.js"></script>
     
     <script>
         // Demo faculty ID (you can use any valid faculty ID from your database)
