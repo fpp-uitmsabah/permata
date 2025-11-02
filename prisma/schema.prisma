@@ -31,6 +31,51 @@ model Faculty {
   canEdit      Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  
+  // Social Media Relations
+  likes        Like[]
+  comments     Comment[]
+  followers    Follow[] @relation("FollowingFaculty")
 
   @@map("faculties")
+}
+
+model Like {
+  id          String   @id @default(cuid())
+  facultyId   String
+  faculty     Faculty  @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  userId      String   // Can be anonymous or authenticated user ID
+  userName    String?  // Optional name for anonymous users
+  reactionType String  @default("like") // like, love, insightful, celebrate
+  createdAt   DateTime @default(now())
+
+  @@unique([facultyId, userId])
+  @@map("likes")
+}
+
+model Comment {
+  id          String   @id @default(cuid())
+  facultyId   String
+  faculty     Faculty  @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  userId      String   // Can be anonymous or authenticated user ID
+  userName    String   // Display name
+  userEmail   String?  // Optional email
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("comments")
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  facultyId   String
+  faculty     Faculty  @relation("FollowingFaculty", fields: [facultyId], references: [id], onDelete: Cascade)
+  userId      String   // Follower's user ID
+  userName    String   // Follower's name
+  userEmail   String?  // Follower's email
+  createdAt   DateTime @default(now())
+
+  @@unique([facultyId, userId])
+  @@map("follows")
 }
