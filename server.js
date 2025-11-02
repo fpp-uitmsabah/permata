@@ -5,7 +5,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('./generated/prisma');
 const admin = require('firebase-admin');
 
 const app = express();
@@ -14,6 +14,9 @@ const prisma = new PrismaClient();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (HTML, CSS, JS)
+app.use(express.static(__dirname));
 
 // Initialize Firebase Admin (for custom token generation)
 // Note: You'll need to download and add your Firebase service account key
