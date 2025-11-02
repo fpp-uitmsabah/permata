@@ -366,6 +366,11 @@ app.post('/api/social/comment', async (req, res) => {
             return res.status(400).json({ error: 'Comment cannot be empty' });
         }
 
+        // Validate comment length (max 2000 characters)
+        if (content.length > 2000) {
+            return res.status(400).json({ error: 'Comment is too long. Maximum 2000 characters allowed.' });
+        }
+
         // Check if faculty exists
         const faculty = await prisma.faculty.findUnique({
             where: { id: facultyId }

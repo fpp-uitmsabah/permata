@@ -340,12 +340,17 @@ const SocialUI = {
                         id="comment-input-${facultyId}"
                         class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none resize-none"
                         rows="3"
-                        placeholder="Share your thoughts..."></textarea>
-                    <button 
-                        onclick="submitComment('${facultyId}')"
-                        class="mt-2 px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105">
-                        Post Comment
-                    </button>
+                        maxlength="2000"
+                        placeholder="Share your thoughts..."
+                        oninput="updateCharCount('${facultyId}', this.value)"></textarea>
+                    <div class="flex justify-between items-center mt-2">
+                        <span id="char-count-${facultyId}" class="text-xs text-gray-500">0 / 2000 characters</span>
+                        <button 
+                            onclick="submitComment('${facultyId}')"
+                            class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105">
+                            Post Comment
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- Comments list -->
@@ -551,6 +556,12 @@ async function submitComment(facultyId) {
         return;
     }
     
+    // Validate comment length (max 2000 characters)
+    if (content.length > 2000) {
+        alert('Comment is too long. Maximum 2000 characters allowed.');
+        return;
+    }
+    
     try {
         await SocialAPI.addComment(facultyId, content);
         
@@ -728,14 +739,62 @@ function showShareModal(url, title) {
 
 function copyShareUrl() {
     const input = document.getElementById('share-url-input');
-    input.select();
-    document.execCommand('copy');
-    alert('Link copied to clipboard!');
+    
+    // Use modern Clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(input.value)
+            .then(() => {
+                alert('Link copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy:', err);
+                // Fallback to old method
+                input.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Link copied to clipboard!');
+                } catch (e) {
+                    alert('Failed to copy link. Please copy manually.');
+                }
+            });
+    } else {
+        // Fallback for older browsers
+        input.select();
+        try {
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        } catch (e) {
+            alert('Failed to copy link. Please copy manually.');
+        }
+    }
 }
 
 function closeShareModal() {
     const modal = document.querySelector('.fixed.inset-0');
     if (modal) modal.remove();
+}
+
+/**
+ * Update character count for comment textarea
+ */
+function updateCharCount(facultyId, text) {
+    const charCount = document.getElementById(`char-count-${facultyId}`);
+    if (charCount) {
+        const length = text.length;
+        charCount.textContent = `${length} / 2000 characters`;
+        
+        // Change color based on length
+        if (length > 1800) {
+            charCount.classList.add('text-red-500');
+            charCount.classList.remove('text-gray-500', 'text-yellow-600');
+        } else if (length > 1500) {
+            charCount.classList.add('text-yellow-600');
+            charCount.classList.remove('text-gray-500', 'text-red-500');
+        } else {
+            charCount.classList.add('text-gray-500');
+            charCount.classList.remove('text-yellow-600', 'text-red-500');
+        }
+    }
 }
 
 // Export for use in HTML pages
