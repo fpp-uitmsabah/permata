@@ -223,6 +223,396 @@ app.post('/api/admin/setup-auth', async (req, res) => {
     }
 });
 
+/**
+ * Social Media Features - Like/React to Faculty Profile
+ */
+app.post('/api/social/like', async (req, res) => {
+    try {
+        const { facultyId, userId, userName, reactionType = 'like' } = req.body;
+
+        if (!facultyId || !userId) {
+            return res.status(400).json({ error: 'Faculty ID and user ID are required' });
+        }
+
+        // Check if faculty exists
+        const faculty = await prisma.faculty.findUnique({
+            where: { id: facultyId }
+        });
+
+        if (!faculty) {
+            return res.status(404).json({ error: 'Faculty member not found' });
+        }
+
+        // Upsert like (create or update)
+        const like = await prisma.like.upsert({
+            where: {
+                facultyId_userId: {
+                    facultyId,
+                    userId
+                }
+            },
+            update: {
+                reactionType,
+                userName
+            },
+            create: {
+                facultyId,
+                userId,
+                userName,
+                reactionType
+            }
+        });
+
+        // Get total likes count
+        const likesCount = await prisma.like.count({
+            where: { facultyId }
+        });
+
+        res.json({
+            success: true,
+            like,
+            likesCount
+        });
+
+    } catch (error) {
+        console.error('Like error:', error);
+        res.status(500).json({ error: 'Failed to process like' });
+    }
+});
+
+/**
+ * Remove Like
+ */
+app.delete('/api/social/like', async (req, res) => {
+    try {
+        const { facultyId, userId } = req.body;
+
+        if (!facultyId || !userId) {
+            return res.status(400).json({ error: 'Faculty ID and user ID are required' });
+        }
+
+        await prisma.like.delete({
+            where: {
+                facultyId_userId: {
+                    facultyId,
+                    userId
+                }
+            }
+        });
+
+        // Get updated likes count
+        const likesCount = await prisma.like.count({
+            where: { facultyId }
+        });
+
+        res.json({
+            success: true,
+            likesCount
+        });
+
+    } catch (error) {
+        console.error('Unlike error:', error);
+        res.status(500).json({ error: 'Failed to remove like' });
+    }
+});
+
+/**
+ * Get Likes for a Faculty Profile
+ */
+app.get('/api/social/likes/:facultyId', async (req, res) => {
+    try {
+        const { facultyId } = req.params;
+
+        const likes = await prisma.like.findMany({
+            where: { facultyId },
+            orderBy: { createdAt: 'desc' }
+        });
+
+        const likesCount = likes.length;
+        const reactionCounts = likes.reduce((acc, like) => {
+            acc[like.reactionType] = (acc[like.reactionType] || 0) + 1;
+            return acc;
+        }, {});
+
+        res.json({
+            likesCount,
+            reactionCounts,
+            likes
+        });
+
+    } catch (error) {
+        console.error('Get likes error:', error);
+        res.status(500).json({ error: 'Failed to retrieve likes' });
+    }
+});
+
+/**
+ * Add Comment to Faculty Profile
+ */
+app.post('/api/social/comment', async (req, res) => {
+    try {
+        const { facultyId, userId, userName, userEmail, content } = req.body;
+
+        if (!facultyId || !userId || !userName || !content) {
+            return res.status(400).json({ 
+                error: 'Faculty ID, user ID, user name, and content are required' 
+            });
+        }
+
+        if (content.trim().length === 0) {
+            return res.status(400).json({ error: 'Comment cannot be empty' });
+        }
+
+        // Check if faculty exists
+        const faculty = await prisma.faculty.findUnique({
+            where: { id: facultyId }
+        });
+
+        if (!faculty) {
+            return res.status(404).json({ error: 'Faculty member not found' });
+        }
+
+        const comment = await prisma.comment.create({
+            data: {
+                facultyId,
+                userId,
+                userName,
+                userEmail,
+                content: content.trim()
+            }
+        });
+
+        // Get total comments count
+        const commentsCount = await prisma.comment.count({
+            where: { facultyId }
+        });
+
+        res.json({
+            success: true,
+            comment,
+            commentsCount
+        });
+
+    } catch (error) {
+        console.error('Comment error:', error);
+        res.status(500).json({ error: 'Failed to add comment' });
+    }
+});
+
+/**
+ * Get Comments for a Faculty Profile
+ */
+app.get('/api/social/comments/:facultyId', async (req, res) => {
+    try {
+        const { facultyId } = req.params;
+        const { limit = 50, offset = 0 } = req.query;
+
+        const comments = await prisma.comment.findMany({
+            where: { facultyId },
+            orderBy: { createdAt: 'desc' },
+            take: parseInt(limit),
+            skip: parseInt(offset)
+        });
+
+        const commentsCount = await prisma.comment.count({
+            where: { facultyId }
+        });
+
+        res.json({
+            comments,
+            commentsCount,
+            hasMore: commentsCount > parseInt(offset) + parseInt(limit)
+        });
+
+    } catch (error) {
+        console.error('Get comments error:', error);
+        res.status(500).json({ error: 'Failed to retrieve comments' });
+    }
+});
+
+/**
+ * Delete Comment (only by comment author)
+ */
+app.delete('/api/social/comment/:commentId', async (req, res) => {
+    try {
+        const { commentId } = req.params;
+        const { userId } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({ error: 'User ID is required' });
+        }
+
+        // Check if comment exists and belongs to user
+        const comment = await prisma.comment.findUnique({
+            where: { id: commentId }
+        });
+
+        if (!comment) {
+            return res.status(404).json({ error: 'Comment not found' });
+        }
+
+        if (comment.userId !== userId) {
+            return res.status(403).json({ error: 'Not authorized to delete this comment' });
+        }
+
+        await prisma.comment.delete({
+            where: { id: commentId }
+        });
+
+        res.json({
+            success: true,
+            message: 'Comment deleted successfully'
+        });
+
+    } catch (error) {
+        console.error('Delete comment error:', error);
+        res.status(500).json({ error: 'Failed to delete comment' });
+    }
+});
+
+/**
+ * Follow a Faculty Member
+ */
+app.post('/api/social/follow', async (req, res) => {
+    try {
+        const { facultyId, userId, userName, userEmail } = req.body;
+
+        if (!facultyId || !userId || !userName) {
+            return res.status(400).json({ 
+                error: 'Faculty ID, user ID, and user name are required' 
+            });
+        }
+
+        // Check if faculty exists
+        const faculty = await prisma.faculty.findUnique({
+            where: { id: facultyId }
+        });
+
+        if (!faculty) {
+            return res.status(404).json({ error: 'Faculty member not found' });
+        }
+
+        // Create or update follow
+        const follow = await prisma.follow.upsert({
+            where: {
+                facultyId_userId: {
+                    facultyId,
+                    userId
+                }
+            },
+            update: {
+                userName,
+                userEmail
+            },
+            create: {
+                facultyId,
+                userId,
+                userName,
+                userEmail
+            }
+        });
+
+        // Get total followers count
+        const followersCount = await prisma.follow.count({
+            where: { facultyId }
+        });
+
+        res.json({
+            success: true,
+            follow,
+            followersCount
+        });
+
+    } catch (error) {
+        console.error('Follow error:', error);
+        res.status(500).json({ error: 'Failed to follow' });
+    }
+});
+
+/**
+ * Unfollow a Faculty Member
+ */
+app.delete('/api/social/follow', async (req, res) => {
+    try {
+        const { facultyId, userId } = req.body;
+
+        if (!facultyId || !userId) {
+            return res.status(400).json({ error: 'Faculty ID and user ID are required' });
+        }
+
+        await prisma.follow.delete({
+            where: {
+                facultyId_userId: {
+                    facultyId,
+                    userId
+                }
+            }
+        });
+
+        // Get updated followers count
+        const followersCount = await prisma.follow.count({
+            where: { facultyId }
+        });
+
+        res.json({
+            success: true,
+            followersCount
+        });
+
+    } catch (error) {
+        console.error('Unfollow error:', error);
+        res.status(500).json({ error: 'Failed to unfollow' });
+    }
+});
+
+/**
+ * Get Followers for a Faculty Profile
+ */
+app.get('/api/social/followers/:facultyId', async (req, res) => {
+    try {
+        const { facultyId } = req.params;
+
+        const followers = await prisma.follow.findMany({
+            where: { facultyId },
+            orderBy: { createdAt: 'desc' }
+        });
+
+        res.json({
+            followersCount: followers.length,
+            followers
+        });
+
+    } catch (error) {
+        console.error('Get followers error:', error);
+        res.status(500).json({ error: 'Failed to retrieve followers' });
+    }
+});
+
+/**
+ * Get Social Stats for a Faculty Profile
+ */
+app.get('/api/social/stats/:facultyId', async (req, res) => {
+    try {
+        const { facultyId } = req.params;
+
+        const [likesCount, commentsCount, followersCount] = await Promise.all([
+            prisma.like.count({ where: { facultyId } }),
+            prisma.comment.count({ where: { facultyId } }),
+            prisma.follow.count({ where: { facultyId } })
+        ]);
+
+        res.json({
+            likesCount,
+            commentsCount,
+            followersCount
+        });
+
+    } catch (error) {
+        console.error('Get stats error:', error);
+        res.status(500).json({ error: 'Failed to retrieve stats' });
+    }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'Portfolio API is running' });
