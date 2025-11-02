@@ -20,6 +20,11 @@
         .publication-item { transition: all 0.3s ease-in-out; }
         .publication-item:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
     </style>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 </head>
 <body class="bg-slate-50 font-sans">
     <div class="min-h-screen">
@@ -82,6 +87,27 @@
                     </div>
 
                     <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+
+                <!-- Social Media Features -->
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                        </svg>
+                        Social Engagement
+                    </h2>
+                    <div id="social-actions-ghazali">
+                        <!-- Social buttons will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Comments Section (Initially Hidden) -->
+                <div id="comments-section-ghazali-container">
+                    <!-- Comments section will be inserted here by JavaScript -->
+                </div>
+
+
                         <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                             <i class="fa-solid fa-lightbulb text-blue-500 mr-3"></i>
                             Research & Expertise
@@ -168,5 +194,65 @@
             </div>
         </div>
     </div>
+    
+    <!-- Firebase Configuration -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
+        
+        // Initialize Firebase app
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            console.log('Firebase initialized successfully');
+        }
+    </script>
+    
+    <!-- Authentication Module (Optional) -->
+    <script src="js/auth-social.js"></script>
+    
+    <!-- Social Features Library (Firebase version) -->
+    <script src="js/social-firebase.js"></script>
+    
+    <script>
+        // Faculty ID for ghazali
+        const FACULTY_ID = 'ghazali';
+        
+        // Initialize social features and auth on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log('Initializing social features for ghazali...');
+            
+            // Initialize authentication (optional)
+            initializeAuth();
+            
+            // Create and insert social buttons
+            const actionsContainer = document.getElementById('social-actions-ghazali');
+            if (actionsContainer) {
+                const socialButtons = SocialUI.createSocialButtons(FACULTY_ID);
+                actionsContainer.appendChild(socialButtons);
+                
+                // Create and insert comments section
+                const commentsContainer = document.getElementById('comments-section-ghazali-container');
+                if (commentsContainer) {
+                    const commentsSection = SocialUI.createCommentsSection(FACULTY_ID);
+                    commentsContainer.appendChild(commentsSection);
+                }
+                
+                // Initialize with current stats
+                await initSocialFeatures(FACULTY_ID);
+                
+                console.log('Social features initialized successfully!');
+            } else {
+                console.error('Social actions container not found!');
+            }
+        });
+    </script>
 </body>
 </html>
