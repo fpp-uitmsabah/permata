@@ -22,6 +22,7 @@
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     
     <style>
         * {
@@ -144,12 +145,17 @@
                 <div class="absolute inset-0 bg-black opacity-10"></div>
 
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 mb-8 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                        Back to Directory
-                    </a>
+                    <div class="flex justify-between items-center mb-8">
+                        <a href="index.html" class="back-button inline-flex items-center text-white hover:text-gray-200 px-4 py-2 rounded-xl backdrop-blur-sm bg-white bg-opacity-20">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            Back to Directory
+                        </a>
+                        
+                        <!-- Authentication Container -->
+                        <div id="auth-container"></div>
+                    </div>
 
                     <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
                         <div class="relative">
@@ -863,6 +869,9 @@
         }
     </script>
     
+    <!-- Authentication Module (Optional) -->
+    <script src="js/auth-social.js"></script>
+    
     <!-- Social Features Library (Firebase version) -->
     <script src="js/social-firebase.js"></script>
     
@@ -870,9 +879,12 @@
         // Faculty ID for Abdul Aziz bin Karia
         const FACULTY_ID = 'azizkaria';
         
-        // Initialize social features on page load
+        // Initialize social features and auth on page load
         window.addEventListener('DOMContentLoaded', async () => {
-            console.log('Initializing social features for Dr. Abdul Aziz bin Karia...');
+            console.log('Initializing features for Dr. Abdul Aziz bin Karia...');
+            
+            // Initialize authentication (optional)
+            initializeAuth();
             
             // Create and insert social buttons
             const actionsContainer = document.getElementById('social-actions-azizkaria');
