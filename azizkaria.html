@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio: Associate Professor Dr. Abdul Aziz bin Karia</title>
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="Dr. Abdul Aziz bin Karia - Associate Professor">
+    <meta property="og:description" content="Distinguished economist specializing in economic forecasting, applied econometrics, and AI applications in economics. UiTM's youngest PhD graduate at age 25.">
+    <meta property="og:image" content="https://i.imgur.com/SEXIf1W.jpeg">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://fpp-uitmsabah.github.io/permata/azizkaria.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dr. Abdul Aziz bin Karia - Associate Professor">
+    <meta name="twitter:description" content="Distinguished economist specializing in economic forecasting, applied econometrics, and AI applications in economics.">
+    <meta name="twitter:image" content="https://i.imgur.com/SEXIf1W.jpeg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -229,6 +241,25 @@
                         <div class="text-lg font-medium opacity-90">Research Grants</div>
                         <div class="text-sm opacity-75 mt-1">Total Funding</div>
                     </div>
+                </div>
+
+                <!-- Social Media Features -->
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                        </svg>
+                        Social Engagement
+                    </h2>
+                    <div id="social-actions-azizkaria">
+                        <!-- Social buttons will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Comments Section (Initially Hidden) -->
+                <div id="comments-section-azizkaria-container">
+                    <!-- Comments section will be inserted here by JavaScript -->
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -806,5 +837,37 @@
             </div>
         </div>
     </div>
+    
+    <!-- Social Features Library -->
+    <script src="js/social.js"></script>
+    
+    <script>
+        // Faculty ID for Abdul Aziz bin Karia
+        const FACULTY_ID = 'azizkaria';
+        
+        // Initialize social features on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log('Initializing social features for Dr. Abdul Aziz bin Karia...');
+            
+            // Create and insert social buttons
+            const actionsContainer = document.getElementById('social-actions-azizkaria');
+            if (actionsContainer) {
+                const socialButtons = SocialUI.createSocialButtons(FACULTY_ID);
+                actionsContainer.appendChild(socialButtons);
+                
+                // Create and insert comments section
+                const commentsContainer = document.getElementById('comments-section-azizkaria-container');
+                if (commentsContainer) {
+                    const commentsSection = SocialUI.createCommentsSection(FACULTY_ID);
+                    commentsContainer.appendChild(commentsSection);
+                }
+                
+                // Initialize with current stats
+                await initSocialFeatures(FACULTY_ID);
+                
+                console.log('Social features initialized successfully!');
+            }
+        });
+    </script>
 </body>
 </html>
