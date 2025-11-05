@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Operational Frameworks and Product Structures</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #7c2d12 0%, #c2410c 50%, #ea580c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .content-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #ea580c;
+        }
+        
+        .contract-box {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left: 4px solid #ea580c;
+            transition: all 0.3s ease;
+        }
+        
+        .contract-box:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 16px -4px rgba(234, 88, 12, 0.3);
+        }
+        
+        .interactive-calculator {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+        }
+        
+        .formula-box {
+            background: #f8fafc;
+            border: 2px dashed #ea580c;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #fed7aa;
+            border-color: #ea580c;
+        }
+        
+        .quiz-option.selected {
+            background-color: #ea580c;
+            color: white;
+            border-color: #c2410c;
+        }
+        
+        .quiz-option.correct {
+            background-color: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .product-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .step-indicator {
+            counter-reset: step;
+        }
+        
+        .step-item::before {
+            counter-increment: step;
+            content: counter(step);
+            background: #ea580c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-orange-600 transition">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="microislamfin2.html" class="text-gray-700 hover:text-orange-600 transition">
+                        ← Chapter 2
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Chapter 3 of 4</span>
+                    <a href="microislamfin4.html" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition">
+                        Next Chapter →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <div class="chapter-header text-white py-16 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <span class="text-sm font-semibold">Chapter 3</span>
+                </div>
+                <h1 class="text-5xl font-bold mb-4">Operational Frameworks and Product Structures</h1>
+                <p class="text-xl text-orange-100">Deep dive into Islamic microfinance contracts and operations</p>
+                <div class="mt-8 flex justify-center items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">8</div>
+                        <div class="text-sm text-orange-200">Sections</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">~40</div>
+                        <div class="text-sm text-orange-200">Minutes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">7</div>
+                        <div class="text-sm text-orange-200">Quiz Questions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm sticky top-16 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700">Your Progress</span>
+                <span class="text-sm text-gray-600"><span id="progress-percent">0</span>% Complete</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-orange-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12 max-w-4xl">
+        
+        <!-- Learning Objectives -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Learning Objectives
+            </h2>
+            <div class="space-y-3">
+                <div class="flex items-start">
+                    <span class="text-orange-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Master the operational structures of Islamic microfinance products</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-orange-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Understand profit calculation and pricing mechanisms</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-orange-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Compare different Islamic financing contracts in practice</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-orange-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Apply Islamic contracts to real-world microfinance scenarios</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Murabaha in Detail -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="1">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">1. Murabaha (Cost-Plus Financing) - Detailed Analysis</h2>
+            
+            <div class="contract-box p-6 rounded-lg mb-6">
+                <h3 class="text-2xl font-bold text-orange-900 mb-4">Contract Structure</h3>
+                <p class="text-gray-700 mb-4">
+                    Murabaha is the most widely used Islamic financing product in microfinance. The institution 
+                    purchases an asset on behalf of the client and sells it at a markup, with payment made in installments.
+                </p>
+                
+                <div class="step-indicator space-y-4 mt-6">
+                    <div class="step-item flex items-start">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Client Request</h4>
+                            <p class="text-gray-600 text-sm">Client identifies an asset (equipment, inventory, etc.) and requests financing</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item flex items-start">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Promise to Purchase</h4>
+                            <p class="text-gray-600 text-sm">Client promises to buy from the institution at an agreed markup</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item flex items-start">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Institution Purchases</h4>
+                            <p class="text-gray-600 text-sm">Institution buys the asset from the supplier</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item flex items-start">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Sale to Client</h4>
+                            <p class="text-gray-600 text-sm">Institution sells asset to client at cost + agreed markup</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item flex items-start">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Repayment</h4>
+                            <p class="text-gray-600 text-sm">Client repays in agreed installments over specified period</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formula-box p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-lg text-gray-800 mb-3">Profit Calculation Formula:</h4>
+                <p class="text-lg mb-2">Total Selling Price = Cost Price + Markup</p>
+                <p class="text-lg mb-4">Markup = Cost Price × Profit Margin × (Term in Months / 12)</p>
+                
+                <div class="bg-white p-4 rounded mt-4">
+                    <p class="text-sm font-semibold text-gray-700">Example:</p>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Cost: RM 10,000 | Margin: 12% p.a. | Term: 12 months<br>
+                        Markup = 10,000 × 0.12 × (12/12) = RM 1,200<br>
+                        <strong>Selling Price = RM 11,200</strong><br>
+                        Monthly Payment = 11,200 ÷ 12 = <strong>RM 933.33</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Shariah Compliance Requirements:</h3>
+            <ul class="space-y-2 ml-6 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Institution must take actual ownership of the asset before selling</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Asset must exist and be identified at time of sale</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Selling price must be fixed and disclosed upfront</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Cannot charge penalty on late payment (only compensation for actual costs)</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 2: Mudharabah Partnership -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Mudharabah (Profit-Sharing Partnership)</h2>
+            
+            <div class="contract-box p-6 rounded-lg mb-6">
+                <h3 class="text-2xl font-bold text-orange-900 mb-4">Partnership Model</h3>
+                <p class="text-gray-700 mb-4">
+                    In Mudharabah, the financier (Rab al-Maal) provides capital while the entrepreneur (Mudarib) 
+                    provides labor and expertise. Profits are shared according to a pre-agreed ratio.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-orange-50 p-5 rounded-lg">
+                        <h4 class="font-bold text-orange-800 mb-3">Financier's Role (Rab al-Maal)</h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>✓ Provides 100% capital</li>
+                            <li>✓ Bears financial loss (if any)</li>
+                            <li>✓ Limited involvement in management</li>
+                            <li>✓ Shares profit as per agreement</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-5 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-3">Entrepreneur's Role (Mudarib)</h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>✓ Provides labor and expertise</li>
+                            <li>✓ Manages the business</li>
+                            <li>✓ Bears loss of time/effort</li>
+                            <li>✓ Shares profit as per agreement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formula-box p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-lg text-gray-800 mb-3">Profit Distribution Example:</h4>
+                <div class="bg-white p-4 rounded">
+                    <p class="text-sm font-semibold text-gray-700">Scenario:</p>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Capital: RM 50,000 | Agreed Ratio: 60:40 (Institution:Entrepreneur)<br>
+                        Business Profit: RM 15,000<br><br>
+                        Institution receives: 15,000 × 60% = <strong>RM 9,000</strong><br>
+                        Entrepreneur receives: 15,000 × 40% = <strong>RM 6,000</strong><br><br>
+                        <em>If business makes a loss of RM 5,000:</em><br>
+                        Institution bears: <strong>RM 5,000 (full loss)</strong><br>
+                        Entrepreneur gets: <strong>RM 0 (loses time and effort)</strong>
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Best Suited For:</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <p class="font-medium text-gray-800">Trading Businesses</p>
+                    <p class="text-sm text-gray-600">Buy and sell of goods</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <p class="font-medium text-gray-800">Service Ventures</p>
+                    <p class="text-sm text-gray-600">Expertise-based income</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <p class="font-medium text-gray-800">Short-term Projects</p>
+                    <p class="text-sm text-gray-600">Clear profit cycles</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Musharakah Joint Venture -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="3">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">3. Musharakah (Joint Venture Financing)</h2>
+            
+            <div class="contract-box p-6 rounded-lg mb-6">
+                <h3 class="text-2xl font-bold text-orange-900 mb-4">Equity Partnership</h3>
+                <p class="text-gray-700 mb-4">
+                    Both the financier and entrepreneur contribute capital and may participate in management. 
+                    Profits and losses are shared based on capital contribution or as mutually agreed.
+                </p>
+
+                <div class="bg-white border-2 border-orange-300 p-5 rounded-lg mt-6">
+                    <h4 class="font-bold text-gray-800 mb-4">Types of Musharakah:</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <h5 class="font-semibold text-gray-800">Permanent Musharakah</h5>
+                            <p class="text-sm text-gray-600">Ongoing partnership with no predetermined exit date</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h5 class="font-semibold text-gray-800">Diminishing Musharakah</h5>
+                            <p class="text-sm text-gray-600">Financier's share gradually decreases as client buys out ownership</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formula-box p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-lg text-gray-800 mb-3">Diminishing Musharakah Example:</h4>
+                <div class="bg-white p-4 rounded">
+                    <p class="text-sm font-semibold text-gray-700">Asset Purchase (Equipment worth RM 100,000):</p>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Institution contributes: RM 80,000 (80% ownership)<br>
+                        Client contributes: RM 20,000 (20% ownership)<br>
+                        <br>
+                        <strong>Monthly Payments:</strong><br>
+                        1. Rental payment for using institution's share<br>
+                        2. Purchase installment to buy institution's ownership<br>
+                        <br>
+                        After 24 months of RM 3,500/month payments:<br>
+                        Client ownership increases to: <strong>80%</strong><br>
+                        Institution ownership decreases to: <strong>20%</strong><br>
+                        <br>
+                        <em>Process continues until client owns 100%</em>
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Key Features:</h3>
+            <ul class="space-y-2 ml-6 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Both parties contribute capital</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Profit sharing ratio can differ from capital ratio (by agreement)</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Loss sharing must be proportional to capital contribution</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-600 mr-2">•</span>
+                    <span>Either or both parties may manage the business</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 4: Qard Hasan -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">4. Qard Hasan (Benevolent Loan)</h2>
+            
+            <div class="contract-box p-6 rounded-lg mb-6">
+                <h3 class="text-2xl font-bold text-orange-900 mb-4">Interest-Free Charitable Lending</h3>
+                <p class="text-gray-700 mb-4">
+                    A completely interest-free loan where the borrower only repays the principal amount. 
+                    This is considered an act of charity in Islam.
+                </p>
+
+                <div class="bg-amber-50 border-2 border-amber-400 p-5 rounded-lg mt-6">
+                    <h4 class="font-bold text-amber-900 mb-3">When to Use Qard Hasan:</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-medium text-gray-800 mb-2">Emergency Situations:</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Medical emergencies</li>
+                                <li>• Natural disaster relief</li>
+                                <li>• Urgent family needs</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800 mb-2">Welfare Purposes:</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Education financing</li>
+                                <li>• Start-up capital for very poor</li>
+                                <li>• Debt consolidation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border-2 border-orange-200 p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-lg text-gray-800 mb-3">Comparison: Qard Hasan vs Commercial Loan</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-orange-50">
+                                <th class="p-3 text-left">Aspect</th>
+                                <th class="p-3 text-left">Qard Hasan</th>
+                                <th class="p-3 text-left">Commercial Loan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">Interest</td>
+                                <td class="p-3 text-green-600">Zero</td>
+                                <td class="p-3 text-red-600">Yes (10-20%)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">Repayment Amount</td>
+                                <td class="p-3">Principal only</td>
+                                <td class="p-3">Principal + Interest</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">Purpose</td>
+                                <td class="p-3">Charitable/Welfare</td>
+                                <td class="p-3">Commercial</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">Flexibility</td>
+                                <td class="p-3 text-green-600">High (grace periods allowed)</td>
+                                <td class="p-3">Low (strict terms)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-l-4 border-green-500 p-5 rounded-r-lg">
+                <p class="text-green-900">
+                    <strong>Note:</strong> While Qard Hasan generates no profit, institutions may charge administrative 
+                    fees to cover operational costs. These fees must be reasonable and not profit-driven.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 5: Interactive Calculator -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="5">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">5. Interactive Murabaha Calculator</h2>
+            
+            <div class="interactive-calculator p-6 rounded-lg">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Calculate Your Murabaha Financing</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Cost Price (RM)</label>
+                        <input type="number" id="calc-cost" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none" value="10000" min="100">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Annual Profit Margin (%)</label>
+                        <input type="number" id="calc-margin" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none" value="12" min="1" max="30" step="0.5">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Financing Period (Months)</label>
+                        <input type="number" id="calc-period" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none" value="12" min="1" max="60">
+                    </div>
+                    
+                    <button onclick="calculateMurabaha()" class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition font-semibold">
+                        Calculate
+                    </button>
+                </div>
+                
+                <div id="calc-results" class="mt-6 p-6 bg-white rounded-lg border-2 border-orange-300 hidden">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4">Results:</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-700">Cost Price:</span>
+                            <span class="font-semibold" id="result-cost">RM 0.00</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-700">Markup Amount:</span>
+                            <span class="font-semibold text-orange-600" id="result-markup">RM 0.00</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2 text-lg">
+                            <span class="text-gray-800 font-bold">Total Selling Price:</span>
+                            <span class="font-bold text-orange-600" id="result-total">RM 0.00</span>
+                        </div>
+                        <div class="flex justify-between pt-2">
+                            <span class="text-gray-700">Monthly Installment:</span>
+                            <span class="font-semibold text-blue-600 text-xl" id="result-monthly">RM 0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Product Comparison -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">6. Comparative Analysis of Products</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-orange-50">
+                            <th class="border p-3 text-left">Criteria</th>
+                            <th class="border p-3 text-left">Murabaha</th>
+                            <th class="border p-3 text-left">Mudharabah</th>
+                            <th class="border p-3 text-left">Musharakah</th>
+                            <th class="border p-3 text-left">Qard Hasan</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr>
+                            <td class="border p-3 font-medium">Nature</td>
+                            <td class="border p-3">Sale-based</td>
+                            <td class="border p-3">Partnership</td>
+                            <td class="border p-3">Joint venture</td>
+                            <td class="border p-3">Loan</td>
+                        </tr>
+                        <tr>
+                            <td class="border p-3 font-medium">Return Type</td>
+                            <td class="border p-3">Fixed markup</td>
+                            <td class="border p-3">Profit share</td>
+                            <td class="border p-3">Profit share</td>
+                            <td class="border p-3">None</td>
+                        </tr>
+                        <tr>
+                            <td class="border p-3 font-medium">Risk Level</td>
+                            <td class="border p-3 bg-green-50">Low</td>
+                            <td class="border p-3 bg-yellow-50">High</td>
+                            <td class="border p-3 bg-yellow-50">Medium-High</td>
+                            <td class="border p-3 bg-red-50">Very High</td>
+                        </tr>
+                        <tr>
+                            <td class="border p-3 font-medium">Collateral</td>
+                            <td class="border p-3">Asset itself</td>
+                            <td class="border p-3">Usually not required</td>
+                            <td class="border p-3">Shared assets</td>
+                            <td class="border p-3">Not required</td>
+                        </tr>
+                        <tr>
+                            <td class="border p-3 font-medium">Management</td>
+                            <td class="border p-3">Client</td>
+                            <td class="border p-3">Client</td>
+                            <td class="border p-3">Shared or Client</td>
+                            <td class="border p-3">Client</td>
+                        </tr>
+                        <tr>
+                            <td class="border p-3 font-medium">Best For</td>
+                            <td class="border p-3">Asset purchase</td>
+                            <td class="border p-3">Trading business</td>
+                            <td class="border p-3">Long-term ventures</td>
+                            <td class="border p-3">Welfare needs</td>
+                        </tr>
+                        <tr>
+                            <td class="border p-3 font-medium">Popularity</td>
+                            <td class="border p-3 bg-green-50">70-80%</td>
+                            <td class="border p-3 bg-yellow-50">10-15%</td>
+                            <td class="border p-3 bg-yellow-50">5-10%</td>
+                            <td class="border p-3 bg-blue-50">5-10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 7: Case Scenarios -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="7">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">7. Real-World Application Scenarios</h2>
+            
+            <div class="space-y-6">
+                <div class="border-2 border-orange-200 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3">Scenario 1: Tailoring Equipment</h3>
+                    <p class="text-gray-700 mb-3">
+                        <strong>Client:</strong> Fatimah, a seamstress who needs a RM 5,000 sewing machine<br>
+                        <strong>Recommended Product:</strong> Murabaha<br>
+                        <strong>Rationale:</strong> Specific asset needed, predictable income from tailoring, fixed repayment capability
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded">
+                        <p class="text-sm text-gray-700">
+                            <strong>Structure:</strong> Institution buys machine for RM 5,000, sells to Fatimah for RM 5,600 
+                            (RM 100/month for 12 months). She owns the machine immediately while repaying.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-2 border-blue-200 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3">Scenario 2: Fish Trading Business</h3>
+                    <p class="text-gray-700 mb-3">
+                        <strong>Client:</strong> Ahmad, experienced fish trader needing RM 20,000 for inventory<br>
+                        <strong>Recommended Product:</strong> Mudharabah<br>
+                        <strong>Rationale:</strong> Variable profits, requires expertise, short business cycles
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded">
+                        <p class="text-sm text-gray-700">
+                            <strong>Structure:</strong> Institution provides RM 20,000 capital, Ahmad manages trading. 
+                            Profits split 60:40 (Institution:Ahmad). Monthly settlement based on actual sales.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-2 border-green-200 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3">Scenario 3: Medical Emergency</h3>
+                    <p class="text-gray-700 mb-3">
+                        <strong>Client:</strong> Siti, factory worker needing RM 3,000 for child's surgery<br>
+                        <strong>Recommended Product:</strong> Qard Hasan<br>
+                        <strong>Rationale:</strong> Emergency welfare need, limited repayment capacity
+                    </p>
+                    <div class="bg-gray-50 p-4 rounded">
+                        <p class="text-sm text-gray-700">
+                            <strong>Structure:</strong> Interest-free loan of RM 3,000, repayable at RM 250/month for 
+                            12 months. Flexible if financial difficulties arise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Knowledge Check Quiz
+            </h2>
+            
+            <div id="quiz-container" class="space-y-8">
+                <!-- Quiz questions will be rendered here -->
+            </div>
+
+            <div class="mt-6 text-center">
+                <button id="submit-quiz" class="bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition font-semibold">
+                    Submit Answers
+                </button>
+            </div>
+
+            <div id="quiz-result" class="mt-6 p-6 rounded-lg hidden"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12">
+            <a href="microislamfin2.html" class="text-gray-600 hover:text-gray-800 transition flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Previous: Chapter 2
+            </a>
+            <a href="microislamfin4.html" class="bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition font-semibold flex items-center">
+                Next: Chapter 4
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 UiTM Sabah - Islamic Microfinance Learning Module</p>
+            <p class="text-gray-400 text-sm mt-2">Faculty of Business and Management</p>
+        </div>
+    </footer>
+
+    <script>
+        // Murabaha Calculator
+        function calculateMurabaha() {
+            const cost = parseFloat(document.getElementById('calc-cost').value);
+            const margin = parseFloat(document.getElementById('calc-margin').value) / 100;
+            const period = parseInt(document.getElementById('calc-period').value);
+            
+            const markup = cost * margin * (period / 12);
+            const total = cost + markup;
+            const monthly = total / period;
+            
+            document.getElementById('result-cost').textContent = `RM ${cost.toFixed(2)}`;
+            document.getElementById('result-markup').textContent = `RM ${markup.toFixed(2)}`;
+            document.getElementById('result-total').textContent = `RM ${total.toFixed(2)}`;
+            document.getElementById('result-monthly').textContent = `RM ${monthly.toFixed(2)}`;
+            
+            document.getElementById('calc-results').classList.remove('hidden');
+        }
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "In a Murabaha contract, who must take ownership of the asset first?",
+                options: [
+                    "The client",
+                    "The financier/institution",
+                    "The supplier",
+                    "Any party can take ownership"
+                ],
+                correct: 1
+            },
+            {
+                question: "In Mudharabah, who bears the financial loss if the business fails?",
+                options: [
+                    "The entrepreneur (Mudarib)",
+                    "The financier (Rab al-Maal)",
+                    "Both parties equally",
+                    "Neither party"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is the key difference between Mudharabah and Musharakah?",
+                options: [
+                    "Profit sharing ratio",
+                    "Capital contribution (one party vs both parties)",
+                    "Risk distribution",
+                    "Management structure"
+                ],
+                correct: 1
+            },
+            {
+                question: "In Qard Hasan, what amount does the borrower repay?",
+                options: [
+                    "Principal + Interest",
+                    "Principal + Markup",
+                    "Principal only",
+                    "Principal + Administrative fee"
+                ],
+                correct: 2
+            },
+            {
+                question: "According to the comparative analysis, which product is most popular in Islamic microfinance?",
+                options: [
+                    "Mudharabah",
+                    "Musharakah",
+                    "Murabaha",
+                    "Qard Hasan"
+                ],
+                correct: 2
+            },
+            {
+                question: "If cost price is RM 10,000, margin is 12% p.a., and term is 12 months, what is the markup?",
+                options: [
+                    "RM 1,000",
+                    "RM 1,200",
+                    "RM 1,500",
+                    "RM 2,000"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which Islamic contract would be most suitable for purchasing equipment?",
+                options: [
+                    "Mudharabah",
+                    "Murabaha",
+                    "Qard Hasan",
+                    "Musharakah"
+                ],
+                correct: 1
+            }
+        ];
+
+        let selectedAnswers = {};
+
+        // Render quiz
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = quizData.map((q, index) => `
+                <div class="quiz-question" data-question="${index}">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Question ${index + 1}: ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" 
+                                 data-question="${index}" 
+                                 data-option="${optIndex}"
+                                 onclick="selectOption(${index}, ${optIndex})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select option
+        function selectOption(questionIndex, optionIndex) {
+            document.querySelectorAll(`[data-question="${questionIndex}"][data-option]`).forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            const option = document.querySelector(`[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+            option.classList.add('selected');
+            
+            selectedAnswers[questionIndex] = optionIndex;
+            updateProgress();
+        }
+
+        // Submit quiz
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            if (Object.keys(selectedAnswers).length < quizData.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                const userAnswer = selectedAnswers[index];
+                const options = document.querySelectorAll(`[data-question="${index}"][data-option]`);
+                
+                options.forEach((option, optIndex) => {
+                    option.style.pointerEvents = 'none';
+                    if (optIndex === q.correct) {
+                        option.classList.add('correct');
+                    } else if (optIndex === userAnswer && userAnswer !== q.correct) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswer === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = (correct / quizData.length * 100).toFixed(0);
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            
+            let message, bgColor;
+            if (percentage >= 80) {
+                message = "Excellent! You have mastered Islamic microfinance operational frameworks.";
+                bgColor = "bg-green-100 border-green-500 text-green-900";
+            } else if (percentage >= 60) {
+                message = "Good work! Review the product structures for better understanding.";
+                bgColor = "bg-blue-100 border-blue-500 text-blue-900";
+            } else {
+                message = "Keep studying! Review the contracts and their applications.";
+                bgColor = "bg-amber-100 border-amber-500 text-amber-900";
+            }
+
+            resultDiv.className = `mt-6 p-6 rounded-lg border-l-4 ${bgColor}`;
+            resultDiv.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">Quiz Results</h3>
+                <p class="text-2xl font-bold mb-2">${correct} out of ${quizData.length} correct (${percentage}%)</p>
+                <p>${message}</p>
+            `;
+
+            this.style.display = 'none';
+            markSectionComplete(8);
+        });
+
+        // Progress tracking
+        const totalSections = 8;
+        let completedSections = new Set();
+
+        function markSectionComplete(sectionIndex) {
+            completedSections.add(sectionIndex);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = Math.round(progress);
+        }
+
+        // Intersection Observer for section completion
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    const section = entry.target;
+                    const sectionIndex = parseInt(section.dataset.section);
+                    if (sectionIndex) {
+                        setTimeout(() => markSectionComplete(sectionIndex), 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderQuiz();
+            
+            document.querySelectorAll('[data-section]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

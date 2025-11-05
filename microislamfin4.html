@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Challenges, Solutions and Future Directions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #581c87 0%, #7c3aed 50%, #a78bfa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .content-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #7c3aed;
+        }
+        
+        .challenge-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border-left: 4px solid #dc2626;
+        }
+        
+        .solution-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+            border-left: 4px solid #10b981;
+        }
+        
+        .future-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .tech-card {
+            background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%);
+            border: 2px solid #7c3aed;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px -6px rgba(124, 58, 237, 0.3);
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e9d5ff;
+            border-color: #7c3aed;
+        }
+        
+        .quiz-option.selected {
+            background-color: #7c3aed;
+            color: white;
+            border-color: #6d28d9;
+        }
+        
+        .quiz-option.correct {
+            background-color: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-purple-600 transition">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="microislamfin3.html" class="text-gray-700 hover:text-purple-600 transition">
+                        ← Chapter 3
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Chapter 4 of 4</span>
+                    <a href="index.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                        Complete Course →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <div class="chapter-header text-white py-16 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <span class="text-sm font-semibold">Final Chapter</span>
+                </div>
+                <h1 class="text-5xl font-bold mb-4">Challenges, Solutions and Future Directions</h1>
+                <p class="text-xl text-purple-100">Navigating the evolving landscape of Islamic microfinance</p>
+                <div class="mt-8 flex justify-center items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">8</div>
+                        <div class="text-sm text-purple-200">Sections</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">~45</div>
+                        <div class="text-sm text-purple-200">Minutes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">8</div>
+                        <div class="text-sm text-purple-200">Quiz Questions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm sticky top-16 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700">Your Progress</span>
+                <span class="text-sm text-gray-600"><span id="progress-percent">0</span>% Complete</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-purple-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12 max-w-4xl">
+        
+        <!-- Learning Objectives -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Learning Objectives
+            </h2>
+            <div class="space-y-3">
+                <div class="flex items-start">
+                    <span class="text-purple-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Identify key challenges facing Islamic microfinance</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-purple-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Explore innovative solutions and best practices</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-purple-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Understand the role of technology and digital transformation</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-purple-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Anticipate future trends and opportunities in the industry</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Key Challenges -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="1">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">1. Major Challenges in Islamic Microfinance</h2>
+            
+            <div class="space-y-6">
+                <div class="challenge-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        1. Limited Scale and Outreach
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Islamic microfinance institutions often struggle to achieve the scale necessary for financial 
+                        sustainability and broad impact.
+                    </p>
+                    <div class="bg-white p-4 rounded border-l-4 border-red-400">
+                        <p class="text-sm text-gray-700">
+                            <strong>Statistics:</strong> Islamic microfinance serves less than 5% of potential Muslim 
+                            clients globally, while conventional microfinance reaches approximately 140 million borrowers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="challenge-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        2. High Operational Costs
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Islamic contracts often require more documentation, oversight, and Shariah compliance monitoring, 
+                        increasing operational expenses.
+                    </p>
+                    <ul class="text-sm text-gray-700 space-y-1 ml-6">
+                        <li>• Shariah board fees and compliance costs</li>
+                        <li>• Additional documentation for asset-backed financing</li>
+                        <li>• Higher training requirements for staff</li>
+                        <li>• Complex contract structures</li>
+                    </ul>
+                </div>
+
+                <div class="challenge-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        3. Limited Product Diversification
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Over-reliance on Murabaha (70-80% of products) limits client choice and institutional resilience.
+                    </p>
+                    <div class="bg-white p-4 rounded border-l-4 border-red-400">
+                        <p class="text-sm text-gray-700">
+                            <strong>Challenge:</strong> Profit-sharing products (Mudharabah, Musharakah) are riskier and 
+                            more complex, leading to their underutilization despite being more aligned with Islamic principles.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="challenge-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/>
+                        </svg>
+                        4. Regulatory and Legal Gaps
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Many countries lack specific regulations for Islamic microfinance, creating legal uncertainties 
+                        and operational challenges.
+                    </p>
+                    <ul class="text-sm text-gray-700 space-y-1 ml-6">
+                        <li>• Absence of dedicated Islamic microfinance laws</li>
+                        <li>• Tax treatment of Islamic contracts unclear</li>
+                        <li>• Lack of standardized Shariah interpretations</li>
+                        <li>• Limited legal recourse for profit-sharing agreements</li>
+                    </ul>
+                </div>
+
+                <div class="challenge-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        5. Limited Awareness and Understanding
+                    </h3>
+                    <p class="text-gray-700">
+                        Many potential clients, even in Muslim-majority countries, have limited understanding of Islamic 
+                        microfinance products and their benefits over conventional alternatives.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Solutions and Best Practices -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Innovative Solutions and Best Practices</h2>
+            
+            <div class="space-y-6">
+                <div class="solution-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-green-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Partnership and Collaboration Models
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Strategic partnerships help IMFIs achieve scale while maintaining Shariah compliance.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded border-2 border-green-300">
+                            <h4 class="font-semibold text-gray-800 mb-2">Bank-MFI Partnerships</h4>
+                            <p class="text-sm text-gray-600">Islamic banks provide funding while specialized MFIs handle operations and client relationships</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-2 border-green-300">
+                            <h4 class="font-semibold text-gray-800 mb-2">Fintech Collaboration</h4>
+                            <p class="text-sm text-gray-600">Technology companies provide platforms while IMFIs offer Shariah expertise</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-2 border-green-300">
+                            <h4 class="font-semibold text-gray-800 mb-2">Government Support</h4>
+                            <p class="text-sm text-gray-600">Public-private partnerships leverage government resources and IMFI expertise</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-2 border-green-300">
+                            <h4 class="font-semibold text-gray-800 mb-2">Network Development</h4>
+                            <p class="text-sm text-gray-600">Joining networks for shared resources, knowledge, and advocacy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-green-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        Cost Reduction Strategies
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <span><strong>Standardization:</strong> Developing standard contracts and procedures to reduce complexity</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <span><strong>Technology Adoption:</strong> Using mobile banking and digital platforms to reduce branch costs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <span><strong>Group Methodologies:</strong> Leveraging peer groups to reduce monitoring costs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">✓</span>
+                            <span><strong>Agent Banking:</strong> Using local agents instead of physical branches</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="solution-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-green-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        Product Innovation
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Developing new Shariah-compliant products to meet diverse client needs:
+                    </p>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                            <h4 class="font-semibold text-gray-800">Islamic Microinsurance (Takaful)</h4>
+                            <p class="text-sm text-gray-600">Protecting clients against health, crop, and livelihood risks</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                            <h4 class="font-semibold text-gray-800">Islamic Savings Products</h4>
+                            <p class="text-sm text-gray-600">Profit-sharing savings accounts to mobilize local resources</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border-l-4 border-green-500">
+                            <h4 class="font-semibold text-gray-800">Hybrid Products</h4>
+                            <p class="text-sm text-gray-600">Combining different Islamic contracts for specific needs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Digital Transformation -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="3">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">3. Digital Transformation in Islamic Microfinance</h2>
+            
+            <p class="text-gray-700 mb-6">
+                Technology is revolutionizing how Islamic microfinance is delivered, making it more accessible, 
+                affordable, and efficient.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="text-4xl mb-3">📱</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Mobile Banking</h3>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Mobile money platforms enable instant disbursements, repayments, and account management.
+                    </p>
+                    <div class="bg-white p-3 rounded text-xs">
+                        <strong>Impact:</strong> Reduces transaction costs by 40-60% and expands rural outreach
+                    </div>
+                </div>
+
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="text-4xl mb-3">🤖</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">AI and Big Data</h3>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Machine learning algorithms assess creditworthiness using alternative data sources.
+                    </p>
+                    <div class="bg-white p-3 rounded text-xs">
+                        <strong>Benefit:</strong> Enables lending to clients without traditional credit histories
+                    </div>
+                </div>
+
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="text-4xl mb-3">⛓️</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Blockchain Technology</h3>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Distributed ledger technology enhances transparency and traceability of Islamic contracts.
+                    </p>
+                    <div class="bg-white p-3 rounded text-xs">
+                        <strong>Application:</strong> Smart contracts automate profit distribution in Mudharabah
+                    </div>
+                </div>
+
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="text-4xl mb-3">☁️</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Cloud Computing</h3>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Cloud-based core banking systems reduce IT infrastructure costs significantly.
+                    </p>
+                    <div class="bg-white p-3 rounded text-xs">
+                        <strong>Advantage:</strong> Scalable, flexible, and accessible from anywhere
+                    </div>
+                </div>
+
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="text-4xl mb-3">💳</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Digital Wallets</h3>
+                    <p class="text-gray-700 text-sm mb-3">
+                        E-wallets facilitate cashless transactions and integration with Islamic fintech ecosystems.
+                    </p>
+                    <div class="bg-white p-3 rounded text-xs">
+                        <strong>Example:</strong> GrabPay, Touch 'n Go integration in Malaysia
+                    </div>
+                </div>
+
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="text-4xl mb-3">📊</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Data Analytics</h3>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Advanced analytics optimize product design, pricing, and client targeting.
+                    </p>
+                    <div class="bg-white p-3 rounded text-xs">
+                        <strong>Use Case:</strong> Predicting repayment patterns and preventing defaults
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: SWOT Analysis -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">4. SWOT Analysis of Islamic Microfinance</h2>
+            
+            <div class="swot-grid">
+                <div class="bg-green-50 border-2 border-green-500 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Strengths
+                    </h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>✓ Ethical foundation attracts values-driven clients</li>
+                        <li>✓ Risk-sharing promotes sustainable entrepreneurship</li>
+                        <li>✓ Asset-backed financing reduces speculation</li>
+                        <li>✓ Large untapped Muslim market (1.8 billion globally)</li>
+                        <li>✓ Integration with zakat and waqf systems</li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 border-2 border-red-500 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        Weaknesses
+                    </h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>× Limited scale and outreach</li>
+                        <li>× Higher operational costs</li>
+                        <li>× Complex contract structures</li>
+                        <li>× Limited product diversity</li>
+                        <li>× Shortage of qualified Shariah scholars</li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50 border-2 border-blue-500 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                        Opportunities
+                    </h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>→ Growing demand for ethical finance</li>
+                        <li>→ Digital transformation potential</li>
+                        <li>→ Government support increasing globally</li>
+                        <li>→ Fintech partnerships and innovation</li>
+                        <li>→ Expanding to non-Muslim markets</li>
+                    </ul>
+                </div>
+
+                <div class="bg-amber-50 border-2 border-amber-500 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-amber-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        Threats
+                    </h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>⚠ Competition from conventional microfinance</li>
+                        <li>⚠ Regulatory uncertainties</li>
+                        <li>⚠ Economic downturns affecting repayment</li>
+                        <li>⚠ Reputational risks from non-compliance</li>
+                        <li>⚠ Client over-indebtedness concerns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Future Trends -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="5">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">5. Future Trends and Opportunities</h2>
+            
+            <div class="space-y-6">
+                <div class="future-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">1. Islamic Fintech Revolution</h3>
+                    <p class="text-gray-700 mb-3">
+                        The convergence of Islamic finance and financial technology is creating new possibilities:
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Peer-to-Peer Platforms</h4>
+                            <p class="text-xs text-gray-600">Connecting investors directly with entrepreneurs via Shariah-compliant crowdfunding</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Robo-Advisory</h4>
+                            <p class="text-xs text-gray-600">Automated Shariah-compliant investment advice for microentrepreneurs</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h4 class="font-semibold text-gray-800 mb-2">Digital Sukuk</h4>
+                            <p class="text-xs text-gray-600">Tokenized Islamic bonds for microfinance funding</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="future-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">2. Green and Sustainable Finance Integration</h3>
+                    <p class="text-gray-700 mb-3">
+                        Combining Islamic finance principles with environmental and social goals:
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-700 ml-6">
+                        <li>• Solar energy financing for rural households</li>
+                        <li>• Organic farming and sustainable agriculture support</li>
+                        <li>• Clean water and sanitation projects</li>
+                        <li>• Eco-friendly small business development</li>
+                    </ul>
+                </div>
+
+                <div class="future-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">3. Cross-Border Islamic Microfinance</h3>
+                    <p class="text-gray-700 mb-3">
+                        Leveraging technology to enable international Islamic microfinance:
+                    </p>
+                    <div class="bg-white p-4 rounded border-2 border-blue-300">
+                        <p class="text-sm text-gray-700">
+                            <strong>Example:</strong> Diaspora Muslims financing microenterprises in their home countries 
+                            through digital Islamic microfinance platforms, creating direct impact while earning Shariah-compliant returns.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="future-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">4. Integration with National Financial Inclusion Strategies</h3>
+                    <p class="text-gray-700">
+                        Governments increasingly recognize Islamic microfinance as a key tool for financial inclusion, 
+                        leading to supportive policies, dedicated funding, and regulatory frameworks.
+                    </p>
+                </div>
+
+                <div class="future-box p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">5. Data-Driven Personalization</h3>
+                    <p class="text-gray-700 mb-3">
+                        Using big data and AI to offer personalized Islamic microfinance solutions:
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-700 ml-6">
+                        <li>• Customized repayment schedules based on cash flow patterns</li>
+                        <li>• Dynamic pricing based on risk assessment</li>
+                        <li>• Tailored product recommendations</li>
+                        <li>• Predictive support for struggling borrowers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Role of Stakeholders -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">6. Role of Key Stakeholders</h2>
+            
+            <div class="space-y-4">
+                <div class="border-l-4 border-purple-500 pl-6 py-4 bg-purple-50 rounded-r-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Governments</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Develop supportive regulatory frameworks</li>
+                        <li>• Provide seed capital and guarantees</li>
+                        <li>• Integrate into poverty reduction strategies</li>
+                        <li>• Facilitate tax incentives for Islamic microfinance</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-4 border-blue-500 pl-6 py-4 bg-blue-50 rounded-r-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Islamic Financial Institutions</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Provide wholesale funding to IMFIs</li>
+                        <li>• Share expertise and best practices</li>
+                        <li>• Develop innovative Shariah-compliant products</li>
+                        <li>• Invest in IMFI capacity building</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-4 border-green-500 pl-6 py-4 bg-green-50 rounded-r-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Technology Providers</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Develop affordable fintech solutions</li>
+                        <li>• Ensure Shariah compliance in digital products</li>
+                        <li>• Provide training and technical support</li>
+                        <li>• Facilitate data security and privacy</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-4 border-amber-500 pl-6 py-4 bg-amber-50 rounded-r-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Academic and Research Institutions</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Conduct rigorous impact studies</li>
+                        <li>• Develop educational curricula</li>
+                        <li>• Train future Islamic finance professionals</li>
+                        <li>• Provide policy recommendations</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-4 border-red-500 pl-6 py-4 bg-red-50 rounded-r-lg">
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">International Development Organizations</h3>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Provide technical assistance and grants</li>
+                        <li>• Facilitate knowledge sharing globally</li>
+                        <li>• Support industry standard development</li>
+                        <li>• Fund research and innovation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: Case Study - Success Story -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="7">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">7. Success Story: Digital Transformation in Action</h2>
+            
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg border-2 border-purple-300">
+                <h3 class="text-2xl font-bold text-purple-900 mb-4">Case Study: MyFinB (Malaysia)</h3>
+                
+                <div class="space-y-4 text-gray-700">
+                    <p>
+                        <strong>Background:</strong> MyFinB is a Shariah-compliant digital financing platform launched in 
+                        2019, focusing on micro and SME financing.
+                    </p>
+
+                    <div class="bg-white p-5 rounded-lg">
+                        <h4 class="font-bold text-lg text-gray-800 mb-3">Key Innovations:</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">→</span>
+                                <span><strong>Fully Digital Process:</strong> Application to disbursement in 24-48 hours</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">→</span>
+                                <span><strong>Alternative Credit Scoring:</strong> Uses transaction data and digital footprint</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">→</span>
+                                <span><strong>Automated Shariah Compliance:</strong> Built-in contract templates and oversight</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">→</span>
+                                <span><strong>Flexible Products:</strong> Multiple Islamic contracts available</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4 mt-4">
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-purple-800">50K+</div>
+                            <div class="text-sm text-gray-700">Clients Served</div>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-purple-800">RM 500M+</div>
+                            <div class="text-sm text-gray-700">Financing Disbursed</div>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-lg text-center">
+                            <div class="text-3xl font-bold text-purple-800">95%+</div>
+                            <div class="text-sm text-gray-700">Approval Rate</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4 rounded-r-lg">
+                        <p class="text-green-900 text-sm">
+                            <strong>Lesson:</strong> Digital transformation, when properly implemented with Shariah oversight, 
+                            can dramatically improve accessibility and efficiency of Islamic microfinance while maintaining compliance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Final Knowledge Check Quiz
+            </h2>
+            
+            <div id="quiz-container" class="space-y-8">
+                <!-- Quiz questions will be rendered here -->
+            </div>
+
+            <div class="mt-6 text-center">
+                <button id="submit-quiz" class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-semibold">
+                    Submit Answers
+                </button>
+            </div>
+
+            <div id="quiz-result" class="mt-6 p-6 rounded-lg hidden"></div>
+        </div>
+
+        <!-- Course Completion -->
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl p-8 mb-8">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🎓</div>
+                <h2 class="text-3xl font-bold mb-4">Congratulations!</h2>
+                <p class="text-xl mb-6">
+                    You've completed the Islamic Microfinance Learning Module
+                </p>
+                <p class="text-purple-100 mb-8">
+                    You now have a comprehensive understanding of Islamic microfinance principles, practices, 
+                    and future directions. This knowledge will help you contribute to financial inclusion and 
+                    poverty alleviation through Shariah-compliant mechanisms.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="index.html" class="bg-white text-purple-600 px-6 py-3 rounded-lg hover:bg-purple-50 transition font-semibold">
+                        Return to Home
+                    </a>
+                    <a href="microislamfin1.html" class="bg-purple-700 text-white px-6 py-3 rounded-lg hover:bg-purple-800 transition font-semibold">
+                        Review Course
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12">
+            <a href="microislamfin3.html" class="text-gray-600 hover:text-gray-800 transition flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Previous: Chapter 3
+            </a>
+            <a href="index.html" class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-semibold flex items-center">
+                Complete Course
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 UiTM Sabah - Islamic Microfinance Learning Module</p>
+            <p class="text-gray-400 text-sm mt-2">Faculty of Business and Management</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "What percentage of potential Muslim clients globally does Islamic microfinance currently serve?",
+                options: [
+                    "Less than 5%",
+                    "Around 15%",
+                    "Approximately 25%",
+                    "Over 30%"
+                ],
+                correct: 0
+            },
+            {
+                question: "Which solution is NOT mentioned as a cost reduction strategy?",
+                options: [
+                    "Standardization of contracts",
+                    "Technology adoption",
+                    "Increasing interest rates",
+                    "Agent banking"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is the main benefit of mobile banking in Islamic microfinance?",
+                options: [
+                    "Increases profit margins",
+                    "Reduces transaction costs by 40-60%",
+                    "Eliminates Shariah compliance needs",
+                    "Replaces human staff completely"
+                ],
+                correct: 1
+            },
+            {
+                question: "In the SWOT analysis, which is listed as a strength of Islamic microfinance?",
+                options: [
+                    "High operational efficiency",
+                    "Large scale operations",
+                    "Ethical foundation attracting values-driven clients",
+                    "Simple contract structures"
+                ],
+                correct: 2
+            },
+            {
+                question: "What type of future trend involves combining Islamic finance with environmental goals?",
+                options: [
+                    "Islamic Fintech",
+                    "Green and Sustainable Finance Integration",
+                    "Cross-Border Islamic Microfinance",
+                    "Data-Driven Personalization"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which stakeholder is responsible for developing supportive regulatory frameworks?",
+                options: [
+                    "Islamic Financial Institutions",
+                    "Technology Providers",
+                    "Governments",
+                    "Academic Institutions"
+                ],
+                correct: 2
+            },
+            {
+                question: "According to the MyFinB case study, how long does the digital process take from application to disbursement?",
+                options: [
+                    "24-48 hours",
+                    "3-5 days",
+                    "1-2 weeks",
+                    "1 month"
+                ],
+                correct: 0
+            },
+            {
+                question: "What is a key threat mentioned in the SWOT analysis?",
+                options: [
+                    "Lack of clients",
+                    "Competition from conventional microfinance",
+                    "Too much government support",
+                    "Oversupply of Shariah scholars"
+                ],
+                correct: 1
+            }
+        ];
+
+        let selectedAnswers = {};
+
+        // Render quiz
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = quizData.map((q, index) => `
+                <div class="quiz-question" data-question="${index}">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Question ${index + 1}: ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" 
+                                 data-question="${index}" 
+                                 data-option="${optIndex}"
+                                 onclick="selectOption(${index}, ${optIndex})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select option
+        function selectOption(questionIndex, optionIndex) {
+            document.querySelectorAll(`[data-question="${questionIndex}"][data-option]`).forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            const option = document.querySelector(`[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+            option.classList.add('selected');
+            
+            selectedAnswers[questionIndex] = optionIndex;
+            updateProgress();
+        }
+
+        // Submit quiz
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            if (Object.keys(selectedAnswers).length < quizData.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                const userAnswer = selectedAnswers[index];
+                const options = document.querySelectorAll(`[data-question="${index}"][data-option]`);
+                
+                options.forEach((option, optIndex) => {
+                    option.style.pointerEvents = 'none';
+                    if (optIndex === q.correct) {
+                        option.classList.add('correct');
+                    } else if (optIndex === userAnswer && userAnswer !== q.correct) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswer === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = (correct / quizData.length * 100).toFixed(0);
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            
+            let message, bgColor;
+            if (percentage >= 80) {
+                message = "Outstanding! You've mastered the challenges and future directions of Islamic microfinance.";
+                bgColor = "bg-green-100 border-green-500 text-green-900";
+            } else if (percentage >= 60) {
+                message = "Well done! You have a good grasp of the material.";
+                bgColor = "bg-blue-100 border-blue-500 text-blue-900";
+            } else {
+                message = "Good effort! Consider reviewing the chapter for deeper understanding.";
+                bgColor = "bg-amber-100 border-amber-500 text-amber-900";
+            }
+
+            resultDiv.className = `mt-6 p-6 rounded-lg border-l-4 ${bgColor}`;
+            resultDiv.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">Final Quiz Results</h3>
+                <p class="text-2xl font-bold mb-2">${correct} out of ${quizData.length} correct (${percentage}%)</p>
+                <p>${message}</p>
+                ${percentage >= 80 ? '<p class="mt-4 text-lg font-semibold">🎉 Congratulations on completing the Islamic Microfinance Learning Module!</p>' : ''}
+            `;
+
+            this.style.display = 'none';
+            markSectionComplete(8);
+        });
+
+        // Progress tracking
+        const totalSections = 8;
+        let completedSections = new Set();
+
+        function markSectionComplete(sectionIndex) {
+            completedSections.add(sectionIndex);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = Math.round(progress);
+        }
+
+        // Intersection Observer for section completion
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    const section = entry.target;
+                    const sectionIndex = parseInt(section.dataset.section);
+                    if (sectionIndex) {
+                        setTimeout(() => markSectionComplete(sectionIndex), 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderQuiz();
+            
+            document.querySelectorAll('[data-section]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
