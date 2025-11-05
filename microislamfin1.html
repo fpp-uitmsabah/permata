@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to Islamic Microfinance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .content-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+        }
+        
+        .quiz-option.selected {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #1e3a8a;
+        }
+        
+        .quiz-option.correct {
+            background-color: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .interactive-example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .key-concept {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition mr-6">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Back to Home
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Chapter 1 of 4</span>
+                    <a href="microislamfin2.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Next Chapter →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <div class="chapter-header text-white py-16 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <span class="text-sm font-semibold">Chapter 1</span>
+                </div>
+                <h1 class="text-5xl font-bold mb-4">Introduction to Islamic Microfinance</h1>
+                <p class="text-xl text-blue-100">Understanding the foundations of Shariah-compliant microfinancing</p>
+                <div class="mt-8 flex justify-center items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">6</div>
+                        <div class="text-sm text-blue-200">Sections</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">~30</div>
+                        <div class="text-sm text-blue-200">Minutes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">5</div>
+                        <div class="text-sm text-blue-200">Quiz Questions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm sticky top-16 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700">Your Progress</span>
+                <span class="text-sm text-gray-600"><span id="progress-percent">0</span>% Complete</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12 max-w-4xl">
+        
+        <!-- Learning Objectives -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Learning Objectives
+            </h2>
+            <div class="space-y-3">
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Understand the fundamental principles of Islamic microfinance</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Differentiate between conventional and Islamic microfinance</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Identify key Shariah principles governing microfinance</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-blue-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Recognize the role of Islamic microfinance in poverty alleviation</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="1">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">1. What is Microfinance?</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg leading-relaxed">
+                    Microfinance refers to the provision of financial services to low-income individuals or groups who 
+                    typically lack access to conventional banking and related services. These services include small loans 
+                    (microcredit), savings accounts, insurance, and money transfer services.
+                </p>
+                <div class="key-concept p-6 rounded-lg my-6">
+                    <h3 class="font-bold text-lg text-amber-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Key Concept
+                    </h3>
+                    <p class="text-gray-800">
+                        The primary goal of microfinance is to provide financial inclusion to the unbanked population, 
+                        enabling them to start or expand small businesses, manage emergencies, and improve their standard of living.
+                    </p>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Key Characteristics:</h3>
+                <ul class="space-y-2 ml-6">
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Small loan amounts:</strong> Typically ranging from $50 to $5,000</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Short repayment periods:</strong> Usually 6 to 12 months</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Group lending:</strong> Often uses peer group mechanisms for accountability</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Simplified application process:</strong> Less paperwork and collateral requirements</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Islamic Microfinance: The Shariah-Compliant Approach</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg leading-relaxed">
+                    Islamic microfinance applies Shariah principles to microfinancing activities, ensuring that all 
+                    transactions are ethical, equitable, and free from prohibited elements such as riba (interest), 
+                    gharar (excessive uncertainty), and maysir (gambling).
+                </p>
+                <div class="interactive-example p-6 rounded-lg my-6">
+                    <h3 class="font-bold text-lg text-blue-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        Example
+                    </h3>
+                    <p class="text-gray-800">
+                        Instead of charging interest on a loan, an Islamic microfinance institution might use a 
+                        <strong>Murabaha</strong> (cost-plus financing) contract. For example, if a client needs to 
+                        purchase equipment worth $1,000, the institution buys the equipment and sells it to the client 
+                        for $1,100, payable over 12 months. The $100 markup is the institution's profit, disclosed upfront.
+                    </p>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Core Principles:</h3>
+                <ul class="space-y-2 ml-6">
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Prohibition of Riba:</strong> No interest-based transactions</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Risk Sharing:</strong> Both parties share profits and losses</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Asset-Backed Financing:</strong> All financing must be linked to real assets or services</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Ethical Investment:</strong> No financing for prohibited activities (alcohol, gambling, etc.)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="3">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">3. Key Differences: Conventional vs Islamic Microfinance</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-blue-50">
+                            <th class="border-b border-blue-200 p-4 text-blue-900 font-semibold">Aspect</th>
+                            <th class="border-b border-blue-200 p-4 text-blue-900 font-semibold">Conventional Microfinance</th>
+                            <th class="border-b border-blue-200 p-4 text-blue-900 font-semibold">Islamic Microfinance</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="hover:bg-gray-50">
+                            <td class="border-b border-gray-200 p-4 font-medium">Return Mechanism</td>
+                            <td class="border-b border-gray-200 p-4">Interest-based</td>
+                            <td class="border-b border-gray-200 p-4">Profit-sharing or markup</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="border-b border-gray-200 p-4 font-medium">Risk Distribution</td>
+                            <td class="border-b border-gray-200 p-4">Borrower bears all risk</td>
+                            <td class="border-b border-gray-200 p-4">Risk shared between parties</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="border-b border-gray-200 p-4 font-medium">Ethical Screening</td>
+                            <td class="border-b border-gray-200 p-4">Limited or none</td>
+                            <td class="border-b border-gray-200 p-4">Mandatory Shariah compliance</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="border-b border-gray-200 p-4 font-medium">Contract Type</td>
+                            <td class="border-b border-gray-200 p-4">Debt contract</td>
+                            <td class="border-b border-gray-200 p-4">Various contracts (Mudarabah, Murabaha, etc.)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="border-b border-gray-200 p-4 font-medium">Underlying Asset</td>
+                            <td class="border-b border-gray-200 p-4">Not required</td>
+                            <td class="border-b border-gray-200 p-4">Must be asset-backed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">4. Common Islamic Financing Instruments in Microfinance</h2>
+            <div class="space-y-6">
+                <!-- Mudarabah -->
+                <div class="border-l-4 border-blue-500 pl-6 py-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Mudarabah (Profit-Sharing Partnership)</h3>
+                    <p class="text-gray-700 mb-2">
+                        A partnership where the financier provides capital and the entrepreneur provides labor and expertise. 
+                        Profits are shared according to a pre-agreed ratio, while losses are borne by the financier.
+                    </p>
+                    <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Best for: Business ventures</span>
+                </div>
+
+                <!-- Musharakah -->
+                <div class="border-l-4 border-green-500 pl-6 py-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Musharakah (Joint Venture)</h3>
+                    <p class="text-gray-700 mb-2">
+                        A partnership where both parties contribute capital and share profits and losses based on their 
+                        capital contribution or as agreed.
+                    </p>
+                    <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Best for: Collaborative projects</span>
+                </div>
+
+                <!-- Murabaha -->
+                <div class="border-l-4 border-purple-500 pl-6 py-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Murabaha (Cost-Plus Financing)</h3>
+                    <p class="text-gray-700 mb-2">
+                        The financier purchases goods requested by the client and sells them at a markup. The client 
+                        pays in installments over an agreed period.
+                    </p>
+                    <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Best for: Asset purchases</span>
+                </div>
+
+                <!-- Qard Hasan -->
+                <div class="border-l-4 border-amber-500 pl-6 py-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Qard Hasan (Benevolent Loan)</h3>
+                    <p class="text-gray-700 mb-2">
+                        An interest-free loan given for charitable purposes. The borrower only repays the principal amount. 
+                        Often used for emergency or welfare purposes.
+                    </p>
+                    <span class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm">Best for: Emergency needs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="5">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Knowledge Check Quiz
+            </h2>
+            
+            <div id="quiz-container" class="space-y-8">
+                <!-- Quiz questions will be rendered here -->
+            </div>
+
+            <div class="mt-6 text-center">
+                <button id="submit-quiz" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                    Submit Answers
+                </button>
+            </div>
+
+            <div id="quiz-result" class="mt-6 p-6 rounded-lg hidden"></div>
+        </div>
+
+        <!-- Summary -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Chapter Summary</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg">
+                    In this chapter, we've covered the fundamentals of Islamic microfinance, including:
+                </p>
+                <ul class="space-y-2 ml-6">
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">✓</span>
+                        <span>The basic definition and purpose of microfinance</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">✓</span>
+                        <span>How Islamic microfinance differs from conventional microfinance</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">✓</span>
+                        <span>Key Shariah principles that govern Islamic microfinance</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">✓</span>
+                        <span>Common Islamic financing instruments used in microfinance</span>
+                    </li>
+                </ul>
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-6 mt-6 rounded-r-lg">
+                    <p class="text-blue-900 font-medium">
+                        <strong>Next Chapter Preview:</strong> In Chapter 2, we'll explore the historical development 
+                        of Islamic microfinance, examining successful models from around the world and understanding 
+                        how these institutions have grown to serve millions of clients.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12">
+            <a href="index.html" class="text-gray-600 hover:text-gray-800 transition flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Home
+            </a>
+            <a href="microislamfin2.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold flex items-center">
+                Next: Chapter 2
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 UiTM Sabah - Islamic Microfinance Learning Module</p>
+            <p class="text-gray-400 text-sm mt-2">Faculty of Business and Management</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is the primary goal of microfinance?",
+                options: [
+                    "To maximize profits for financial institutions",
+                    "To provide financial inclusion to the unbanked population",
+                    "To replace conventional banking entirely",
+                    "To offer luxury financial products"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which of the following is prohibited in Islamic finance?",
+                options: [
+                    "Profit-sharing",
+                    "Asset-backed financing",
+                    "Interest (Riba)",
+                    "Risk-sharing"
+                ],
+                correct: 2
+            },
+            {
+                question: "In a Murabaha contract, what does the financier do?",
+                options: [
+                    "Provides an interest-free loan",
+                    "Purchases and sells goods at a markup",
+                    "Shares profits and losses equally",
+                    "Acts as a guarantor only"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is Qard Hasan?",
+                options: [
+                    "A profit-sharing partnership",
+                    "A cost-plus financing method",
+                    "An interest-free benevolent loan",
+                    "A joint venture agreement"
+                ],
+                correct: 2
+            },
+            {
+                question: "In conventional microfinance, who typically bears all the risk?",
+                options: [
+                    "The financial institution",
+                    "The government",
+                    "The borrower",
+                    "Both parties equally"
+                ],
+                correct: 2
+            }
+        ];
+
+        let selectedAnswers = {};
+
+        // Render quiz
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = quizData.map((q, index) => `
+                <div class="quiz-question" data-question="${index}">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Question ${index + 1}: ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" 
+                                 data-question="${index}" 
+                                 data-option="${optIndex}"
+                                 onclick="selectOption(${index}, ${optIndex})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select option
+        function selectOption(questionIndex, optionIndex) {
+            // Remove previous selection
+            document.querySelectorAll(`[data-question="${questionIndex}"][data-option]`).forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add new selection
+            const option = document.querySelector(`[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+            option.classList.add('selected');
+            
+            selectedAnswers[questionIndex] = optionIndex;
+            updateProgress();
+        }
+
+        // Submit quiz
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            if (Object.keys(selectedAnswers).length < quizData.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                const userAnswer = selectedAnswers[index];
+                const options = document.querySelectorAll(`[data-question="${index}"][data-option]`);
+                
+                options.forEach((option, optIndex) => {
+                    option.style.pointerEvents = 'none';
+                    if (optIndex === q.correct) {
+                        option.classList.add('correct');
+                    } else if (optIndex === userAnswer && userAnswer !== q.correct) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswer === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = (correct / quizData.length * 100).toFixed(0);
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            
+            let message, bgColor;
+            if (percentage >= 80) {
+                message = "Excellent work! You have a strong understanding of the material.";
+                bgColor = "bg-green-100 border-green-500 text-green-900";
+            } else if (percentage >= 60) {
+                message = "Good job! Review the sections where you had difficulties.";
+                bgColor = "bg-blue-100 border-blue-500 text-blue-900";
+            } else {
+                message = "Keep learning! Consider reviewing the chapter before moving on.";
+                bgColor = "bg-amber-100 border-amber-500 text-amber-900";
+            }
+
+            resultDiv.className = `mt-6 p-6 rounded-lg border-l-4 ${bgColor}`;
+            resultDiv.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">Quiz Results</h3>
+                <p class="text-2xl font-bold mb-2">${correct} out of ${quizData.length} correct (${percentage}%)</p>
+                <p>${message}</p>
+            `;
+
+            this.style.display = 'none';
+            markSectionComplete(5);
+        });
+
+        // Progress tracking
+        const totalSections = 6;
+        let completedSections = new Set();
+
+        function markSectionComplete(sectionIndex) {
+            completedSections.add(sectionIndex);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = Math.round(progress);
+        }
+
+        // Intersection Observer for section completion
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    const section = entry.target;
+                    const sectionIndex = parseInt(section.dataset.section);
+                    if (sectionIndex) {
+                        setTimeout(() => markSectionComplete(sectionIndex), 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe all sections
+        document.addEventListener('DOMContentLoaded', function() {
+            renderQuiz();
+            
+            document.querySelectorAll('[data-section]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Historical Development and Global Models</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .content-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #10b981;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            border-left: 2px solid #10b981;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #10b981;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #10b981;
+        }
+        
+        .case-study {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #10b981;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 1px solid #10b981;
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #d1fae5;
+            border-color: #10b981;
+        }
+        
+        .quiz-option.selected {
+            background-color: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+        
+        .quiz-option.correct {
+            background-color: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .map-marker {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 transition">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="microislamfin1.html" class="text-gray-700 hover:text-green-600 transition">
+                        ← Chapter 1
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Chapter 2 of 4</span>
+                    <a href="microislamfin3.html" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                        Next Chapter →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <div class="chapter-header text-white py-16 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+                    <span class="text-sm font-semibold">Chapter 2</span>
+                </div>
+                <h1 class="text-5xl font-bold mb-4">Historical Development and Global Models</h1>
+                <p class="text-xl text-green-100">Tracing the evolution of Islamic microfinance worldwide</p>
+                <div class="mt-8 flex justify-center items-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">7</div>
+                        <div class="text-sm text-green-200">Sections</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">~35</div>
+                        <div class="text-sm text-green-200">Minutes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">6</div>
+                        <div class="text-sm text-green-200">Quiz Questions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm sticky top-16 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700">Your Progress</span>
+                <span class="text-sm text-gray-600"><span id="progress-percent">0</span>% Complete</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-green-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12 max-w-4xl">
+        
+        <!-- Learning Objectives -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Learning Objectives
+            </h2>
+            <div class="space-y-3">
+                <div class="flex items-start">
+                    <span class="text-green-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Trace the historical development of Islamic microfinance</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-green-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Analyze successful global models and case studies</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-green-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Understand regional variations and adaptations</p>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-green-600 mr-3 mt-1">✓</span>
+                    <p class="text-gray-700">Identify key success factors in Islamic microfinance institutions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Timeline -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="1">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">1. Evolution Timeline of Islamic Microfinance</h2>
+            <div class="space-y-6">
+                <div class="timeline-item pb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">1970s - Early Foundations</h3>
+                    <p class="text-gray-700">
+                        The concept of Islamic finance begins to formalize with the establishment of Islamic Development 
+                        Bank (IDB) in 1975. While not specifically focused on microfinance, it laid the groundwork for 
+                        Shariah-compliant financial services.
+                    </p>
+                </div>
+
+                <div class="timeline-item pb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">1980s - Pioneering Experiments</h3>
+                    <p class="text-gray-700">
+                        Early experiments with interest-free lending to the poor began in rural areas of Pakistan, 
+                        Bangladesh, and Egypt. These were often community-based initiatives tied to zakat and waqf systems.
+                    </p>
+                </div>
+
+                <div class="timeline-item pb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">1990s - Institutional Development</h3>
+                    <p class="text-gray-700">
+                        Formal Islamic microfinance institutions (IMFIs) emerged. Notable examples include Akhuwat in 
+                        Pakistan (1991) and various NGOs in Indonesia and Bangladesh combining Islamic principles with 
+                        microfinance methodologies.
+                    </p>
+                </div>
+
+                <div class="timeline-item pb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">2000s - Rapid Expansion</h3>
+                    <p class="text-gray-700">
+                        Islamic microfinance gained momentum globally. The Consultative Group to Assist the Poor (CGAP) 
+                        published influential studies on Islamic microfinance, bringing academic and institutional attention 
+                        to the field.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">2010s-Present - Mainstreaming and Innovation</h3>
+                    <p class="text-gray-700">
+                        Digital technologies transform Islamic microfinance delivery. Mobile banking, fintech solutions, 
+                        and blockchain applications emerge. Islamic microfinance becomes integrated into national financial 
+                        inclusion strategies across Muslim-majority countries.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Global Distribution -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Global Distribution of Islamic Microfinance</h2>
+            <div class="space-y-6">
+                <div class="stats-card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">Key Statistics</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-600">250+</div>
+                            <div class="text-sm text-gray-700">Institutions Worldwide</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-600">10M+</div>
+                            <div class="text-sm text-gray-700">Active Clients</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-600">$5B+</div>
+                            <div class="text-sm text-gray-700">Portfolio Value</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Regional Breakdown:</h3>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                        <span class="map-marker"></span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-gray-800">South Asia (40%)</div>
+                            <div class="text-sm text-gray-600">Pakistan, Bangladesh, Afghanistan, India</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                        <span class="map-marker"></span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-gray-800">Southeast Asia (30%)</div>
+                            <div class="text-sm text-gray-600">Indonesia, Malaysia, Brunei</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                        <span class="map-marker"></span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-gray-800">Middle East & North Africa (20%)</div>
+                            <div class="text-sm text-gray-600">Egypt, Yemen, Jordan, Morocco</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                        <span class="map-marker"></span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-gray-800">Sub-Saharan Africa (8%)</div>
+                            <div class="text-sm text-gray-600">Sudan, Somalia, Nigeria, Senegal</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                        <span class="map-marker"></span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-gray-800">Other Regions (2%)</div>
+                            <div class="text-sm text-gray-600">Central Asia, Europe, Americas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Case Study - Akhuwat -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="3">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">3. Case Study: Akhuwat (Pakistan)</h2>
+            <div class="case-study p-6 rounded-lg mb-6">
+                <div class="flex items-center mb-4">
+                    <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-green-800">The World's Largest Interest-Free Microcredit Program</h3>
+                </div>
+                <div class="space-y-4 text-gray-700">
+                    <p>
+                        <strong>Founded:</strong> 2001 in Lahore, Pakistan<br>
+                        <strong>Model:</strong> Qard Hasan (Interest-free loan)<br>
+                        <strong>Reach:</strong> Over 5 million families served<br>
+                        <strong>Repayment Rate:</strong> 99.9%
+                    </p>
+
+                    <h4 class="font-semibold text-lg text-gray-800 mt-6 mb-3">Key Features:</h4>
+                    <ul class="space-y-2 ml-6">
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span>100% interest-free loans based on Islamic principles</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span>Loans disbursed in mosques, churches, and temples to promote interfaith harmony</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span>No collateral required, based on trust</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span>Voluntary donations from borrowers help sustain operations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span>Extensive support services including health and education programs</span>
+                        </li>
+                    </ul>
+
+                    <div class="bg-white p-4 rounded-lg mt-6 border-2 border-green-200">
+                        <p class="italic text-gray-800">
+                            "Akhuwat's success demonstrates that Islamic microfinance based on compassion and trust 
+                            can achieve exceptional outcomes while maintaining Shariah compliance and social values."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Case Study - Indonesian Model -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">4. Case Study: Baitul Maal wat Tamwil (BMT) - Indonesia</h2>
+            <div class="case-study p-6 rounded-lg mb-6">
+                <div class="flex items-center mb-4">
+                    <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-green-800">Community-Based Islamic Microfinance</h3>
+                </div>
+                <div class="space-y-4 text-gray-700">
+                    <p>
+                        <strong>Established:</strong> 1990s<br>
+                        <strong>Structure:</strong> Cooperative model<br>
+                        <strong>Number of BMTs:</strong> Over 4,500 institutions<br>
+                        <strong>Focus:</strong> Dual social and commercial objectives
+                    </p>
+
+                    <h4 class="font-semibold text-lg text-gray-800 mt-6 mb-3">Unique Characteristics:</h4>
+                    <ul class="space-y-2 ml-6">
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span><strong>Dual Function:</strong> Combines social welfare (Baitul Maal) with business financing (Tamwil)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span><strong>Community Ownership:</strong> Members are both owners and customers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span><strong>Diverse Products:</strong> Murabaha, Musharakah, Mudharabah contracts</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span><strong>Zakat Integration:</strong> Collects and distributes zakat to the poor</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 mr-2">•</span>
+                            <span><strong>Local Focus:</strong> Deeply embedded in local communities and markets</span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-green-600">4.5M+</div>
+                            <div class="text-sm text-gray-700">Active Borrowers</div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-green-600">$1.2B+</div>
+                            <div class="text-sm text-gray-700">Total Financing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Malaysian Context -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="5">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">5. Islamic Microfinance in Malaysia</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg leading-relaxed">
+                    Malaysia has developed a unique approach to Islamic microfinance, combining government support, 
+                    regulatory frameworks, and innovative financial institutions.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-3">Key Institutions:</h3>
+                
+                <div class="space-y-4">
+                    <div class="border-l-4 border-green-500 pl-6 py-3 bg-gray-50 rounded-r-lg">
+                        <h4 class="font-bold text-lg text-gray-800">Amanah Ikhtiar Malaysia (AIM)</h4>
+                        <p class="text-gray-700 mt-2">
+                            Founded in 1987, AIM is Malaysia's largest microfinance institution, serving over 400,000 
+                            active borrowers. While initially following conventional group lending, it has increasingly 
+                            adopted Shariah-compliant products.
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 pl-6 py-3 bg-gray-50 rounded-r-lg">
+                        <h4 class="font-bold text-lg text-gray-800">Tabung Ekonomi Kumpulan Usaha Niaga (TEKUN)</h4>
+                        <p class="text-gray-700 mt-2">
+                            A government-backed scheme providing interest-free loans to small entrepreneurs, particularly 
+                            focusing on Bumiputera micro-enterprises.
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 pl-6 py-3 bg-gray-50 rounded-r-lg">
+                        <h4 class="font-bold text-lg text-gray-800">Bank Rakyat</h4>
+                        <p class="text-gray-700 mt-2">
+                            Malaysia's largest Islamic cooperative bank, offering various Islamic microfinance products 
+                            to its members, with a strong focus on financial inclusion.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-3">Regulatory Framework:</h3>
+                <ul class="space-y-2 ml-6">
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">•</span>
+                        <span>Oversight by Bank Negara Malaysia (Central Bank)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">•</span>
+                        <span>Shariah Advisory Council ensures compliance</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">•</span>
+                        <span>Integration with national financial inclusion strategy</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">•</span>
+                        <span>Support for digital financial services expansion</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 6: Success Factors -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">6. Key Success Factors</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-green-800 mb-3">1. Strong Community Trust</h3>
+                    <p class="text-gray-700">
+                        Successful IMFIs build deep relationships with communities, often leveraging religious institutions 
+                        and local leaders to establish credibility.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-blue-800 mb-3">2. Shariah Compliance</h3>
+                    <p class="text-gray-700">
+                        Rigorous adherence to Islamic principles, often verified by Shariah boards, ensures authenticity 
+                        and attracts religiously conscious clients.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-purple-800 mb-3">3. Financial Sustainability</h3>
+                    <p class="text-gray-700">
+                        Balancing social mission with financial viability through efficient operations, appropriate 
+                        pricing, and diversified revenue streams.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-amber-800 mb-3">4. Client-Centric Design</h3>
+                    <p class="text-gray-700">
+                        Products and services tailored to the specific needs, cash flows, and cultural contexts of 
+                        target clients.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-red-800 mb-3">5. Technology Adoption</h3>
+                    <p class="text-gray-700">
+                        Leveraging mobile technology, digital payments, and fintech solutions to reduce costs and 
+                        expand reach.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-lg text-teal-800 mb-3">6. Holistic Support</h3>
+                    <p class="text-gray-700">
+                        Beyond financing, providing training, mentorship, and linkages to markets enhances client 
+                        success and loyalty.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8 fade-in" data-section="7">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Knowledge Check Quiz
+            </h2>
+            
+            <div id="quiz-container" class="space-y-8">
+                <!-- Quiz questions will be rendered here -->
+            </div>
+
+            <div class="mt-6 text-center">
+                <button id="submit-quiz" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-semibold">
+                    Submit Answers
+                </button>
+            </div>
+
+            <div id="quiz-result" class="mt-6 p-6 rounded-lg hidden"></div>
+        </div>
+
+        <!-- Summary -->
+        <div class="content-card bg-white rounded-xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Chapter Summary</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg">
+                    In this chapter, we explored the historical development and global landscape of Islamic microfinance:
+                </p>
+                <ul class="space-y-2 ml-6">
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Evolution from the 1970s to present day</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Global distribution and regional concentrations</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Successful models like Akhuwat and BMT</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Malaysian Islamic microfinance landscape</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Critical success factors for Islamic microfinance institutions</span>
+                    </li>
+                </ul>
+                <div class="bg-green-50 border-l-4 border-green-600 p-6 mt-6 rounded-r-lg">
+                    <p class="text-green-900 font-medium">
+                        <strong>Next Chapter Preview:</strong> In Chapter 3, we'll examine the operational frameworks 
+                        and product structures used in Islamic microfinance, including detailed analysis of various 
+                        Islamic contracts and their practical applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12">
+            <a href="microislamfin1.html" class="text-gray-600 hover:text-gray-800 transition flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Previous: Chapter 1
+            </a>
+            <a href="microislamfin3.html" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-semibold flex items-center">
+                Next: Chapter 3
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 UiTM Sabah - Islamic Microfinance Learning Module</p>
+            <p class="text-gray-400 text-sm mt-2">Faculty of Business and Management</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "When was the Islamic Development Bank (IDB) established?",
+                options: [
+                    "1965",
+                    "1975",
+                    "1985",
+                    "1995"
+                ],
+                correct: 1
+            },
+            {
+                question: "What does BMT stand for?",
+                options: [
+                    "Bank Maal Tamwil",
+                    "Baitul Maal wat Tamwil",
+                    "Business Microfinance Trust",
+                    "Basic Micro Trading"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which region has the highest concentration of Islamic microfinance institutions?",
+                options: [
+                    "Middle East & North Africa",
+                    "Southeast Asia",
+                    "South Asia",
+                    "Sub-Saharan Africa"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is Akhuwat's reported repayment rate?",
+                options: [
+                    "95%",
+                    "97.5%",
+                    "99%",
+                    "99.9%"
+                ],
+                correct: 3
+            },
+            {
+                question: "What type of loan does Akhuwat primarily offer?",
+                options: [
+                    "Murabaha",
+                    "Musharakah",
+                    "Qard Hasan",
+                    "Ijarah"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which Malaysian institution is specifically mentioned as providing interest-free loans to Bumiputera micro-enterprises?",
+                options: [
+                    "AIM",
+                    "TEKUN",
+                    "Bank Rakyat",
+                    "Bank Negara"
+                ],
+                correct: 1
+            }
+        ];
+
+        let selectedAnswers = {};
+
+        // Render quiz
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = quizData.map((q, index) => `
+                <div class="quiz-question" data-question="${index}">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Question ${index + 1}: ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" 
+                                 data-question="${index}" 
+                                 data-option="${optIndex}"
+                                 onclick="selectOption(${index}, ${optIndex})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select option
+        function selectOption(questionIndex, optionIndex) {
+            document.querySelectorAll(`[data-question="${questionIndex}"][data-option]`).forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            const option = document.querySelector(`[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+            option.classList.add('selected');
+            
+            selectedAnswers[questionIndex] = optionIndex;
+            updateProgress();
+        }
+
+        // Submit quiz
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            if (Object.keys(selectedAnswers).length < quizData.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                const userAnswer = selectedAnswers[index];
+                const options = document.querySelectorAll(`[data-question="${index}"][data-option]`);
+                
+                options.forEach((option, optIndex) => {
+                    option.style.pointerEvents = 'none';
+                    if (optIndex === q.correct) {
+                        option.classList.add('correct');
+                    } else if (optIndex === userAnswer && userAnswer !== q.correct) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswer === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = (correct / quizData.length * 100).toFixed(0);
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            
+            let message, bgColor;
+            if (percentage >= 80) {
+                message = "Excellent work! You have a strong understanding of the historical development of Islamic microfinance.";
+                bgColor = "bg-green-100 border-green-500 text-green-900";
+            } else if (percentage >= 60) {
+                message = "Good job! Review the case studies for better retention.";
+                bgColor = "bg-blue-100 border-blue-500 text-blue-900";
+            } else {
+                message = "Keep learning! Consider reviewing the chapter before proceeding.";
+                bgColor = "bg-amber-100 border-amber-500 text-amber-900";
+            }
+
+            resultDiv.className = `mt-6 p-6 rounded-lg border-l-4 ${bgColor}`;
+            resultDiv.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">Quiz Results</h3>
+                <p class="text-2xl font-bold mb-2">${correct} out of ${quizData.length} correct (${percentage}%)</p>
+                <p>${message}</p>
+            `;
+
+            this.style.display = 'none';
+            markSectionComplete(7);
+        });
+
+        // Progress tracking
+        const totalSections = 7;
+        let completedSections = new Set();
+
+        function markSectionComplete(sectionIndex) {
+            completedSections.add(sectionIndex);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = Math.round(progress);
+        }
+
+        // Intersection Observer for section completion
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    const section = entry.target;
+                    const sectionIndex = parseInt(section.dataset.section);
+                    if (sectionIndex) {
+                        setTimeout(() => markSectionComplete(sectionIndex), 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderQuiz();
+            
+            document.querySelectorAll('[data-section]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
