@@ -558,11 +558,9 @@
         // They can be stolen and used by anyone, costing you money.
         // You MUST move this logic to a secure backend (like Firebase Cloud Functions).
         
-        // TODO: Move to backend
-        const GEMINI_API_KEY = "YOUR_GEMINI_KEY_MUST_BE_SECURED_ON_BACKEND";
-        
-        // TODO: Move to backend
-        const SERPAPI_KEY = 'YOUR_SERPAPI_KEY_MUST_BE_SECURED_ON_BACKEND'; 
+        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M"; // TODO: Move to backend
+        const GEMINI_API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241'; // TODO: Move to backend 
 
         // HTML Sanitization Helper Function
         function sanitizeHTML(str) {
