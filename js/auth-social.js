@@ -445,6 +445,38 @@ async function handleForgotPassword() {
 /**
  * UI helper functions
  */
+function showNotification(message, type = 'info') {
+    // Create notification element if it doesn't exist
+    let notification = document.getElementById('auth-notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'auth-notification';
+        notification.className = 'fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-96';
+        document.body.appendChild(notification);
+    }
+
+    // Set notification style based on type
+    const styles = {
+        success: 'bg-green-500 text-white',
+        error: 'bg-red-500 text-white',
+        info: 'bg-blue-500 text-white',
+        warning: 'bg-yellow-500 text-white'
+    };
+
+    notification.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 ${styles[type] || styles.info}`;
+    notification.textContent = message;
+
+    // Show notification
+    setTimeout(() => {
+        notification.classList.remove('translate-x-96');
+    }, 100);
+
+    // Hide after 3 seconds
+    setTimeout(() => {
+        notification.classList.add('translate-x-96');
+    }, 3000);
+}
+
 function showAuthModal() {
     const modal = document.getElementById('auth-modal');
     if (modal) {
@@ -580,5 +612,6 @@ window.switchAuthTab = switchAuthTab;
 window.toggleUserMenu = toggleUserMenu;
 window.updateAuthUI = updateAuthUI;
 window.initializeAuth = initializeAuth;
+window.showNotification = showNotification;
 
 console.log('Firebase Authentication module loaded successfully');
