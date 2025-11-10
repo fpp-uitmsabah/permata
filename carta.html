@@ -235,6 +235,13 @@
             color: #6d4c00;
             font-size: 0.9em;
         }
+
+        /* Navigation hover effect */
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+        }
     </style>
 </head>
 <body>
@@ -244,6 +251,16 @@
             <p>Fakulti Pengurusan dan Perniagaan (FPP)</p>
             <p><strong>Tempoh Lantikan: 2025-2027</strong></p>
         </header>
+            
+            <!-- Navigation Menu -->
+            <nav style="margin-top: 20px; text-align: center;">
+                <a href="/" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 12px 24px; border-radius: 25px; color: white; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Kembali ke Laman Utama</span>
+                </a>
+            </nav>
 
         <!-- Leadership Section -->
         <div id="leadership" class="section-wrapper">
