@@ -20,6 +20,11 @@
     <meta name="twitter:description" content="Discover distinguished faculty members from UiTM Sabah and explore their expertise.">
     <meta name="twitter:image" content="https://i.imgur.com/SEXIf1W.jpeg">
     
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -321,6 +326,26 @@
             color: #6d28d9; /* purple-700 */
         }
     </style>
+    
+    <!-- Firebase Configuration -->
+    <script>
+        // Firebase configuration - SECURITY WARNING: Should be in environment variables
+        const firebaseConfig = {
+            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w",
+            authDomain: "academiq-9c9zg.firebaseapp.com",
+            projectId: "academiq-9c9zg",
+            storageBucket: "academiq-9c9zg.firebasestorage.app",
+            messagingSenderId: "779034912138",
+            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
+            measurementId: "G-DGZHBZBYLW"
+        };
+        
+        // Initialize Firebase app
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            console.log('Firebase initialized successfully');
+        }
+    </script>
 </head>
 <body class="bg-gray-50 font-sans">
     <audio id="backgroundMusic" loop>
@@ -496,38 +521,7 @@
         </div>
     </div>
 
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script>
-        // WARNING: API keys should be moved to environment variables and accessed via a backend server
-        // These keys are currently exposed and should be rotated immediately
-        // TODO: Implement backend API to securely handle API calls
-        
-        // Firebase configuration - SECURITY WARNING: Should be in environment variables
-        const firebaseConfig = {
-            apiKey: "AIzaSyBw3CzBbdO49NpxkOqAmVI596nuB9wmt8w", // TODO: Move to backend
-            authDomain: "academiq-9c9zg.firebaseapp.com",
-            projectId: "academiq-9c9zg",
-            storageBucket: "academiq-9c9zg.firebasestorage.app",
-            messagingSenderId: "779034912138",
-            appId: "1:779034912138:web:b2bdd60d01622bf9261473",
-            measurementId: "G-DGZHBZBYLW"
-        };
-
-        // Initialize Firebase with error handling
-        try {
-            firebase.initializeApp(firebaseConfig);
-            // Remove detailed logging in production
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                console.log("Firebase initialized");
-            }
-        } catch (error) {
-            // Don't expose error details in production
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                console.error("Firebase initialization failed:", error);
-            }
-        }
 
         // SECURITY WARNING: API keys should never be in client-side code
         // TODO: Move to backend server with proper authentication
@@ -1532,6 +1526,10 @@
     
     <!-- Authentication Module -->
     <script src="js/auth-social.js"></script>
+    
+    <!-- Social Features Library (Firebase version) -->
+    <script src="js/social-firebase.js"></script>
+    
     <script>
         // Initialize authentication on page load
         document.addEventListener('DOMContentLoaded', () => {
