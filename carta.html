@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Organisasi Fakulti Pengurusan dan Perniagaan 2025-2027</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '▶';
+            color: #764ba2;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 0.9em;
+            color: #764ba2;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-name {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .card-program {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .card-description {
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-required {
+            background: #ffd93d;
+            color: #6d4c00;
+        }
+
+        .status-appointed {
+            background: #6bcf7f;
+            color: #1d5c2e;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #555;
+            display: none;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-wrapper {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-note {
+            background: #fff9e6;
+            border-left: 4px solid #ffd93d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #6d4c00;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Carta Organisasi Wakil Fakulti</h1>
+            <p>Fakulti Pengurusan dan Perniagaan (FPP)</p>
+            <p><strong>Tempoh Lantikan: 2025-2027</strong></p>
+        </header>
+
+        <!-- Leadership Section -->
+        <div id="leadership" class="section-wrapper">
+            <div class="section">
+                <h2 class="section-title">Kepimpinan Fakulti</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">DT</div>
+                            <div class="card-info">
+                                <div class="card-title">Ketua Pusat Pengajian</div>
+                                <div class="card-name">DR DEWI TAJUDDIN</div>
+                                <span class="status-badge status-appointed"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Bertanggungjawab dari pelbagai aspek pengelolaan akademik dan administratif dari pusat pengajian yang berkaitan
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; margin: 30px 0 20px 0; font-size: 1.4em;">Ketua Prasiswazah</h3>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">RG</div>
+                            <div class="card-info">
+                                <div class="card-title">Ketua Prasiswazah</div>
+                                <div class="card-name">DR RAINAH GINSAD</div>
+                                <span class="card-program">BA270 & BA280</span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan hal ehwal yang berkaitan program BA270 & BA280
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">SRB</div>
+                            <div class="card-info">
+                                <div class="card-title">Ketua Prasiswazah</div>
+                                <div class="card-name">DR. SITI RAHAYU BELI</div>
+                                <span class="card-program">BA119 & BA242</span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan hal ehwal yang berkaitan dengan kod PU BA119 dan juga program BA242
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">JVA</div>
+                            <div class="card-info">
+                                <div class="card-title">Ketua Prasiswazah</div>
+                                <div class="card-name">DR. JASMINE VIVIENNE ANDREW</div>
+                                <span class="card-program">BA111 & BA117</span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan hal ehwal yang berkaitan program BA111 & BA117
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diploma Programs Section -->
+        <div id="diploma" class="section-wrapper">
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - Jadual Waktu (Diploma)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">FMS</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jadual Waktu</div>
+                                <div class="card-name">PUAN FARIDAH MOHD SHAH</div>
+                                <span class="card-program">BA111/117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menggantikan Dr Auzae yang dilantik sebagai Koordinator Korporat (lantikan bermula 1/1/2025)
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NSN</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jadual Waktu</div>
+                                <div class="card-name">CIK NUR SHAHAFIQAH NADIAH JAFFERY</div>
+                                <span class="card-program">BA111/117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Merangka KS dan menyelaraskan jadual waktu pensyarah bagi kursus Diploma FPP untuk setiap semester
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">AH</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jadual Waktu</div>
+                                <div class="card-name">PUAN ANASTASIAH BINTI HARBI</div>
+                                <span class="card-program">BA119</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - Aktiviti Pelajar (Diploma)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">KMK</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">PUAN KHAIRIAH MAZDIAH KALIMIN</div>
+                                <span class="card-program">BA111/117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Sekurang-kurangnya 3 aktiviti yang melibatkan pelajar setiap semester
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NH</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">PUAN NUR HAZILAH</div>
+                                <span class="card-program">BA111/117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mengemaskini bulletin BA Diploma (setiap semester)
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NF</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">PUAN NINALYN FRIDRICT</div>
+                                <span class="card-program">BA119</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mengemaskini Buku panduan pelajar Diploma (BA)
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MRA</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">EN. MOHD RAZUAN ABD HISHAMUDDIN</div>
+                                <span class="card-program">BA119</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Memegang file kelab pelajar
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - NOBLE (Diploma)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">FHL</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">ENCIK FRANKLIN HAZLEY LAI</div>
+                                <span class="card-program">BA111</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mengumpul dan melaporkan CDL-CQI dari LIC yang berkaitan untuk pelaporan ke unit UHEK. Menganalisa data yang berkaitan bagi pelaporan PEO PLO program. Menglaksanakan pemurnian laporan PLO diperingkat fakulti.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MZJ</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">EN MOHAMAD ZULFADHLI JUSOH</div>
+                                <span class="card-program">BA117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Melengkapkan laporan PLO untuk KPP bagi dibentangkan semasa Mesyuarat Pembentangan PLO peringkat Kampus
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MME</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">PUAN MYDAH @ MYLENDA ERIC</div>
+                                <span class="card-program">BA117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NF</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">PN NINALYN FREDRICT</div>
+                                <span class="card-program">BA119</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MRM</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">EN MOHD ROZIE MOHD DAMIT</div>
+                                <span class="card-program">BA119</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">WF Penyelidikan, Penerbitan dan Inovasi (Diploma)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NAA</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Penyelidikan & Inovasi</div>
+                                <div class="card-name">PM DR NABILA AZWA AMBAD</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Merancang dan membuat aktiviti yang berkaitan dengan penyelidikan dan inovasi seperti seminar, hari menulis dsb. Sekurang-kurangnya 3 aktiviti setiap semester.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">WF Alumni (Diploma)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">KAB</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Alumni</div>
+                                <div class="card-name">DG KAMISAH AG BUDIN</div>
+                                <span class="card-program">BA111 & BA117</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Membantu fakulti dalam melaksanakan survey kebolehpasaran graduan FPP yang akan membantu pembangunan PEO
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NF</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Alumni</div>
+                                <div class="card-name">PN. NINALYN FRIDRICT</div>
+                                <span class="card-program">BA119</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mencari peluang koloborasi jaringan bersama alumni
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Degree Programs Section -->
+        <div id="degree" class="section-wrapper">
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - Jadual Waktu (Ijazah Sarjana Muda)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MFN</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jadual Waktu</div>
+                                <div class="card-name">DR. MOHD. ADZWIN FARIS NIASIN</div>
+                                <span class="card-program">BA240</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Merangka KS dan menyelaraskan jadual waktu pensyarah bagi kursus ISM FPP untuk setiap semester termasuk semester pendek
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">SJS</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jadual Waktu</div>
+                                <div class="card-name">PUAN SITI JULEA SUPAR</div>
+                                <span class="card-program">BA242</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MAT</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jadual Waktu</div>
+                                <div class="card-name">PUAN MELINDA AZZALEA TAI ABDULLAH</div>
+                                <span class="card-program">BA250</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - Aktiviti Pelajar (Ijazah Sarjana Muda)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NMS</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">PM DR. NOORZIAH MOHD SALLEH</div>
+                                <span class="card-program">BA240</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Sekurang-kurangnya 3 aktiviti yang melibatkan pelajar setiap semester
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MQO</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">PUAN MARYAM QAMEELAH OTHMAN</div>
+                                <span class="card-program">BA242</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">AGI</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Aktiviti Pelajar</div>
+                                <div class="card-name">ENCIK AHMAD GHAZALI ISMAIL</div>
+                                <span class="card-program">BA250</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - NOBLE (Ijazah Sarjana Muda)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">JKS</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">DR JAQUELINE KOH SIEW LEN</div>
+                                <span class="card-program">BA240/BA270</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mengumpul dan melaporkan CDL-CQI dari LIC yang berkaitan untuk pelaporan ke unit UHEK. Menganalisa data yang berkaitan bagi pelaporan PEO PLO program.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">KI</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">KAMARULZAMAN ISHAK</div>
+                                <span class="card-program">BA240/BA270</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menglaksanakan pemurnian laporan PLO diperingkat fakulti
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">AFH</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">ENCIK AHMAD FAUZE ABDUL HAMIT</div>
+                                <span class="card-program">BA242/BA272</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Melengkapkan laporan PLO untuk KPP bagi dibentangkan semasa Mesyuarat Pembentangan PLO peringkat Kampus
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">TAH</div>
+                            <div class="card-info">
+                                <div class="card-title">WF NOBLE</div>
+                                <div class="card-name">DR. TAUFIK ABD HAKIM</div>
+                                <span class="card-program">BA250/BA280</span>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">WF Alumni (Degree)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">HRM</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Alumni</div>
+                                <div class="card-name">HERNIZA ROXANNE MARCUS</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">WF Latihan Industri (Ijazah Sarjana Muda)</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">SSB</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Latihan Industri</div>
+                                <div class="card-name">ENCIK SUALI @ SUHAILIE BAKRIN</div>
+                                <span class="card-program">BA240</span>
+                                <span class="status-badge status-appointed"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Membantu menguruskan hal yang berkaitan latihan industri pelajar semester akhir
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">MRM</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Latihan Industri</div>
+                                <div class="card-name">DR MOHD ROZIE MOHD DAMIT</div>
+                                <span class="card-program">BA242</span>
+                                <span class="status-badge status-appointed"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NHM</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Latihan Industri</div>
+                                <div class="card-name">PUAN NURUL HIDAYAH MAT NOR</div>
+                                <span class="card-program">BA250</span>
+                                <span class="status-badge status-appointed"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support & Administration Section -->
+        <div id="support" class="section-wrapper">
+            <div class="section">
+                <h2 class="section-title">Pentadbiran Fakulti</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">DAK</div>
+                            <div class="card-info">
+                                <div class="card-title">Setiausaha Fakulti</div>
+                                <div class="card-name">CIK DGKU ALMAHIRAH AWANG KEE</div>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan tetang surat menyurat, peyediaan minit mesyuarat dan dokumen berkaitan dengan fakulti.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">HRM</div>
+                            <div class="card-info">
+                                <div class="card-title">Bendahari Fakulti</div>
+                                <div class="card-name">PUAN HERNIZA ROXANNE MARCUS</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan hal berkaitan dengan kewangan FPP (Pensyarah) dan wang sumbangan fakulti
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Setiausaha Pra-Validasi</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">DAK</div>
+                            <div class="card-info">
+                                <div class="card-title">Setiausaha Pra-Validasi</div>
+                                <div class="card-name">CIK DGKU ALMAHIRAH AWANG KEE</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan hal berkaitan dengan mesyuarat validasi peperiksaan
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">NNH</div>
+                            <div class="card-info">
+                                <div class="card-title">Setiausaha Pra-Validasi</div>
+                                <div class="card-name">DR NORNAJIHAH NADIA HASBULLAH</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Borang perubahan markah peperiksaan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Wakil Fakulti - Korporat & Hubungan</h2>
+                <div class="leadership-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">CS</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Korporat & Hubungan Luar</div>
+                                <div class="card-name">ENCIK CYRIL SUPAIN @ CHRISTOPHER</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mewakili fakulti didalam program korporat yang berkaitan fakulti
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">SNA</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Jaringan Industri</div>
+                                <div class="card-name">DR SHARIFAH NURAFIZAH SYED ANWAR</div>
+                                <span class="status-badge status-required"></span>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Mewakili dan membantu fakulti dalam mempromosikan program-program yang berkaitan semasa Expo akademik, Program out reach dsg.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">AF</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Multimedia</div>
+                                <div class="card-name">EN AHMAD FAUZE ABDUL HAMIT</div>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Aturan pelbagai media dan hebahan berkenaan fakulti
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar">JKS</div>
+                            <div class="card-info">
+                                <div class="card-title">WF Kebajikan Fakulti</div>
+                                <div class="card-name">DR JACQUELINE KOH SIEW LEN</div>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            Menguruskan perkara berkaitan mengenai kebajikan fakulti seperti kutipan sumbangan kematian, kesusahan, kejayaan dll.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Faculty data with images
+        const facultyData = {
+            "DR DEWI TAJUDDIN": "https://i.imgur.com/KAwa8sg.png",
+            "DR RAINAH GINSAD": "https://i.imgur.com/wY54IiY.png",
+            "DR. SITI RAHAYU BELI": "https://i.imgur.com/gnIUTT6.png",
+            "DR. JASMINE VIVIENNE ANDREW": "https://i.imgur.com/RPrDp9X.png",
+            "PUAN FARIDAH MOHD SHAH": "https://i.imgur.com/9kyxtX1.jpeg",
+            "CIK NUR SHAHAFIQAH NADIAH JAFFERY": "https://i.imgur.com/w5Qc4D5.jpeg",
+            "PUAN ANASTASIAH BINTI HARBI": "https://i.imgur.com/AAs2gaX.jpeg",
+            "PUAN KHAIRIAH MAZDIAH KALIMIN": "https://i.imgur.com/ISFXj5V.jpeg",
+            "PUAN NUR HAZILAH": "https://i.imgur.com/LSw0Z0g.jpeg",
+            "PUAN NINALYN FRIDRICT": "https://i.imgur.com/j8qifBN.jpeg",
+            "EN. MOHD RAZUAN ABD HISHAMUDDIN": "https://i.imgur.com/pYidT6V.jpeg",
+            "ENCIK FRANKLIN HAZLEY LAI": "https://i.imgur.com/FUaqmnE.jpeg",
+            "EN MOHAMAD ZULFADHLI JUSOH": "https://i.imgur.com/UNWImiZ.jpeg",
+            "PUAN MYDAH @ MYLENDA ERIC": "https://i.imgur.com/UZYHglF.png",
+            "PN NINALYN FREDRICT": "https://i.imgur.com/j8qifBN.jpeg",
+            "EN MOHD ROZIE MOHD DAMIT": "https://i.imgur.com/BHVplSw.png",
+            "PM DR NABILA AZWA AMBAD": "https://i.imgur.com/R4QSvdh.png",
+            "DG KAMISAH AG BUDIN": "https://i.imgur.com/LLv1xol.jpeg",
+            "PN. NINALYN FRIDRICT": "https://i.imgur.com/j8qifBN.jpeg",
+            "DR. MOHD. ADZWIN FARIS NIASIN": "https://i.imgur.com/fpzCzj9.jpeg",
+            "PUAN SITI JULEA SUPAR": "https://i.imgur.com/T9WUIx4.jpeg",
+            "PUAN MELINDA AZZALEA TAI ABDULLAH": "https://i.imgur.com/f5olmQB.jpeg",
+            "PM DR. NOORZIAH MOHD SALLEH": "https://i.imgur.com/YzT5qni.png",
+            "PUAN MARYAM QAMEELAH OTHMAN": "https://i.imgur.com/cwzclWd.jpeg",
+            "ENCIK AHMAD GHAZALI ISMAIL": "https://i.imgur.com/6vXlmtW.jpeg",
+            "DR JAQUELINE KOH SIEW LEN": "https://i.imgur.com/jeP92pB.jpeg",
+            "KAMARULZAMAN ISHAK": "https://i.imgur.com/ojqbTPz.jpeg",
+            "ENCIK AHMAD FAUZE ABDUL HAMIT": "https://i.imgur.com/wvOF6kd.jpeg",
+            "DR. TAUFIK ABD HAKIM": "https://i.imgur.com/8m4ozuO.jpeg",
+            "HERNIZA ROXANNE MARCUS": "https://i.imgur.com/B2WoXT6.jpeg",
+            "ENCIK SUALI @ SUHAILIE BAKRIN": "https://i.imgur.com/yHMd3b4.jpeg",
+            "DR MOHD ROZIE MOHD DAMIT": "https://i.imgur.com/BHVplSw.png",
+            "PUAN NURUL HIDAYAH MAT NOR": "https://i.imgur.com/3QEuEYe.png",
+            "CIK DGKU ALMAHIRAH AWANG KEE": "https://i.imgur.com/4OpExzW.png",
+            "PUAN HERNIZA ROXANNE MARCUS": "https://i.imgur.com/B2WoXT6.jpeg",
+            "DR NORNAJIHAH NADIA HASBULLAH": "https://i.imgur.com/4v3GwBm.jpeg",
+            "ENCIK CYRIL SUPAIN @ CHRISTOPHER": "https://i.imgur.com/aBd1Bme.jpeg",
+            "DR SHARIFAH NURAFIZAH SYED ANWAR": "https://i.imgur.com/mZx1OJe.png",
+            "EN AHMAD FAUZEE": "https://i.imgur.com/wvOF6kd.jpeg",
+            "DR JACQUELINE KOH SIEW LEN": "https://i.imgur.com/jeP92pB.jpeg"
+        };
+
+        // Function to get initials from name
+        function getInitials(name) {
+            const parts = name.split(' ');
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[1][0]).toUpperCase();
+            }
+            return name.substring(0, 2).toUpperCase();
+        }
+
+        // Replace avatars with actual images on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const nameElement = card.querySelector('.card-name');
+                if (nameElement) {
+                    const name = nameElement.textContent.trim();
+                    const imageUrl = facultyData[name];
+                    const avatar = card.querySelector('.avatar');
+                    
+                    if (imageUrl && avatar) {
+                        avatar.style.backgroundImage = `url('${imageUrl}')`;
+                        avatar.style.backgroundSize = 'cover';
+                        avatar.style.backgroundPosition = 'center';
+                        avatar.textContent = '';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
