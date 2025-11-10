@@ -21,8 +21,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -552,15 +550,12 @@
 
 <script>
 
-        // 🚨 CRITICAL SECURITY WARNING 🚨
-        // Your API keys have been removed from this code.
-        // DO NOT PASTE YOUR KEYS BACK IN HERE.
-        // They can be stolen and used by anyone, costing you money.
-        // You MUST move this logic to a secure backend (like Firebase Cloud Functions).
-        
-        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M"; // TODO: Move to backend
+        // 🚨 KEYS RESTORED AS REQUESTED 🚨
+        // Please move these to a secure backend (like Google Apps Script)
+        // as soon as possible to prevent them from being stolen.
+        const GEMINI_API_KEY = "AIzaSyBdWyxRzeffdUVmajEHkJWLOXKvc6kzR2M";
         const GEMINI_API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241'; // TODO: Move to backend 
+        const SERPAPI_KEY = '5a5241bc4ea3fb190a940eaabfa8d43d515cd59e71fc036c790c432f5df0a241';
 
         // HTML Sanitization Helper Function
         function sanitizeHTML(str) {
@@ -587,7 +582,6 @@
         }
         
         // Faculty data
-        // THIS IS THE DATA THAT WAS MISSING BEFORE
         const facultyData = [
             {
                 "name": "ASSOCIATE PROFESSOR DR ROZITA@UJI MOHAMMED", "position": "ACTING RECTOR", "field": "KEWANGAN", "phone": "088 - 325151", "imageUrl": "https://i.imgur.com/AfTwVHA.png", "isRector": true, "path": "https://fpp-uitmsabah.github.io/permata/rozita.html", "scholarId": "X8mOPWwAAAAJ", "email": "rozlim97@uitm.edu.my", "employee_id": "162582"
@@ -756,16 +750,21 @@
         let filteredFaculty = [...facultyData];
 
         // Fetch ORCID works (publications)
-        // THIS IS THE LOGIC THAT WAS MISSING
         async function fetchOrcidWorks(orcidId) {
             if (!orcidId) return null;
             try {
-                const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`);
-                if (!response.ok) return null;
+                // Using a proxy to bypass CORS issues, but this is not ideal for production
+                const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!response.ok) {
+                    console.error(`ORCID API error for ${orcidId}: ${response.status}`);
+                    return null;
+                }
                 const data = await response.json();
                 return data['group']?.map(group => ({
                     title: group['work-summary'][0]['title']['title']['value'],
-                    year: group['work-summary'][0]['publication-date']['year']['value'],
+                    year: group['work-summary'][0]['publication-date']?.['year']?.['value'] || 'N/A',
                     type: group['work-summary'][0]['type']
                 })) || [];
             } catch (error) {
@@ -775,30 +774,27 @@
         }
 
         // Fetch Google Scholar data via SerpApi
-        // THIS IS THE LOGIC THAT WAS MISSING
         async function fetchScholarData(scholarId, apiKey) {
             if (!scholarId || !apiKey) return null;
             
-            // This will fail until you use a secure Cloud Function
-            if (apiKey === "YOUR_SERPAPI_KEY_MUST_BE_SECURED_ON_BACKEND") {
-                console.warn("SerpApi key is not set. Skipping fetch.");
-                return null;
-            }
+            // Using a simple proxy to help with CORS. This is NOT secure.
+            const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+            const targetUrl = `https://serpapi.com/search?engine=google_scholar_author&author_id=${scholarId}&api_key=${apiKey}`;
 
             try {
-                const params = new URLSearchParams({
-                    engine: 'google_scholar_author',
-                    author_id: scholarId,
-                    api_key: apiKey
-                });
-                // WARNING: This URL proxy (serpapi.com) might be blocked by browser privacy settings.
-                // A backend Cloud Function is the most reliable way.
-                const response = await fetch(`https://serpapi.com/search?${params}`);
-                if (!response.ok) return null;
+                const response = await fetch(`${PROXY_URL}${encodeURIComponent(targetUrl)}`);
+                if (!response.ok) {
+                    console.error(`SerpApi (Scholar) error: ${response.status}`);
+                    return null;
+                }
                 const data = await response.json();
+                if(data.error) {
+                    console.error(`SerpApi (Scholar) error: ${data.error}`);
+                    return null;
+                }
                 return {
-                    citedBy: data['cited_by'] || 0,
-                    publications: data['publications']?.slice(0, 5) || []
+                    citedBy: data['cited_by']?.['value'] || 0,
+                    publications: data['articles']?.slice(0, 5) || []
                 };
             } catch (error) {
                 console.error('Scholar fetch error:', error);
@@ -807,29 +803,27 @@
         }
 
         // Fetch Scopus data via SerpApi
-        // THIS IS THE LOGIC THAT WAS MISSING
         async function fetchScopusData(scopusId, apiKey) {
             if (!scopusId || !apiKey) return null;
-            
-            // This will fail until you use a secure Cloud Function
-            if (apiKey === "YOUR_SERPAPI_KEY_MUST_BE_SECURED_ON_BACKEND") {
-                console.warn("SerpApi key is not set. Skipping fetch.");
-                return null;
-            }
+
+            const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+            const targetUrl = `https://serpapi.com/search?engine=scopus_author&author_id=${scopusId}&api_key=${apiKey}`;
 
             try {
-                const params = new URLSearchParams({
-                    engine: 'scopus',
-                    author_id: scopusId,
-                    api_key: apiKey
-                });
-                const response = await fetch(`https://serpapi.com/search?${params}`);
-                if (!response.ok) return null;
+                const response = await fetch(`${PROXY_URL}${encodeURIComponent(targetUrl)}`);
+                if (!response.ok) {
+                     console.error(`SerpApi (Scopus) error: ${response.status}`);
+                    return null;
+                }
                 const data = await response.json();
+                if(data.error) {
+                    console.error(`SerpApi (Scopus) error: ${data.error}`);
+                    return null;
+                }
                 return {
-                    hIndex: data['h-index'] || 0,
-                    citedBy: data['cited_by'] || 0,
-                    publications: data['publications']?.slice(0, 5) || []
+                    hIndex: data['author_profile']?.['h_index'] || 0,
+                    citedBy: data['author_profile']?.['citation_count'] || 0,
+                    publications: data['articles']?.slice(0, 5) || []
                 };
             } catch (error) {
                 console.error('Scopus fetch error:', error);
@@ -838,57 +832,32 @@
         }
 
         // Fetch Web of Science data via SerpApi
-        // THIS IS THE LOGIC THAT WAS MISSING
         async function fetchWosData(wosId, apiKey) {
             if (!wosId || !apiKey) return null;
             
-            // This will fail until you use a secure Cloud Function
-            if (apiKey === "YOUR_SERPAPI_KEY_MUST_BE_SECURED_ON_BACKEND") {
-                console.warn("SerpApi key is not set. Skipping fetch.");
-                return null;
-            }
-            
-            try {
-                const params = new URLSearchParams({
-                    engine: 'web_of_science',
-                    author_id: wosId,
-                    api_key: apiKey
-                });
-                const response = await fetch(`https://serpapi.com/search?${params}`);
-                if (!response.ok) return null;
-                const data = await response.json();
-                return {
-                    citedBy: data['cited_by'] || 0,
-                    publications: data['publications']?.slice(0, 5) || []
-                };
-            } catch (error) {
-                console.error('WoS fetch error:', error);
-                return null;
-            }
+            // NOTE: SerpApi does not have a dedicated Web of Science *author* engine.
+            // This is a placeholder, as the original code would likely fail.
+            // A proper backend is required to scrape or API-call WoS.
+            console.warn("Web of Science fetch is not directly supported by client-side SerpApi. This is a placeholder.");
+            return null; 
         }
 
         // Fetch AD Scientific Index data
-        // THIS IS THE LOGIC THAT WAS MISSING
         async function fetchAdScientificData(adScientificId, apiKey) {
-            if (!adScientificId || !apiKey) return null;
-
-            // This will fail until you use a secure Cloud Function
-            if (apiKey === "YOUR_SERPAPI_KEY_MUST_BE_SECURED_ON_BACKEND") {
-                console.warn("SerpApi key is not set. Skipping fetch.");
-                return null;
-            }
-            
+             if (!adScientificId || !apiKey) return null;
+             
+            // This is a Google Search for the profile, not a direct API call.
+            const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+            const targetUrl = `https://serpapi.com/search?engine=google&q=site:adscientificindex.com+${adScientificId}&api_key=${apiKey}`;
+             
             try {
-                // Assuming SerpApi has a way, but for now, placeholder
-                const params = new URLSearchParams({
-                    engine: 'google',  // Fallback to Google search for AD Scientific
-                    q: `site:adsciencelibrary.com ${adScientificId}`,
-                    api_key: apiKey
-                });
-                const response = await fetch(`https://serpapi.com/search?${params}`);
+                const response = await fetch(`${PROXY_URL}${encodeURIComponent(targetUrl)}`);
                 if (!response.ok) return null;
                 const data = await response.json();
-                // Parse results as needed
+                if (data.error) {
+                    console.error(`SerpApi (AD) error: ${data.error}`);
+                    return null;
+                }
                 return {
                     rank: data['organic_results']?.[0]?.snippet || 'N/A'
                 };
@@ -899,7 +868,6 @@
         }
 
         // Cache helper
-        // THIS IS THE LOGIC THAT WAS MISSING
         function getCached(key, ttl = 3600000) {  // 1 hour TTL
             const item = localStorage.getItem(key);
             if (!item) return null;
@@ -907,13 +875,11 @@
             return Date.now() - timestamp < ttl ? data : null;
         }
 
-        // THIS IS THE LOGIC THAT WAS MISSING
         function setCached(key, data) {
             localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
         }
 
         // Get field class for styling
-        // THIS IS THE LOGIC THAT WAS MISSING
         function getFieldClass(field) {
             const fieldMap = {
                 'EKONOMI': 'ekonomi',
@@ -925,22 +891,19 @@
                 'PENGURUSAN OPERASI': 'pengurusan',
                 'PENGANGKUTAN': 'pengangkutan'
             };
-            // Normalize field to lower case for matching
             return fieldMap[field.toUpperCase()] || 'default';
         }
 
         // Generate initials for avatar
-        // THIS IS THE LOGIC THAT WAS MISSING
         function getInitials(name) {
             return name.split(' ')
-                .filter(word => word.length > 2)
+                .filter(word => word.length > 2) // Filter out short words
                 .slice(0, 2)
                 .map(word => word[0])
                 .join('');
         }
 
         // Get gradient colors for cards
-        // THIS IS THE LOGIC THAT WAS MISSING
         function getCardGradient(index) {
             const gradients = [
                 'from-purple-600 via-pink-500 to-red-500',
@@ -958,7 +921,6 @@
         }
 
         // Create faculty card with sanitization
-        // THIS IS THE LOGIC THAT WAS MISSING
         function createFacultyCard(faculty, index) {
             // Sanitize all user-facing content
             const initials = getInitials(sanitizeHTML(faculty.name));
@@ -966,7 +928,6 @@
             const cardGradient = getCardGradient(index);
             
             const isDistinguished = !!faculty.path;
-            // Validate URL before using
             const profileImage = (faculty.imageUrl && isValidURL(faculty.imageUrl)) ? faculty.imageUrl : '';
             const facultyIndex = facultyData.indexOf(faculty);
             
@@ -979,7 +940,7 @@
             
             return `
                 <div class="faculty-card bg-gradient-to-r ${cardGradient} rounded-3xl shadow-2xl p-8 relative group overflow-hidden" 
-                    onclick="window.open('${sanitizedPath}', '_blank')" 
+                    ${isDistinguished ? `onclick="window.location.href='${sanitizedPath}'"` : `onclick="showProfile(${facultyIndex})"`}
                     style="animation-delay: ${delay}s;">
                     
                     <div class="absolute inset-0 bg-black opacity-10"></div>
@@ -1031,7 +992,7 @@
                                 </div>
                                 
                                 <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 mb-2">
-                                    View Full Portfolio →
+                                    ${isDistinguished ? 'View Full Portfolio →' : 'View Quick Profile →'}
                                 </button>
 
                                 <button onclick="handleContactClick(event, ${facultyIndex})" class="contact-button" title="Initiate contact with ${sanitizedName}">
@@ -1051,7 +1012,6 @@
 
 
         // Render faculty grid
-        // THIS IS THE LOGIC THAT WAS MISSING
         function renderFacultyGrid() {
             const grid = document.getElementById('facultyGrid');
             if (!grid) return;
@@ -1064,14 +1024,11 @@
         }
 
         // Filter faculty with input sanitization
-        // THIS IS THE LOGIC THAT WAS MISSING
         function filterFaculty() {
-            // Sanitize search input to prevent XSS
             const searchInput = document.getElementById('searchInput').value;
             const sanitizedSearchTerm = sanitizeHTML(searchInput).toLowerCase();
             const fieldFilter = document.getElementById('fieldFilter').value;
             
-            // Validate field filter to prevent injection
             const validFields = ['', 'EKONOMI', 'KEWANGAN', 'PEMASARAN', 'PENGURUSAN', 'PENGANGKUTAN'];
             const safeFieldFilter = validFields.includes(fieldFilter) ? fieldFilter : '';
             
@@ -1089,9 +1046,17 @@
         }
 
         // Main profile routing function
-        // THIS IS THE LOGIC THAT WAS MISSING
         async function showProfile(index) {
+            // This function is for non-distinguished faculty
             const faculty = facultyData[index];
+            if (!faculty) return;
+
+            // Prevent opening this for faculty with a full path
+            if (faculty.path && isValidURL(faculty.path)) {
+                 window.location.href = faculty.path;
+                 return;
+            }
+
             const cacheKey = `profile_${index}`;
             let profileData = getCached(cacheKey);
 
@@ -1112,7 +1077,6 @@
         }
 
         // Show enhanced profile detail with sanitization
-        // THIS IS THE LOGIC THAT WAS MISSING
         function showEnhancedProfile(faculty, profileData) {
             // Sanitize all faculty data before rendering
             const sanitizedFaculty = {
@@ -1127,13 +1091,16 @@
             
             const initials = getInitials(sanitizedFaculty.name);
             const fieldClass = getFieldClass(faculty.field); // Safe since it's from enum
-            const { orcidWorks = [], scholarData = null, scopusData = null, wosData = null, adScientificData = null } = profileData;
+            const { orcidWorks, scholarData, scopusData, wosData, adScientificData } = profileData || {};
 
             let researchSection = `
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Research Highlights</h2>
             `;
 
+            let hasData = false;
+
             if (orcidWorks && orcidWorks.length > 0) {
+                hasData = true;
                 researchSection += `
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">Recent Publications (ORCID)</h3>
@@ -1146,6 +1113,7 @@
             }
 
             if (scholarData) {
+                hasData = true;
                 researchSection += `
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">Google Scholar Metrics</h3>
@@ -1161,6 +1129,7 @@
             }
 
             if (scopusData) {
+                hasData = true;
                 researchSection += `
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">Scopus Metrics</h3>
@@ -1177,6 +1146,7 @@
             }
 
             if (wosData) {
+                hasData = true;
                 researchSection += `
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">Web of Science Metrics</h3>
@@ -1192,6 +1162,7 @@
             }
 
             if (adScientificData) {
+                hasData = true;
                 researchSection += `
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 mb-3">AD Scientific Index</h3>
@@ -1200,7 +1171,7 @@
                 `;
             }
 
-            if (!orcidWorks && !scholarData && !scopusData && !wosData && !adScientificData) {
+            if (!hasData) {
                 researchSection += `
                     <p class="text-gray-700 leading-relaxed">
                         A detailed portfolio for this faculty member, including research interests, publications, achievements, and a detailed biography, will be available here soon.
@@ -1268,20 +1239,23 @@
                 </div>
             `;
             
-            document.getElementById('profileView').innerHTML = profileHTML;
-            document.getElementById('homepage').classList.add('hidden');
-            document.getElementById('profileView').classList.remove('hidden');
+            const profileViewEl = document.getElementById('profileView');
+            const homepageEl = document.getElementById('homepage');
+            
+            if(profileViewEl) profileViewEl.innerHTML = profileHTML;
+            if(homepageEl) homepageEl.classList.add('hidden');
+            if(profileViewEl) profileViewEl.classList.remove('hidden');
         }
 
         // Show homepage
-        // THIS IS THE LOGIC THAT WAS MISSING
         function showHomepage() {
-            document.getElementById('profileView').classList.add('hidden');
-            document.getElementById('homepage').classList.remove('hidden');
+            const profileViewEl = document.getElementById('profileView');
+            const homepageEl = document.getElementById('homepage');
+            if(profileViewEl) profileViewEl.classList.add('hidden');
+            if(homepageEl) homepageEl.classList.remove('hidden');
         }
 
         // Sort faculty
-        // THIS IS THE LOGIC THAT WAS MISSING
         function sortFaculty() {
             const sortBy = document.getElementById('sortBy').value;
             
@@ -1298,7 +1272,6 @@
         }
 
         // Clear all filters
-        // THIS IS THE LOGIC THAT WAS MISSING
         function clearFilters() {
             document.getElementById('searchInput').value = '';
             document.getElementById('fieldFilter').value = '';
@@ -1308,7 +1281,6 @@
         }
 
         // Enhanced filter with debounce
-        // THIS IS THE LOGIC THAT WAS MISSING
         let filterTimeout;
         function debouncedFilter() {
             clearTimeout(filterTimeout);
@@ -1317,22 +1289,19 @@
             }, 300);
         }
 
-        // --- NEW/UPDATED AI Functions (Vanilla JS) ---
+        // --- AI/MODAL Functions ---
 
         // Global modal variables
         let aiModal, modalTitle, modalBody, closeModalButton, copyAiContentButton;
-        // NEW Contact Modal variables
         let contactModal, contactModalTitle, closeContactModalButton, contactForm;
-        let currentContactFaculty = null; // Store the currently selected faculty for contact
+        let currentContactFaculty = null;
 
-        // THIS IS THE LOGIC THAT WAS MISSING
         function showLoadingInModal() {
             if (modalTitle) modalTitle.textContent = 'AI Generated Content';
             if (modalBody) modalBody.innerHTML = '<div class="spinner"></div><p style="text-align: center; color: #6b7280;">Generating content with AI...</p>';
             if (aiModal) aiModal.classList.add('active');
         }
 
-        // THIS IS THE LOGIC THAT WAS MISSING
         function displayInModal(title, content) {
             if (modalTitle) modalTitle.textContent = title;
             if (modalBody) {
@@ -1343,7 +1312,7 @@
                     .replace(/\n\*/g, '<br>•') // Bullet points
                     .replace(/\n/g, '<br>'); // Newlines
                 
-                // Handle formatted titles (like "**Expertise Snapshot:**")
+                // Handle formatted titles
                 formattedContent = formattedContent.replace(/<br><strong>(.*?):<\/strong>/g, '<br><br><strong style="color: #6d28d9; font-size: 1.1em;">$1:</strong>');
 
                 modalBody.innerHTML = formattedContent;
@@ -1351,8 +1320,62 @@
             if (aiModal) aiModal.classList.add('active');
         }
 
-        // --- UPDATED handleAiClick function ---
-        // THIS IS THE LOGIC THAT WAS MISSING
+        // --- RESTORED INSECURE API CALL ---
+        async function callGeminiAPI(prompt) {
+            showLoadingInModal();
+            const apiUrl = `${GEMINI_API_URL_BASE}?key=${GEMINI_API_KEY}`;
+
+            try {
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("Gemini API Error:", errorData);
+                    let errorMessage = `API request failed with status ${response.status}`;
+                    if (errorData.error && errorData.error.message) {
+                        errorMessage += `: ${errorData.error.message}`;
+                    }
+                    if (response.status === 400 && errorData.error?.message.toLowerCase().includes("api key not valid")) {
+                            errorMessage += " Please check if your API key is correct and has the Gemini API enabled.";
+                    } else if (response.status === 403) {
+                        errorMessage += " Permission denied. This might be due to an incorrect API key or insufficient permissions for the key.";
+                    }
+                    throw new Error(errorMessage);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].finishReason === "SAFETY") {
+                    console.warn("Gemini API response blocked due to safety settings:", result.candidates[0]);
+                    return "The AI-generated content could not be displayed due to safety restrictions. Please try a different prompt or check your safety settings.";
+                } else {
+                    console.error("Unexpected API response structure:", result);
+                    throw new Error("Failed to parse AI response. The structure was unexpected or content was missing.");
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                let displayError = error.message;
+                if (error.message.includes("API key")) {
+                    displayError = "There seems to be an issue with the API key. Please ensure it's correct and has the necessary permissions. (Details in console)";
+                } else if (error.message.includes("Failed to fetch")) {
+                        displayError = "Network error: Could not connect to the AI service. Please check your internet connection. (Details in console)";
+                }
+                return `Error: ${displayError}`;
+            }
+        }
+        
+        // --- UPDATED handleAiClick function (to call the insecure function) ---
         async function handleAiClick(event, facultyIndex, type) {
             event.stopPropagation(); // Stop click from propagating to the card's link
             
@@ -1386,36 +1409,15 @@
             [Your call to action here]`;
                 
             let title = `Curious about ${faculty.name}? (AI-Generated)`;
-            
-            // Show the loading spinner in the modal
-            showLoadingInModal();
 
-            try {
-                // ---- THIS IS THE NEW, SECURE PART ----
-                
-                // 1. Get a reference to our "assistant" (the Cloud Function)
-                const callGeminiFunction = firebase.functions().httpsCallable('callGemini');
-                
-                // 2. Call the function and send the prompt
-                //    This calls your backend, not Google
-                const result = await callGeminiFunction({ prompt: prompt });
-                
-                // 3. Get the answer back from your assistant
-                const aiResponse = result.data.text;
-                
-                // 4. Display the result
-                displayInModal(title, aiResponse);
-
-            } catch (error) {
-                console.error("Error calling Cloud Function:", error);
-                displayInModal("Error", `Sorry, the AI request failed: ${error.message}. (Have you deployed the Cloud Function and set the secret API key?)`);
-            }
+            // Call the client-side API function directly
+            const aiResponse = await callGeminiAPI(prompt);
+            displayInModal(title, aiResponse);
         }
         // Make handleAiClick global so onclick can find it
         window.handleAiClick = handleAiClick;
 
         // --- NEW handleContactClick function ---
-        // THIS IS THE LOGIC THAT WAS MISSING
         function handleContactClick(event, facultyIndex) {
             event.stopPropagation(); // Stop click from propagating to the card's link
             const faculty = facultyData[facultyIndex];
@@ -1432,7 +1434,6 @@
 
 
         // Event Listeners
-        // THIS IS THE LOGIC THAT WAS MISSING
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('searchInput').addEventListener('input', debouncedFilter);
             document.getElementById('fieldFilter').addEventListener('change', filterFaculty);
@@ -1444,17 +1445,19 @@
             const playIcon = document.getElementById('playIcon');
             const pauseIcon = document.getElementById('pauseIcon');
 
-            audioControl.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play();
-                    playIcon.classList.add('hidden');
-                    pauseIcon.classList.remove('hidden');
-                } else {
-                    audio.pause();
-                    pauseIcon.classList.add('hidden');
-                    playIcon.classList.remove('hidden');
-                }
-            });
+            if (audioControl) {
+                audioControl.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play();
+                        playIcon.classList.add('hidden');
+                        pauseIcon.classList.remove('hidden');
+                    } else {
+                        audio.pause();
+                        pauseIcon.classList.add('hidden');
+                        playIcon.classList.remove('hidden');
+                    }
+                });
+            }
 
             // --- AI Modal Event Listeners ---
             aiModal = document.getElementById('aiModal');
@@ -1467,7 +1470,6 @@
                 if (aiModal) aiModal.classList.remove('active');
             }
 
-            // Close modal listeners
             if (closeModalButton) closeModalButton.addEventListener('click', closeAiModal);
             if (aiModal) {
                 aiModal.addEventListener('click', function(event) {
@@ -1477,10 +1479,9 @@
                 });
             }
             
-            // Copy to clipboard listener
             if (copyAiContentButton) {
                 copyAiContentButton.addEventListener('click', function() {
-                    const textToCopy = modalBody.innerText; // Use innerText to get text without HTML
+                    const textToCopy = modalBody.innerText;
                     navigator.clipboard.writeText(textToCopy).then(() => {
                         this.textContent = 'Copied!';
                         setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
@@ -1515,25 +1516,21 @@
 
             if (contactForm) {
                 contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent actual form submission
+                    event.preventDefault(); 
                     
-                    // Get and sanitize form data
                     const visitorEmail = document.getElementById('contactEmail').value.trim();
                     const visitorPhone = document.getElementById('contactPhone').value.trim() || 'Not provided';
                     const visitorMessage = document.getElementById('contactMessage').value.trim() || '';
                     
-                    // Validate email format
                     if (!isValidEmail(visitorEmail)) {
                         alert('Please enter a valid email address.');
                         return;
                     }
                     
-                    // Sanitize inputs to prevent injection
                     const sanitizedEmail = sanitizeHTML(visitorEmail);
                     const sanitizedPhone = sanitizeHTML(visitorPhone);
                     const sanitizedMessage = sanitizeHTML(visitorMessage);
                     
-                    // Check if faculty is selected and has an email
                     if (!currentContactFaculty) {
                         alert('Error: No faculty member selected. Please try again.');
                         closeContactModal();
@@ -1546,7 +1543,6 @@
                         return;
                     }
                     
-                    // Construct email subject and body with sanitized data
                     const subject = encodeURIComponent(`Contact Request from Faculty Portfolio Website`);
                     let body = `Dear ${sanitizeHTML(currentContactFaculty.name)},\n\n`;
                     body += `I would like to get in touch with you.\n\n`;
@@ -1562,11 +1558,9 @@
                     
                     const encodedBody = encodeURIComponent(body);
                     
-                    // Create mailto link and open it
                     const mailtoLink = `mailto:${encodeURIComponent(currentContactFaculty.email)}?subject=${subject}&body=${encodedBody}`;
                     window.location.href = mailtoLink;
                     
-                    // Show confirmation and close modal
                     setTimeout(() => {
                         alert(`Your email client should open shortly. If not, please email ${currentContactFaculty.email} directly.`);
                         closeContactModal();
@@ -1588,7 +1582,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // This will call initializeAuth() with the default value of true,
             // so the "Sign In" button WILL appear on this index page.
-            initializeAuth();
+            initializeAuth(true); // Explicitly calling with true
         });
     </script>
 </body>
