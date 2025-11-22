@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ms">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Semakan Kurikulum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    /* CSS GLOBAL */
+    body { box-sizing: border-box; margin: 0; padding: 0; height: 100%; overflow-y: auto; background: #f3f4f6; font-family: 'Roboto', sans-serif; }
+    
+    /* DASHBOARD STYLES */
+    .dashboard-container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    .data-table-container { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { background: #2563eb; color: white; padding: 1rem; text-align: left; font-family: 'Montserrat', sans-serif; }
+    .data-table td { padding: 1rem; border-bottom: 1px solid #e5e7eb; }
+    .data-table tr:hover { background: #f9fafb; }
+    .badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; background: #dbeafe; color: #1e40af; }
+    
+    /* FORM STYLES (Dikekalkan) */
+    .header-image { width: 100%; height: auto; max-height: 300px; object-fit: contain; display: block; background: white; }
+    .form-container { max-width: 900px; margin: 1rem auto 2rem; position: relative; z-index: 10; padding: 0 1rem; }
+    .section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 3px solid #2563eb; color: #1f2937; }
+    .input-field { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.95rem; margin-top: 0.25rem; }
+    textarea.input-field { min-height: 120px; resize: vertical; }
+    .label { display: block; font-weight: 600; margin-top: 1rem; color: #1f2937; }
+    .description-text { font-size: 0.9rem; color: #6b7280; margin-bottom: 0.5rem; margin-top: 0.2rem; font-style: italic; }
+    .submit-btn { background: #2563eb; color: white; padding: 1rem 3rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 2rem; transition: background 0.2s; }
+    .submit-btn:hover { background: #1d4ed8; }
+    
+    /* NAVIGATION & UTILS */
+    .hidden { display: none !important; }
+    .loading-spinner { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .toast { position: fixed; top: 2rem; right: 2rem; padding: 1rem 1.5rem; border-radius: 8px; color: white; display: none; z-index: 9999; }
+
+    /* PDF MODAL & PRINT */
+    .pdf-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; z-index: 2000; justify-content: center; align-items: center; padding: 1rem; }
+    .pdf-modal.active { display: flex; }
+    .pdf-modal-content { background: #525659; width: 100%; max-width: 1000px; height: 90vh; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
+    .pdf-preview-scroller { flex: 1; overflow-y: auto; padding: 2rem; display: flex; justify-content: center; background: #525659; }
+    .pdf-preview-page { background: white; width: 210mm; min-height: 297mm; padding: 0; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+    
+    /* PDF STRUCTURE */
+    .pdf-structure { font-family: "Times New Roman", Times, serif; font-size: 12pt; color: #000; line-height: 1.5; }
+    .pdf-header-container { width: 100%; line-height: 0; margin-bottom: 20px; margin-top: -25mm; }
+    .pdf-body { padding: 0 25mm; text-align: justify; }
+    .pdf-doc-title { text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 5px; text-transform: uppercase; text-decoration: underline; margin-top: 10px; }
+    .pdf-doc-subtitle { text-align: center; font-size: 11pt; font-style: italic; margin-bottom: 25px; }
+    .pdf-section-block { margin-bottom: 20px; break-inside: auto; }
+    .pdf-sec-title { font-weight: bold; font-size: 12pt; margin-bottom: 10px; text-transform: uppercase; padding-top: 10px; border-bottom: 1px solid #000; display: inline-block; width: 100%; }
+    .pdf-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 11pt; }
+    .pdf-table td { border: 1px solid #000; padding: 6px 8px; vertical-align: top; }
+    .pdf-table td:first-child { width: 35%; background-color: #f0f0f0 !important; font-weight: bold; -webkit-print-color-adjust: exact; }
+    .pdf-item { margin-bottom: 15px; break-inside: auto; }
+    .pdf-question { font-weight: bold; margin-bottom: 5px; display: block; }
+    .pdf-desc { font-style: italic; font-size: 10pt; color: #444; margin-bottom: 5px; display: block; }
+    .pdf-answer { display: block; border: 1px solid #000; padding: 8px; min-height: 24px; white-space: pre-wrap; text-align: left; background: #fafafa; -webkit-print-color-adjust: exact; }
+    .pdf-sig-wrapper { margin-top: 30px; display: flex; justify-content: space-between; gap: 20px; break-inside: avoid; }
+    .pdf-sig-box { width: 48%; border: 1px solid #000; padding: 15px; }
+    .pdf-sig-header { text-align: center; font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 10px; }
+    .pdf-sig-line { border-top: 1px solid #000; margin-top: 50px; padding-top: 5px; font-size: 10pt; text-align: center; font-weight: bold; }
+
+    #printContainer { display: none; }
+    body.is-printing > * { display: none !important; }
+    body.is-printing #printContainer { display: block !important; position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; }
+    body.is-printing { background: white; }
+
+    @media print {
+        @page { margin-top: 25mm; margin-bottom: 25mm; margin-left: 0; margin-right: 0; size: A4 portrait; }
+        body > * { display: none !important; }
+        #printContainer { display: block !important; }
+        .page-footer-marker { position: fixed; bottom: 0; right: 25mm; font-size: 9pt; color: #555; display: block !important; }
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+  </style>
+ </head>
+ <body>
+  
+  <div id="toast" class="toast"></div>
+
+  <div id="dashboardView" class="dashboard-container">
+      <div class="flex justify-between items-center mb-8 mt-4">
+          <div>
+              <h1 class="text-2xl font-bold text-gray-800">Sistem Semakan Kurikulum</h1>
+              <p class="text-gray-500">Pangkalan Data & Penjanaan Laporan</p>
+          </div>
+          <button onclick="showForm()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-blue-700 transition flex items-center gap-2">
+              <i class="fas fa-plus"></i> Buat Semakan Baru
+          </button>
+      </div>
+
+      <div class="stat-card">
+          <div>
+              <h3 class="text-gray-500 font-medium">Jumlah Semakan Dihantar</h3>
+              <h2 id="totalCount" class="text-4xl font-bold text-blue-600 mt-2">0</h2>
+          </div>
+          <i class="fas fa-file-alt text-4xl text-blue-200"></i>
+      </div>
+
+      <div class="data-table-container">
+          <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+              <h3 class="font-bold text-gray-700">Senarai Semakan Terkini</h3>
+              <button onclick="fetchData()" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                  <i class="fas fa-sync-alt"></i> Refresh
+              </button>
+          </div>
+          <div id="loadingState" class="hidden">
+              <div class="loading-spinner"></div>
+              <p class="text-center text-gray-500 pb-4">Memuat turun data...</p>
+          </div>
+          <div style="overflow-x:auto;">
+              <table class="data-table">
+                  <thead>
+                      <tr>
+                          <th>Tarikh</th>
+                          <th>Nama Pensyarah</th>
+                          <th>Kursus</th>
+                          <th>Program</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody id="submissionsTableBody">
+                      </tbody>
+              </table>
+          </div>
+          <div id="emptyState" class="hidden p-8 text-center text-gray-500">
+              Belum ada data direkodkan.
+          </div>
+      </div>
+  </div>
+
+  <div id="formView" class="hidden">
+      <div class="max-w-[900px] mx-auto mt-4 px-4">
+          <button onclick="showDashboard()" class="text-gray-600 hover:text-gray-900 font-medium flex items-center gap-2">
+              <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+          </button>
+      </div>
+
+      <img src="https://i.imgur.com/AVVKZJx.jpeg" alt="Header Borang" class="header-image">
+
+      <div class="form-container">
+       <form id="feedbackForm">
+        <div class="section">
+         <h2 class="section-title">📋 BAHAGIAN A: MAKLUMAT KURSUS</h2>
+         <div style="overflow-x:auto;">
+             <table class="info-table" style="width: 100%; border-collapse: separate; border-spacing: 0;">
+               <tr><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb; font-weight:600; width:35%; background:#f9fafb;">Nama Kursus</td><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb;"><input type="text" name="nama_kursus" class="input-field" required></td></tr>
+               <tr><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb; font-weight:600; background:#f9fafb;">Kod Kursus</td><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb;"><input type="text" name="kod_kursus" class="input-field" required></td></tr>
+               <tr><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb; font-weight:600; background:#f9fafb;">Program</td><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb;"><input type="text" name="program" class="input-field" required></td></tr>
+               <tr><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb; font-weight:600; background:#f9fafb;">Tarikh Semakan</td><td style="padding:0.75rem; border-bottom:1px solid #e5e7eb;"><input type="date" name="tarikh_semakan" class="input-field" required></td></tr>
+             </table>
+         </div>
+        </div>
+
+        <div class="section">
+         <h2 class="section-title">💭 BAHAGIAN B: ULASAN DAN PENILAIAN</h2>
+         <div class="mb-5"><label class="label">1. Penjajaran Hasil Pembelajaran Kursus (CLO)</label><p class="description-text">Ulasan mengenai kesesuaian CLO dengan tahap pembelajaran dan pemetaan kepada Hasil Pembelajaran Program/PLO</p><textarea name="penjajaran_clo" class="input-field" required></textarea></div>
+         <div class="mb-5"><label class="label">2. Kandungan dan Silibus Kursus</label><p class="description-text">Komen mengenai relevansi topik, kemutakhiran silibus, dan kecukupan liputan topik</p><textarea name="kandungan_silibus" class="input-field" required></textarea></div>
+         <div class="mb-5"><label class="label">3. Kaedah Penilaian</label><p class="description-text">Kesesuaian pemberatan penilaian berterusan dan peperiksaan akhir serta jenis penilaian yang digunakan</p><textarea name="kaedah_penilaian" class="input-field" required></textarea></div>
+         <div class="mb-5"><label class="label">4. Kaedah Pengajaran dan Pembelajaran (PdP)</label><p class="description-text">Kesesuaian strategi penyampaian seperti kuliah, tutorial, amali, atau pembelajaran berasaskan masalah</p><textarea name="kaedah_pdp" class="input-field" required></textarea></div>
+         <div class="mb-5"><label class="label">5. Cadangan Penambahbaikan</label><p class="description-text">Saranan spesifik untuk meningkatkan kualiti kursus pada masa hadapan</p><textarea name="cadangan_penambahbaikan" class="input-field" required></textarea></div>
+        </div>
+
+        <div class="section">
+         <h2 class="section-title">🔄 BAHAGIAN C: ISU KHUSUS</h2>
+         <div class="mb-5"><label class="label">Adakah anda bersetuju dengan cadangan perubahan nama program ini?</label><div style="display:flex; gap:20px; margin-top:10px;"><label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" name="perubahan_nama" value="Ya" required style="width:20px; height:20px;"> Ya</label><label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" name="perubahan_nama" value="Tidak" required style="width:20px; height:20px;"> Tidak</label></div></div>
+         <div class="mb-5"><label class="label">Justifikasi:</label><p class="description-text">Sila nyatakan sebab atau cadangan alternatif sekiranya anda memilih 'Tidak'</p><textarea name="justifikasi" class="input-field" required></textarea></div>
+        </div>
+
+        <div class="section">
+         <h2 class="section-title">✍️ BAHAGIAN D: PENGESAHAN</h2>
+         <p style="font-weight: 600; margin-bottom: 1rem;">Disediakan oleh:</p>
+         <div class="mb-5"><label class="label">Nama Pensyarah:</label> <input type="text" name="nama_pensyarah" class="input-field" required></div>
+         <div class="mb-5"><label class="label">Jawatan:</label> <input type="text" class="input-field" value="Lecturer in Charge (LiC) / Penyelaras Kursus" readonly style="background: #f9fafb;"></div>
+         <div class="mb-5"><label class="label">Tarikh:</label> <input type="date" name="tarikh_pengesahan" class="input-field" required></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">📤 Simpan ke Database & Jana PDF</button>
+       </form>
+      </div>
+  </div>
+
+  <div id="pdfModal" class="pdf-modal">
+   <div class="pdf-modal-content">
+    <div class="pdf-modal-header" style="padding:1rem; background:white; border-bottom:1px solid #ddd; display:flex; justify-content:space-between; align-items:center;">
+     <h3 style="font-weight:bold; color:#333; margin:0;">Pratonton Dokumen</h3>
+     <button onclick="closeModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+    </div>
+    <div class="pdf-preview-scroller">
+        <div id="modalPreviewBody" class="pdf-preview-page pdf-structure"></div>
+    </div>
+    <div style="padding:1rem; background:white; border-top:1px solid #ddd; display:flex; justify-content:flex-end; gap:10px;">
+      <button onclick="closeModal()" style="padding:0.5rem 1.5rem; border-radius:5px; border:1px solid #ccc; background:white; cursor:pointer;">Tutup</button>
+      <button onclick="triggerPrint()" style="padding:0.5rem 1.5rem; border-radius:5px; border:none; background:#2563eb; color:white; font-weight:bold; cursor:pointer;">🖨️ Simpan PDF</button>
+    </div>
+   </div>
+  </div>
+
+  <div id="printContainer">
+    <div class="pdf-structure">
+        <div class="pdf-header-container">
+            <img src="https://i.imgur.com/AVVKZJx.jpeg" class="pdf-header-img" style="display:block; width:100%;">
+        </div>
+        <div class="pdf-body">
+            <div class="pdf-doc-title">BORANG MAKLUM BALAS SEMAKAN KURIKULUM</div>
+            <div class="pdf-doc-subtitle">(Oleh Penyelaras Kursus / Lecturer in Charge - LiC)</div>
+
+            <div class="pdf-section-block">
+                <div class="pdf-sec-title">BAHAGIAN A: MAKLUMAT KURSUS</div>
+                <table class="pdf-table">
+                    <tr><td>Nama Kursus</td><td id="p-nama_kursus"></td></tr>
+                    <tr><td>Kod Kursus</td><td id="p-kod_kursus"></td></tr>
+                    <tr><td>Program</td><td id="p-program"></td></tr>
+                    <tr><td>Tarikh Semakan</td><td id="p-tarikh_semakan"></td></tr>
+                </table>
+            </div>
+
+            <div class="pdf-section-block">
+                <div class="pdf-sec-title">BAHAGIAN B: ULASAN DAN PENILAIAN</div>
+                <div class="pdf-item"><span class="pdf-question">1. Penjajaran Hasil Pembelajaran Kursus (CLO)</span><span class="pdf-desc">Ulasan mengenai kesesuaian CLO...</span><span class="pdf-answer" id="p-penjajaran_clo"></span></div>
+                <div class="pdf-item"><span class="pdf-question">2. Kandungan dan Silibus Kursus</span><span class="pdf-desc">Komen mengenai relevansi topik...</span><span class="pdf-answer" id="p-kandungan_silibus"></span></div>
+                <div class="pdf-item"><span class="pdf-question">3. Kaedah Penilaian</span><span class="pdf-desc">Kesesuaian pemberatan penilaian...</span><span class="pdf-answer" id="p-kaedah_penilaian"></span></div>
+                <div class="pdf-item"><span class="pdf-question">4. Kaedah Pengajaran dan Pembelajaran (PdP)</span><span class="pdf-desc">Kesesuaian strategi penyampaian...</span><span class="pdf-answer" id="p-kaedah_pdp"></span></div>
+                <div class="pdf-item"><span class="pdf-question">5. Cadangan Penambahbaikan</span><span class="pdf-desc">Saranan spesifik untuk meningkatkan...</span><span class="pdf-answer" id="p-cadangan_penambahbaikan"></span></div>
+            </div>
+
+            <div class="pdf-section-block">
+                <div class="pdf-sec-title">BAHAGIAN C: ISU KHUSUS (PERUBAHAN NAMA PROGRAM)</div>
+                <div class="pdf-item"><span class="pdf-question">Adakah anda bersetuju dengan cadangan perubahan nama program ini?</span><span class="pdf-answer" id="p-perubahan_nama"></span></div>
+                <div class="pdf-item"><span class="pdf-question">Justifikasi:</span><span class="pdf-desc">Sila nyatakan sebab atau cadangan alternatif...</span><span class="pdf-answer" id="p-justifikasi"></span></div>
+            </div>
+
+            <div class="pdf-section-block">
+                <div class="pdf-sec-title">BAHAGIAN D: PENGESAHAN</div>
+                <div class="pdf-sig-wrapper">
+                    <div class="pdf-sig-box">
+                        <div class="pdf-sig-header">Disediakan Oleh</div>
+                        <div style="margin-top:10px;">
+                            <div style="margin-bottom:5px;"><strong>Nama:</strong> <span id="p-nama_pensyarah"></span></div>
+                            <div style="margin-bottom:5px;"><strong>Jawatan:</strong> Lecturer in Charge (LiC)</div>
+                            <div style="margin-bottom:5px;"><strong>Tarikh:</strong> <span id="p-tarikh_pengesahan"></span></div>
+                        </div>
+                        <div class="pdf-sig-line">Tandatangan Pensyarah Penyelaras</div>
+                    </div>
+                    <div class="pdf-sig-box">
+                        <div class="pdf-sig-header">Disahkan Oleh</div>
+                        <div style="margin-top:10px;">
+                            <div style="margin-bottom:5px;"><strong>Nama:</strong> _______________________</div>
+                            <div style="margin-bottom:5px;"><strong>Jawatan:</strong> Penyelaras Program (PU)</div>
+                            <div style="margin-bottom:5px;"><strong>Tarikh:</strong> _______________________</div>
+                        </div>
+                        <div class="pdf-sig-line">Tandatangan Penyelaras PU</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-footer-marker">Dokumen Dijana Secara Digital</div>
+    </div>
+  </div>
+
+  <script>
+    // --- KONFIGURASI PENTING ---
+    // Masukkan URL Google Script (Web App URL) anda di sini:
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxk0h1IA2_Ab3gLs6SOqf1KWg0CaCuONzA5Unhrcq-BUkSQpa22563y4rEoPyPK42yI/exec"; 
+
+    // --- NAVIGATION LOGIC ---
+    function showForm() {
+        document.getElementById('dashboardView').classList.add('hidden');
+        document.getElementById('formView').classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    function showDashboard() {
+        document.getElementById('formView').classList.add('hidden');
+        document.getElementById('dashboardView').classList.remove('hidden');
+        fetchData(); // Refresh data bila balik dashboard
+    }
+
+    // --- GOOGLE SHEET INTEGRATION ---
+    
+    // 1. Fetch Data untuk Dashboard
+    async function fetchData() {
+        if(GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbxk0h1IA2_Ab3gLs6SOqf1KWg0CaCuONzA5Unhrcq-BUkSQpa22563y4rEoPyPK42yI/exec") {
+            console.warn("Sila masukkan URL Script dahulu");
+            return;
+        }
+
+        const tableBody = document.getElementById('submissionsTableBody');
+        const loadingState = document.getElementById('loadingState');
+        const emptyState = document.getElementById('emptyState');
+        
+        // UI Loading
+        tableBody.innerHTML = '';
+        loadingState.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL);
+            const data = await response.json();
+            
+            loadingState.classList.add('hidden');
+            document.getElementById('totalCount').textContent = data.length;
+
+            if (data.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            data.forEach(item => {
+                const date = new Date(item.timestamp).toLocaleDateString('ms-MY');
+                const row = `
+                    <tr class="transition hover:bg-gray-50">
+                        <td class="text-sm text-gray-600">${date}</td>
+                        <td class="font-medium text-gray-900">${item.nama_pensyarah}</td>
+                        <td class="text-sm text-gray-600">${item.nama_kursus} (${item.kod_kursus})</td>
+                        <td><span class="badge">${item.program}</span></td>
+                        <td><span class="text-green-600 text-sm font-bold"><i class="fas fa-check-circle"></i> Selesai</span></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            loadingState.classList.add('hidden');
+            alert("Gagal menyambung ke database. Sila semak URL Script.");
+        }
+    }
+
+    // --- FORM & PDF LOGIC (Diperbaharui) ---
+    
+    function setText(id, val) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val || '-';
+    }
+    
+    function formatDate(dateString) {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return `${date.getDate().toString().padStart(2,'0')}/${(date.getMonth()+1).toString().padStart(2,'0')}/${date.getFullYear()}`;
+    }
+
+    function showToast(msg, error=false) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.style.background = error ? '#ef4444' : '#10b981';
+        t.style.display = 'block';
+        setTimeout(()=>t.style.display='none', 3000);
+    }
+
+    // PRINT FUNCTION
+    function triggerPrint() {
+        closeModal();
+        document.body.classList.add('is-printing');
+        setTimeout(() => {
+            window.print();
+            setTimeout(() => {
+                document.body.classList.remove('is-printing');
+                // Pilihan: Auto balik dashboard lepas print?
+                // showDashboard(); 
+            }, 1000);
+        }, 100);
+    }
+
+    function closeModal() {
+        document.getElementById('pdfModal').classList.remove('active');
+    }
+
+    // SUBMIT HANDLER
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if(GOOGLE_SCRIPT_URL.includes("MASUKKAN_URL")) {
+            alert("Sila masukkan URL Google Script dalam kod HTML (Line 368)!");
+            return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        const originalText = btn.textContent;
+        btn.textContent = '⏳ Menyimpan ke Database...';
+        btn.disabled = true;
+
+        const formData = new FormData(e.target);
+        
+        // Tukar FormData ke JSON Object untuk dihantar ke Google Script
+        const dataObject = {};
+        formData.forEach((value, key) => dataObject[key] = value);
+
+        // Populate PDF Preview siap-siap
+        setText('p-nama_kursus', formData.get('nama_kursus'));
+        setText('p-kod_kursus', formData.get('kod_kursus'));
+        setText('p-program', formData.get('program'));
+        setText('p-tarikh_semakan', formatDate(formData.get('tarikh_semakan')));
+        setText('p-penjajaran_clo', formData.get('penjajaran_clo'));
+        setText('p-kandungan_silibus', formData.get('kandungan_silibus'));
+        setText('p-kaedah_penilaian', formData.get('kaedah_penilaian'));
+        setText('p-kaedah_pdp', formData.get('kaedah_pdp'));
+        setText('p-cadangan_penambahbaikan', formData.get('cadangan_penambahbaikan'));
+        setText('p-perubahan_nama', formData.get('perubahan_nama'));
+        setText('p-justifikasi', formData.get('justifikasi'));
+        setText('p-nama_pensyarah', formData.get('nama_pensyarah'));
+        setText('p-tarikh_pengesahan', formatDate(formData.get('tarikh_pengesahan')));
+
+        try {
+            // HANTAR DATA KE GOOGLE SHEET
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(dataObject)
+            });
+
+            showToast('✅ Data berjaya disimpan!');
+            
+            // Show PDF Preview
+            const printContent = document.getElementById('printContainer').innerHTML;
+            document.getElementById('modalPreviewBody').innerHTML = printContent;
+            document.getElementById('pdfModal').classList.add('active');
+            
+            // Reset borang
+            e.target.reset();
+
+        } catch (err) {
+            console.error(err);
+            showToast('❌ Ralat sambungan database', true);
+            alert("Data mungkin tidak disimpan di Sheet, tetapi anda masih boleh cetak PDF.");
+            
+            // Masih benarkan cetak PDF walaupun save gagal
+            const printContent = document.getElementById('printContainer').innerHTML;
+            document.getElementById('modalPreviewBody').innerHTML = printContent;
+            document.getElementById('pdfModal').classList.add('active');
+        }
+
+        btn.disabled = false;
+        btn.textContent = originalText;
+    });
+    
+    // Init: Load data dashboard bila page buka
+    fetchData();
+  </script>
+ </body>
+</html>
